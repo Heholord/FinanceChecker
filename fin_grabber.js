@@ -13,7 +13,11 @@ fs.readFile("./George.html", function(err, html) {
 
   $(".transactionlist").each((index, monthView) => {
     monthView = $(monthView);
-    const month = monthView.find("thead h2").text();
+    const month = monthView
+      .find("thead h2")
+      .text()
+      .trim()
+      .replace(/\s/gm, "");
 
     if (month) {
       data[month] = {};
