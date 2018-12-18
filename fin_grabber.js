@@ -20,14 +20,14 @@ fs.readFile("./George.html", function(err, html) {
         dayEntry = $(dayEntry);
         let day = dayEntry.find(".datecol .day").text();
         if (!data[month][day]) data[month][day] = [];
-        data[month][day].push(parseDayEntry($, dayEntry));
+        data[month][day].push(parseDayEntry(dayEntry));
       });
     }
   });
   console.log(JSON.stringify(data, null, 2));
 });
 
-function parseDayEntry($, dayEntry) {
+function parseDayEntry(dayEntry) {
   let data = {};
 
   data.info = getText(dayEntry.find(".accountcol h5"));
