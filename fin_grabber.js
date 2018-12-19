@@ -94,15 +94,10 @@ async function getCategory(inFlow, categories, elem) {
     console.log("Outgoing category " + elem.info);
   }
   if (!categoryContainsValue(categories, elem.info)) {
-    return new Promise(resolve => {
-      inquireCategory(categories, elem).then(answer => {
-        resolve(answer);
-      });
-    });
+    answer = await inquireCategory(categories, elem);
+    return answer;
   } else {
-    return new Promise(resolve => {
-      resolve(categories);
-    });
+    return categories;
   }
 }
 
@@ -112,11 +107,11 @@ async function inquireCategory(categories, elem) {
   inquirerLock = true;
   let choices = [];
   if (categories) {
-    if (isEmpty(categories)) {
-      categories = [];
-    }
     if (Array.isArray(categories)) {
-      choices = [placeHere, newCategory];
+      choices = [placeHere];
+      if (categories.length === 0) {
+        choices.push(newCategory);
+      }
     } else {
       let keys = Object.keys(categories);
       console.log(JSON.stringify(categories));
@@ -143,7 +138,14 @@ async function inquireCategory(categories, elem) {
             message: "What is the name of the category"
           }
         ]);
-        categories[newCat.new] = [];
+        categories = {};
+        categories[newCat.new] = []; // TODO can't set object in a list
+        console.log(
+          "after answer " +
+            newCat.new +
+            " category is " +
+            JSON.stringify(categories)
+        );
         answers.selection = newCat.new;
       }
       categories[answers.selection] = await inquireCategory(
@@ -153,9 +155,7 @@ async function inquireCategory(categories, elem) {
     }
   }
   inquirerLock = false;
-  return new Promise(resolve => {
-    resolve(categories);
-  });
+  return categories;
 }
 
 function categoryContainsValue(category, insertValue) {
