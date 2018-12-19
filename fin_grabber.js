@@ -1,7 +1,10 @@
 const fs = require("fs");
 const jsdom = require("jsdom");
-const dataFile = "george.json";
+const inquirer = require("inquirer");
+const deasync = require("deasync");
+const dataFile = "data.json";
 const categoryFile = "categorizer.json";
+let inquirerLock = false;
 
 fs.readFile("./George.html", function(err, html) {
   if (err) {
@@ -40,7 +43,7 @@ fs.readFile("./George.html", function(err, html) {
 });
 
 function buildCategoryFile(data) {
-  let categories = { out: { food: { supermarkt: [] } } };
+  let categories = { in: [], out: [] };
   if (fs.existsSync(categoryFile)) {
     fs.readFile(categoryFile, "utf8", (err, catData) => {
       if (err) {
@@ -58,16 +61,25 @@ function buildCategoryFile(data) {
 
 function categorizeData(categories, data) {
   Object.keys(data).forEach((month, index) => {
-    console.log("Month " + month);
+    // console.log("Month " + month);
     Object.keys(data[month]).forEach((day, index) => {
-      console.log("\tDay " + day + ".");
+      // console.log("\tDay " + day + ".");
       for (index in data[month][day]) {
-        elem = data[month][day][index];
-        console.log("\t\t" + elem.info);
-        if (!categoryContainsValue(categories, elem.info)) {
-          categories.out.food.supermarkt.push(elem.info);
-          //console.log(JSON.stringify(categories));
+        while (inquirerLock) {
+          deasync.sleep(100);
         }
+        elem = data[month][day][index];
+        // console.log("\t\t" + elem.info);
+        if (+elem.amount > 0) {
+          getCategory(true, categories.in, elem).then(category => {
+            categories.in = category;
+          });
+        } else {
+          getCategory(false, categories.out, elem).then(category => {
+            categories.out = category;
+          });
+        }
+        console.log(JSON.stringify(categories));
       }
     });
   });
@@ -75,22 +87,95 @@ function categorizeData(categories, data) {
   fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
 }
 
+async function getCategory(inFlow, categories, elem) {
+  if (inFlow) {
+    console.log("Incoming category " + elem.info);
+  } else {
+    console.log("Outgoing category " + elem.info);
+  }
+  if (!categoryContainsValue(categories, elem.info)) {
+    return new Promise(resolve => {
+      inquireCategory(categories, elem).then(answer => {
+        resolve(answer);
+      });
+    });
+  } else {
+    return new Promise(resolve => {
+      resolve(categories);
+    });
+  }
+}
+
+async function inquireCategory(categories, elem) {
+  const placeHere = "place here";
+  const newCategory = "new category";
+  inquirerLock = true;
+  let choices = [];
+  if (categories) {
+    if (isEmpty(categories)) {
+      categories = [];
+    }
+    if (Array.isArray(categories)) {
+      choices = [placeHere, newCategory];
+    } else {
+      let keys = Object.keys(categories);
+      console.log(JSON.stringify(categories));
+      choices = [...keys, new inquirer.Separator(), newCategory];
+    }
+
+    let answers = await inquirer.prompt([
+      {
+        type: "list",
+        name: "selection",
+        message: "What do you want to do?",
+        choices
+      }
+    ]);
+
+    if (answers.selection === placeHere) {
+      categories.push(elem.info);
+    } else {
+      if (answers.selection === newCategory) {
+        let newCat = await inquirer.prompt([
+          {
+            type: "input",
+            name: "new",
+            message: "What is the name of the category"
+          }
+        ]);
+        categories[newCat.new] = [];
+        answers.selection = newCat.new;
+      }
+      categories[answers.selection] = await inquireCategory(
+        categories[answers.selection],
+        elem
+      );
+    }
+  }
+  inquirerLock = false;
+  return new Promise(resolve => {
+    resolve(categories);
+  });
+}
+
 function categoryContainsValue(category, insertValue) {
   let returnValue = false;
-  Object.keys(category).forEach(function(key, index) {
-    const value = category[key];
-    // console.log("Key " + key + "; Value " + value);
-    if (value === insertValue) {
-      console.log("value " + value + " already in category");
-      returnValue = true;
-      return;
-    } else if (typeof value === "object") {
-      if (categoryContainsValue(value, insertValue)) {
+  if (category) {
+    Object.keys(category).forEach(function(key, index) {
+      const value = category[key];
+      // console.log("Key " + key + "; Value " + value);
+      if (value === insertValue) {
+        console.log("value " + value + " already in category");
         returnValue = true;
         return;
+      } else if (typeof value === "object") {
+        if (categoryContainsValue(value, insertValue)) {
+          returnValue = true;
+          return;
+        }
       }
-    }
-  });
+    });
+  }
   return returnValue;
 }
 
@@ -127,4 +212,33 @@ function getText(elem) {
     .text()
     .replace(/(\r\n\t|\n|\r\t)/gm, "")
     .trim();
+}
+
+// Speed up calls to hasOwnProperty
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function isEmpty(obj) {
+  //@see https://stackoverflow.com/questions/4994201/is-object-empty
+
+  // null and undefined are "empty"
+  if (obj == null) return true;
+
+  // Assume if it has a length property with a non-zero value
+  // that that property is correct.
+  if (obj.length > 0) return false;
+  if (obj.length === 0) return true;
+
+  // If it isn't an object at this point
+  // it is empty, but it can't be anything *but* empty
+  // Is it empty?  Depends on your application.
+  if (typeof obj !== "object") return true;
+
+  // Otherwise, does it have any properties of its own?
+  // Note that this doesn't handle
+  // toString and valueOf enumeration bugs in IE < 9
+  for (var key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false;
+  }
+
+  return true;
 }
