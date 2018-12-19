@@ -1,0 +1,25 @@
+{
+  "name": "@financechecker/george",
+  "version": "1.0.0",
+  "description": "Down with excel sheets",
+  "main": "fin_grabber.js",
+  "dependencies": {
+    "chart.js": "^2.7.3",
+    "jquery": "^3.3.1",
+    "jsdom": "^13.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heholord/FinanceChecker.git"
+  },
+  "author": "Manuel Esberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Heholord/FinanceChecker/issues"
+  },
+  "homepage": "https://github.com/Heholord/FinanceChecker#readme"
+}

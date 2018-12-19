@@ -1,8 +1,8 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <script src="Chart.bundle.min.js"></script>
-    <script src="jquery-3.3.1.min.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
   </head>
   <body>
     <div class="text"></div>
@@ -51,8 +51,7 @@
       });
       var j = null;
       $.getJSON("george.json", function(json) {
-        j = json["October2017"];
-        console.log(j);
+        j = json["October2018"];
         $(".text").text(JSON.stringify(j, null, 2));
         console.log(j); // this will show the info it in firebug console
       });

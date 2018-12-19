@@ -1,6 +1,7 @@
 const fs = require("fs");
 const jsdom = require("jsdom");
 const dataFile = "george.json";
+const categoryFile = "categorizer.json";
 
 fs.readFile("./George.html", function(err, html) {
   if (err) {
@@ -36,6 +37,31 @@ fs.readFile("./George.html", function(err, html) {
   writeBack(data);
   console.log(JSON.stringify(data, null, 2));
 });
+
+function buildCategoryFile(data) {
+  let categories = {};
+  if (fs.existsSync(categoryFile)) {
+    fs.readFile(categoryFile, "utf8", (err, catData) => {
+      if (err) {
+        console.log(err);
+      } else {
+        categories = JSON.parse(catData);
+      }
+    });
+  }
+  Object.keys(data).forEach(function(key, index) {});
+}
+
+function categoryContainsValue(category, insertValue) {
+  Object.keys(data).forEach(function(ke, index) {
+    const value = category[ke];
+    if (value == insertValue) return true;
+    else if (typeof value === "object") {
+      return categoryContainsValue(value, insertValue);
+    }
+    return false;
+  });
+}
 
 function writeBack(data) {
   if (fs.existsSync(dataFile)) {
