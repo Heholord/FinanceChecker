@@ -70,16 +70,26 @@ function categorizeData(categories, data) {
         }
         elem = data[month][day][index];
         // console.log("\t\t" + elem.info);
+        let param = false;
+        let cat = {};
+        let callback;
         if (+elem.amount > 0) {
-          getCategory(true, categories.in, elem).then(category => {
+          param = true;
+          cat = categories.in;
+          callback = category => {
             categories.in = category;
-          });
+          };
         } else {
-          getCategory(false, categories.out, elem).then(category => {
+          param = false;
+          cat = categories.out;
+          callback = category => {
             categories.out = category;
-          });
+          };
         }
-        console.log(JSON.stringify(categories));
+        getCategory(param, cat, elem).then(category => {
+          callback(category);
+          console.log(JSON.stringify(categories)); // TODO overwrite data to file
+        });
       }
     });
   });
@@ -114,7 +124,6 @@ async function inquireCategory(categories, elem) {
       }
     } else {
       let keys = Object.keys(categories);
-      console.log(JSON.stringify(categories));
       choices = [...keys, new inquirer.Separator(), newCategory];
     }
 
@@ -135,17 +144,11 @@ async function inquireCategory(categories, elem) {
           {
             type: "input",
             name: "new",
-            message: "What is the name of the category"
+            message: "What is the name of the category" //TODO validate
           }
         ]);
-        categories = {};
-        categories[newCat.new] = []; // TODO can't set object in a list
-        console.log(
-          "after answer " +
-            newCat.new +
-            " category is " +
-            JSON.stringify(categories)
-        );
+        if (typeof categories !== "object") categories = {};
+        categories[newCat.new] = [];
         answers.selection = newCat.new;
       }
       categories[answers.selection] = await inquireCategory(
