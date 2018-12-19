@@ -85,8 +85,10 @@ function categoryContainsValue(category, insertValue) {
       returnValue = true;
       return;
     } else if (typeof value === "object") {
-      returnValue = categoryContainsValue(value, insertValue);
-      return;
+      if (categoryContainsValue(value, insertValue)) {
+        returnValue = true;
+        return;
+      }
     }
   });
   return returnValue;
