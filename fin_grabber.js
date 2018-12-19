@@ -36,31 +36,60 @@ fs.readFile("./George.html", function(err, html) {
   });
   writeBack(data);
   console.log(JSON.stringify(data, null, 2));
+  buildCategoryFile(data);
 });
 
 function buildCategoryFile(data) {
-  let categories = {};
+  let categories = { out: { food: { supermarkt: [] } } };
   if (fs.existsSync(categoryFile)) {
     fs.readFile(categoryFile, "utf8", (err, catData) => {
       if (err) {
         console.log(err);
       } else {
+        console.log(catData);
         categories = JSON.parse(catData);
+        categorizeData(categories, data);
       }
     });
+  } else {
+    categorizeData(categories, data);
   }
-  Object.keys(data).forEach(function(key, index) {});
+}
+
+function categorizeData(categories, data) {
+  Object.keys(data).forEach((month, index) => {
+    console.log("Month " + month);
+    Object.keys(data[month]).forEach((day, index) => {
+      console.log("\tDay " + day + ".");
+      for (index in data[month][day]) {
+        elem = data[month][day][index];
+        console.log("\t\t" + elem.info);
+        if (!categoryContainsValue(categories, elem.info)) {
+          categories.out.food.supermarkt.push(elem.info);
+          //console.log(JSON.stringify(categories));
+        }
+      }
+    });
+  });
+
+  fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
 }
 
 function categoryContainsValue(category, insertValue) {
-  Object.keys(data).forEach(function(ke, index) {
-    const value = category[ke];
-    if (value == insertValue) return true;
-    else if (typeof value === "object") {
-      return categoryContainsValue(value, insertValue);
+  let returnValue = false;
+  Object.keys(category).forEach(function(key, index) {
+    const value = category[key];
+    // console.log("Key " + key + "; Value " + value);
+    if (value === insertValue) {
+      console.log("value " + value + " already in category");
+      returnValue = true;
+      return;
+    } else if (typeof value === "object") {
+      returnValue = categoryContainsValue(value, insertValue);
+      return;
     }
-    return false;
   });
+  return returnValue;
 }
 
 function writeBack(data) {
@@ -77,7 +106,7 @@ function writeBack(data) {
       }
     });
   } else {
-    fs.writeFile(dataFile, JSON.stringify(data));
+    fs.writeFile(dataFile, JSON.stringify(data), "utf8");
   }
 }
 
