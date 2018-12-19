@@ -49,7 +49,6 @@ function buildCategoryFile(data) {
       if (err) {
         console.log(err);
       } else {
-        console.log(catData);
         categories = JSON.parse(catData);
         categorizeData(categories, data);
       }
@@ -61,83 +60,91 @@ function buildCategoryFile(data) {
 
 function categorizeData(categories, data) {
   Object.keys(data).forEach((month, index) => {
-    // console.log("Month " + month);
     Object.keys(data[month]).forEach((day, index) => {
-      // console.log("\tDay " + day + ".");
       for (index in data[month][day]) {
         while (inquirerLock) {
           deasync.sleep(100);
         }
         elem = data[month][day][index];
-        // console.log("\t\t" + elem.info);
         let param = false;
         let cat = {};
-        let callback;
+        let updateCategory;
         if (+elem.amount > 0) {
           param = true;
           cat = categories.in;
-          callback = category => {
+          updateCategory = category => {
             categories.in = category;
           };
         } else {
           param = false;
           cat = categories.out;
-          callback = category => {
+          updateCategory = category => {
             categories.out = category;
           };
         }
         getCategory(param, cat, elem).then(category => {
-          callback(category);
-          console.log(JSON.stringify(categories)); // TODO overwrite data to file
+          updateCategory(category);
+          fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
         });
       }
     });
   });
-
-  fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
 }
 
 async function getCategory(inFlow, categories, elem) {
   if (inFlow) {
-    console.log("Incoming category " + elem.info);
+    console.log("Incoming category " + elem.info + " (" + elem.amount + "€)");
   } else {
-    console.log("Outgoing category " + elem.info);
+    console.log("Outgoing category " + elem.info + " (" + elem.amount + "€)");
   }
   if (!categoryContainsValue(categories, elem.info)) {
-    answer = await inquireCategory(categories, elem);
+    answer = await inquireCategory("", categories, elem);
     return answer;
   } else {
     return categories;
   }
 }
 
-async function inquireCategory(categories, elem) {
+async function inquireCategory(path, categories, elem) {
   const placeHere = "place here";
   const newCategory = "new category";
-  inquirerLock = true;
-  let choices = [];
-  if (categories) {
-    if (Array.isArray(categories)) {
-      choices = [placeHere];
-      if (categories.length === 0) {
-        choices.push(newCategory);
-      }
-    } else {
-      let keys = Object.keys(categories);
-      choices = [...keys, new inquirer.Separator(), newCategory];
-    }
+  const goBack = "go back";
 
+  inquirerLock = true;
+  returnValue = false;
+
+  let choices = [];
+  if (Array.isArray(categories)) {
+    choices = [placeHere];
+    choices.push(newCategory);
+    if (!isEmpty(path)) {
+      choices.push(goBack);
+    }
+  } else {
+    let keys = Object.keys(categories);
+    choices = [...keys, new inquirer.Separator(), newCategory];
+    if (!isEmpty(path)) {
+      choices.push(goBack);
+    }
+    choices.push(new inquirer.Separator());
+  }
+  while (!returnValue) {
     let answers = await inquirer.prompt([
       {
         type: "list",
         name: "selection",
-        message: "What do you want to do?",
+        message:
+          "Where do you want to place it? " +
+          (isEmpty(path) ? "" : path + " > ..."),
         choices
       }
     ]);
 
-    if (answers.selection === placeHere) {
+    if (answers.selection === goBack) {
+      return false;
+    } else if (answers.selection === placeHere) {
       categories.push(elem.info);
+      returnValue = true;
     } else {
       if (answers.selection === newCategory) {
         let newCat = await inquirer.prompt([
@@ -147,14 +154,25 @@ async function inquireCategory(categories, elem) {
             message: "What is the name of the category" //TODO validate
           }
         ]);
-        if (typeof categories !== "object") categories = {};
+        if (Array.isArray(categories)) {
+          if (categories.length > 0) {
+            const temp = categories;
+            categories = { other: temp };
+          } else {
+            categories = {};
+          }
+        }
         categories[newCat.new] = [];
         answers.selection = newCat.new;
       }
-      categories[answers.selection] = await inquireCategory(
+      returnValue = await inquireCategory(
+        (isEmpty(path) ? "" : path + " > ") + answers.selection,
         categories[answers.selection],
         elem
       );
+      if (returnValue) {
+        categories[answers.selection] = returnValue;
+      }
     }
   }
   inquirerLock = false;
@@ -184,6 +202,7 @@ function categoryContainsValue(category, insertValue) {
 
 function writeBack(data) {
   if (fs.existsSync(dataFile)) {
+    //append
     //@see https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js
     fs.readFile(dataFile, "utf8", function readFileCallback(err, previousData) {
       if (err) {
@@ -196,6 +215,7 @@ function writeBack(data) {
       }
     });
   } else {
+    //overwrite
     fs.writeFile(dataFile, JSON.stringify(data), "utf8");
   }
 }
