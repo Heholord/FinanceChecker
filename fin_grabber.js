@@ -4,43 +4,53 @@ const inquirer = require("inquirer");
 const deasync = require("deasync");
 const dataFile = "data.json";
 const categoryFile = "categorizer.json";
+const stringSimilarity = require("string-similarity");
+
 let inquirerLock = false;
 
-fs.readFile("./George.html", function(err, html) {
-  if (err) {
-    throw err;
-  }
-  const { JSDOM } = jsdom;
-  const dom = new JSDOM(html);
-  const $ = require("jquery")(dom.window);
-  let data = {};
+console.log(
+  "similarity " +
+    stringSimilarity.compareTwoStrings("Hofer DANKt", "Hofer Dankt")
+);
 
-  $(".transactionlist").each((index, monthView) => {
-    monthView = $(monthView);
-    const month = monthView
-      .find("thead h2")
-      .text()
-      .trim()
-      .replace(/\s/gm, "");
-
-    if (month) {
-      data[month] = {};
-      monthView.find("tbody .transaction-line").each((index, dayEntry) => {
-        dayEntry = $(dayEntry);
-        let day = dayEntry.find(".datecol .day").text();
-        if (!data[month][day]) data[month][day] = [];
-        let parsedDayEntry = parseDayEntry(dayEntry);
-        console.log(parsedDayEntry);
-        if (parsedDayEntry) {
-          data[month][day].push(parsedDayEntry);
-        }
-      });
+const on = false;
+if (on) {
+  fs.readFile("./George.html", function(err, html) {
+    if (err) {
+      throw err;
     }
+    const { JSDOM } = jsdom;
+    const dom = new JSDOM(html);
+    const $ = require("jquery")(dom.window);
+    let data = {};
+
+    $(".transactionlist").each((index, monthView) => {
+      monthView = $(monthView);
+      const month = monthView
+        .find("thead h2")
+        .text()
+        .trim()
+        .replace(/\s/gm, "");
+
+      if (month) {
+        data[month] = {};
+        monthView.find("tbody .transaction-line").each((index, dayEntry) => {
+          dayEntry = $(dayEntry);
+          let day = dayEntry.find(".datecol .day").text();
+          if (!data[month][day]) data[month][day] = [];
+          let parsedDayEntry = parseDayEntry(dayEntry);
+          console.log(parsedDayEntry);
+          if (parsedDayEntry) {
+            data[month][day].push(parsedDayEntry);
+          }
+        });
+      }
+    });
+    writeBack(data);
+    // console.log(JSON.stringify(data, null, 2));
+    buildCategoryFile(data);
   });
-  writeBack(data);
-  console.log(JSON.stringify(data, null, 2));
-  buildCategoryFile(data);
-});
+}
 
 function buildCategoryFile(data) {
   let categories = { in: [], out: [] };
