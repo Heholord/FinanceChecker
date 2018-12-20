@@ -9,52 +9,77 @@
     <canvas id="myChart" width="400" height="400"></canvas>
     <script>
       var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(255, 159, 64, 0.2)"
-              ],
-              borderColor: [
-                "rgba(255,99,132,1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)"
-              ],
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true
-                }
-              }
-            ]
+      chartData = {
+        datasets: [
+          {
+            data: [10, 20, 30],
+            backgroundColor: ["red", "yellow", "blue"]
           }
-        }
-      });
+        ],
+
+        // These labels appear in the legend and in the tooltips when hovering different arcs -->
+        labels: ["Red", "Yellow", "Blue"]
+      };
+
+      chartData = { datasets: [], labels: [] };
       var j = null;
-      $.getJSON("george.json", function(json) {
-        j = json["October2018"];
+      $.getJSON("data.json", data => {
+        j = data["October2018"];
         $(".text").text(JSON.stringify(j, null, 2));
         console.log(j); // this will show the info it in firebug console
+        $.getJSON("categorizer.json", categories => {
+          filteredData = filterByCategory(
+            categories.out.food.supermarket,
+            data
+          );
+          chartData.datasets.push({
+            data: filteredData.map(el => {
+              return Math.abs(el.value);
+            })
+          });
+          chartData.labels.push(
+            ...filteredData.map(el => {
+              return el.category;
+            })
+          );
+        });
       });
+
+      var myChart = new Chart(ctx, {
+        type: "doughnut",
+        data: chartData,
+        options: { cutoutPercentage: 60 }
+      });
+
+      function filterByCategory(categoryItems, data) {
+        let returnValue = Object.keys(categoryItems).map(elem => {
+          return { category: elem, value: 0 };
+        });
+        Object.keys(data).forEach((month, index) => {
+          Object.keys(data[month]).forEach((day, index) => {
+            for (index in data[month][day]) {
+              elem = data[month][day][index];
+              for (category in categoryItems) {
+                if (categoryItems[category].includes(elem.info)) {
+                  returnValue[
+                    indexOf(returnValue, category)
+                  ].value += +elem.amount;
+                  break;
+                }
+              }
+            }
+          });
+        });
+        return returnValue;
+      }
+
+      function indexOf(list, category) {
+        for (el in list) {
+          if (list[el].category === category) {
+            return el;
+          }
+        }
+      }
     </script>
   </body>
 </html>

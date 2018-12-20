@@ -135,7 +135,7 @@ async function inquireCategory(path, categories, elem) {
         name: "selection",
         message:
           "Where do you want to place it? " +
-          (isEmpty(path) ? "" : path + " > ..."),
+          (isEmpty(path) ? "" : "\n" + path + " > ..."),
         choices
       }
     ]);
