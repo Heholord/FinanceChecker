@@ -5,3 +5,6 @@ George_files/
 node_modules/
 data.json
 categorizer.json
+*.bak
+*.bak.json
+*_bak/
