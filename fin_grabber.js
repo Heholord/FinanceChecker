@@ -8,12 +8,7 @@ const stringSimilarity = require("string-similarity");
 
 let inquirerLock = false;
 
-console.log(
-  "similarity " +
-    stringSimilarity.compareTwoStrings("Hofer DANKt", "Hofer Dankt")
-);
-
-const on = false;
+const on = true;
 if (on) {
   fs.readFile("./George.html", function(err, html) {
     if (err) {
