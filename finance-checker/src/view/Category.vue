@@ -2,13 +2,17 @@
   <div class="category">
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '2', 'in', 'out']" @click="alert">
+        <el-menu
+          :default-openeds="['1', '2', 'in', 'out']"
+          @close="setChartData"
+          @open="setChartData"
+        >
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-tickets"></i>Categories
             </template>
             <el-input placeholder="Filter keyword" v-model="filterText"></el-input>
-            <el-submenu collapse="false" index="in">
+            <el-submenu index="in">
               <template slot="title">
                 <i class="el-icon-circle-plus-outline"></i>In
               </template>
@@ -48,7 +52,17 @@
 
       <el-container>
         <el-main>
-          <doughnut class="doughnut" v-if="loaded" :chartData="chartData" :options="chartOptions"></doughnut>
+          <div class="split">
+            <el-table :data="tableData" class="table">
+              <el-table-column prop="date" label="Date" width="150"></el-table-column>
+              <el-table-column prop="name" label="Name" width="120"></el-table-column>
+              <el-table-column prop="state" label="State" width="120"></el-table-column>
+              <el-table-column prop="city" label="City" width="120"></el-table-column>
+              <el-table-column prop="address" label="Address" width="300"></el-table-column>
+              <el-table-column prop="zip" label="Zip" width="120"></el-table-column>
+            </el-table>
+            <doughnut class="doughnut" v-if="loaded" :chartData="chartData" :options="chartOptions"></doughnut>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -74,7 +88,65 @@ export default {
       },
       loaded: false,
       chartData: { datasets: [], labels: [] },
-      chartOptions: { cutoutPercentage: 60 }
+      chartOptions: { cutoutPercentage: 60 },
+      tableData: [
+        {
+          date: "2016-05-03",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-02",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-04",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-01",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-08",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-06",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        },
+        {
+          date: "2016-05-07",
+          name: "Tom",
+          state: "California",
+          city: "Los Angeles",
+          address: "No. 189, Grove St, Los Angeles",
+          zip: "CA 90036"
+        }
+      ]
     };
   },
   beforeMount: function() {
@@ -86,7 +158,7 @@ export default {
       if (!value) return true;
       return dataa.label.indexOf(value) !== -1;
     },
-    setChartData(categoryPath) {
+    async setChartData(categoryPath) {
       this.loaded = false;
       this.chartData = { datasets: [], labels: [] };
 
@@ -114,6 +186,7 @@ export default {
   watch: {
     filterText(val) {
       this.$refs.treeIn.filter(val);
+      this.$refs.treeOut.filter(val);
     }
   }
 };
@@ -126,6 +199,22 @@ export default {
     text-align: left;
     .el-menu .el-menu .el-submenu .el-menu {
       padding-left: 60px;
+    }
+  }
+  .el-main {
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 50px;
+      .table {
+        margin: 10px;
+        margin-left: 50px;
+        justify-self: center;
+        align-self: start;
+      }
+      .doughnut {
+        justify-self: center;
+      }
     }
   }
 }

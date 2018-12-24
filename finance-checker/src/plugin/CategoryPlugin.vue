@@ -86,11 +86,23 @@ const CategoryPlugin = {
     };
 
     Vue.prototype.$findCategory = path => {
-      const parts = path.split(".");
+      let parts = [];
+      if (strStartsWith(path, ["in", "out", "save"])) {
+        parts = path.split(".");
+      }
       return resolveCategory(parts, options.categories);
     };
   }
 };
+
+function strStartsWith(string, list) {
+  for (let elem in list) {
+    if (string.startsWith(list[elem])) {
+      return true;
+    }
+  }
+  return false;
+}
 
 function resolveCategory(parts, data) {
   if (parts.length > 0) {

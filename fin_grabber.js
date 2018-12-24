@@ -179,7 +179,7 @@ async function inquirePreCategory(categoryText, bestMatch, categoryPath) {
         " (" +
         bestMatch.rating +
         ") found. Sould the new entry be placed in path: " +
-        categoryPath.split(".").join(" > ")
+        categoryPath.split(".").join(" / ")
     }
   ]);
 
@@ -212,7 +212,7 @@ async function inquireCategory(categoryText, path, categories, elem) {
         name: "selection",
         message:
           categoryText +
-          (isEmpty(path) ? "Where do you want to place it? " : path + " > ..."),
+          (isEmpty(path) ? "Where do you want to place it? " : path + " / ..."),
         choices
       }
     ]);
@@ -247,7 +247,7 @@ async function inquireCategory(categoryText, path, categories, elem) {
       }
       returnValue = await inquireCategory(
         "",
-        (isEmpty(path) ? "" : path + " > ") + answers.selection,
+        (isEmpty(path) ? "" : path + " / ") + answers.selection,
         categories[answers.selection],
         elem
       );
@@ -305,13 +305,14 @@ function writeBack(data) {
     //@see https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js
     previousData = fs.readFileSync(dataFile, "utf8");
     obj = JSON.parse(previousData); //now it an object
-    obj = { ...data, ...obj };
+    if (obj) obj = { ...data, ...obj };
     json = JSON.stringify(obj); //convert it back to json
     fs.writeFile(dataFile, json, "utf8", () => {}); // write it back
     return obj;
   } else {
     //overwrite
     fs.writeFile(dataFile, JSON.stringify(data), "utf8", () => {});
+    return data;
   }
 }
 
