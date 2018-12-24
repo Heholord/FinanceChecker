@@ -1,7 +1,8 @@
 <script>
+import palette from "google-palette";
+
 const CategoryPlugin = {
   install(Vue, options) {
-    // 3. inject some component options
     Vue.mixin({
       data: () => {
         return {
@@ -10,40 +11,28 @@ const CategoryPlugin = {
       }
     });
 
-    // 4. add an instance method
-    Vue.prototype.$filterByCategories = categoryItems => {
-      const data = options.data;
-      // const categories = options.categories;
-      let returnValue = Object.keys(categoryItems).map(elem => {
-        return { category: elem, value: 0 };
-      });
-      forEachElem(data, elem => {
-        for (let category in categoryItems) {
-          // check all categories
-          if (categoryItems[category].includes(elem.info)) {
-            returnValue.filter(elem => {
-              return category === elem.category;
-            })[0].value += Math.abs(+elem.amount);
-          }
-        }
-      });
-      return returnValue;
-    };
-
     Vue.prototype.$filterByCategory = category => {
       var categoryList = {};
       let returnValue = [];
-      if (!Array.isArray(category)) {
-        Object.keys(category).forEach(key => {
-          categoryList[key] = flatten(category[key]);
-        });
-        returnValue = Object.keys(category).map(elem => {
-          return { category: elem, value: 0 };
-        });
-      } else {
-        categoryList["all"] = category;
-        returnValue = [{ category: "all", value: 0 }];
-      }
+
+      actOnCategory(
+        category,
+        (key, subCategory) => {
+          //subcategory function
+          categoryList[key] = flatten(subCategory);
+        },
+        () => {
+          //category function
+          returnValue = Object.keys(category).map(elem => {
+            return { category: elem, value: 0 };
+          });
+        },
+        () => {
+          //leaf function
+          categoryList["all"] = category;
+          returnValue = [{ category: "all", value: 0 }];
+        }
+      );
 
       const data = options.data;
 
@@ -63,17 +52,12 @@ const CategoryPlugin = {
 
     Vue.prototype.$subcategories = category => {
       let returnValue = [];
-      if (typeof category === "object") {
-        Object.keys(category).forEach(subCategory => {
-          if (typeof category[subCategory] === "object") {
-            returnValue.push({
-              key: subCategory,
-              data: category[subCategory]
-            });
-          }
+      actOnCategory(category, (key, subCategory) => {
+        returnValue.push({
+          key: key,
+          data: subCategory
         });
-      }
-
+      });
       return returnValue;
     };
 
@@ -92,8 +76,47 @@ const CategoryPlugin = {
       }
       return resolveCategory(parts, options.categories);
     };
+
+    Vue.prototype.$createChartData = data => {
+      let chartData = { datasets: [], labels: [] };
+
+      data.sort((e1, e2) => {
+        return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
+      });
+
+      chartData.datasets.push({
+        data: data.map(el => {
+          return Math.abs(el.value);
+        }),
+        backgroundColor: palette("tol-dv", data.length).map(hex => {
+          return "#" + hex;
+        })
+      });
+      chartData.labels.push(
+        ...data.map(el => {
+          return el.category;
+        })
+      );
+      return chartData;
+    };
   }
 };
+
+function actOnCategory(
+  category,
+  subCategoryFunction,
+  categoryFunction,
+  leafFunction
+) {
+  if (Array.isArray(category)) {
+    if (leafFunction) leafFunction();
+  } else if (typeof category === "object") {
+    Object.keys(category).forEach(catKey => {
+      if (subCategoryFunction) subCategoryFunction(catKey, category[catKey]);
+    });
+    if (categoryFunction) categoryFunction();
+  }
+}
 
 function strStartsWith(string, list) {
   for (let elem in list) {
@@ -115,19 +138,16 @@ function resolveCategory(parts, data) {
 
 function renderCategory(path, cat) {
   let returnValue = [];
-  if (typeof cat === "object") {
-    Object.keys(cat).forEach(catKey => {
-      if (typeof cat[catKey] === "object") {
-        const newPath = path + "." + catKey;
-        returnValue.push({
-          id: newPath,
-          label: catKey,
-          children: renderCategory(newPath, cat[catKey])
-        });
-      }
+
+  actOnCategory(cat, (key, subCategory) => {
+    const newPath = path + "." + key;
+    returnValue.push({
+      id: newPath,
+      label: key,
+      children: renderCategory(newPath, subCategory)
     });
-    return returnValue;
-  }
+  });
+  return returnValue;
 }
 
 function forEachElem(data, callback) {
@@ -144,13 +164,18 @@ function forEachElem(data, callback) {
 
 function flatten(category) {
   let returnValue = [];
-  if (Array.isArray(category)) {
-    return category;
-  } else {
-    Object.keys(category).forEach(key => {
-      returnValue.push(...flatten(category[key]));
-    });
-  }
+  actOnCategory(
+    category,
+    (key, subCategory) => {
+      //subcategory function
+      returnValue.push(...flatten(subCategory));
+    },
+    () => {}, //category function
+    () => {
+      // leaf function
+      returnValue = category;
+    }
+  );
   return returnValue;
 }
 

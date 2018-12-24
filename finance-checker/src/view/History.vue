@@ -1,27 +1,21 @@
 <template>
-  <div class="category">
+  <div class="history">
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
         <el-menu
-          :default-openeds="['categories', '2', 'in', 'out']"
+          :default-openeds="['categories', '1', 'in', 'out']"
           @close="setChartData"
           @open="setChartData"
         >
-          <CategoryTree
-            :inCategory="inCategory"
-            :outCategory="outCategory"
-            @onSelect="setChartData"
-          />
-          <el-submenu index="2">
+          <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-date"></i>Dates
             </template>
-            <el-menu-item-group>
-              <template slot="title">Group 1</template>
-              <el-menu-item index="2-1">Option 1</el-menu-item>
-              <el-menu-item index="2-2">Option 2</el-menu-item>
-            </el-menu-item-group>
+            <div class="block">
+              <el-date-picker v-model="displayDate" type="year" placeholder="Pick a year"></el-date-picker>
+            </div>
           </el-submenu>
+          <CategoryTree :outCategory="outCategory" @onSelect="setChartData"/>
         </el-menu>
       </el-aside>
 
@@ -50,13 +44,19 @@ import CategoryTree from "@/components/CategoryTree.vue";
 
 export default {
   name: "Category",
-  components: { Doughnut, CategoryTree },
+  components: { CategoryTree, Doughnut },
   data() {
     return {
       inCategory: [],
       outCategory: [],
+      subcategories: {},
+      defaultProps: {
+        children: "children",
+        label: "label"
+      },
       loaded: false,
       chartData: { datasets: [], labels: [] },
+      displayDate: new Date(),
       tableData: [
         {
           date: "2016-05-03",
@@ -136,29 +136,7 @@ export default {
 </script>
 
 <style lang="scss">
-.category {
+.history {
   height: 100%;
-  .el-aside {
-    text-align: left;
-    .el-menu .el-menu .el-submenu .el-menu {
-      padding-left: 60px;
-    }
-  }
-  .el-main {
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 50px;
-      .table {
-        margin: 10px;
-        margin-left: 50px;
-        justify-self: center;
-        align-self: start;
-      }
-      .doughnut {
-        justify-self: center;
-      }
-    }
-  }
 }
 </style>

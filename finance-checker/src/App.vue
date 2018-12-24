@@ -1,23 +1,12 @@
 <template>
   <div id="app">
     <el-tabs class="tabs" type="border-card">
-      <el-tab-pane label="Big">
-        <div class="text"></div>
-        <doughnut class="doughnut" v-if="loaded" :chartData="chartData" :options="chartOptions"></doughnut>
-      </el-tab-pane>
-      <el-tab-pane label="Small">
-        <doughnut
-          class="doughnut small"
-          v-if="loaded"
-          :chartData="chartData"
-          :options="chartOptions"
-        ></doughnut>
-      </el-tab-pane>
       <el-tab-pane label="Category">
         <Category/>
       </el-tab-pane>
-      <el-tab-pane label="Year"></el-tab-pane>
-      <el-tab-pane label="Month"></el-tab-pane>
+      <el-tab-pane label="History">
+        <History/>
+      </el-tab-pane>
       <el-tab-pane label="Day of the month stats"></el-tab-pane>
       <el-tab-pane label="Day of the week stats"></el-tab-pane>
     </el-tabs>
@@ -25,14 +14,14 @@
 </template>
 
 <script>
-import Doughnut from "./components/Doughnut.vue";
 import Category from "@/view/Category.vue";
+import History from "@/view/History.vue";
 import palette from "google-palette";
 
 export default {
   name: "app",
   components: {
-    Doughnut,
+    History,
     Category
   },
   data() {
@@ -84,6 +73,32 @@ export default {
 
   .tabs {
     height: 100%;
+  }
+
+  .el-aside {
+    text-align: left;
+    .el-menu .el-menu {
+      padding: 0px 10px;
+      .el-submenu .el-menu {
+        padding-left: 40px;
+      }
+    }
+  }
+  .el-main {
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 50px;
+      .table {
+        margin: 10px;
+        margin-left: 50px;
+        justify-self: center;
+        align-self: start;
+      }
+      .doughnut {
+        justify-self: center;
+      }
+    }
   }
 }
 </style>
