@@ -5,15 +5,34 @@ const CategoryPlugin = {
   install(Vue, options) {
     Vue.mixin({
       data: () => {
-        return {
-          categories: options.categories
-        };
+        return {};
       }
     });
 
-    Vue.prototype.$filterByCategory = category => {
+    // special categories preprocessing (adding to categories-object)
+    forEachElem(options.data, elem => {
+      if (elem.category) {
+        const strParts = elem.category.split(".");
+        let lastCat = options.categories;
+        for (let index in strParts) {
+          const part = strParts[index];
+          if (!lastCat[part]) {
+            if (index == strParts.length - 1) {
+              lastCat[part] = [];
+            } else {
+              lastCat[part] = {};
+            }
+          }
+          lastCat = lastCat[part];
+        }
+      }
+    });
+
+    Vue.prototype.$filterByCategory = (categoryPath, date) => {
       var categoryList = {};
       let returnValue = [];
+
+      const category = Vue.prototype.$findCategory(categoryPath);
 
       actOnCategory(
         category,
@@ -21,29 +40,42 @@ const CategoryPlugin = {
           //subcategory function
           categoryList[key] = flatten(subCategory);
         },
-        () => {
-          //category function
-          returnValue = Object.keys(category).map(elem => {
-            return { category: elem, value: 0 };
-          });
-        },
+        () => {}, //category function
         () => {
           //leaf function
           categoryList["all"] = category;
-          returnValue = [{ category: "all", value: 0 }];
+          returnValue.all = { value: 0, entries: [] };
         }
       );
 
-      const data = options.data;
+      const data = getData(date, options.data);
 
       forEachElem(data, elem => {
-        for (let cat in categoryList) {
-          // check all categories
-          if (categoryList[cat].includes(elem.info)) {
-            returnValue.filter(el => {
-              return cat === el.category;
-            })[0].value += Math.abs(+elem.amount);
+        if (!elem.category) {
+          // for normal categories
+          for (let cat in categoryList) {
+            if (categoryList[cat].includes(elem.info)) {
+              if (!returnValue[cat])
+                returnValue[cat] = { value: 0, entries: [] };
+              returnValue[cat].value += Math.abs(+elem.amount);
+              returnValue[cat].entries.push(elem);
+            }
           }
+        } else if (elem.category && elem.category.startsWith(categoryPath)) {
+          // for special categories
+          let str = elem.category.replace(categoryPath, "");
+          if (str.startsWith(".")) {
+            str = str.replace(".", "");
+          }
+          const strParts = str === "" ? [] : str.split(".");
+          let displayCategory = "all";
+          if (strParts.length > 0) {
+            displayCategory = strParts[0];
+          }
+          if (!returnValue[displayCategory])
+            returnValue[displayCategory] = { value: 0, entries: [] };
+          returnValue[displayCategory].value += Math.abs(+elem.amount);
+          returnValue[displayCategory].entries.push(elem);
         }
       });
 
@@ -61,12 +93,8 @@ const CategoryPlugin = {
       return returnValue;
     };
 
-    Vue.prototype.$getInCategory = () => {
-      return renderCategory("in", options.categories.in);
-    };
-
-    Vue.prototype.$getOutCategory = () => {
-      return renderCategory("out", options.categories.out);
+    Vue.prototype.$getCategoryTree = startingpoint => {
+      return renderCategory(startingpoint, options.categories[startingpoint]);
     };
 
     Vue.prototype.$findCategory = path => {
@@ -80,20 +108,25 @@ const CategoryPlugin = {
     Vue.prototype.$createChartData = data => {
       let chartData = { datasets: [], labels: [] };
 
-      data.sort((e1, e2) => {
+      let listData = [];
+      Object.keys(data).forEach(key => {
+        listData.push({ category: key, value: data[key].value });
+      });
+
+      listData.sort((e1, e2) => {
         return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
       });
 
       chartData.datasets.push({
-        data: data.map(el => {
+        data: listData.map(el => {
           return Math.abs(el.value);
         }),
-        backgroundColor: palette("tol-dv", data.length).map(hex => {
+        backgroundColor: palette("tol-dv", listData.length).map(hex => {
           return "#" + hex;
         })
       });
       chartData.labels.push(
-        ...data.map(el => {
+        ...listData.map(el => {
           return el.category;
         })
       );
@@ -101,6 +134,30 @@ const CategoryPlugin = {
     };
   }
 };
+
+function getData(date, fullData) {
+  let data = fullData;
+
+  if (date) {
+    if (date.length === 4) {
+      data = {};
+      Object.keys(fullData).forEach(key => {
+        const year = key.substring(key.length - 4, key.length);
+        if (year === date) {
+          data[key] = fullData[key];
+        }
+      });
+    } else if (date.length > 4) {
+      data = {};
+      Object.keys(fullData).forEach(key => {
+        if (key === date) {
+          data[key] = fullData[key];
+        }
+      });
+    }
+  }
+  return data;
+}
 
 function actOnCategory(
   category,
@@ -118,9 +175,9 @@ function actOnCategory(
   }
 }
 
-function strStartsWith(string, list) {
+function strStartsWith(str, list) {
   for (let elem in list) {
-    if (string.startsWith(list[elem])) {
+    if (str.startsWith(list[elem])) {
       return true;
     }
   }

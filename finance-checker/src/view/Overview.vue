@@ -1,21 +1,28 @@
 <template>
-  <div class="history">
+  <div class="category">
     <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
+      <el-aside>
         <el-menu
-          :default-openeds="['categories', '1', 'in', 'out']"
+          :default-openeds="['categories', '2', 'in', 'out']"
           @close="setChartData"
           @open="setChartData"
         >
-          <el-submenu index="1">
+          <CategoryTree
+            :inCategory="inCategory"
+            :outCategory="outCategory"
+            :saveCategory="saveCategory"
+            @onSelect="setChartData"
+          />
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-date"></i>Dates
             </template>
-            <div class="block">
-              <el-date-picker v-model="displayDate" type="year" placeholder="Pick a year"></el-date-picker>
-            </div>
+            <el-menu-item-group>
+              <template slot="title">Group 1</template>
+              <el-menu-item index="2-1">Option 1</el-menu-item>
+              <el-menu-item index="2-2">Option 2</el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
-          <CategoryTree :outCategory="outCategory" @onSelect="setChartData"/>
         </el-menu>
       </el-aside>
 
@@ -43,20 +50,15 @@ import Doughnut from "@/components/Doughnut.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 
 export default {
-  name: "Category",
-  components: { CategoryTree, Doughnut },
+  name: "Overview",
+  components: { Doughnut, CategoryTree },
   data() {
     return {
       inCategory: [],
       outCategory: [],
-      subcategories: {},
-      defaultProps: {
-        children: "children",
-        label: "label"
-      },
+      saveCategory: [],
       loaded: false,
       chartData: { datasets: [], labels: [] },
-      displayDate: new Date(),
       tableData: [
         {
           date: "2016-05-03",
@@ -118,15 +120,16 @@ export default {
     };
   },
   beforeMount: function() {
-    this.inCategory = this.$getInCategory();
-    this.outCategory = this.$getOutCategory();
+    this.inCategory = this.$getCategoryTree("in");
+    this.outCategory = this.$getCategoryTree("out");
+    this.saveCategory = this.$getCategoryTree("save");
+    this.setChartData("");
   },
   methods: {
     async setChartData(categoryPath) {
       this.loaded = false;
 
-      const category = this.$findCategory(categoryPath);
-      let filteredData = this.$filterByCategory(category);
+      let filteredData = this.$filterByCategory(categoryPath);
       this.chartData = this.$createChartData(filteredData);
 
       this.loaded = true;
@@ -136,7 +139,4 @@ export default {
 </script>
 
 <style lang="scss">
-.history {
-  height: 100%;
-}
 </style>

@@ -1,53 +1,35 @@
 <template>
   <div id="app">
     <el-tabs class="tabs" type="border-card">
+      <el-tab-pane label="Overview">
+        <Overview/>
+      </el-tab-pane>
       <el-tab-pane label="Category">
         <Category/>
       </el-tab-pane>
-      <el-tab-pane label="History">
-        <History/>
-      </el-tab-pane>
-      <el-tab-pane label="Day of the month stats"></el-tab-pane>
-      <el-tab-pane label="Day of the week stats"></el-tab-pane>
+      <el-tab-pane label="Special Stats"></el-tab-pane>
+      <!-- TODO 
+        entry-browser (sorted by dates), 
+        overview, 
+        8k-view
+        special stats
+      datepicker -> disable dates-->
     </el-tabs>
   </div>
 </template>
 
 <script>
 import Category from "@/view/Category.vue";
-import History from "@/view/History.vue";
-import palette from "google-palette";
+import Overview from "@/view/Overview.vue";
 
 export default {
   name: "app",
   components: {
-    History,
+    Overview,
     Category
   },
   data() {
-    return {
-      loaded: false,
-      chartData: { datasets: [], labels: [] },
-      chartOptions: { cutoutPercentage: 60 }
-    };
-  },
-  mounted: function() {
-    this.loaded = false;
-    let filteredData = this.$filterByCategory(this.categories.out.food);
-    this.chartData.datasets.push({
-      data: filteredData.map(el => {
-        return Math.abs(el.value);
-      }),
-      backgroundColor: palette("tol", filteredData.length).map(hex => {
-        return "#" + hex;
-      })
-    });
-    this.chartData.labels.push(
-      ...filteredData.map(el => {
-        return el.category;
-      })
-    );
-    this.loaded = true;
+    return {};
   },
   methods: {}
 };
@@ -76,12 +58,18 @@ export default {
   }
 
   .el-aside {
-    text-align: left;
-    .el-menu .el-menu {
-      padding: 0px 10px;
-      .el-submenu .el-menu {
-        padding-left: 40px;
-      }
+    text-align: center;
+    background-color: white;
+    border-right: solid 1px #e6e6e6;
+    padding: 20px 20px;
+    width: 300px;
+    & > hr {
+      color: #e6e6e6;
+      margin: 20px;
+    }
+    & > *,
+    & > .categories > * {
+      margin: 10px;
     }
   }
   .el-main {

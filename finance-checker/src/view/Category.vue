@@ -1,33 +1,43 @@
 <template>
-  <div class="category">
+  <div class="history">
     <el-container style="height: 100%; border: 1px solid #eee">
-      <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
-        <el-menu
-          :default-openeds="['categories', '2', 'in', 'out']"
-          @close="setChartData"
-          @open="setChartData"
-        >
-          <CategoryTree
-            :inCategory="inCategory"
-            :outCategory="outCategory"
-            @onSelect="setChartData"
-          />
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-date"></i>Dates
-            </template>
-            <el-menu-item-group>
-              <template slot="title">Group 1</template>
-              <el-menu-item index="2-1">Option 1</el-menu-item>
-              <el-menu-item index="2-2">Option 2</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
+      <el-aside>
+        <i class="el-icon-date"></i>Date
+        <br>
+        <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
+          <el-radio-button label="year"></el-radio-button>
+          <el-radio-button label="month"></el-radio-button>
+        </el-radio-group>
+        <el-date-picker
+          v-if="dateType==='year'"
+          v-model="displayDate"
+          type="year"
+          placeholder="Pick a year"
+          format="yyyy"
+          value-format="yyyy"
+          ref="yearPicker"
+          @change="reloadChart"
+        ></el-date-picker>
+        <el-date-picker
+          v-if="dateType==='month'"
+          v-model="displayDate"
+          type="month"
+          placeholder="Pick a year"
+          format="yyyy-MM"
+          value-format="MMMMyyyy"
+          ref="monthPicker"
+          @change="reloadChart"
+        ></el-date-picker>
+        <hr>
+        <CategoryTree
+          :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"
+          @onSelect="setChartData"
+        />
       </el-aside>
 
       <el-container>
         <el-main>
-          <div class="split">
+          <div v-if="!noData" class="split">
             <el-table :data="tableData" class="table">
               <el-table-column prop="date" label="Date" width="150"></el-table-column>
               <el-table-column prop="name" label="Name" width="120"></el-table-column>
@@ -38,6 +48,7 @@
             </el-table>
             <doughnut class="doughnut" v-if="loaded" :chartData="chartData"></doughnut>
           </div>
+          <h1 v-if="noData">No data available</h1>
         </el-main>
       </el-container>
     </el-container>
@@ -50,13 +61,22 @@ import CategoryTree from "@/components/CategoryTree.vue";
 
 export default {
   name: "Category",
-  components: { Doughnut, CategoryTree },
+  components: { CategoryTree, Doughnut },
   data() {
     return {
       inCategory: [],
       outCategory: [],
+      saveCategory: [],
+      noData: true,
+      lastCategoryPath: "",
+      defaultProps: {
+        children: "children",
+        label: "label"
+      },
       loaded: false,
       chartData: { datasets: [], labels: [] },
+      displayDate: undefined,
+      dateType: "year",
       tableData: [
         {
           date: "2016-05-03",
@@ -118,47 +138,42 @@ export default {
     };
   },
   beforeMount: function() {
-    this.inCategory = this.$getInCategory();
-    this.outCategory = this.$getOutCategory();
+    this.inCategory = this.$getCategoryTree("in");
+    this.outCategory = this.$getCategoryTree("out");
+    this.saveCategory = this.$getCategoryTree("save");
+    this.setChartData("");
   },
   methods: {
+    focusPicker() {
+      if (this.dateType === "year") {
+        this.$refs.yearPicker.focus();
+      } else {
+        this.$refs.monthPicker.focus();
+      }
+    },
+    async reloadChart() {
+      await this.setChartData(this.lastCategoryPath);
+    },
     async setChartData(categoryPath) {
       this.loaded = false;
 
-      const category = this.$findCategory(categoryPath);
-      let filteredData = this.$filterByCategory(category);
-      this.chartData = this.$createChartData(filteredData);
+      let filteredData = this.$filterByCategory(categoryPath, this.displayDate);
+      if (Object.keys(filteredData).length > 0) {
+        this.chartData = this.$createChartData(filteredData);
+        this.noData = false;
+      } else {
+        this.noData = true;
+      }
 
       this.loaded = true;
+      this.lastCategoryPath = categoryPath;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.category {
+.history {
   height: 100%;
-  .el-aside {
-    text-align: left;
-    .el-menu .el-menu .el-submenu .el-menu {
-      padding-left: 60px;
-    }
-  }
-  .el-main {
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 50px;
-      .table {
-        margin: 10px;
-        margin-left: 50px;
-        justify-self: center;
-        align-self: start;
-      }
-      .doughnut {
-        justify-self: center;
-      }
-    }
-  }
 }
 </style>
