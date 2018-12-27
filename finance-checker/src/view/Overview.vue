@@ -32,7 +32,7 @@
               <el-table-column prop="address" label="Address" width="300"></el-table-column>
               <el-table-column prop="zip" label="Zip" width="120"></el-table-column>
             </el-table>
-            <doughnut class="doughnut" v-if="loaded" :chartData="chartData"></doughnut>
+            <line-chart class="linechart" v-if="loaded" :chartData="chartData"></line-chart>
           </div>
           <h1 v-if="noData">No data available</h1>
         </el-main>
@@ -42,18 +42,17 @@
 </template>
 
 <script>
-import Doughnut from "@/components/Doughnut.vue";
+import LineChart from "@/components/LineChart.vue";
 
 export default {
   name: "Overview",
-  components: { Doughnut },
+  components: { LineChart },
   data() {
     return {
-      inCategory: [],
-      outCategory: [],
-      saveCategory: [],
+      in: [],
+      out: [],
+      save: [],
       noData: true,
-      lastCategoryPath: "",
       defaultProps: {
         children: "children",
         label: "label"
@@ -127,10 +126,9 @@ export default {
   },
   methods: {
     focusPicker() {
+      this.displayDate = "undefined";
       if (this.dateType === "year") {
         this.$refs.yearPicker.focus();
-      } else {
-        this.$refs.monthPicker.focus();
       }
     },
     async reloadChart() {

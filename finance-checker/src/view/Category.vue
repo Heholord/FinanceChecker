@@ -147,6 +147,7 @@ export default {
   },
   methods: {
     focusPicker() {
+      this.displayDate = "undefined";
       if (this.dateType === "year") {
         this.$refs.yearPicker.focus();
       } else {

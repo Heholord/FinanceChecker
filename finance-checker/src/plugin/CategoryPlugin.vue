@@ -32,13 +32,13 @@ const CategoryPlugin = {
     ];
     const dataStartDate =
       getYear(firstDateKey) + "-" + getMonthAsNr(firstDateKey) + "-01";
-    console.log(moment.weekdays()[moment(dataStartDate).weekday()]);
     const dataEndDate =
       getYear(lastDateKey) + "-" + getMonthAsNr(lastDateKey) + "-28";
-    console.log(moment.weekdays()[moment(dataEndDate).weekday()]);
+    // console.log(moment.weekdays()[moment(dataStartDate).weekday()]);
+    // console.log(moment.weekdays()[moment(dataEndDate).weekday()]);
 
     // special categories preprocessing (adding to categories-object)
-    forEachElem(options.data, elem => {
+    forEachElem(options.data, (month, day, elem) => {
       if (elem.category) {
         const strParts = elem.category.split(".");
         let lastCat = options.categories;
@@ -85,7 +85,7 @@ const CategoryPlugin = {
 
       const data = getDataByDate(date, options.data);
 
-      forEachElem(data, elem => {
+      forEachElem(data, (month, day, elem) => {
         if (!elem.category) {
           // for normal categories
           for (let cat in categoryList) {
@@ -166,6 +166,29 @@ const CategoryPlugin = {
         })
       );
       return chartData;
+    };
+
+    Vue.prototype.$getDataPer = (dateType, dateTypeValue) => {
+      let returnValue = [];
+      if (dateType === "all") {
+        forEachElem(options.data, (month, day, elem) => {
+          let dataYear = getYear(month);
+          if (!returnValue[dataYear]) returnValue[dataYear] = [];
+          returnValue[dataYear].push(elem);
+        });
+      } else if (dateType === "year") {
+        forEachElem(options.data, (month, day, elem) => {
+          let dataYear = getYear(month);
+          let dataMonth = getMonthAsString(month);
+          if (dataYear === dateTypeValue) {
+            if (!returnValue[dataMonth]) returnValue[dataMonth] = [];
+            returnValue[dataMonth].push(elem);
+          }
+        });
+      } else if (dateType === "month") {
+        returnValue = options.data[dateTypeValue];
+      }
+      return returnValue;
     };
   }
 };
@@ -258,15 +281,25 @@ function renderCategory(path, cat) {
 }
 
 function forEachElem(data, callback) {
-  Object.keys(data).forEach(month => {
-    Object.keys(data[month]).forEach(day => {
-      for (let index in data[month][day]) {
-        //retrieve all days
-        const elem = data[month][day][index];
-        callback(elem);
+  if (!Array.isArray(data)) {
+    Object.keys(data).forEach(month => {
+      if (!Array.isArray(data[month])) {
+        Object.keys(data[month]).forEach(day => {
+          data[month][day].forEach(elem => {
+            callback(month, day, elem);
+          });
+        });
+      } else {
+        data[month].forEach(elem => {
+          callback(month, undefined, elem);
+        });
       }
     });
-  });
+  } else {
+    data.forEach(elem => {
+      callback(undefined, undefined, elem);
+    });
+  }
 }
 
 function flatten(category) {
