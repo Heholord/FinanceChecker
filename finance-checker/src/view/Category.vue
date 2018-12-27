@@ -17,6 +17,7 @@
           value-format="yyyy"
           ref="yearPicker"
           @change="reloadChart"
+          :picker-options="{disabledDate: $getDisabledDates}"
         ></el-date-picker>
         <el-date-picker
           v-if="dateType==='month'"
@@ -27,6 +28,7 @@
           value-format="MMMMyyyy"
           ref="monthPicker"
           @change="reloadChart"
+          :picker-options="{disabledDate: $getDisabledDates}"
         ></el-date-picker>
         <hr>
         <CategoryTree

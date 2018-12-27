@@ -13,6 +13,7 @@
     "jsdom": "^13.1.0",
     "npm": "^6.5.0",
     "string-similarity": "^3.0.0",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.2"
   },
   "devDependencies": {},

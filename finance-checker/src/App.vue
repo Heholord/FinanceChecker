@@ -4,7 +4,7 @@
       <el-tab-pane label="Overview">
         <Overview/>
       </el-tab-pane>
-      <el-tab-pane label="Category">
+      <el-tab-pane label="Category Browser">
         <Category/>
       </el-tab-pane>
       <el-tab-pane label="Special Stats"></el-tab-pane>
@@ -45,11 +45,11 @@ export default {
   margin: 20px;
 
   .doughnut {
-    width: 800px;
-    height: 800px;
+    width: 500px;
+    height: 100px;
     &.small {
-      width: 400px;
-      height: 400px;
+      width: 300px;
+      height: 150px;
     }
   }
 

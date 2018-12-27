@@ -1,5 +1,21 @@
 <script>
 import palette from "google-palette";
+const moment = require("moment");
+
+// const monthArray = [
+//   "January",
+//   "February",
+//   "March",
+//   "April",
+//   "May",
+//   "June",
+//   "July",
+//   "August",S
+//   "September",
+//   "October",
+//   "November",
+//   "December"
+// ];
 
 const CategoryPlugin = {
   install(Vue, options) {
@@ -8,6 +24,18 @@ const CategoryPlugin = {
         return {};
       }
     });
+
+    //set start & end date
+    const lastDateKey = Object.keys(options.data)[0];
+    const firstDateKey = Object.keys(options.data)[
+      Object.keys(options.data).length - 1
+    ];
+    const dataStartDate =
+      getYear(firstDateKey) + "-" + getMonthAsNr(firstDateKey) + "-01";
+    console.log(moment.weekdays()[moment(dataStartDate).weekday()]);
+    const dataEndDate =
+      getYear(lastDateKey) + "-" + getMonthAsNr(lastDateKey) + "-28";
+    console.log(moment.weekdays()[moment(dataEndDate).weekday()]);
 
     // special categories preprocessing (adding to categories-object)
     forEachElem(options.data, elem => {
@@ -27,6 +55,13 @@ const CategoryPlugin = {
         }
       }
     });
+
+    Vue.prototype.$getDisabledDates = date => {
+      return (
+        date.getTime() < moment(dataStartDate) ||
+        date.getTime() > moment(dataEndDate)
+      );
+    };
 
     Vue.prototype.$filterByCategory = (categoryPath, date) => {
       var categoryList = {};
@@ -48,7 +83,7 @@ const CategoryPlugin = {
         }
       );
 
-      const data = getData(date, options.data);
+      const data = getDataByDate(date, options.data);
 
       forEachElem(data, elem => {
         if (!elem.category) {
@@ -135,14 +170,14 @@ const CategoryPlugin = {
   }
 };
 
-function getData(date, fullData) {
+function getDataByDate(date, fullData) {
   let data = fullData;
 
   if (date) {
     if (date.length === 4) {
       data = {};
       Object.keys(fullData).forEach(key => {
-        const year = key.substring(key.length - 4, key.length);
+        const year = getYear(key);
         if (year === date) {
           data[key] = fullData[key];
         }
@@ -157,6 +192,21 @@ function getData(date, fullData) {
     }
   }
   return data;
+}
+
+// Input format MMMMyyyy (i.e September2008)
+function getMonthAsString(dateString) {
+  return dateString.substring(0, dateString.length - 4);
+}
+
+// Input format MMMMyyyy (i.e September2008)
+function getMonthAsNr(dateString) {
+  return moment.months().indexOf(getMonthAsString(dateString)) + 1;
+}
+
+// Input format MMMMyyyy (i.e September2008)
+function getYear(dateString) {
+  return dateString.substring(dateString.length - 4, dateString.length);
 }
 
 function actOnCategory(
