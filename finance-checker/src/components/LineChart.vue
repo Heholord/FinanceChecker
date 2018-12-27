@@ -9,7 +9,15 @@ export default {
     options: {
       type: Object,
       default: function() {
-        return {};
+        return {
+          scales: {
+            yAxes: [
+              {
+                stacked: true
+              }
+            ]
+          }
+        };
       }
     }
   },

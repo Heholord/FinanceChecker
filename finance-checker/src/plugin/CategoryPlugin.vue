@@ -63,9 +63,21 @@ const CategoryPlugin = {
       );
     };
 
+    Vue.prototype.$getCategoryTree = startingpoint => {
+      return renderCategory(startingpoint, options.categories[startingpoint]);
+    };
+
+    Vue.prototype.$findCategory = path => {
+      let parts = [];
+      if (strStartsWith(path, ["in", "out", "save"])) {
+        parts = path.split(".");
+      }
+      return resolveCategory(parts, options.categories);
+    };
+
     Vue.prototype.$filterByCategory = (categoryPath, date) => {
       var categoryList = {};
-      let returnValue = [];
+      let returnValue = {};
 
       const category = Vue.prototype.$findCategory(categoryPath);
 
@@ -79,7 +91,7 @@ const CategoryPlugin = {
         () => {
           //leaf function
           categoryList["all"] = category;
-          returnValue.all = { value: 0, entries: [] };
+          returnValue.all = { value: 0, values: {}, entries: [] }; //cummulative values, historical values, entities with info
         }
       );
 
@@ -90,10 +102,14 @@ const CategoryPlugin = {
           // for normal categories
           for (let cat in categoryList) {
             if (categoryList[cat].includes(elem.info)) {
-              if (!returnValue[cat])
-                returnValue[cat] = { value: 0, entries: [] };
-              returnValue[cat].value += Math.abs(+elem.amount);
-              returnValue[cat].entries.push(elem);
+              returnValue = addToCategory(
+                returnValue,
+                cat,
+                date,
+                month,
+                day,
+                elem
+              );
             }
           }
         } else if (elem.category && elem.category.startsWith(categoryPath)) {
@@ -107,52 +123,52 @@ const CategoryPlugin = {
           if (strParts.length > 0) {
             displayCategory = strParts[0];
           }
-          if (!returnValue[displayCategory])
-            returnValue[displayCategory] = { value: 0, entries: [] };
-          returnValue[displayCategory].value += Math.abs(+elem.amount);
-          returnValue[displayCategory].entries.push(elem);
+          returnValue = addToCategory(
+            returnValue,
+            displayCategory,
+            date,
+            month,
+            day,
+            elem
+          );
         }
       });
 
+      returnValue = fillUpHistoricalData(
+        returnValue,
+        date,
+        dataStartDate,
+        dataEndDate
+      );
+
       return returnValue;
-    };
-
-    Vue.prototype.$subcategories = category => {
-      let returnValue = [];
-      actOnCategory(category, (key, subCategory) => {
-        returnValue.push({
-          key: key,
-          data: subCategory
-        });
-      });
-      return returnValue;
-    };
-
-    Vue.prototype.$getCategoryTree = startingpoint => {
-      return renderCategory(startingpoint, options.categories[startingpoint]);
-    };
-
-    Vue.prototype.$findCategory = path => {
-      let parts = [];
-      if (strStartsWith(path, ["in", "out", "save"])) {
-        parts = path.split(".");
-      }
-      return resolveCategory(parts, options.categories);
     };
 
     Vue.prototype.$createChartData = data => {
-      let chartData = { datasets: [], labels: [] };
+      let chartData = {
+        general: {
+          datasets: [],
+          labels: []
+        },
+        historical: {
+          datasets: []
+        }
+      };
 
-      let listData = [];
-      Object.keys(data).forEach(key => {
-        listData.push({ category: key, value: data[key].value });
+      let listData = Object.keys(data.data).map(key => {
+        return {
+          category: key,
+          value: data.data[key].value,
+          values: data.data[key].values
+        };
       });
 
       listData.sort((e1, e2) => {
         return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
       });
 
-      chartData.datasets.push({
+      //general
+      chartData.general.datasets.push({
         data: listData.map(el => {
           return Math.abs(el.value);
         }),
@@ -160,38 +176,111 @@ const CategoryPlugin = {
           return "#" + hex;
         })
       });
-      chartData.labels.push(
-        ...listData.map(el => {
-          return el.category;
-        })
-      );
-      return chartData;
-    };
+      chartData.general.labels = listData.map(el => {
+        return el.category;
+      });
 
-    Vue.prototype.$getDataPer = (dateType, dateTypeValue) => {
-      let returnValue = [];
-      if (dateType === "all") {
-        forEachElem(options.data, (month, day, elem) => {
-          let dataYear = getYear(month);
-          if (!returnValue[dataYear]) returnValue[dataYear] = [];
-          returnValue[dataYear].push(elem);
+      // historical data
+      const backgrounds = palette("tol-dv", listData.length).map(hex => {
+        return "#" + hex;
+      });
+
+      const sortList = data.sorting;
+
+      for (let index in listData) {
+        let sortedKey = Object.keys(listData[index].values);
+        sortedKey.sort((a, b) => {
+          return sortList.indexOf(a) > sortList.indexOf(b) ? 1 : -1;
         });
-      } else if (dateType === "year") {
-        forEachElem(options.data, (month, day, elem) => {
-          let dataYear = getYear(month);
-          let dataMonth = getMonthAsString(month);
-          if (dataYear === dateTypeValue) {
-            if (!returnValue[dataMonth]) returnValue[dataMonth] = [];
-            returnValue[dataMonth].push(elem);
-          }
+        chartData.historical.datasets.push({
+          label: listData[index].category,
+          data: sortedKey.map(key => {
+            return listData[index].values[key];
+          }),
+          borderColor: backgrounds[index],
+          backgroundColor: "rgba(0, 0, 0, 0.05)" // backgrounds[index]
         });
-      } else if (dateType === "month") {
-        returnValue = options.data[dateTypeValue];
       }
-      return returnValue;
+      chartData.historical.labels = data.sorting;
+
+      return chartData;
     };
   }
 };
+
+function fillUpHistoricalData(returnValue, date, dataStartDate, dataEndDate) {
+  let datesList = [];
+
+  if (date) {
+    if (date.length === 4) {
+      datesList = moment.months();
+    } else if (date.length > 4) {
+      const year = getYear(date);
+      const month = getMonthAsNr(date);
+      const monthlenght = new Date(+year, month, 0).getDate();
+      for (let i = 1; i < monthlenght; i++) {
+        datesList.push("" + i);
+      }
+    }
+  } else {
+    let startYear = moment(dataStartDate).year();
+    let endYear = moment(dataEndDate).year();
+    for (; startYear <= endYear; startYear++) {
+      datesList.push("" + startYear);
+    }
+  }
+
+  Object.keys(returnValue).forEach(elemKey => {
+    let elem = returnValue[elemKey];
+    datesList.forEach(dateElem => {
+      if (!Object.keys(elem.values).includes(dateElem)) {
+        elem.values[dateElem] = 0;
+      }
+    });
+    returnValue[elemKey] = elem;
+  });
+
+  return { sorting: datesList, data: returnValue };
+}
+
+function addToCategory(
+  returnValue,
+  category,
+  dateSelection,
+  elemMonth,
+  elemDay,
+  elem
+) {
+  const value = +elem.amount;
+  if (!returnValue[category])
+    returnValue[category] = {
+      value: 0,
+      values: {}, //historical values
+      entries: []
+    };
+  returnValue[category].value += Math.abs(value);
+  const histValue = getHistoricalValue(dateSelection, elemMonth, elemDay, elem);
+  if (!returnValue[category].values[histValue.key])
+    returnValue[category].values[histValue.key] = 0;
+  returnValue[category].values[histValue.key] += histValue.value;
+  returnValue[category].entries.push(elem);
+  return returnValue;
+}
+
+function getHistoricalValue(date, month, day, elem) {
+  let historicalValue = { key: undefined, value: Math.abs(+elem.amount) };
+
+  if (date) {
+    if (date.length === 4) {
+      historicalValue.key = getMonthAsString(month);
+    } else if (date.length > 4) {
+      historicalValue.key = day;
+    }
+  } else {
+    historicalValue.key = getYear(month);
+  }
+  return historicalValue;
+}
 
 function getDataByDate(date, fullData) {
   let data = fullData;

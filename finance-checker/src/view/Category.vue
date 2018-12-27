@@ -48,7 +48,8 @@
               <el-table-column prop="address" label="Address" width="300"></el-table-column>
               <el-table-column prop="zip" label="Zip" width="120"></el-table-column>
             </el-table>
-            <doughnut class="doughnut" v-if="loaded" :chartData="chartData"></doughnut>
+            <doughnut class="chart" v-if="loaded" :chartData="chartData.general"></doughnut>
+            <line-chart class="chart big" v-if="loaded" :chartData="chartData.historical"></line-chart>
           </div>
           <h1 v-if="noData">No data available</h1>
         </el-main>
@@ -59,11 +60,12 @@
 
 <script>
 import Doughnut from "@/components/Doughnut.vue";
+import LineChart from "@/components/LineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 
 export default {
   name: "Category",
-  components: { CategoryTree, Doughnut },
+  components: { CategoryTree, Doughnut, LineChart },
   data() {
     return {
       inCategory: [],
@@ -76,7 +78,16 @@ export default {
         label: "label"
       },
       loaded: false,
-      chartData: { datasets: [], labels: [] },
+      chartData: {
+        general: {
+          datasets: [],
+          labels: []
+        },
+        historical: {
+          datasets: [],
+          labels: []
+        }
+      },
       displayDate: undefined,
       dateType: "year",
       tableData: [
@@ -147,7 +158,7 @@ export default {
   },
   methods: {
     focusPicker() {
-      this.displayDate = "undefined";
+      //this.displayDate = "undefined";
       if (this.dateType === "year") {
         this.$refs.yearPicker.focus();
       } else {

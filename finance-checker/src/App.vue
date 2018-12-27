@@ -44,12 +44,16 @@ export default {
   color: #2c3e50;
   margin: 20px;
 
-  .doughnut {
+  .chart {
     width: 500px;
     height: 100px;
     &.small {
       width: 300px;
       height: 150px;
+    }
+    &.big {
+      width: 800px;
+      height: 800px;
     }
   }
 
@@ -83,8 +87,11 @@ export default {
         justify-self: center;
         align-self: start;
       }
-      .doughnut {
+      .chart {
         justify-self: center;
+        &.big {
+          grid-column: 1 / span 2;
+        }
       }
     }
   }
