@@ -2,21 +2,6 @@
 import palette from "google-palette";
 const moment = require("moment");
 
-// const monthArray = [
-//   "January",
-//   "February",
-//   "March",
-//   "April",
-//   "May",
-//   "June",
-//   "July",
-//   "August",S
-//   "September",
-//   "October",
-//   "November",
-//   "December"
-// ];
-
 const CategoryPlugin = {
   install(Vue, options) {
     Vue.mixin({
@@ -25,15 +10,12 @@ const CategoryPlugin = {
       }
     });
 
-    //set start & end date
-    const lastDateKey = Object.keys(options.data)[0];
-    const firstDateKey = Object.keys(options.data)[
-      Object.keys(options.data).length - 1
-    ];
+    const startEndDates = findEarliestLatestDate(options.data);
+
     const dataStartDate =
-      getYear(firstDateKey) + "-" + getMonthAsNr(firstDateKey) + "-01";
+      getYear(startEndDates[0]) + "-" + getMonthAsNr(startEndDates[0]) + "-01";
     const dataEndDate =
-      getYear(lastDateKey) + "-" + getMonthAsNr(lastDateKey) + "-28";
+      getYear(startEndDates[1]) + "-" + getMonthAsNr(startEndDates[1]) + "-28";
     // console.log(moment.weekdays()[moment(dataStartDate).weekday()]);
     // console.log(moment.weekdays()[moment(dataEndDate).weekday()]);
 
@@ -207,6 +189,32 @@ const CategoryPlugin = {
     };
   }
 };
+
+function findEarliestLatestDate(data) {
+  let lowestDate = "December2999";
+  let highestDate = "January0000";
+  Object.keys(data).forEach(key => {
+    let year = getYear(key);
+    let month = getMonthAsNr(key);
+    if (getYear(lowestDate) > year) {
+      lowestDate = key;
+    } else if (getYear(lowestDate) == year) {
+      if (getMonthAsNr(lowestDate) > month) {
+        lowestDate = key;
+      }
+    }
+
+    if (getYear(highestDate) < year) {
+      highestDate = key;
+    } else if (getYear(highestDate) == year) {
+      if (getMonthAsNr(highestDate) < month) {
+        highestDate = key;
+      }
+    }
+  });
+
+  return [lowestDate, highestDate];
+}
 
 function fillUpHistoricalData(returnValue, date, dataStartDate, dataEndDate) {
   let datesList = [];
