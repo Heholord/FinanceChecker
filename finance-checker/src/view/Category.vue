@@ -41,12 +41,11 @@
         <el-main>
           <div v-if="!noData" class="split">
             <el-table :data="tableData" class="table">
-              <el-table-column prop="date" label="Date" width="150"></el-table-column>
-              <el-table-column prop="name" label="Name" width="120"></el-table-column>
-              <el-table-column prop="state" label="State" width="120"></el-table-column>
-              <el-table-column prop="city" label="City" width="120"></el-table-column>
-              <el-table-column prop="address" label="Address" width="300"></el-table-column>
-              <el-table-column prop="zip" label="Zip" width="120"></el-table-column>
+              <el-table-column prop="category" label="Category" width="160"></el-table-column>
+              <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
+              <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
+              <el-table-column prop="avg" label="Average " width="100"></el-table-column>
+              <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
             </el-table>
             <doughnut class="chart" v-if="loaded" :chartData="chartData.general"></doughnut>
             <line-chart class="chart big" v-if="loaded" :chartData="chartData.historical"></line-chart>
@@ -73,10 +72,6 @@ export default {
       saveCategory: [],
       noData: true,
       lastCategoryPath: "",
-      defaultProps: {
-        children: "children",
-        label: "label"
-      },
       loaded: false,
       chartData: {
         general: {
@@ -90,64 +85,7 @@ export default {
       },
       displayDate: undefined,
       dateType: "year",
-      tableData: [
-        {
-          date: "2016-05-03",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-02",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-04",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-01",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-08",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-06",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        },
-        {
-          date: "2016-05-07",
-          name: "Tom",
-          state: "California",
-          city: "Los Angeles",
-          address: "No. 189, Grove St, Los Angeles",
-          zip: "CA 90036"
-        }
-      ]
+      tableData: []
     };
   },
   beforeMount: function() {
@@ -174,6 +112,7 @@ export default {
       let filteredData = this.$filterByCategory(categoryPath, this.displayDate);
       if (Object.keys(filteredData).length > 0) {
         this.chartData = this.$createChartData(filteredData);
+        this.tableData = this.$createTableData(filteredData);
         this.noData = false;
       } else {
         this.noData = true;

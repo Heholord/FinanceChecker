@@ -1,6 +1,8 @@
 <template>
   <div class="categories">
-    <i class="el-icon-tickets"></i> Categories
+    <el-button round @click="click('')">
+      <i class="el-icon-tickets"></i> Categories
+    </el-button>
     <el-input placeholder="Filter keyword" v-model="filterText"></el-input>
     <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="['in', 'out', 'save']">
       <el-submenu v-for="category in categories" :key="category.path" :index="category.path">

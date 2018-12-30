@@ -13,7 +13,7 @@ export default {
           scales: {
             yAxes: [
               {
-                stacked: false
+                stacked: true
               }
             ]
           }

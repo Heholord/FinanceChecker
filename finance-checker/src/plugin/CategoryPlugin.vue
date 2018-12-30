@@ -180,15 +180,111 @@ const CategoryPlugin = {
             return listData[index].values[key];
           }),
           borderColor: backgrounds[index],
-          backgroundColor: "rgba(0, 0, 0, 0.05)" // backgrounds[index]
+          backgroundColor: backgrounds[index] // "rgba(0, 0, 0, 0.05)"
         });
       }
       chartData.historical.labels = data.sorting;
 
       return chartData;
     };
+
+    Vue.prototype.$createTableData = data => {
+      let tableData = [];
+
+      let keys = Object.keys(data.data);
+      keys.sort((e1, e2) => {
+        return Math.abs(data.data[e1].value) > Math.abs(data.data[e2].value)
+          ? -1
+          : 1;
+      });
+      keys.forEach(key => {
+        tableData.push({
+          category: key,
+          sum: Math.round(data.data[key].value * 100) / 100,
+          count: data.data[key].entries.length,
+          avg:
+            Math.round(
+              (data.data[key].value * 100) / data.data[key].entries.length
+            ) / 100,
+          std: getStandardDeviation(
+            data.data[key].entries.map(elem => {
+              return Math.abs(+elem.amount);
+            }),
+            2
+          )
+        });
+      });
+
+      tableData.push({
+        category: "SUM",
+        sum: getSum(
+          Object.keys(data.data).map(key => {
+            return data.data[key].value;
+          }),
+          2
+        )
+      });
+
+      // listData.sort((e1, e2) => {
+      //   return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
+      // });
+
+      return tableData;
+    };
   }
 };
+
+function getSum(numArr, numOfDec) {
+  if (!Array.isArray(numArr)) {
+    return false;
+  }
+  var i = numArr.length,
+    sum = 0;
+  while (i--) {
+    sum += numArr[i];
+  }
+  return getNumWithSetDec(sum, numOfDec);
+}
+
+function getNumWithSetDec(num, numOfDec) {
+  var pow10s = Math.pow(10, numOfDec || 0);
+  return numOfDec ? Math.round(pow10s * num) / pow10s : num;
+}
+
+function getAverageFromNumArr(numArr, numOfDec) {
+  if (!Array.isArray(numArr)) {
+    return false;
+  }
+  var i = numArr.length,
+    sum = 0;
+  while (i--) {
+    sum += numArr[i];
+  }
+  return getNumWithSetDec(sum / numArr.length, numOfDec);
+}
+
+function getVariance(numArr, numOfDec) {
+  if (!Array.isArray(numArr)) {
+    return false;
+  }
+  var avg = getAverageFromNumArr(numArr, numOfDec),
+    i = numArr.length,
+    v = 0;
+
+  while (i--) {
+    v += Math.pow(numArr[i] - avg, 2);
+  }
+  v /= numArr.length;
+  return getNumWithSetDec(v, numOfDec);
+}
+
+function getStandardDeviation(numArr, numOfDec) {
+  if (!Array.isArray(numArr)) {
+    return false;
+  }
+  var stdDev = Math.sqrt(getVariance(numArr, numOfDec));
+  return getNumWithSetDec(stdDev, numOfDec);
+}
 
 function findEarliestLatestDate(data) {
   let lowestDate = "December2999";

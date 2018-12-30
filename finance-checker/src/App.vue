@@ -13,6 +13,7 @@
         overview, 
         8k-view
         special stats
+        linechart switch between stacked/overlapping
       datepicker -> disable dates-->
     </el-tabs>
   </div>
@@ -46,10 +47,10 @@ export default {
 
   .chart {
     width: 500px;
-    height: 100px;
+    height: 400px;
     &.small {
       width: 300px;
-      height: 150px;
+      height: 100px;
     }
     &.big {
       width: 800px;
