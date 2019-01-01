@@ -3,8 +3,9 @@ George.html
 George-Dateien/
 George_files/
 node_modules/
-data.json
-categorizer.json
+data*.json
+categorizer*.json
 *.bak
 *.bak.json
+*.bak*.json
 *_bak/

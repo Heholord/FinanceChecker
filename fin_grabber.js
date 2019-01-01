@@ -70,10 +70,6 @@ function categorizeData(categories, data) {
         }
         elem = data[month][day][index];
 
-        if (month === "Oktober2018" && day === "31") {
-          console.log(JSON.stringify(elem));
-        }
-
         if (elem.category) {
           console.log(elem.info + " is an exception");
         } else {
@@ -93,7 +89,7 @@ function categorizeData(categories, data) {
               categories.out = category;
             };
           }
-          getCategory(param, cat, elem).then(category => {
+          getCategory(param, cat, month, day, elem).then(category => {
             updateCategory(category);
             fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
           });
@@ -103,23 +99,41 @@ function categorizeData(categories, data) {
   });
 }
 
-async function getCategory(inFlow, categories, elem) {
+async function getCategory(inFlow, categories, month, day, elem) {
   let rootCat = inFlow ? "in" : "out";
   let categoryText = "";
   if (inFlow) {
     categoryText =
-      " (+) Incoming entry " + elem.info + " (" + elem.amount + "€)\n";
+      " (+) Incoming entry " +
+      elem.info +
+      " (" +
+      elem.amount +
+      "€) found on " +
+      month +
+      " " +
+      day +
+      "\n";
   } else {
     categoryText =
-      " (-) Outgoing entry " + elem.info + " (" + elem.amount + "€)\n";
+      " (-) Outgoing entry " +
+      elem.info +
+      " (" +
+      elem.amount +
+      "€) found on " +
+      month +
+      " " +
+      day +
+      "\n";
   }
 
   elem.info = elem.info.toUpperCase();
   const listCategories = flatten(categories);
 
   if (listCategories.includes(elem.info)) {
+    // already categorized
     return categories;
   } else if (listCategories.length > 0) {
+    // maybe there is a similar category
     console.log("");
     const bestMatch = stringSimilarity.findBestMatch(elem.info, listCategories)
       .bestMatch;
@@ -145,7 +159,7 @@ async function getCategory(inFlow, categories, elem) {
       }
     }
   }
-  answer = await inquireCategory(categoryText, "", categories, elem);
+  answer = await inquireCategory(categoryText, "", categories, elem); // nothing worked, okay let's extend the category tree
   return answer;
 }
 
@@ -177,8 +191,8 @@ async function inquirePreCategory(categoryText, bestMatch, categoryPath) {
         "Similar entry " +
         bestMatch.target +
         " (" +
-        bestMatch.rating +
-        ") found. Sould the new entry be placed in path: " +
+        Math.round(bestMatch.rating * 100) +
+        "% similarity) found. Sould the new entry be placed in path: " +
         categoryPath.split(".").join(" / ")
     }
   ]);
