@@ -80,7 +80,7 @@ export default {
   .el-main {
     .split {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 2fr 1fr;
       grid-gap: 50px;
       .table {
         margin: 10px;

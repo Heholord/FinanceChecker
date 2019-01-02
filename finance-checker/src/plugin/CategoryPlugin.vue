@@ -200,51 +200,32 @@ const CategoryPlugin = {
       keys.forEach(key => {
         tableData.push({
           category: key,
-          sum: Math.round(data.data[key].value * 100) / 100,
+          sum: Math.round(data.data[key].value * 100) / 100 + " €",
           count: data.data[key].entries.length,
           avg:
             Math.round(
               (data.data[key].value * 100) / data.data[key].entries.length
-            ) / 100,
-          std: getStandardDeviation(
-            data.data[key].entries.map(elem => {
-              return Math.abs(+elem.amount);
-            }),
-            2
-          )
+            ) /
+              100 +
+            " €",
+          std:
+            getStandardDeviation(
+              data.data[key].entries.map(elem => {
+                return Math.abs(+elem.amount);
+              }),
+              2
+            ) + " €"
         });
       });
 
-      tableData.push({
-        category: "SUM",
-        sum: getSum(
-          Object.keys(data.data).map(key => {
-            return data.data[key].value;
-          }),
-          2
-        )
-      });
-
-      // listData.sort((e1, e2) => {
-      //   return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
-      // });
-
       return tableData;
+    };
+
+    Vue.prototype.$std = array => {
+      return getStandardDeviation(array, 2);
     };
   }
 };
-
-function getSum(numArr, numOfDec) {
-  if (!Array.isArray(numArr)) {
-    return false;
-  }
-  var i = numArr.length,
-    sum = 0;
-  while (i--) {
-    sum += numArr[i];
-  }
-  return getNumWithSetDec(sum, numOfDec);
-}
 
 function getNumWithSetDec(num, numOfDec) {
   var pow10s = Math.pow(10, numOfDec || 0);

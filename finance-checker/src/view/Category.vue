@@ -40,14 +40,14 @@
       <el-container>
         <el-main>
           <div v-if="!noData" class="split">
-            <el-table :data="tableData" class="table">
+            <el-table show-summary :summary-method="getSummaries" :data="tableData" class="table">
               <el-table-column prop="category" label="Category" width="160"></el-table-column>
               <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
               <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
               <el-table-column prop="avg" label="Average " width="100"></el-table-column>
               <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
             </el-table>
-            <doughnut class="chart" v-if="loaded" :chartData="chartData.general"></doughnut>
+            <doughnut class="chart small" v-if="loaded" :chartData="chartData.general"></doughnut>
             <line-chart class="chart big" v-if="loaded" :chartData="chartData.historical"></line-chart>
           </div>
           <h1 v-if="noData">No data available</h1>
@@ -120,6 +120,42 @@ export default {
 
       this.loaded = true;
       this.lastCategoryPath = categoryPath;
+    },
+    getSummaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = "Summary";
+          return;
+        }
+        const values = data.map(item => {
+          if (typeof item[column.property] === "string")
+            return +item[column.property].replace(" €", "");
+          else return item[column.property];
+        });
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          });
+          if (index === 3) {
+            sums[index] = sums[index] / values.length;
+          } else if (index === 4) {
+            sums[index] = this.$std(values);
+          }
+          sums[index] =
+            Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+        } else {
+          sums[index] = "N/A";
+        }
+      });
+
+      return sums;
     }
   }
 };
