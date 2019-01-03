@@ -7,12 +7,14 @@ import router from "./router";
 import CategoryPlugin from "@/plugin/CategoryPlugin.vue";
 import elemLocale from "element-ui/lib/locale/lang/en";
 import moment from "vue-moment";
+import vmodal from "vue-js-modal";
 const data = require("@/assets/data.json");
 const categories = require("@/assets/categorizer.json");
 
 Vue.use(Element, { locale: elemLocale });
 Vue.use(CategoryPlugin, { data, categories });
 Vue.use(moment);
+Vue.use(vmodal);
 
 Vue.config.productionTip = false;
 

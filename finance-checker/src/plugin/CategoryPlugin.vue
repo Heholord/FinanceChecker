@@ -16,8 +16,6 @@ const CategoryPlugin = {
       getYear(startEndDates[0]) + "-" + getMonthAsNr(startEndDates[0]) + "-01";
     const dataEndDate =
       getYear(startEndDates[1]) + "-" + getMonthAsNr(startEndDates[1]) + "-28";
-    // console.log(moment.weekdays()[moment(dataStartDate).weekday()]);
-    // console.log(moment.weekdays()[moment(dataEndDate).weekday()]);
 
     // special categories preprocessing (adding to categories-object)
     forEachElem(options.data, (month, day, elem) => {
@@ -62,7 +60,9 @@ const CategoryPlugin = {
       let returnValue = {};
 
       const category = Vue.prototype.$findCategory(categoryPath);
+      let rootCategory = categoryPath !== "" ? categoryPath.split(".")[0] : "";
 
+      // create flat category structure
       actOnCategory(
         category,
         (key, subCategory) => {
@@ -80,10 +80,17 @@ const CategoryPlugin = {
       const data = getDataByDate(date, options.data);
 
       forEachElem(data, (month, day, elem) => {
+        elem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
         if (!elem.category) {
           // for normal categories
           for (let cat in categoryList) {
-            if (categoryList[cat].includes(elem.info)) {
+            if (rootCategory === "") rootCategory = cat; // in cases where cat is in, out, save
+            if (
+              categoryList[cat].includes(elem.info) && // check if element is part of the category
+              (rootCategory === "save" || // and element is part of the right category tree  in this case (for example mom can be incoming and outgoing)
+                (rootCategory === "in" && +elem.amount > 0) ||
+                (rootCategory === "out" && +elem.amount < 0))
+            ) {
               returnValue = addToCategory(
                 returnValue,
                 cat,
@@ -93,6 +100,8 @@ const CategoryPlugin = {
                 elem
               );
             }
+
+            if (rootCategory === cat) rootCategory = ""; // revert special rootCategory magic
           }
         } else if (elem.category && elem.category.startsWith(categoryPath)) {
           // for special categories

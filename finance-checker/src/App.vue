@@ -14,6 +14,7 @@
         8k-view
         special stats
         linechart switch between stacked/overlapping
+        janika in/out bug
       datepicker -> disable dates-->
     </el-tabs>
   </div>

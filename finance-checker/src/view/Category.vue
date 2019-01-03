@@ -1,5 +1,14 @@
 <template>
   <div class="history">
+    <modal :adaptive="true" :delay="1" height="auto" scrollable name="entry">
+      <div class="entry-list">
+        <el-table show-summary :summary-method="getEntriesSummaries" :data="entries" class="table">
+          <el-table-column prop="date" label="Date" width="100"></el-table-column>
+          <el-table-column prop="info" label="Info" width="400"></el-table-column>
+          <el-table-column prop="amount" label="Amount" width="100"></el-table-column>
+        </el-table>
+      </div>
+    </modal>
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside>
         <i class="el-icon-date"></i>Date
@@ -40,7 +49,14 @@
       <el-container>
         <el-main>
           <div v-if="!noData" class="split">
-            <el-table show-summary :summary-method="getSummaries" :data="tableData" class="table">
+            <el-table
+              show-summary
+              @row-contextmenu="showEntries"
+              :summary-method="getSummaries"
+              :data="tableData"
+              class="table"
+              oncontextmenu="return false;"
+            >
               <el-table-column prop="category" label="Category" width="160"></el-table-column>
               <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
               <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
@@ -71,6 +87,7 @@ export default {
       outCategory: [],
       saveCategory: [],
       noData: true,
+      entries: [],
       lastCategoryPath: "",
       loaded: false,
       chartData: {
@@ -103,6 +120,15 @@ export default {
         this.$refs.monthPicker.focus();
       }
     },
+    showEntries(row) {
+      let filteredData = this.$filterByCategory(
+        this.lastCategoryPath,
+        this.displayDate
+      );
+      let category = filteredData.data[row.category];
+      this.entries = category.entries;
+      this.$modal.show("entry");
+    },
     async reloadChart() {
       await this.setChartData(this.lastCategoryPath);
     },
@@ -124,9 +150,67 @@ export default {
     getSummaries(param) {
       const { columns, data } = param;
       const sums = [];
+      if (["", "save"].includes(this.lastCategoryPath)) {
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = "Under the line";
+            return;
+          }
+          if (index === 1) {
+            const inValue = +data
+              .filter(item => item.category === "in")[0]
+              .sum.replace(" €", "");
+
+            const outValue = +data
+              .filter(item => item.category === "out")[0]
+              .sum.replace(" €", "");
+
+            sums[index] = Math.round((inValue - outValue) * 100) / 100 + " €";
+          }
+        });
+      } else {
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = "Summary";
+            return;
+          }
+          const values = data.map(item => {
+            if (typeof item[column.property] === "string")
+              return +item[column.property].replace(" €", "");
+            else return item[column.property];
+          });
+          if (!values.every(value => isNaN(value))) {
+            if ([1, 2].includes(index)) {
+              sums[index] = values.reduce((prev, curr) => {
+                const value = Number(curr);
+                if (!isNaN(value)) {
+                  return prev + curr;
+                } else {
+                  return prev;
+                }
+              });
+            } else if (index === 3) {
+              sums[index] = sums[index - 2].replace(" €", "") / sums[index - 1];
+            } else if (index === 4) {
+              sums[index] = this.$std(values);
+            }
+            sums[index] =
+              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+          } else {
+            sums[index] = "N/A";
+          }
+        });
+      }
+
+      return sums;
+    },
+    getEntriesSummaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+
       columns.forEach((column, index) => {
         if (index === 0) {
-          sums[index] = "Summary";
+          sums[index] = "Sum";
           return;
         }
         const values = data.map(item => {
@@ -134,24 +218,21 @@ export default {
             return +item[column.property].replace(" €", "");
           else return item[column.property];
         });
-        if (!values.every(value => isNaN(value))) {
-          sums[index] = values.reduce((prev, curr) => {
-            const value = Number(curr);
-            if (!isNaN(value)) {
-              return prev + curr;
-            } else {
-              return prev;
-            }
-          });
-          if (index === 3) {
-            sums[index] = sums[index] / values.length;
-          } else if (index === 4) {
-            sums[index] = this.$std(values);
+        if ([2].includes(index)) {
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            });
+            sums[index] =
+              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+          } else {
+            sums[index] = "N/A";
           }
-          sums[index] =
-            Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
-        } else {
-          sums[index] = "N/A";
         }
       });
 
