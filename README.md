@@ -2,4 +2,4 @@
 
 Down with excel sheets
 
-![screenplay of finance-checker](https://imgur.com/a/a5oJ4LJ)
+![screenplay of finance-checker](https://i.imgur.com/shUV2Nm.gif)
