@@ -136,7 +136,7 @@ export default {
       this.loaded = false;
 
       let filteredData = this.$filterByCategory(categoryPath, this.displayDate);
-      if (Object.keys(filteredData).length > 0) {
+      if (Object.keys(filteredData.data).length > 0) {
         this.chartData = this.$createChartData(filteredData);
         this.tableData = this.$createTableData(filteredData);
         this.noData = false;

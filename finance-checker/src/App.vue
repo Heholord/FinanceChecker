@@ -83,6 +83,9 @@ export default {
       display: grid;
       grid-template-columns: 2fr 1fr;
       grid-gap: 50px;
+      .el-card.box-card {
+        margin-bottom: 10px;
+      }
       .table {
         margin: 10px;
         margin-left: 50px;

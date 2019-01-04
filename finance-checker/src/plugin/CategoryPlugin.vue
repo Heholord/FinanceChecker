@@ -55,6 +55,19 @@ const CategoryPlugin = {
       return resolveCategory(parts, options.categories);
     };
 
+    /**
+     *
+     * @param categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
+     * @param date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
+     * @returns creates an object with following structure:
+     * - sorting: list with the sorted keys of the historical data (i.e [2000, 2001, ..., 2020], [Jannuar, Feb...., December], [01, 02, ..., 31])
+     * - data: Object with the subcategories of the given categoryPath as keys. Each entry of the data consists of three values:
+     *  - category: name of the category
+     *  - value: sum of all entries in this category by a given date
+     *  - values: historical data (all date entries are classified into historical data).
+     *            So the historical key is dependent on the given date format. If date is "undefined" then the years are the keys. If the given date is a year (i.e 2010) then the months are the keys and if the year is of format (MMMMYYYY, i.e. February2000) then the keys are the days of this month.
+     *            the value is the sum of all entries in this historical category.
+     */
     Vue.prototype.$filterByCategory = (categoryPath, date) => {
       var categoryList = {};
       let returnValue = {};
@@ -100,7 +113,6 @@ const CategoryPlugin = {
                 elem
               );
             }
-
             if (rootCategory === cat) rootCategory = ""; // revert special rootCategory magic
           }
         } else if (elem.category && elem.category.startsWith(categoryPath)) {
@@ -176,17 +188,11 @@ const CategoryPlugin = {
         return "#" + hex;
       });
 
-      const sortList = data.sorting;
-
       for (let index in listData) {
-        let sortedKey = Object.keys(listData[index].values);
-        sortedKey.sort((a, b) => {
-          return sortList.indexOf(a) > sortList.indexOf(b) ? 1 : -1;
-        });
         chartData.historical.datasets.push({
           label: listData[index].category,
-          data: sortedKey.map(key => {
-            return listData[index].values[key];
+          data: data.sorting.map(key => {
+            return Math.abs(listData[index].values[key]);
           }),
           borderColor: backgrounds[index],
           backgroundColor: backgrounds[index] // "rgba(0, 0, 0, 0.05)"
@@ -209,14 +215,14 @@ const CategoryPlugin = {
       keys.forEach(key => {
         tableData.push({
           category: key,
-          sum: Math.round(data.data[key].value * 100) / 100 + " €",
+          sum: Math.abs(Math.round(data.data[key].value * 100) / 100) + " €",
           count: data.data[key].entries.length,
           avg:
-            Math.round(
-              (data.data[key].value * 100) / data.data[key].entries.length
-            ) /
-              100 +
-            " €",
+            Math.abs(
+              Math.round(
+                (data.data[key].value * 100) / data.data[key].entries.length
+              ) / 100
+            ) + " €",
           std:
             getStandardDeviation(
               data.data[key].entries.map(elem => {
@@ -232,6 +238,10 @@ const CategoryPlugin = {
 
     Vue.prototype.$std = array => {
       return getStandardDeviation(array, 2);
+    };
+
+    Vue.prototype.$dateList = date => {
+      return getDateList(date, dataStartDate, dataEndDate);
     };
   }
 };
@@ -302,7 +312,27 @@ function findEarliestLatestDate(data) {
   return [lowestDate, highestDate];
 }
 
+/**
+ * Data might have holes (for example, on day 15 no incoming entry was found). For the graphical display these holes have to be filled up.
+ * i.e. with 0 or NaN. In this case 0 was choosen.
+ */
 function fillUpHistoricalData(returnValue, date, dataStartDate, dataEndDate) {
+  const dateList = getDateList(date, dataStartDate, dataEndDate);
+
+  Object.keys(returnValue).forEach(elemKey => {
+    let elem = returnValue[elemKey];
+    dateList.forEach(dateElem => {
+      if (!Object.keys(elem.values).includes(dateElem)) {
+        elem.values[dateElem] = 0;
+      }
+    });
+    returnValue[elemKey] = elem;
+  });
+
+  return { sorting: dateList, data: returnValue };
+}
+
+function getDateList(date, dataStartDate, dataEndDate) {
   let datesList = [];
 
   if (date) {
@@ -323,18 +353,7 @@ function fillUpHistoricalData(returnValue, date, dataStartDate, dataEndDate) {
       datesList.push("" + startYear);
     }
   }
-
-  Object.keys(returnValue).forEach(elemKey => {
-    let elem = returnValue[elemKey];
-    datesList.forEach(dateElem => {
-      if (!Object.keys(elem.values).includes(dateElem)) {
-        elem.values[dateElem] = 0;
-      }
-    });
-    returnValue[elemKey] = elem;
-  });
-
-  return { sorting: datesList, data: returnValue };
+  return datesList;
 }
 
 function addToCategory(
@@ -352,7 +371,7 @@ function addToCategory(
       values: {}, //historical values
       entries: []
     };
-  returnValue[category].value += Math.abs(value);
+  returnValue[category].value += value;
   const histValue = getHistoricalValue(dateSelection, elemMonth, elemDay, elem);
   if (!returnValue[category].values[histValue.key])
     returnValue[category].values[histValue.key] = 0;
@@ -362,7 +381,7 @@ function addToCategory(
 }
 
 function getHistoricalValue(date, month, day, elem) {
-  let historicalValue = { key: undefined, value: Math.abs(+elem.amount) };
+  let historicalValue = { key: undefined, value: +elem.amount };
 
   if (date) {
     if (date.length === 4) {
