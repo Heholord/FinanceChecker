@@ -57,14 +57,14 @@ const CategoryPlugin = {
 
     /**
      *
-     * @param categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
-     * @param date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
-     * @returns creates an object with following structure:
-     * - sorting: list with the sorted keys of the historical data (i.e [2000, 2001, ..., 2020], [Jannuar, Feb...., December], [01, 02, ..., 31])
-     * - data: Object with the subcategories of the given categoryPath as keys. Each entry of the data consists of three values:
-     *  - category: name of the category
-     *  - value: sum of all entries in this category by a given date
-     *  - values: historical data (all date entries are classified into historical data).
+     * @param {string} categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
+     * @param {string} date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
+     * @returns {object} creates an object with following structure:
+     * - sorting {array}: list with the sorted keys of the historical data (i.e [2000, 2001, ..., 2020], [Jannuar, Feb...., December], [01, 02, ..., 31])
+     * - data {object}: Object with the subcategories of the given categoryPath as keys. Each entry of the data consists of three values:
+     *  - category {string}: name of the category
+     *  - value {integer}: sum of all entries in this category by a given date
+     *  - values {object}: historical data (all date entries are classified into historical data).
      *            So the historical key is dependent on the given date format. If date is "undefined" then the years are the keys. If the given date is a year (i.e 2010) then the months are the keys and if the year is of format (MMMMYYYY, i.e. February2000) then the keys are the days of this month.
      *            the value is the sum of all entries in this historical category.
      */
