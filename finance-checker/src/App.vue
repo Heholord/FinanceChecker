@@ -91,6 +91,13 @@ export default {
         margin-left: 50px;
         justify-self: center;
         align-self: start;
+        &.no-margin {
+          margin: 0;
+
+          td {
+            padding: 0.05em 0;
+          }
+        }
       }
       .chart {
         justify-self: center;

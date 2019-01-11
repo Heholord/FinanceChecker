@@ -33,7 +33,7 @@
                   show-summary
                   :summary-method="getSummaries"
                   :data="dataEntry.values"
-                  class="table"
+                  class="table no-margin"
                 >
                   <el-table-column prop="date" label="Date" width="100"></el-table-column>
                   <el-table-column prop="in" label="Income" width="100"></el-table-column>
