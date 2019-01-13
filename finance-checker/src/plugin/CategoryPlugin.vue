@@ -147,7 +147,12 @@ const CategoryPlugin = {
       return returnValue;
     };
 
-    Vue.prototype.$createChartData = data => {
+    /**
+     * @param {object} data output of the @see $filterByCategory function.
+     * Contains the historical sorting in as <tt>sorting</tt> and the actual data.
+     * The data by itself contains the category (<tt>category</tt>), the sum of all entries (<tt>value</tt>) and the historical entries (<tt>values</tt>).
+     */
+    Vue.prototype.$createChartData = (data, transparent) => {
       let chartData = {
         general: {
           datasets: [],
@@ -195,7 +200,7 @@ const CategoryPlugin = {
             return Math.abs(listData[index].values[key]);
           }),
           borderColor: backgrounds[index],
-          backgroundColor: backgrounds[index] // "rgba(0, 0, 0, 0.05)"
+          backgroundColor: transparent ? "rgba(0, 0, 0, 0)" : backgrounds[index]
         });
       }
       chartData.historical.labels = data.sorting;

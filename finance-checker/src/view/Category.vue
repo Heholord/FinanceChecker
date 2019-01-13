@@ -1,8 +1,13 @@
 <template>
-  <div class="history">
+  <div class="contentView">
     <modal :adaptive="true" :delay="1" height="auto" scrollable name="entry">
       <div class="entry-list">
-        <el-table show-summary :summary-method="getEntriesSummaries" :data="entries" class="table">
+        <el-table
+          show-summary
+          :summary-method="getEntriesSummaries"
+          :data="entries"
+          class="table no-margin"
+        >
           <el-table-column prop="date" label="Date" width="100"></el-table-column>
           <el-table-column prop="info" label="Info" width="400"></el-table-column>
           <el-table-column prop="amount" label="Amount" width="100"></el-table-column>
@@ -63,8 +68,14 @@
               <el-table-column prop="avg" label="Average " width="100"></el-table-column>
               <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
             </el-table>
-            <doughnut class="chart small" v-if="loaded" :chartData="chartData.general"></doughnut>
-            <line-chart class="chart big" v-if="loaded" :chartData="chartData.historical"></line-chart>
+            <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
+            <switchable-line-chart
+              class="chart"
+              :chartData="chartData.historical"
+              :stacked="true"
+              v-if="loaded"
+              @stacked="setTransparent"
+            ></switchable-line-chart>
           </div>
           <h1 v-if="noData">No data available</h1>
         </el-main>
@@ -75,12 +86,12 @@
 
 <script>
 import Doughnut from "@/components/Doughnut.vue";
-import LineChart from "@/components/LineChart.vue";
+import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 
 export default {
   name: "Category",
-  components: { CategoryTree, Doughnut, LineChart },
+  components: { CategoryTree, Doughnut, SwitchableLineChart },
   data() {
     return {
       inCategory: [],
@@ -102,7 +113,8 @@ export default {
       },
       displayDate: undefined,
       dateType: "year",
-      tableData: []
+      tableData: [],
+      transparent: false
     };
   },
   beforeMount: function() {
@@ -112,6 +124,10 @@ export default {
     this.setChartData("");
   },
   methods: {
+    setTransparent(stacked) {
+      this.transparent = !stacked;
+      this.setChartData(this.lastCategoryPath);
+    },
     focusPicker() {
       //this.displayDate = "undefined";
       if (this.dateType === "year") {
@@ -137,7 +153,7 @@ export default {
 
       let filteredData = this.$filterByCategory(categoryPath, this.displayDate);
       if (Object.keys(filteredData.data).length > 0) {
-        this.chartData = this.$createChartData(filteredData);
+        this.chartData = this.$createChartData(filteredData, this.transparent);
         this.tableData = this.$createTableData(filteredData);
         this.noData = false;
       } else {
@@ -243,7 +259,8 @@ export default {
 </script>
 
 <style lang="scss">
-.history {
-  height: 100%;
+.don {
+  grid-row: 1 / span 2;
+  grid-column: 2;
 }
 </style>

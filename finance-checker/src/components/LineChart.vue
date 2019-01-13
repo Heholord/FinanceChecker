@@ -1,29 +1,36 @@
 <script>
 import { Line, mixins } from "vue-chartjs";
-const { reactiveProp } = mixins;
 
 export default {
   extends: Line,
+  mixins: [mixins.reactiveProp],
   props: {
     chartData: Object,
-    options: {
-      type: Object,
-      default: function() {
-        return {
-          scales: {
-            yAxes: [
-              {
-                stacked: true
-              }
-            ]
-          }
-        };
-      }
+    stacked: {
+      default: true
     }
   },
-  mixins: [reactiveProp],
   mounted: function() {
     this.renderChart(this.chartData, this.options);
+  },
+  watch: {
+    stacked() {
+      this.renderChart(this.chartData, this.options);
+    }
+  },
+  computed: {
+    options() {
+      return {
+        responsive: true,
+        scales: {
+          yAxes: [
+            {
+              stacked: this.stacked
+            }
+          ]
+        }
+      };
+    }
   }
 };
 </script>

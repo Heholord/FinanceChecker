@@ -46,63 +46,67 @@ export default {
   color: #2c3e50;
   margin: 20px;
 
-  .chart {
-    width: 500px;
-    height: 400px;
-    &.small {
-      width: 300px;
-      height: 100px;
-    }
-    &.big {
-      width: 800px;
-      height: 800px;
-    }
-  }
-
-  .tabs {
+  .contentView {
     height: 100%;
-  }
 
-  .el-aside {
-    text-align: center;
-    background-color: white;
-    border-right: solid 1px #e6e6e6;
-    padding: 20px 20px;
-    width: 300px;
-    & > hr {
-      color: #e6e6e6;
-      margin: 20px;
-    }
-    & > *,
-    & > .categories > * {
-      margin: 10px;
-    }
-  }
-  .el-main {
-    .split {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-gap: 50px;
-      .el-card.box-card {
-        margin-bottom: 10px;
+    .chart {
+      min-height: 300px;
+      min-width: 300px;
+      &.small {
+        width: 300px;
+        height: 100px;
       }
-      .table {
-        margin: 10px;
-        margin-left: 50px;
-        justify-self: center;
-        align-self: start;
-        &.no-margin {
-          margin: 0;
+      &.big {
+        width: 1000px;
+        height: 1000px;
+      }
+    }
 
-          td {
-            padding: 0.05em 0;
-          }
+    .tabs {
+      height: 100%;
+    }
+
+    .el-aside {
+      text-align: center;
+      background-color: white;
+      border-right: solid 1px #e6e6e6;
+      padding: 20px 20px;
+      width: 300px;
+      & > hr {
+        color: #e6e6e6;
+        margin: 20px;
+      }
+      & > *,
+      & > .categories > * {
+        margin: 10px;
+      }
+    }
+    .el-main {
+      .split {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 50px;
+        .el-card.box-card {
+          margin-bottom: 10px;
+        }
+        .chart {
+          justify-self: center;
+          position: relative;
+          width: 75%;
+          height: 75%;
         }
       }
-      .chart {
-        justify-self: center;
-        &.big {
-          grid-column: 1 / span 2;
+    }
+    .table {
+      margin: 10px;
+      margin-left: 50px;
+      justify-self: center;
+      align-self: start;
+      &.no-margin {
+        margin: 0;
+
+        td {
+          padding: 0.2em 0;
         }
       }
     }

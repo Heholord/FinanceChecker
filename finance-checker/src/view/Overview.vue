@@ -1,5 +1,5 @@
 <template>
-  <div class="history">
+  <div class="contentView">
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside>
         <i class="el-icon-date"></i>Date
@@ -25,24 +25,35 @@
         <el-main>
           <div v-if="!noData" class="split">
             <div class="left">
-              <el-card v-for="dataEntry in data" :key="dataEntry.date" class="box-card">
-                <div slot="header" class="clearfix">
-                  <span>{{dataEntry.date}}</span>
-                </div>
-                <el-table
-                  show-summary
-                  :summary-method="getSummaries"
-                  :data="dataEntry.values"
-                  class="table no-margin"
+              <el-collapse :value="data[0].date">
+                <el-collapse-item
+                  v-for="dataEntry in data"
+                  :key="dataEntry.date"
+                  :title="dataEntry.date"
+                  :name="dataEntry.date"
                 >
-                  <el-table-column prop="date" label="Date" width="100"></el-table-column>
-                  <el-table-column prop="in" label="Income" width="100"></el-table-column>
-                  <el-table-column prop="out" label="Outgoing" width="100"></el-table-column>
-                  <el-table-column prop="diff" label="Difference" width="100"></el-table-column>
-                  <el-table-column prop="save" label="Save" width="100"></el-table-column>
-                </el-table>
-              </el-card>
+                  <el-table
+                    show-summary
+                    :summary-method="getSummaries"
+                    :data="dataEntry.values"
+                    class="table no-margin"
+                  >
+                    <el-table-column prop="date" label="Date" width="120"></el-table-column>
+                    <el-table-column prop="in" label="Income" width="100"></el-table-column>
+                    <el-table-column prop="out" label="Outgoing" width="100"></el-table-column>
+                    <el-table-column prop="diff" label="Difference" width="100"></el-table-column>
+                    <el-table-column prop="save" label="Save" width="100"></el-table-column>
+                  </el-table>
+                </el-collapse-item>
+              </el-collapse>
             </div>
+            <switchable-line-chart
+              class="chart"
+              :chartData="chartData.historical"
+              :stacked="true"
+              v-if="loaded"
+              @stacked="setTransparent"
+            ></switchable-line-chart>
             <div class="right"></div>
           </div>
           <h1 v-if="noData">No data available</h1>
@@ -53,11 +64,11 @@
 </template>
 
 <script>
-import LineChart from "@/components/LineChart.vue";
+import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 
 export default {
   name: "Overview",
-  components: { LineChart },
+  components: { SwitchableLineChart },
   data() {
     return {
       noData: true,
@@ -85,6 +96,10 @@ export default {
       const dateList = this.$dateList(this.displayDate);
       this.noData = true;
 
+      dateList.sort((e1, e2) => {
+        return e1 > e2 ? -1 : 1;
+      });
+
       dateList.forEach(date => {
         let filteredData = this.$filterByCategory("", date);
         let values = [];
@@ -105,10 +120,10 @@ export default {
               save = Math.round(filteredData.data.save.values[key] * 100) / 100;
             return {
               date: key,
-              in: income,
-              out: outgoing,
-              diff: Math.round((income - outgoing) * 100) / 100,
-              save: save
+              in: income + " €",
+              out: outgoing + " €",
+              diff: Math.round((income - outgoing) * 100) / 100 + " €",
+              save: save + " €"
             };
           });
           this.noData = false;
@@ -144,8 +159,7 @@ export default {
                 return prev;
               }
             });
-            sums[index] =
-              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+            sums[index] = Math.round(sums[index] * 100) / 100 + " €";
           } else {
             sums[index] = "N/A";
           }
@@ -159,7 +173,4 @@ export default {
 </script>
 
 <style lang="scss">
-.history {
-  height: 100%;
-}
 </style>

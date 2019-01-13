@@ -6,13 +6,18 @@ export default {
   extends: Doughnut,
   props: {
     chartData: Object,
+    responsive: {
+      default: true
+    },
     options: {
       type: Object,
       default: function() {
         return {
+          responsive: true,
+          maintainAspectRatio: false,
           cutoutPercentage: 60,
           circumference: Math.PI,
-          rotation: Math.PI
+          rotation: (Math.PI * 3) / 2
         };
       }
     }
