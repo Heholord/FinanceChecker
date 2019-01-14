@@ -4,12 +4,7 @@
       <el-aside>
         <i class="el-icon-date"></i>Date
         <br>
-        <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
-          <el-radio-button label="all"></el-radio-button>
-          <el-radio-button label="year"></el-radio-button>
-        </el-radio-group>
         <el-date-picker
-          v-if="dateType==='year'"
           v-model="displayDate"
           type="year"
           placeholder="Pick a year"
@@ -49,8 +44,8 @@
             </div>
             <switchable-line-chart
               class="chart"
-              :chartData="chartData.historical"
-              :stacked="true"
+              :chartData="chartData"
+              :stacked="false"
               v-if="loaded"
               @stacked="setTransparent"
             ></switchable-line-chart>
@@ -75,33 +70,50 @@ export default {
       loaded: false,
       chartData: { datasets: [], labels: [] },
       displayDate: undefined,
-      dateType: "year",
-      data: []
+      data: [],
+      transparent: true
     };
   },
   beforeMount: function() {
     this.setData("");
   },
   methods: {
+    setTransparent(stacked) {
+      this.transparent = !stacked;
+      this.chartData = this.$createChartData(
+        this.$filterByCategory("", this.displayDate),
+        this.transparent
+      ).historical;
+    },
     focusPicker() {
-      this.displayDate = "undefined";
-      if (this.dateType === "year") {
-        this.$refs.yearPicker.focus();
-      }
+      this.displayDate = undefined;
     },
     async reloadChart() {
       await this.setData();
     },
     async setData() {
+      // chartdata
+      this.data = [];
+      this.chartData = this.$createChartData(
+        this.$filterByCategory("", this.displayDate),
+        this.transparent
+      ).historical;
       const dateList = this.$dateList(this.displayDate);
       this.noData = true;
 
-      dateList.sort((e1, e2) => {
-        return e1 > e2 ? -1 : 1;
-      });
+      //entries with table
+      if (!this.displayDate) {
+        dateList.sort((e1, e2) => {
+          return e1 > e2 ? -1 : 1;
+        });
+      }
 
       dateList.forEach(date => {
-        let filteredData = this.$filterByCategory("", date);
+        var filterDate = date;
+        if (this.displayDate) {
+          filterDate += this.displayDate; // for filtering when a year has been selected, format September2018
+        }
+        let filteredData = this.$filterByCategory("", filterDate);
         let values = [];
         if (Object.keys(filteredData.data).length > 0) {
           values = filteredData.sorting.map(key => {
@@ -123,7 +135,7 @@ export default {
               in: income + " €",
               out: outgoing + " €",
               diff: Math.round((income - outgoing) * 100) / 100 + " €",
-              save: save + " €"
+              save: save * -1 + " €"
             };
           });
           this.noData = false;

@@ -347,7 +347,7 @@ function getDateList(date, dataStartDate, dataEndDate) {
       const year = getYear(date);
       const month = getMonthAsNr(date);
       const monthlenght = new Date(+year, month, 0).getDate();
-      for (let i = 1; i < monthlenght; i++) {
+      for (let i = 1; i <= monthlenght; i++) {
         datesList.push("" + i);
       }
     }
