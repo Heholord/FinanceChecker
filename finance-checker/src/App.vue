@@ -10,12 +10,10 @@
       <el-tab-pane label="Special Stats"></el-tab-pane>
       <!-- TODO 
         entry-browser (sorted by dates), 
-        overview, 
         8k-view
         special stats
-        linechart switch between stacked/overlapping
-        janika in/out bug
-      datepicker -> disable dates-->
+        janika in/out bug   # check if fixed
+      -->
     </el-tabs>
   </div>
 </template>
