@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="inquirer">
     <root-nav/>
-    <div class="stepContainer">
+    <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
         <el-cascader
           expand-trigger="hover"
@@ -11,29 +11,23 @@
         ></el-cascader>
       </div>
       <div class="step" v-else-if="activeStep === 1">
-        <el-upload
-          class="upload-demo"
-          drag
-          :multiple="false"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :file-list="fileList"
-          :list-type="'text'"
-        >
-          <i class="el-icon-upload"></i>
-          <div class="el-upload__text">
-            Drop html file here or
-            <em>click to upload</em>
-          </div>
-          <div class="el-upload__tip" slot="tip">
-            File must have the ending
-            <em>.html</em>
-          </div>
-        </el-upload>
+        <div class="split">
+          <file-uploader class="split-elem" fileType="html" :fileSize="20" @onFile="setHTMLFile"/>
+          <file-uploader
+            class="split-elem"
+            fileType="json"
+            :fileSize="20"
+            @onFile="setMergeEntries"
+          />
+        </div>
       </div>
-      <div class="step" v-else-if="activeStep === 2">Edit</div>
+      <div class="step" v-else-if="activeStep === 2">
+        <entry-browser :entries="entries.data"/>
+      </div>
       <div class="step" v-else-if="activeStep === 3">Category</div>
     </div>
     <el-button
+      class="stepButton"
       v-show="activeStep > 0"
       icon="el-icon-arrow-left"
       circle
@@ -41,6 +35,7 @@
       ref="next"
     ></el-button>
     <el-button
+      class="stepButton"
       icon="el-icon-arrow-right"
       circle
       @click="nextStep"
@@ -58,9 +53,12 @@
 
 <script>
 import RootNav from "@/components/RootNav";
+import FileUploader from "@/components/FileUploader";
+import EntryBrowser from "@/components/EntryBrowser";
+
 export default {
   name: "DataInquire",
-  components: { RootNav },
+  components: { RootNav, FileUploader, EntryBrowser },
   data() {
     return {
       activeStep: 0,
@@ -82,62 +80,94 @@ export default {
           ]
         }
       ],
+      loading: false,
       selectedBank: [],
       categoryData: [],
-      entries: []
+      entries: {},
+      mergeEntries: {}
     };
   },
   methods: {
     nextStep() {
-      this.disableNextStep = false;
+      this.disableNextStep = true;
+      // merge previous data with new data
+      if (this.activeStep === 1) {
+        let mergeEntries = this.mergeEntries;
+        if (this.$isEmpty(mergeEntries)) {
+          mergeEntries = { categories: {}, data: {} };
+        }
+        this.entries = {
+          categories: mergeEntries.categories,
+          data: { ...this.entries, ...mergeEntries.data }
+        };
+        this.$setData(this.entries);
+      }
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
         this.$router.push("/display");
       }
     },
     previousStep() {
-      switch (this.activeStep) {
-        case 1:
-        case 2:
-          this.entries = []; // caution: break is omitted intentionally
-        case 3:
-          this.categoryData = [];
-          break;
-      }
+      // switch (this.activeStep) {
+      //   case 1:
+      //   case 2:
+      //     this.entries = []; // caution: break is omitted intentionally
+      //   case 3:
+      //     this.categoryData = [];
+      //     break;
+      // }
       this.activeStep--;
       this.disableNextStep = false;
     },
     allowNextStep() {
       this.disableNextStep = false;
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("Avatar picture must be JPG format!");
-      }
-      if (!isLt2M) {
-        this.$message.error("Avatar picture size can not exceed 2MB!");
-      }
-      return isJPG && isLt2M;
+    setHTMLFile(file) {
+      this.disableNextStep = true;
+      this.setFile(file, content => {
+        this.entries = this.$parseHtml(content);
+        this.allowNextStep();
+      });
+    },
+    setMergeEntries(file) {
+      this.setFile(file, content => {
+        this.mergeEntries = JSON.parse(content);
+      });
+    },
+    setFile(file, contentCall) {
+      this.loading = true;
+      const reader = new FileReader();
+      reader.onload = event => {
+        const content = event.target.result;
+        contentCall(content);
+        this.loading = false;
+      };
+      reader.readAsText(file);
     }
   }
 };
 </script>
 
 <style lang="scss">
-.el-button {
-  margin: 40px;
-}
-.stepContainer {
-  justify-content: center;
-  align-content: center;
-  display: flex;
-  min-height: 400px;
-  .step > * {
-    position: relative;
-    top: 50%;
+div.inquirer {
+  display: block;
+  .stepButton.el-button {
+    margin: 40px 20px;
+  }
+  .stepContainer {
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    min-height: 400px;
+
+    .step {
+      margin: auto;
+    }
+  }
+  .split-elem {
+    justify-self: center;
+    align-self: center;
+    margin: auto;
   }
 }
 </style>

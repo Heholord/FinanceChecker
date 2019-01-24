@@ -22,7 +22,18 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin: 20px;
+    margin: 30px;
+
+    .split {
+      display: grid;
+      width: 100%;
+      grid-template: auto / auto auto;
+      grid-gap: 20px;
+    }
+
+    .success {
+      color: #67c23a;
+    }
   }
 }
 </style>

@@ -42,9 +42,9 @@ export default {
 .master-menu {
   margin-bottom: 50px;
 }
+
 .contentView {
   height: 100%;
-
   .chart {
     min-height: 300px;
     min-width: 300px;

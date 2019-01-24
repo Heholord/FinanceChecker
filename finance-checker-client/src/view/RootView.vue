@@ -42,10 +42,6 @@ export default {
 
 <style lang="scss">
 .split {
-  display: grid;
-  grid-template: auto / auto auto;
-  max-height: 500px;
-  height: 100%;
   button {
     justify-self: center;
     align-self: center;
@@ -53,6 +49,7 @@ export default {
     border: none;
     height: 80%;
     width: 80%;
+    margin: auto;
     .box-card {
       height: 100%;
     }

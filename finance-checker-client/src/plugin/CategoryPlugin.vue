@@ -1,40 +1,59 @@
 <script>
 import palette from "google-palette";
+import $ from "jquery";
 const moment = require("moment");
 
 const CategoryPlugin = {
-  install(Vue, options) {
-    Vue.mixin({
-      data: () => {
-        return {};
-      }
-    });
+  install(Vue) {
+    // Vue.mixin({
+    //   data: () => {
+    //     return {};
+    //   }
+    // });
 
-    const startEndDates = findEarliestLatestDate(options.data);
+    let dataStartDate, dataEndDate;
+    let theData;
 
-    const dataStartDate =
-      getYear(startEndDates[0]) + "-" + getMonthAsNr(startEndDates[0]) + "-01";
-    const dataEndDate =
-      getYear(startEndDates[1]) + "-" + getMonthAsNr(startEndDates[1]) + "-28";
+    Vue.prototype.$setData = data => {
+      theData = data;
+      const startEndDates = findEarliestLatestDate(theData.data);
 
-    // special categories preprocessing (adding to categories-object)
-    forEachElem(options.data, (month, day, elem) => {
-      if (elem.category) {
-        const strParts = elem.category.split(".");
-        let lastCat = options.categories;
-        for (let index in strParts) {
-          const part = strParts[index];
-          if (!lastCat[part]) {
-            if (index == strParts.length - 1) {
-              lastCat[part] = [];
-            } else {
-              lastCat[part] = {};
+      dataStartDate =
+        getYear(startEndDates[0]) +
+        "-" +
+        getMonthAsNr(startEndDates[0]) +
+        "-01";
+      dataEndDate = moment(
+        new Date(
+          +getYear(startEndDates[1]),
+          getMonthAsNr(startEndDates[1]),
+          0
+        ).getDate()
+      ).format("YYYY-MM-DD");
+
+      // special categories preprocessing (adding to categories-object)
+      forEachElem(theData.data, (month, day, elem) => {
+        if (elem.category) {
+          const strParts = elem.category.split(".");
+          let lastCat = theData.categories;
+          for (let index in strParts) {
+            const part = strParts[index];
+            if (!lastCat[part]) {
+              if (index == strParts.length - 1) {
+                lastCat[part] = [];
+              } else {
+                lastCat[part] = {};
+              }
             }
+            lastCat = lastCat[part];
           }
-          lastCat = lastCat[part];
         }
-      }
-    });
+      });
+    };
+
+    Vue.prototype.$parseHtml = content => {
+      return parseHTMLString(content);
+    };
 
     Vue.prototype.$getDisabledDates = date => {
       return (
@@ -44,7 +63,7 @@ const CategoryPlugin = {
     };
 
     Vue.prototype.$getCategoryTree = startingpoint => {
-      return renderCategory(startingpoint, options.categories[startingpoint]);
+      return renderCategory(startingpoint, theData.categories[startingpoint]);
     };
 
     Vue.prototype.$findCategory = path => {
@@ -52,7 +71,7 @@ const CategoryPlugin = {
       if (strStartsWith(path, ["in", "out", "save"])) {
         parts = path.split(".");
       }
-      return resolveCategory(parts, options.categories);
+      return resolveCategory(parts, theData.categories);
     };
 
     /**
@@ -90,7 +109,7 @@ const CategoryPlugin = {
         }
       );
 
-      const data = getDataByDate(date, options.data);
+      const data = getDataByDate(date, theData.data);
 
       forEachElem(data, (month, day, elem) => {
         elem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
@@ -248,8 +267,59 @@ const CategoryPlugin = {
     Vue.prototype.$dateList = date => {
       return getDateList(date, dataStartDate, dataEndDate);
     };
+
+    Vue.prototype.$isEmpty = obj => {
+      return isEmpty(obj);
+    };
   }
 };
+
+function parseHTMLString(content) {
+  let data = {};
+
+  let html = $(content);
+
+  html.find(".transactionlist").each((index, monthView) => {
+    monthView = $(monthView);
+    const month = monthView
+      .find("thead h2")
+      .text()
+      .trim()
+      .replace(/\s/gm, "");
+
+    if (month) {
+      data[month] = {};
+      monthView.find("tbody .transaction-line").each((index, dayEntry) => {
+        dayEntry = $(dayEntry);
+        let day = dayEntry.find(".datecol .day").text();
+        if (!data[month][day]) data[month][day] = [];
+        let parsedDayEntry = parseDayEntry(dayEntry);
+        if (parsedDayEntry) {
+          data[month][day].push(parsedDayEntry);
+        }
+      });
+    }
+  });
+
+  return data;
+}
+
+function parseDayEntry(dayEntry) {
+  let data = {};
+
+  data.info = getText(dayEntry.find(".accountcol h5")).toUpperCase();
+  data.amount = getText(dayEntry.find(".amountcol .balance")).replace(",", ".");
+
+  if (isNaN(data.amount) || +data.amount == 0) return false; // *** Abschlussbuchung per 30.09.2018 **** interessiert uns nicht
+  return data;
+}
+
+function getText(elem) {
+  return elem
+    .text()
+    .replace(/(\r\n\t|\n|\r\t|\.)/gm, "")
+    .trim();
+}
 
 function getNumWithSetDec(num, numOfDec) {
   var pow10s = Math.pow(10, numOfDec || 0);
@@ -524,6 +594,35 @@ function flatten(category) {
     }
   );
   return returnValue;
+}
+
+// Speed up calls to hasOwnProperty
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function isEmpty(obj) {
+  //@see https://stackoverflow.com/questions/4994201/is-object-empty
+
+  // null and undefined are "empty"
+  if (obj == null) return true;
+
+  // Assume if it has a length property with a non-zero value
+  // that that property is correct.
+  if (obj.length > 0) return false;
+  if (obj.length === 0) return true;
+
+  // If it isn't an object at this point
+  // it is empty, but it can't be anything *but* empty
+  // Is it empty?  Depends on your application.
+  if (typeof obj !== "object") return true;
+
+  // Otherwise, does it have any properties of its own?
+  // Note that this doesn't handle
+  // toString and valueOf enumeration bugs in IE < 9
+  for (var key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false;
+  }
+
+  return true;
 }
 
 export default CategoryPlugin;
