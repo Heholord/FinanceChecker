@@ -88,6 +88,7 @@
 import Doughnut from "@/components/Doughnut.vue";
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
+import { getCategoryTree } from "@/plugin/utils";
 
 export default {
   name: "Category",
@@ -118,9 +119,9 @@ export default {
     };
   },
   beforeMount: function() {
-    this.inCategory = this.$getCategoryTree("in");
-    this.outCategory = this.$getCategoryTree("out");
-    this.saveCategory = this.$getCategoryTree("save");
+    this.inCategory = getCategoryTree("in");
+    this.outCategory = getCategoryTree("out");
+    this.saveCategory = getCategoryTree("save");
     this.setChartData("");
   },
   methods: {
@@ -137,7 +138,7 @@ export default {
       }
     },
     showEntries(row) {
-      let filteredData = this.$filterByCategory(
+      let filteredData = this.$store.getters.filterByCategory(
         this.lastCategoryPath,
         this.displayDate
       );
@@ -151,7 +152,10 @@ export default {
     async setChartData(categoryPath) {
       this.loaded = false;
 
-      let filteredData = this.$filterByCategory(categoryPath, this.displayDate);
+      let filteredData = this.$store.getters.filterByCategory(
+        categoryPath,
+        this.displayDate
+      );
       if (Object.keys(filteredData.data).length > 0) {
         this.chartData = this.$createChartData(filteredData, this.transparent);
         this.tableData = this.$createTableData(filteredData);

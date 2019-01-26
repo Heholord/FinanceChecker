@@ -17,6 +17,7 @@
             class="split-elem"
             fileType="json"
             :fileSize="20"
+            text="Drop optional json file here, if you have pre-existing data to merge"
             @onFile="setMergeEntries"
           />
         </div>
@@ -92,6 +93,7 @@ export default {
       this.disableNextStep = true;
       // merge previous data with new data
       if (this.activeStep === 1) {
+        this.loading = true;
         let mergeEntries = this.mergeEntries;
         if (this.$isEmpty(mergeEntries)) {
           mergeEntries = { categories: {}, data: {} };
@@ -100,7 +102,11 @@ export default {
           categories: mergeEntries.categories,
           data: { ...this.entries, ...mergeEntries.data }
         };
-        this.$setData(this.entries);
+        this.$store.dispatch("setData", this.entries).then(data => {
+          this.entries = data;
+          this.loading = false;
+        });
+        this.loading = false;
       }
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
@@ -108,14 +114,6 @@ export default {
       }
     },
     previousStep() {
-      // switch (this.activeStep) {
-      //   case 1:
-      //   case 2:
-      //     this.entries = []; // caution: break is omitted intentionally
-      //   case 3:
-      //     this.categoryData = [];
-      //     break;
-      // }
       this.activeStep--;
       this.disableNextStep = false;
     },
@@ -143,6 +141,13 @@ export default {
         this.loading = false;
       };
       reader.readAsText(file);
+    }
+  },
+  mounted() {
+    if (!this.$isEmpty(this.entries)) {
+      if (!this.$isEmpty(this.entries.categories)) {
+        this.activeStep = this.totalSteps - 1;
+      }
     }
   }
 };

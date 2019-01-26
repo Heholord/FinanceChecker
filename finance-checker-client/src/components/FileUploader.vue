@@ -10,7 +10,8 @@
   >
     <i class="el-icon-upload"></i>
     <div class="el-upload__text">
-      Drop {{fileType}} file here or
+      {{getText}}
+      or
       <em>click to upload</em>
     </div>
     <div class="el-upload__tip" slot="tip">
@@ -31,7 +32,7 @@
 export default {
   components: {},
   name: "FileUploader",
-  props: ["fileType", "fileSize"],
+  props: ["fileType", "fileSize", "text"],
   computed: {
     fileSizeLabeled() {
       let fileSize = this.file.size;
@@ -45,6 +46,9 @@ export default {
         ending = " MiB";
       }
       return Math.round(fileSize * 100) / 100 + ending;
+    },
+    getText() {
+      return this.text ? this.text : "Drop " + this.fileType + " file here ";
     }
   },
   methods: {

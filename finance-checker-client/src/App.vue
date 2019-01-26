@@ -28,7 +28,7 @@ body {
       display: grid;
       width: 100%;
       grid-template: auto / auto auto;
-      grid-gap: 20px;
+      grid-gap: 50px;
     }
 
     .success {
