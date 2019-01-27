@@ -31,7 +31,7 @@
           value-format="yyyy"
           ref="yearPicker"
           @change="reloadChart"
-          :picker-options="{disabledDate: $getDisabledDates}"
+          :picker-options="{disabledDate: disabledDates}"
         ></el-date-picker>
         <el-date-picker
           v-if="dateType==='month'"
@@ -42,7 +42,7 @@
           value-format="MMMMyyyy"
           ref="monthPicker"
           @change="reloadChart"
-          :picker-options="{disabledDate: $getDisabledDates}"
+          :picker-options="{disabledDate: disabledDates}"
         ></el-date-picker>
         <hr>
         <CategoryTree
@@ -89,6 +89,7 @@ import Doughnut from "@/components/Doughnut.vue";
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 import { getCategoryTree } from "@/plugin/utils";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Category",
@@ -118,10 +119,13 @@ export default {
       transparent: false
     };
   },
+  computed: {
+    ...mapGetters(["disabledDates", "categories"])
+  },
   beforeMount: function() {
-    this.inCategory = getCategoryTree("in");
-    this.outCategory = getCategoryTree("out");
-    this.saveCategory = getCategoryTree("save");
+    this.inCategory = getCategoryTree("in", this.categories);
+    this.outCategory = getCategoryTree("out", this.categories);
+    this.saveCategory = getCategoryTree("save", this.categories);
     this.setChartData("");
   },
   methods: {

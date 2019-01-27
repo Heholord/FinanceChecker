@@ -12,7 +12,7 @@
           value-format="yyyy"
           ref="yearPicker"
           @change="reloadChart"
-          :picker-options="{disabledDate: $getDisabledDates}"
+          :picker-options="{disabledDate: disabledDates}"
         ></el-date-picker>
       </el-aside>
 
@@ -60,6 +60,7 @@
 
 <script>
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Overview",
@@ -73,6 +74,9 @@ export default {
       data: [],
       transparent: true
     };
+  },
+  computed: {
+    ...mapGetters(["disabledDates"])
   },
   beforeMount: function() {
     this.setData("");

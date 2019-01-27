@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="step" v-else-if="activeStep === 2">
-        <entry-browser :entries="entries.data"/>
+        <entry-browser :entries="entries"/>
       </div>
       <div class="step" v-else-if="activeStep === 3">Category</div>
     </div>
@@ -56,6 +56,7 @@
 import RootNav from "@/components/RootNav";
 import FileUploader from "@/components/FileUploader";
 import EntryBrowser from "@/components/EntryBrowser";
+import { mapGetters } from "vuex";
 
 export default {
   name: "DataInquire",
@@ -84,9 +85,12 @@ export default {
       loading: false,
       selectedBank: [],
       categoryData: [],
-      entries: {},
+      content: {},
       mergeEntries: {}
     };
+  },
+  computed: {
+    ...mapGetters({ entries: "data" })
   },
   methods: {
     nextStep() {
@@ -98,15 +102,14 @@ export default {
         if (this.$isEmpty(mergeEntries)) {
           mergeEntries = { categories: {}, data: {} };
         }
-        this.entries = {
+        let entries = this.$parseHtml(this.content);
+        entries = {
           categories: mergeEntries.categories,
-          data: { ...this.entries, ...mergeEntries.data }
+          data: { ...entries, ...this.mergeEntries.data }
         };
-        this.$store.dispatch("setData", this.entries).then(data => {
-          this.entries = data;
+        this.$store.dispatch("setData", entries).then(() => {
           this.loading = false;
         });
-        this.loading = false;
       }
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
@@ -123,7 +126,7 @@ export default {
     setHTMLFile(file) {
       this.disableNextStep = true;
       this.setFile(file, content => {
-        this.entries = this.$parseHtml(content);
+        this.content = content;
         this.allowNextStep();
       });
     },

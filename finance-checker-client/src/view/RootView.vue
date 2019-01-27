@@ -1,9 +1,9 @@
 <template>
   <div class="split">
     <button @click="routeTo('/inquire')">
-      <el-card>
+      <el-card class="box">
         <img src="@/assets/inquire.png" class="image">
-        <div style="padding: 14px;">
+        <div style="margin-top: 20px; padding: 14px;">
           <span>Inquire data</span>
           <div class="bottom clearfix">
             <span class="sub">Start your journey</span>
@@ -12,9 +12,9 @@
       </el-card>
     </button>
     <button @click="routeTo('/display')">
-      <el-card>
+      <el-card class="box">
         <img src="@/assets/display.jpg" class="image">
-        <div style="padding: 14px;">
+        <div style="margin-top: 20px; padding: 14px;">
           <span>View data</span>
           <div class="bottom clearfix">
             <span class="sub">Enjoy what you have earned</span>
@@ -53,8 +53,12 @@ export default {
     .box-card {
       height: 100%;
     }
+    .box {
+      border-radius: 20px;
+    }
   }
   .sub {
+    margin-top: 20px;
     font-size: 13px;
     color: #999;
   }

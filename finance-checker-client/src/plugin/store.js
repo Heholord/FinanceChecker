@@ -29,6 +29,8 @@ const store = new Vuex.Store({
   },
   strict: debug,
   getters: {
+    categories: state => state.categories,
+    data: state => state.data,
     disabledDates: state => date => {
       return (
         date.getTime() < moment(state.dataStartDate) ||
@@ -137,31 +139,46 @@ const store = new Vuex.Store({
       return getDateList(date, state.dataStartDate, state.dataEndDate);
     }
   },
-  actions: {
+  mutations: {
+    setCategories(state, categories) {
+      state.categories = categories;
+    },
     setData(state, data) {
-      state.categories = data.categories;
-      state.data = addRedundantData(data.data);
+      state.data = data;
+    },
+    setDataStartDate(state, dataStartDate) {
+      state.dataStartDate = dataStartDate;
+    },
+    setDataEndDate(state, dataEndDate) {
+      state.dataEndDate = dataEndDate;
+    }
+  },
+  actions: {
+    setData({ commit }, data) {
+      let categories = data.categories;
+      commit("setData", addRedundantData(data.data));
 
-      const startEndDates = findEarliestLatestDate(state.data);
+      const startEndDates = findEarliestLatestDate(data.data);
 
-      store.dataStartDate =
-        getYear(startEndDates[0]) +
-        "-" +
-        getMonthAsNr(startEndDates[0]) +
-        "-01";
-      store.dataEndDate = moment(
-        new Date(
-          +getYear(startEndDates[1]),
-          getMonthAsNr(startEndDates[1]),
-          0
-        ).getDate()
-      ).format("YYYY-MM-DD");
-
+      commit(
+        "setDataStartDate",
+        getYear(startEndDates[0]) + "-" + getMonthAsNr(startEndDates[0]) + "-01"
+      );
+      commit(
+        "setDataEndDate",
+        moment(
+          new Date(
+            +getYear(startEndDates[1]),
+            getMonthAsNr(startEndDates[1]),
+            0
+          )
+        ).format("YYYY-MM-DD")
+      );
       // special categories preprocessing (adding to categories-object) if not existent
-      forEachElem(state.data, (month, day, elem) => {
+      forEachElem(data.data, (month, day, elem) => {
         if (elem.category) {
           const strParts = elem.category.split(".");
-          let lastCat = state.categories;
+          let lastCat = categories;
           for (let index in strParts) {
             const part = strParts[index];
             if (!lastCat[part]) {
@@ -178,8 +195,9 @@ const store = new Vuex.Store({
           }
         }
       });
+      commit("setCategories", categories);
       return new Promise(resolve => {
-        resolve({ categories: state.categories, data: state.data });
+        resolve();
       });
     }
   }

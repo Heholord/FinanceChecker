@@ -107,7 +107,6 @@ export function findEarliestLatestDate(data) {
       }
     }
   });
-
   return [lowestDate, highestDate];
 }
 
