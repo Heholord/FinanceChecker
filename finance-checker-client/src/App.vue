@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <!-- TODO  
+      make an animation list (what would be nice if it'd be animated)
+    -->
   </div>
 </template>
 

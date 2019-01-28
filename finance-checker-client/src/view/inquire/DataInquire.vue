@@ -1,5 +1,13 @@
 <template>
   <div class="inquirer">
+    <!-- TODO  
+       custom parsing,
+       html and/or json
+       options(delete, add, modify, special category) in entity view 
+       category view,
+       make a finish page (with nice animations)
+       jump to finish page when store data and category exits
+    -->
     <root-nav/>
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">

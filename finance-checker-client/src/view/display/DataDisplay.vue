@@ -10,11 +10,11 @@
         <Category/>
       </el-tab-pane>
       <el-tab-pane label="Special Stats"></el-tab-pane>
-      <!-- TODO 
-        entry-browser (sorted by dates), 
+      <!-- TODO  
         8k-view
         special stats
         janika in/out bug   # check if fixed
+        no data component (that offers to go to inquire page)
       -->
     </el-tabs>
   </div>
