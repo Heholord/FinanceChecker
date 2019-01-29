@@ -1,7 +1,12 @@
 <template>
   <div>
+    <!-- TODO  
+        8k-view
+        special stats
+        janika in/out bug   # check if fixed
+        no data component (that offers to go to inquire page)
+    -->
     <root-nav/>
-
     <el-tabs class="tabs" type="border-card">
       <el-tab-pane label="Overview">
         <Overview/>
@@ -10,12 +15,6 @@
         <Category/>
       </el-tab-pane>
       <el-tab-pane label="Special Stats"></el-tab-pane>
-      <!-- TODO  
-        8k-view
-        special stats
-        janika in/out bug   # check if fixed
-        no data component (that offers to go to inquire page)
-      -->
     </el-tabs>
   </div>
 </template>

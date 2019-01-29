@@ -14,35 +14,40 @@ if (on) {
     if (err) {
       throw err;
     }
-    const { JSDOM } = jsdom;
-    const dom = new JSDOM(html);
-    const $ = require("jquery")(dom.window);
-    let data = {};
-
-    $(".transactionlist").each((index, monthView) => {
-      monthView = $(monthView);
-      const month = monthView
-        .find("thead h2")
-        .text()
-        .trim()
-        .replace(/\s/gm, "");
-
-      if (month) {
-        data[month] = {};
-        monthView.find("tbody .transaction-line").each((index, dayEntry) => {
-          dayEntry = $(dayEntry);
-          let day = dayEntry.find(".datecol .day").text();
-          if (!data[month][day]) data[month][day] = [];
-          let parsedDayEntry = parseDayEntry(dayEntry);
-          if (parsedDayEntry) {
-            data[month][day].push(parsedDayEntry);
-          }
-        });
-      }
-    });
+    data = parseHTMLString(html);
     data = writeBack(data);
     buildCategoryFile(data);
   });
+}
+
+function parseHTMLString(content) {
+  const { JSDOM } = jsdom;
+  const dom = new JSDOM(content);
+  const $ = require("jquery")(dom.window);
+  let data = {};
+
+  $(".transactionlist").each((index, monthView) => {
+    monthView = $(monthView);
+    const month = monthView
+      .find("thead h2")
+      .text()
+      .trim()
+      .replace(/\s/gm, "");
+
+    if (month) {
+      data[month] = {};
+      monthView.find("tbody .transaction-line").each((index, dayEntry) => {
+        dayEntry = $(dayEntry);
+        let day = dayEntry.find(".datecol .day").text();
+        if (!data[month][day]) data[month][day] = [];
+        let parsedDayEntry = parseDayEntry(dayEntry);
+        if (parsedDayEntry) {
+          data[month][day].push(parsedDayEntry);
+        }
+      });
+    }
+  });
+  return data;
 }
 
 function buildCategoryFile(data) {

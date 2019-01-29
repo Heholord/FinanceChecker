@@ -29,6 +29,9 @@ export default {
   components: {},
   name: "EntryBrowser",
   props: ["entries"],
+  beforeMount() {
+    this.$emit("next");
+  },
   methods: {
     join(obj) {
       let array = [];

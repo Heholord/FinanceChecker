@@ -6,7 +6,7 @@
        options(delete, add, modify, special category) in entity view 
        category view,
        make a finish page (with nice animations)
-       jump to finish page when store data and category exits
+       jump to finish page option when store data and category exits
     -->
     <root-nav/>
     <div class="stepContainer" v-loading="loading">
@@ -31,9 +31,16 @@
         </div>
       </div>
       <div class="step" v-else-if="activeStep === 2">
-        <entry-browser :entries="entries"/>
+        <h3>
+          <i class="el-icon-info" style="margin-right:15px;"/>Optional
+        </h3>
+        <entry-browser :entries="entries" @next="allowNextStep"/>
       </div>
-      <div class="step" v-else-if="activeStep === 3">Category</div>
+      <div class="step" v-else-if="activeStep === 3">
+        <category-tree
+          :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"
+        />
+      </div>
     </div>
     <el-button
       class="stepButton"
@@ -64,11 +71,13 @@
 import RootNav from "@/components/RootNav";
 import FileUploader from "@/components/FileUploader";
 import EntryBrowser from "@/components/EntryBrowser";
+import CategoryTree from "@/components/CategoryTree";
 import { mapGetters } from "vuex";
+import { getCategoryTree } from "@/plugin/utils";
 
 export default {
   name: "DataInquire",
-  components: { RootNav, FileUploader, EntryBrowser },
+  components: { RootNav, FileUploader, EntryBrowser, CategoryTree },
   data() {
     return {
       activeStep: 0,
@@ -98,7 +107,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ entries: "data" })
+    ...mapGetters({ entries: "data", categories: "categories" })
+  },
+  beforeMount: function() {
+    this.inCategory = getCategoryTree("in", this.categories);
+    this.outCategory = getCategoryTree("out", this.categories);
+    this.saveCategory = getCategoryTree("save", this.categories);
+    this.setChartData("");
   },
   methods: {
     nextStep() {
@@ -156,9 +171,7 @@ export default {
   },
   mounted() {
     if (!this.$isEmpty(this.entries)) {
-      if (!this.$isEmpty(this.entries.categories)) {
-        this.activeStep = this.totalSteps - 1;
-      }
+      this.activeStep = this.totalSteps - 1;
     }
   }
 };
