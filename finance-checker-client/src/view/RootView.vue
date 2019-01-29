@@ -1,17 +1,17 @@
 <template>
   <div class="split">
-    <button @click="routeTo('/inquire')">
+    <button @click="routeTo('/manage')">
       <el-card class="box">
         <img src="@/assets/inquire.png" class="image">
         <div style="margin-top: 20px; padding: 14px;">
-          <span>Inquire data</span>
+          <span>Manage data</span>
           <div class="bottom clearfix">
             <span class="sub">Start your journey</span>
           </div>
         </div>
       </el-card>
     </button>
-    <button @click="routeTo('/display')">
+    <button @click="routeTo('/visualizer')">
       <el-card class="box">
         <img src="@/assets/display.jpg" class="image">
         <div style="margin-top: 20px; padding: 14px;">

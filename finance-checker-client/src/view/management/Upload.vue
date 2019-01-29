@@ -8,7 +8,6 @@
        make a finish page (with nice animations)
        jump to finish page option when store data and category exits
     -->
-    <root-nav/>
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
         <el-cascader
@@ -68,7 +67,6 @@
 </template>
 
 <script>
-import RootNav from "@/components/RootNav";
 import FileUploader from "@/components/FileUploader";
 import EntryBrowser from "@/components/EntryBrowser";
 import CategoryTree from "@/components/CategoryTree";
@@ -76,8 +74,8 @@ import { mapGetters } from "vuex";
 import { getCategoryTree } from "@/plugin/utils";
 
 export default {
-  name: "DataInquire",
-  components: { RootNav, FileUploader, EntryBrowser, CategoryTree },
+  name: "DataManagement",
+  components: { FileUploader, EntryBrowser, CategoryTree },
   data() {
     return {
       activeStep: 0,

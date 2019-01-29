@@ -25,7 +25,7 @@ import Overview from "./Overview";
 import RootNav from "@/components/RootNav";
 
 export default {
-  name: "DataDisplay",
+  name: "DataVisualizer",
   components: {
     Overview,
     Category,

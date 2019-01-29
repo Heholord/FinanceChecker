@@ -3,6 +3,7 @@
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
+      think about the height of all views what should be the default height?
     -->
   </div>
 </template>

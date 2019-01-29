@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import RootView from "@/view/RootView";
-import DataDisplay from "@/view/display/DataDisplay";
-import DataInquire from "@/view/inquire/DataInquire";
+import DataVisualizer from "@/view/display/DataVisualizer";
+import DataManagement from "@/view/management/DataManagement";
 
 Vue.use(VueRouter);
 
@@ -13,12 +13,12 @@ export default new VueRouter({
       component: RootView
     },
     {
-      path: "/display",
-      component: DataDisplay
+      path: "/visualize",
+      component: DataVisualizer
     },
     {
-      path: "/inquire",
-      component: DataInquire
+      path: "/manage",
+      component: DataManagement
     }
   ]
 });
