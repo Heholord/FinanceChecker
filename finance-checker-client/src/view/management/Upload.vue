@@ -28,9 +28,7 @@
         <entry-browser :entries="entries" @next="allowNextStep"/>
       </div>
       <div class="step" v-else-if="activeStep === 3">
-        <category-tree
-          :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"
-        />
+        <entries-to-category :entries="entries" :categories="categories"/>
       </div>
     </div>
     <el-button
@@ -61,13 +59,12 @@
 <script>
 import FileUploader from "@/components/FileUploader";
 import EntryBrowser from "@/components/EntryBrowser";
-import CategoryTree from "@/components/CategoryTree";
+import EntriesToCategory from "@/components/EntriesToCategory";
 import { mapGetters } from "vuex";
-import { getCategoryTree } from "@/plugin/utils";
 
 export default {
   name: "DataManagement",
-  components: { FileUploader, EntryBrowser, CategoryTree },
+  components: { FileUploader, EntryBrowser, EntriesToCategory },
   data() {
     return {
       activeStep: 0,
@@ -98,11 +95,6 @@ export default {
   },
   computed: {
     ...mapGetters({ entries: "data", categories: "categories" })
-  },
-  beforeMount: function() {
-    this.inCategory = getCategoryTree("in", this.categories);
-    this.outCategory = getCategoryTree("out", this.categories);
-    this.saveCategory = getCategoryTree("save", this.categories);
   },
   methods: {
     nextStep() {

@@ -25,6 +25,7 @@
 
 
 <script>
+import { join } from "@/plugin/utils";
 export default {
   components: {},
   name: "EntryBrowser",
@@ -33,13 +34,6 @@ export default {
     this.$emit("next");
   },
   methods: {
-    join(obj) {
-      let array = [];
-      Object.keys(obj).forEach(key => {
-        array.push(...obj[key]);
-      });
-      return array;
-    },
     objectSpanMethod({ row, columnIndex }) {
       if (columnIndex === 0) {
         const dayEntry = this.isFirst(row);
@@ -72,6 +66,9 @@ export default {
         return true;
       }
       return false;
+    },
+    join(obj) {
+      return join(obj);
     }
   },
   data() {

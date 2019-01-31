@@ -281,3 +281,16 @@ export function getDateList(date, dataStartDate, dataEndDate) {
 export function getCategoryTree(startingpoint, categories) {
   return renderCategory(startingpoint, categories[startingpoint]);
 }
+
+/**
+ * Joins together all arrays of this object
+ * @param {*} obj Object with array at its leaves
+ * @returns flattend array (all leaves joined together)
+ */
+export function join(obj) {
+  let array = [];
+  Object.keys(obj).forEach(key => {
+    array.push(...obj[key]);
+  });
+  return array;
+}

@@ -5,6 +5,7 @@
         special stats
         janika in/out bug   # check if fixed
         no data component (that offers to go to inquire page)
+        loading from upload to entity browser does not work correctly (maybe split methods?)
     -->
     <root-nav/>
     <el-tabs class="tabs" type="border-card">

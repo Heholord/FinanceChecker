@@ -1,55 +1,48 @@
 <template>
   <div class="assigner">
-    <progress/>
+    <div v-for="entryKey in Object.keys(entries)" :key="entryKey">
+      <div v-for="entry in join(entries[entryKey])" :key="entry.info">
+        <h3>{{entry.info}}</h3>
+        {{entry.amount}}
+        <category-tree :categories="[{path: rootPath(entry), data: subCat(entry)}]"/>
+        <div class="buttons-bar"></div>
+      </div>
+    </div>
+    <el-progress :percentage="50" status="success"></el-progress>
   </div>
 </template>
 
 
 <script>
+import { getCategoryTree, join } from "@/plugin/utils";
+import CategoryTree from "@/components/CategoryTree";
+
 export default {
   name: "CategoryTree",
-  props: ["categories"],
+  components: { CategoryTree },
+  props: ["entries", "categories"],
   data() {
-    return {
-      defaultProps: {
-        children: "children",
-        label: "label"
-      },
-      filterText: ""
-    };
+    return {};
   },
   methods: {
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
+    join(obj) {
+      return join(obj);
     },
-    async click(categoryPath) {
-      let emitValue = categoryPath;
-      if (categoryPath.id) emitValue = categoryPath.id;
-      this.$emit("onSelect", emitValue);
-    }
-  },
-  watch: {
-    filterText(val) {
-      for (let category in this.categories) {
-        this.$refs["tree" + this.categories[category].path].filter(val);
+    rootPath(entry) {
+      return entry.amount > 0 ? "in" : "out";
+    },
+    subCat(entry) {
+      const isIn = entry.amount > 0;
+      if (isIn === true) {
+        return getCategoryTree("in", this.categories);
+      } else {
+        return getCategoryTree("out", this.categories);
       }
     }
-  }
+  },
+  computed: {}
 };
 </script>
 
 <style lang="scss">
-.el-menu.treeMenu {
-  text-align: left;
-  border-right: none;
-  padding: 0px;
-  & > * {
-    margin: 5px;
-  }
-
-  .el-submenu__title {
-    margin-left: -20px;
-  }
-}
 </style>
