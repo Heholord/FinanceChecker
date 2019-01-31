@@ -289,8 +289,12 @@ export function getCategoryTree(startingpoint, categories) {
  */
 export function join(obj) {
   let array = [];
-  Object.keys(obj).forEach(key => {
-    array.push(...obj[key]);
-  });
+  if (typeof obj === "object") {
+    Object.keys(obj).forEach(key => {
+      array.push(...join(obj[key]));
+    });
+  } else if (!isEmpty(obj)) {
+    array.push(...obj);
+  }
   return array;
 }

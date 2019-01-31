@@ -1,12 +1,10 @@
 <template>
   <div class="assigner">
-    <div v-for="entryKey in Object.keys(entries)" :key="entryKey">
-      <div v-for="entry in join(entries[entryKey])" :key="entry.info">
-        <h3>{{entry.info}}</h3>
-        {{entry.amount}}
-        <category-tree :categories="[{path: rootPath(entry), data: subCat(entry)}]"/>
-        <div class="buttons-bar"></div>
-      </div>
+    <div v-for="entry in join(entries)" :key="entry.month + entry.day + entry.info + entry.amount">
+      <h3>{{entry.month + entry.day + entry.info + entry.amount}}</h3>
+      {{entry.amount}}
+      <!-- category-tree :categories="[{path: rootPath(entry), data: subCat(entry)}]"/>
+      <div class="buttons-bar"></div-->
     </div>
     <el-progress :percentage="50" status="success"></el-progress>
   </div>
