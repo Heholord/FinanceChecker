@@ -6,7 +6,7 @@
     <el-input placeholder="Filter keyword" v-model="filterText"></el-input>
     <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="['in', 'out', 'save']">
       <el-submenu v-for="category in categories" :key="category.path" :index="category.path">
-        <template class="treeMenuTitle" v-if="category.path === 'in'" slot="title">
+        <template v-if="category.path === 'in'" slot="title">
           <i class="el-icon-plus"></i>Incomming
         </template>
         <template v-if="category.path === 'out'" slot="title">

@@ -3,7 +3,6 @@ const jsdom = require("jsdom");
 const inquirer = require("inquirer");
 const deasync = require("deasync");
 const dataFile = "data.json";
-const categoryFile = "categorizer.json";
 const stringSimilarity = require("string-similarity");
 
 let inquirerLock = false;
@@ -15,8 +14,9 @@ if (on) {
       throw err;
     }
     data = parseHTMLString(html);
+    data = { categories: { in: [], out: [] }, data: data };
     data = writeBack(data);
-    buildCategoryFile(data);
+    categorizeData(data);
   });
 }
 
@@ -50,23 +50,8 @@ function parseHTMLString(content) {
   return data;
 }
 
-function buildCategoryFile(data) {
-  let categories = { in: [], out: [] };
-  if (fs.existsSync(categoryFile)) {
-    fs.readFile(categoryFile, "utf8", (err, catData) => {
-      if (err) {
-        console.log(err);
-      } else {
-        categories = JSON.parse(catData);
-        categorizeData(categories, data);
-      }
-    });
-  } else {
-    categorizeData(categories, data);
-  }
-}
-
-function categorizeData(categories, data) {
+function categorizeData(fileData) {
+  let { categories, data } = fileData;
   Object.keys(data).forEach((month, index) => {
     Object.keys(data[month]).forEach((day, index) => {
       for (index in data[month][day]) {
@@ -96,7 +81,8 @@ function categorizeData(categories, data) {
           }
           getCategory(param, cat, month, day, elem).then(category => {
             updateCategory(category);
-            fs.writeFile(categoryFile, JSON.stringify(categories), () => {});
+            fileData = { categories: categories, data: data };
+            writeBack(fileData);
           });
         }
       }
@@ -324,13 +310,18 @@ function writeBack(data) {
     //@see https://stackoverflow.com/questions/36856232/write-add-data-in-json-file-using-node-js
     previousData = fs.readFileSync(dataFile, "utf8");
     obj = JSON.parse(previousData); //now it an object
-    if (obj) obj = { ...data, ...obj };
+    if (obj) {
+      obj = {
+        categories: { ...data.categories, ...obj.categories },
+        data: { ...data.data, ...obj.data }
+      };
+    }
     json = JSON.stringify(obj); //convert it back to json
-    fs.writeFile(dataFile, json, "utf8", () => {}); // write it back
+    fs.writeFileSync(dataFile, json, "utf8", () => {}); // write it back
     return obj;
   } else {
     //overwrite
-    fs.writeFile(dataFile, JSON.stringify(data), "utf8", () => {});
+    fs.writeFileSync(dataFile, JSON.stringify(data), "utf8");
     return data;
   }
 }

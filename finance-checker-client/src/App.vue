@@ -4,6 +4,7 @@
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
       think about the height of all views what should be the default height?
+      rework utils (maybe in plugin)
     -->
   </div>
 </template>

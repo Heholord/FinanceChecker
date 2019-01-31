@@ -1,5 +1,5 @@
 <template>
-  <div class="inquirer">
+  <div class="uploader">
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
         <el-cascader
@@ -28,7 +28,11 @@
         <entry-browser :entries="entries" @next="allowNextStep"/>
       </div>
       <div class="step" v-else-if="activeStep === 3">
-        <entries-to-category :entries="entries" :categories="categories"/>
+        <entries-to-category
+          :entries="join(entries)"
+          :categories="categories"
+          @next="allowNextStep"
+        />
       </div>
     </div>
     <el-button
@@ -61,9 +65,10 @@ import FileUploader from "@/components/FileUploader";
 import EntryBrowser from "@/components/EntryBrowser";
 import EntriesToCategory from "@/components/EntriesToCategory";
 import { mapGetters } from "vuex";
+import { join } from "@/plugin/utils";
 
 export default {
-  name: "DataManagement",
+  name: "Upload",
   components: { FileUploader, EntryBrowser, EntriesToCategory },
   data() {
     return {
@@ -117,7 +122,7 @@ export default {
       }
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
-        this.$router.push("/display");
+        this.$router.push("/visualize");
       }
     },
     previousStep() {
@@ -148,6 +153,9 @@ export default {
         this.loading = false;
       };
       reader.readAsText(file);
+    },
+    join(obj) {
+      return join(obj);
     }
   },
   mounted() {

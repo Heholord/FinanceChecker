@@ -1,5 +1,5 @@
 <template>
-  <div class="inquirer">
+  <div class="management">
     <!-- TODO  
        custom parsing,
        html and/or json

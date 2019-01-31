@@ -288,13 +288,14 @@ export function getCategoryTree(startingpoint, categories) {
  * @returns flattend array (all leaves joined together)
  */
 export function join(obj) {
-  let array = [];
-  if (typeof obj === "object") {
+  if (Array.isArray(obj)) {
+    return obj;
+  } else if (typeof obj === "object") {
+    let array = [];
     Object.keys(obj).forEach(key => {
       array.push(...join(obj[key]));
     });
-  } else if (!isEmpty(obj)) {
-    array.push(...obj);
+    return array;
   }
-  return array;
+  return [];
 }

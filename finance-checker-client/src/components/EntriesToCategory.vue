@@ -1,31 +1,39 @@
 <template>
   <div class="assigner">
-    <div v-for="entry in join(entries)" :key="entry.month + entry.day + entry.info + entry.amount">
-      <h3>{{entry.month + entry.day + entry.info + entry.amount}}</h3>
-      {{entry.amount}}
-      <!-- category-tree :categories="[{path: rootPath(entry), data: subCat(entry)}]"/>
-      <div class="buttons-bar"></div-->
+    <h3>{{activeEntry.month + ' ' + activeEntry.day + ' '+ activeEntry.info + ' ' + activeEntry.amount}}</h3>
+    <category-tree :categories="[{path: rootPath(activeEntry), data: subCat(activeEntry)}]"></category-tree>
+    <div class="buttons-bar">
+      <el-button
+        v-if="isSelected"
+        class="entity-button"
+        icon="el-icon-plus"
+        @click="newCategory"
+      >New Category</el-button>
+      <el-button class="entity-button" icon="el-icon-caret-right" @click="nextEntry">Skip</el-button>
+      <el-button
+        class="entity-button"
+        icon="el-icon-arrow-right"
+        @click="nextEntry"
+        :disabled="!isSelected"
+      ></el-button>
+      <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
     </div>
-    <el-progress :percentage="50" status="success"></el-progress>
   </div>
 </template>
 
 
 <script>
-import { getCategoryTree, join } from "@/plugin/utils";
+import { getCategoryTree } from "@/plugin/utils";
 import CategoryTree from "@/components/CategoryTree";
 
 export default {
-  name: "CategoryTree",
+  name: "EntriesToCategory",
   components: { CategoryTree },
   props: ["entries", "categories"],
   data() {
-    return {};
+    return { activeEntry: {}, activeIndex: 0, selectedCategory: "" };
   },
   methods: {
-    join(obj) {
-      return join(obj);
-    },
     rootPath(entry) {
       return entry.amount > 0 ? "in" : "out";
     },
@@ -36,11 +44,49 @@ export default {
       } else {
         return getCategoryTree("out", this.categories);
       }
+    },
+    nextEntry() {
+      if (this.activeIndex < this.entries.length - 1) {
+        this.activeIndex++;
+        this.activeEntry = this.entries[this.activeIndex];
+      } else {
+        this.$emit("next");
+      }
     }
   },
-  computed: {}
+  computed: {
+    progress() {
+      if (this.activeIndex === this.entries.length - 1) return 100;
+      return Math.round((this.activeIndex / this.entries.length) * 100);
+    },
+    progressClass() {
+      if (this.activeIndex === this.entries.length - 1) return "success";
+      return null;
+    },
+    isSelected() {
+      return !this.$isEmpty(this.selectedCategory);
+    }
+  },
+  beforeMount() {
+    this.activeEntry = this.entries[this.activeIndex];
+  }
 };
 </script>
 
 <style lang="scss">
+.assigner {
+  display: grid;
+  grid-template: 1fr 3fr 1fr/ 1fr;
+  min-width: 600px;
+  & > * {
+    margin: auto;
+  }
+
+  .buttons-bar {
+    width: 100%;
+    .progress {
+      width: 100%;
+    }
+  }
+}
 </style>
