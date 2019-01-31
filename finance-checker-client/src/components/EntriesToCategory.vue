@@ -1,7 +1,10 @@
 <template>
   <div class="assigner">
     <h3>{{activeEntry.month + ' ' + activeEntry.day + ' '+ activeEntry.info + ' ' + activeEntry.amount}}</h3>
-    <category-tree :categories="[{path: rootPath(activeEntry), data: subCat(activeEntry)}]"></category-tree>
+    <category-tree
+      :categories="[{path: rootPath(activeEntry), data: subCat(activeEntry)}]"
+      @onSelect="setCategory"
+    ></category-tree>
     <div class="buttons-bar">
       <el-button
         v-if="isSelected"
@@ -46,12 +49,16 @@ export default {
       }
     },
     nextEntry() {
+      this.selectedCategory = "";
       if (this.activeIndex < this.entries.length - 1) {
         this.activeIndex++;
         this.activeEntry = this.entries[this.activeIndex];
       } else {
         this.$emit("next");
       }
+    },
+    setCategory(categorypath) {
+      this.selectedCategory = categorypath;
     }
   },
   computed: {

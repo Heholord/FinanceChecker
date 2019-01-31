@@ -167,7 +167,7 @@ export default {
 </script>
 
 <style lang="scss">
-div.inquirer {
+.uploader {
   display: block;
   .stepButton.el-button {
     margin: 40px 20px;
@@ -176,7 +176,7 @@ div.inquirer {
     justify-content: center;
     align-content: center;
     display: flex;
-    min-height: 400px;
+    min-height: 300px;
 
     .step {
       margin: auto;
