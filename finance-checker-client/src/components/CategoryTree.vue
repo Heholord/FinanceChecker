@@ -1,9 +1,9 @@
 <template>
   <div class="categories">
-    <el-button round @click="click('')">
+    <el-button v-if="categories.length > 1" round @click="click('')">
       <i class="el-icon-tickets"></i> Categories
     </el-button>
-    <el-input placeholder="Filter keyword" v-model="filterText"></el-input>
+    <el-input v-if="filterMode" placeholder="Filter keyword" v-model="filterText"></el-input>
     <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="['in', 'out', 'save']">
       <el-submenu v-for="category in categories" :key="category.path" :index="category.path">
         <template v-if="category.path === 'in'" slot="title">
@@ -16,6 +16,7 @@
           <i class="el-icon-sort"></i>Save
         </template>
         <el-tree
+          :default-expand-all="expandAll"
           :data="category.data"
           :props="defaultProps"
           :filter-node-method="filterNode"
@@ -31,7 +32,17 @@
 <script>
 export default {
   name: "CategoryTree",
-  props: ["categories"],
+  props: {
+    categories: Array,
+    filterMode: {
+      type: Boolean,
+      default: true
+    },
+    expandAll: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       defaultProps: {
@@ -63,16 +74,22 @@ export default {
 </script>
 
 <style lang="scss">
-.el-menu.treeMenu {
-  text-align: left;
-  border-right: none;
-  padding: 0px;
+.categories {
   & > * {
-    margin: 5px;
+    margin: 10px;
   }
 
-  .el-submenu__title {
-    margin-left: -20px;
+  .el-menu.treeMenu {
+    text-align: left;
+    border-right: none;
+    padding: 0px;
+    & > * {
+      margin: 5px;
+    }
+
+    .el-submenu__title {
+      margin-left: -20px;
+    }
   }
 }
 </style>

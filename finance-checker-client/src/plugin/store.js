@@ -13,7 +13,8 @@ import {
   resolveCategory,
   getDataByDate,
   flatten,
-  getDateList
+  getDateList,
+  isEmpty
 } from "./utils";
 
 Vue.use(Vuex);
@@ -151,6 +152,29 @@ const store = new Vuex.Store({
     },
     setDataEndDate(state, dataEndDate) {
       state.dataEndDate = dataEndDate;
+    },
+    addToCategory(state, categoryPath) {
+      const parts = categoryPath.split(".");
+      let categories = state.categories;
+      for (let idx in parts) {
+        const part = parts[idx];
+        if (categories[part]) {
+          if (Array.isArray(categories[part])) {
+            if (isEmpty(categories[part])) {
+              categories[part] = {};
+            } else {
+              categories[part] = { other: categories[part] };
+            }
+          }
+        } else {
+          if (idx === parts.length - 1) {
+            categories[part] = [];
+          } else {
+            categories[part] = {};
+          }
+        }
+        categories = categories[part];
+      }
     }
   },
   actions: {

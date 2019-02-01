@@ -72,8 +72,7 @@ export default {
       color: #e6e6e6;
       margin: 20px;
     }
-    & > *,
-    & > .categories > * {
+    & > * {
       margin: 10px;
     }
   }
