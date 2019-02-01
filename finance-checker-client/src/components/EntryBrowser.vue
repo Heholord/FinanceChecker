@@ -30,8 +30,12 @@ export default {
   components: {},
   name: "EntryBrowser",
   props: ["entries"],
-  beforeMount() {
-    this.$emit("next");
+  mounted() {
+    this.$nextTick(() => {
+      this.$emit("loaded");
+      this.$emit("next");
+      // console.log("entry browser mounted");
+    });
   },
   methods: {
     objectSpanMethod({ row, columnIndex }) {

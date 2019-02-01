@@ -1,5 +1,15 @@
 <template>
   <div class="assigner">
+    <el-dialog v-if="shouldUse" title="Warning" :visible.sync="isShouldUse" width="50%" center>
+      <span>
+        The entry {{activeEntry.info}} has similarities with a categorized entry {{shouldUse.elem}} ({{shouldUse.similarity}}% similarity). Sould the new entry be placed in path
+        <el-tag type="info">{{shouldUse.categoryPath.split(".").join(" > ")}}</el-tag>as well?
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="use(false)">No</el-button>
+        <el-button type="primary" @click="use(true)">Yes</el-button>
+      </span>
+    </el-dialog>
     <em>{{elemText}}</em>
     <el-alert
       v-if="!$isEmpty(selectedCategory)"
@@ -45,7 +55,7 @@
       <el-button
         class="btn place"
         icon="el-icon-arrow-right"
-        @click="nextEntry"
+        @click="addElemToCategory"
         :disabled="!isSelected"
       >place here</el-button>
       <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
@@ -55,8 +65,9 @@
 
 
 <script>
-import { getCategoryTree, flatten } from "@/plugin/utils";
+import { getCategoryTree, flatten, getCategoryPath } from "@/plugin/utils";
 import CategoryTree from "@/components/CategoryTree";
+const stringSimilarity = require("string-similarity");
 
 export default {
   name: "EntriesToCategory",
@@ -69,7 +80,8 @@ export default {
       selectedCategory: "",
       elemText: "",
       newCategory: "",
-      newCategoryPopover: false
+      newCategoryPopover: false,
+      shouldUse: false
     };
   },
   methods: {
@@ -85,24 +97,60 @@ export default {
       }
     },
     nextEntry() {
-      this.selectedCategory = "";
       if (this.activeIndex < this.entries.length - 1) {
         this.activeIndex++;
         const elem = this.entries[this.activeIndex];
+        const rootCat = this.rootPath(elem);
+        const bestMatch = stringSimilarity.findBestMatch(
+          elem.info,
+          flatten(this.categories[rootCat])
+        ).bestMatch;
         if (elem.category || flatten(this.categories).includes(elem.info)) {
           this.nextEntry();
         } else {
           this.setElemData(elem);
+          if (bestMatch.rating > 0.5) {
+            const categoryPath = getCategoryPath(
+              rootCat,
+              bestMatch.target,
+              this.categories[rootCat]
+            );
+            const similarity = Math.round(bestMatch.rating * 100);
+            this.shouldUse = {
+              similarity,
+              elem: bestMatch.target,
+              categoryPath
+            };
+          }
         }
       } else {
         this.$emit("next");
+      }
+      this.selectedCategory = "";
+    },
+    use(shouldUse) {
+      if (shouldUse) {
+        this.selectedCategory = this.shouldUse.categoryPath;
+        this.addElemToCategory();
+        this.shouldUse = false;
+      } else {
+        this.shouldUse = false;
+      }
+    },
+    addElemToCategory() {
+      if (!this.$isEmpty(this.selectCategory)) {
+        this.$store.commit("addToCategory", {
+          elem: this.activeEntry,
+          categoryPath: this.selectedCategory
+        });
+        this.nextEntry();
       }
     },
     setNewCategoryName() {
       // TODO validate newCategory somehow (maybe veevalidate?)
       if (!this.$isEmpty(this.newCategory)) {
         this.selectedCategory = this.selectedCategory + "." + this.newCategory;
-        this.$store.commit("addToCategory", this.selectedCategory);
+        this.$store.commit("buildCategory", this.selectedCategory);
       } else {
         this.selectedCategory = "";
       }
@@ -139,6 +187,9 @@ export default {
     }
   },
   computed: {
+    isShouldUse() {
+      return this.shouldUse !== false;
+    },
     progress() {
       if (this.activeIndex === this.entries.length - 1) return 100;
       return Math.round((this.activeIndex / this.entries.length) * 100);

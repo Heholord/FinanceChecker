@@ -299,3 +299,17 @@ export function join(obj) {
   }
   return [];
 }
+
+export function getCategoryPath(path, findValue, categories) {
+  let returnValue = false;
+  if (Array.isArray(categories) && categories.includes(findValue)) {
+    return path;
+  } else if (typeof categories === "object") {
+    Object.keys(categories).forEach(function(key) {
+      const value = categories[key];
+      let newValue = getCategoryPath(path + "." + key, findValue, value);
+      if (newValue) returnValue = newValue;
+    });
+  }
+  return returnValue;
+}

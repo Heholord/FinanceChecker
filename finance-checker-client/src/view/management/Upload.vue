@@ -25,7 +25,7 @@
         <h3>
           <i class="el-icon-info" style="margin-right:15px;"/>Optional
         </h3>
-        <entry-browser :entries="entries" @next="allowNextStep"/>
+        <entry-browser v-loading="loading" :entries="entries" @next="allowNextStep"/>
       </div>
       <div class="step" v-else-if="activeStep === 3">
         <entries-to-category
@@ -104,22 +104,13 @@ export default {
   methods: {
     nextStep() {
       this.disableNextStep = true;
+      // this.loading = true; // will be turned off by next step
       // merge previous data with new data
       if (this.activeStep === 1) {
-        this.loading = true;
-        let mergeEntries = this.mergeEntries;
-        if (this.$isEmpty(mergeEntries)) {
-          mergeEntries = { categories: {}, data: {} };
-        }
-        let entries = this.$parseHtml(this.content);
-        entries = {
-          categories: mergeEntries.categories,
-          data: { ...entries, ...this.mergeEntries.data }
-        };
-        this.$store.dispatch("setData", entries).then(() => {
-          this.loading = false;
-        });
+        // this.loading = true; // will be turned off by next step
+        this.merge();
       }
+      // console.log("nextStep " + this.loading);
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
         this.$router.push("/visualize");
@@ -142,6 +133,7 @@ export default {
     setMergeEntries(file) {
       this.setFile(file, content => {
         this.mergeEntries = JSON.parse(content);
+        this.allowNextStep();
       });
     },
     setFile(file, contentCall) {
@@ -156,6 +148,20 @@ export default {
     },
     join(obj) {
       return join(obj);
+    },
+    merge() {
+      let mergeEntries = this.mergeEntries;
+      if (this.$isEmpty(mergeEntries)) {
+        mergeEntries = { categories: {}, data: {} };
+      }
+      let entries = this.$parseHtml(this.content);
+      entries = {
+        categories: mergeEntries.categories,
+        data: { ...entries, ...this.mergeEntries.data }
+      };
+      this.$store.dispatch("setData", entries).then(() => {
+        // this.loading = false;
+      });
     }
   },
   mounted() {
@@ -186,6 +192,9 @@ export default {
     justify-self: center;
     align-self: center;
     margin: auto;
+  }
+  [v-cloak] {
+    display: none;
   }
 }
 </style>

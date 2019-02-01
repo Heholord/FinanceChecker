@@ -153,7 +153,7 @@ const store = new Vuex.Store({
     setDataEndDate(state, dataEndDate) {
       state.dataEndDate = dataEndDate;
     },
-    addToCategory(state, categoryPath) {
+    buildCategory(state, categoryPath) {
       const parts = categoryPath.split(".");
       let categories = state.categories;
       for (let idx in parts) {
@@ -167,13 +167,27 @@ const store = new Vuex.Store({
             }
           }
         } else {
-          if (idx === parts.length - 1) {
+          if (idx == parts.length - 1) {
             categories[part] = [];
           } else {
             categories[part] = {};
           }
         }
         categories = categories[part];
+      }
+    },
+    addToCategory(state, params) {
+      let { elem, categoryPath } = params;
+      const parts = categoryPath.split(".");
+      let categories = state.categories;
+      for (let idx in parts) {
+        const part = parts[idx];
+        if (categories[part]) {
+          if (Array.isArray(categories[part])) {
+            categories[part].push(elem.info);
+          }
+          categories = categories[part];
+        }
       }
     }
   },
