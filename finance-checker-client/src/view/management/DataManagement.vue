@@ -14,7 +14,7 @@
         <Upload/>
       </el-tab-pane>
       <el-tab-pane label="Download">
-        <!--Download/-->
+        <Download/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -23,9 +23,10 @@
 <script>
 import RootNav from "@/components/RootNav";
 import Upload from "./Upload";
+import Download from "./Download";
 
 export default {
   name: "DataManagement",
-  components: { RootNav, Upload }
+  components: { RootNav, Upload, Download }
 };
 </script>

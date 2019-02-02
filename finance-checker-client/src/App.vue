@@ -40,5 +40,8 @@ body {
       color: #67c23a;
     }
   }
+  .el-tag {
+    margin: 0 8px;
+  }
 }
 </style>

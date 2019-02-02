@@ -12,13 +12,21 @@
     </el-dialog>
     <em>{{elemText}}</em>
     <el-alert
-      v-if="!$isEmpty(selectedCategory)"
-      title="Selected category is "
+      v-if="canInsertIntoCategory"
       type="success"
       :closable="false"
       show-icon
-    >
-      <el-tag type="info" style="margin-left: 10px;">{{selectedCategoryPrint}}</el-tag>
+    >Currently category
+      <el-tag type="info">{{selectedCategoryPrint}}</el-tag>is selected
+    </el-alert>
+    <el-alert
+      v-else-if="isCategorySelected"
+      type="warning"
+      :closable="false"
+      show-icon
+    >The selected category
+      <el-tag type="info">{{selectedCategoryPrint}}</el-tag>has subcategories, thus no entries can be added to this category.
+      <br>Please specify the category or add a new subcategory.
     </el-alert>
     <el-alert v-else title="No category selected" type="info" :closable="false" show-icon></el-alert>
     <category-tree
@@ -30,16 +38,23 @@
     <div class="buttons-bar">
       <el-popover
         class="btn new"
-        v-if="isSelected"
+        v-if="isCategorySelected"
         v-model="newCategoryPopover"
         placement="top"
-        width="250"
+        width="500"
       >
         <div class="popover content">
           <p>Do you want to create a new category in</p>
           <el-tag type="info">{{selectedCategoryPrint}}</el-tag>
+          <el-alert v-if="isLeaf(selectedCategory)" type="warning" :closable="false" show-icon>
+            <p>The selected category
+              <el-tag type="info">{{selectedCategoryPrint}}</el-tag>contains entries. If you still decide to add a new subcategory to this category, the existing entries will be placed into an
+              <el-tag type="info">{{selectedCategoryPrint}} > other</el-tag>subcategory.
+            </p>
+          </el-alert>
           <p>The category should be named:</p>
           <el-input placeholder="category name" v-model="newCategory"></el-input>
+
           <div class="popover buttons">
             <el-button size="mini" type="text" @click="newCategoryPopover = false">cancel</el-button>
             <el-button type="primary" size="mini" @click="setNewCategoryName">confirm</el-button>
@@ -56,7 +71,7 @@
         class="btn place"
         icon="el-icon-arrow-right"
         @click="addElemToCategory"
-        :disabled="!isSelected"
+        :disabled="!canInsertIntoCategory"
       >place here</el-button>
       <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
     </div>
@@ -132,10 +147,8 @@ export default {
       if (shouldUse) {
         this.selectedCategory = this.shouldUse.categoryPath;
         this.addElemToCategory();
-        this.shouldUse = false;
-      } else {
-        this.shouldUse = false;
       }
+      this.shouldUse = false;
     },
     addElemToCategory() {
       if (!this.$isEmpty(this.selectCategory)) {
@@ -184,6 +197,20 @@ export default {
           "\n";
       }
       this.activeEntry = elem;
+    },
+    isLeaf(categoryPath) {
+      const parts = categoryPath.split(".");
+      let categories = this.categories;
+      for (let idx in parts) {
+        const part = parts[idx];
+        if (!categories[part]) {
+          return false;
+        } else {
+          categories = categories[part];
+        }
+      }
+      if (!Array.isArray(categories)) return false;
+      return true;
     }
   },
   computed: {
@@ -198,11 +225,17 @@ export default {
       if (this.activeIndex === this.entries.length - 1) return "success";
       return null;
     },
-    isSelected() {
+    isCategorySelected() {
       return !this.$isEmpty(this.selectedCategory);
     },
     selectedCategoryPrint() {
       return this.selectedCategory.replace(/\./gm, " > ");
+    },
+    canInsertIntoCategory() {
+      return (
+        !this.$isEmpty(this.selectedCategory) &&
+        this.isLeaf(this.selectedCategory)
+      );
     }
   },
   beforeMount() {
@@ -254,6 +287,9 @@ export default {
     margin-top: 10px;
     align-self: flex-end;
     justify-self: flex-end;
+  }
+  & > .el-alert {
+    margin: 10px;
   }
 }
 </style>

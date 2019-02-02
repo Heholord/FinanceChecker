@@ -49,6 +49,11 @@
           :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"
           @onSelect="setChartData"
         />
+        <file-downloader
+          :filename="'data.json'"
+          :filecontent="content"
+          :text="'Download your data'"
+        ></file-downloader>
       </el-aside>
 
       <el-container>
@@ -88,12 +93,13 @@
 import Doughnut from "@/components/Doughnut.vue";
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
-import { getCategoryTree } from "@/plugin/utils";
+import FileDownloader from "@/components/FileDownloader";
+import { getCategoryTree, download } from "@/plugin/utils";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Category",
-  components: { CategoryTree, Doughnut, SwitchableLineChart },
+  components: { CategoryTree, Doughnut, SwitchableLineChart, FileDownloader },
   data() {
     return {
       inCategory: [],
@@ -120,7 +126,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["disabledDates", "categories"])
+    ...mapGetters(["disabledDates", "categories", "data"]),
+    content() {
+      return download(this.categories, this.data);
+    }
   },
   beforeMount: function() {
     this.inCategory = getCategoryTree("in", this.categories);

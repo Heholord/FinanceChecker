@@ -14,7 +14,8 @@ import {
   getDataByDate,
   flatten,
   getDateList,
-  isEmpty
+  isEmpty,
+  addRedundantData
 } from "./utils";
 
 Vue.use(Vuex);
@@ -242,23 +243,3 @@ const store = new Vuex.Store({
 });
 
 export default store;
-
-function addRedundantData(data) {
-  let returnValue = {};
-  forEachElem(data, (month, day, elem) => {
-    if (!returnValue[month]) returnValue[month] = {};
-    if (!returnValue[month][day]) returnValue[month][day] = [];
-    returnValue[month][day].push({ month: month, day: day, ...elem });
-  });
-  return returnValue;
-}
-
-// function removeRedundantData(data) {
-//   let returnValue = { category: data.category, data: {} };
-//   forEachElem(data.data, (month, day, elem) => {
-//     delete elem.month;
-//     delete elem.day;
-//     returnValue[month][day].push(elem);
-//   });
-//   return returnValue;
-// }

@@ -313,3 +313,45 @@ export function getCategoryPath(path, findValue, categories) {
   }
   return returnValue;
 }
+
+export function addRedundantData(data) {
+  let returnValue = {};
+  forEachElem(data, (month, day, elem) => {
+    if (!returnValue[month]) returnValue[month] = {};
+    if (!returnValue[month][day]) returnValue[month][day] = [];
+    returnValue[month][day].push({ month: month, day: day, ...elem });
+  });
+  return returnValue;
+}
+
+export function removeRedundantData(data) {
+  let returnValue = { categories: data.categories, data: {} };
+  forEachElem(data.data, (month, day, elem) => {
+    let copyElem = clone(elem);
+    delete copyElem.month;
+    delete copyElem.day;
+    if (!returnValue.data[month]) returnValue.data[month] = {};
+    if (!returnValue.data[month][day]) returnValue.data[month][day] = [];
+    returnValue.data[month][day].push(copyElem);
+  });
+  return returnValue;
+}
+
+export function download(categories, data) {
+  let downloadData = { categories: categories, data: data };
+  return (
+    "data:text/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(removeRedundantData(downloadData)))
+  );
+}
+
+export function clone(obj) {
+  if (null == obj || "object" != typeof obj) return obj;
+  var copy = obj.constructor();
+  for (var attr in obj) {
+    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+  }
+  return copy;
+}
+
+// TODO: sort this after plain utils(clone, isEmpty, ...), category function, data functions, graphic function
