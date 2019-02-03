@@ -116,10 +116,14 @@ export default {
         this.activeIndex++;
         const elem = this.entries[this.activeIndex];
         const rootCat = this.rootPath(elem);
-        const bestMatch = stringSimilarity.findBestMatch(
-          elem.info,
-          flatten(this.categories[rootCat])
-        ).bestMatch;
+        const categories = flatten(this.categories[rootCat]);
+        let bestMatch;
+        if (categories.length > 0) {
+          bestMatch = stringSimilarity.findBestMatch(elem.info, categories)
+            .bestMatch;
+        } else {
+          bestMatch = { rating: 0 };
+        }
         if (elem.category || flatten(this.categories).includes(elem.info)) {
           this.nextEntry();
         } else {
