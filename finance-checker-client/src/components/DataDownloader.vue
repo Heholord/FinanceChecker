@@ -1,8 +1,9 @@
 <template>
-  <div class="downloader">
+  <div class="download-container">
     <file-downloader :filename="'data.json'" :filecontent="content" :text="'Download your data'"></file-downloader>
   </div>
 </template>
+
 
 <script>
 import FileDownloader from "@/components/FileDownloader";
@@ -10,26 +11,20 @@ import { mapGetters } from "vuex";
 import { download } from "@/plugin/utils";
 
 export default {
-  name: "Download",
+  name: "DataDownloader",
   components: { FileDownloader },
   computed: {
-    ...mapGetters({ entries: "data", categories: "categories" }),
+    ...mapGetters(["data", "categories"]),
     content() {
-      return download(this.categories, this.entries);
+      return download(this.categories, this.data);
     }
-  },
-  methods: {}
+  }
 };
 </script>
 
+
 <style lang="scss">
-.downloader {
-  justify-content: center;
-  align-content: center;
-  display: flex;
-  min-height: 300px;
-  & > * {
-    margin: auto;
-  }
+.download-container {
+  padding: 50px 0px;
 }
 </style>

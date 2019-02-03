@@ -2,7 +2,7 @@
   <div class="management">
     <!-- TODO  
        custom parsing,
-       html and/or json
+       html and/or json (make hirachy clear)
        options(delete, add, modify, special category) in entity view 
        category view,
        make a finish page (with nice animations)

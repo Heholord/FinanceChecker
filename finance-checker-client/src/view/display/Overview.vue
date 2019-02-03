@@ -14,6 +14,7 @@
           @change="reloadChart"
           :picker-options="{disabledDate: disabledDates}"
         ></el-date-picker>
+        <data-downloader></data-downloader>
       </el-aside>
 
       <el-container>
@@ -60,11 +61,12 @@
 
 <script>
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
+import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Overview",
-  components: { SwitchableLineChart },
+  components: { SwitchableLineChart, DataDownloader },
   data() {
     return {
       noData: true,
