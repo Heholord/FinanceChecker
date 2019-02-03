@@ -4,7 +4,6 @@
        custom parsing,
        html and/or json (make hirachy clear)
        options(delete, add, modify, special category) in entity view 
-       category view,
        make a finish page (with nice animations)
        jump to finish page option when store data and category exits
     -->

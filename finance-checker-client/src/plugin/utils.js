@@ -317,9 +317,14 @@ export function getCategoryPath(path, findValue, categories) {
 export function addRedundantData(data) {
   let returnValue = {};
   forEachElem(data, (month, day, elem) => {
-    if (!returnValue[month]) returnValue[month] = {};
-    if (!returnValue[month][day]) returnValue[month][day] = [];
-    returnValue[month][day].push({ month: month, day: day, ...elem });
+    let replacedMonth = replaceMonthName(month);
+    if (!returnValue[replacedMonth]) returnValue[replacedMonth] = {};
+    if (!returnValue[replacedMonth][day]) returnValue[replacedMonth][day] = [];
+    returnValue[replacedMonth][day].push({
+      month: replacedMonth,
+      day: day,
+      ...elem
+    });
   });
   return returnValue;
 }
@@ -355,3 +360,33 @@ export function clone(obj) {
 }
 
 // TODO: sort this after plain utils(clone, isEmpty, ...), category function, data functions, graphic function
+
+const replacements = [
+  { repl: "January", find: ["Jänner", "jänner", "january", "januar"] },
+  { repl: "February", find: ["Februar"] },
+  { repl: "March", find: ["März"] },
+  { repl: "April", find: ["april"] },
+  { repl: "May", find: ["Mai"] },
+  { repl: "June", find: ["Juni"] },
+  { repl: "July", find: ["Juli"] },
+  { repl: "August", find: ["august"] },
+  { repl: "September", find: ["september"] },
+  { repl: "October", find: ["Oktober"] },
+  { repl: "November", find: ["november"] },
+  { repl: "December", find: ["Dezember"] }
+];
+export function replaceMonthName(monthName) {
+  let returnValue = monthName;
+  replacements.forEach(repPair => {
+    repPair.find.forEach(find => {
+      if (monthName.includes(find)) {
+        returnValue = monthName.replace(find, repPair.repl);
+        return returnValue;
+      }
+    });
+    if (returnValue !== monthName) {
+      return returnValue;
+    }
+  });
+  return returnValue;
+}
