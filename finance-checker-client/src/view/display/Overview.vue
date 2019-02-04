@@ -2,18 +2,21 @@
   <div class="contentView">
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside>
-        <i class="el-icon-date"></i>Date
-        <br>
-        <el-date-picker
-          v-model="displayDate"
-          type="year"
-          placeholder="Pick a year"
-          format="yyyy"
-          value-format="yyyy"
-          ref="yearPicker"
-          @change="reloadChart"
-          :picker-options="{disabledDate: disabledDates}"
-        ></el-date-picker>
+        <div>
+          <p>
+            <i class="el-icon-date"></i>Date
+          </p>
+          <el-date-picker
+            v-model="displayDate"
+            type="year"
+            placeholder="Pick a year"
+            format="yyyy"
+            value-format="yyyy"
+            ref="yearPicker"
+            @change="reloadChart"
+            :picker-options="{disabledDate: disabledDates}"
+          ></el-date-picker>
+        </div>
         <data-downloader></data-downloader>
       </el-aside>
 

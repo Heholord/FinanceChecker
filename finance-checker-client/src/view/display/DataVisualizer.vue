@@ -72,8 +72,17 @@ export default {
       color: #e6e6e6;
       margin: 20px;
     }
-    & > * {
-      margin: 10px;
+    & > div {
+      margin: 30px 10px;
+      & > * {
+        margin: 10px;
+      }
+      & > p {
+        margin-bottom: 0px;
+        & > i {
+          margin-right: 6px;
+        }
+      }
     }
   }
   .el-main {

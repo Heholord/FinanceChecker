@@ -335,6 +335,7 @@ export function removeRedundantData(data) {
     let copyElem = clone(elem);
     delete copyElem.month;
     delete copyElem.day;
+    delete copyElem.date;
     if (!returnValue.data[month]) returnValue.data[month] = {};
     if (!returnValue.data[month][day]) returnValue.data[month][day] = [];
     returnValue.data[month][day].push(copyElem);

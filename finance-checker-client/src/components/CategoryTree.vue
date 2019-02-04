@@ -88,7 +88,9 @@ export default {
     }
 
     .el-submenu__title {
-      margin-left: -20px;
+      & + .el-menu {
+        margin-left: 30px;
+      }
     }
   }
 }

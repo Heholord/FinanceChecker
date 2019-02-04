@@ -16,34 +16,37 @@
     </modal>
     <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside>
-        <i class="el-icon-date"></i>Date
-        <br>
-        <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
-          <el-radio-button label="year"></el-radio-button>
-          <el-radio-button label="month"></el-radio-button>
-        </el-radio-group>
-        <el-date-picker
-          v-if="dateType==='year'"
-          v-model="displayDate"
-          type="year"
-          placeholder="Pick a year"
-          format="yyyy"
-          value-format="yyyy"
-          ref="yearPicker"
-          @change="reloadChart"
-          :picker-options="{disabledDate: disabledDates}"
-        ></el-date-picker>
-        <el-date-picker
-          v-if="dateType==='month'"
-          v-model="displayDate"
-          type="month"
-          placeholder="Pick a year"
-          format="yyyy-MM"
-          value-format="MMMMyyyy"
-          ref="monthPicker"
-          @change="reloadChart"
-          :picker-options="{disabledDate: disabledDates}"
-        ></el-date-picker>
+        <div>
+          <p>
+            <i class="el-icon-date"></i>Date
+          </p>
+          <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
+            <el-radio-button label="year"></el-radio-button>
+            <el-radio-button label="month"></el-radio-button>
+          </el-radio-group>
+          <el-date-picker
+            v-if="dateType==='year'"
+            v-model="displayDate"
+            type="year"
+            placeholder="Pick a year"
+            format="yyyy"
+            value-format="yyyy"
+            ref="yearPicker"
+            @change="reloadChart"
+            :picker-options="{disabledDate: disabledDates}"
+          ></el-date-picker>
+          <el-date-picker
+            v-if="dateType==='month'"
+            v-model="displayDate"
+            type="month"
+            placeholder="Pick a year"
+            format="yyyy-MM"
+            value-format="MMMMyyyy"
+            ref="monthPicker"
+            @change="reloadChart"
+            :picker-options="{disabledDate: disabledDates}"
+          ></el-date-picker>
+        </div>
         <hr>
         <CategoryTree
           :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"

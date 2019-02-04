@@ -15,7 +15,8 @@ import {
   flatten,
   getDateList,
   isEmpty,
-  addRedundantData
+  addRedundantData,
+  clone
 } from "./utils";
 
 Vue.use(Vuex);
@@ -84,16 +85,18 @@ const store = new Vuex.Store({
       const data = getDataByDate(date, state.data);
 
       forEachElem(data, (month, day, elem) => {
-        elem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
-        if (!elem.category) {
+        // console.log(month + day);
+        let workElem = clone(elem);
+        workElem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
+        if (!workElem.category) {
           // for normal categories
           for (let cat in categoryList) {
             if (rootCategory === "") rootCategory = cat; // in cases where cat is in, out, save
             if (
-              categoryList[cat].includes(elem.info) && // check if element is part of the category
+              categoryList[cat].includes(workElem.info) && // check if element is part of the category
               (rootCategory === "save" || // and element is part of the right category tree  in this case (for example mom can be incoming and outgoing)
-                (rootCategory === "in" && +elem.amount > 0) ||
-                (rootCategory === "out" && +elem.amount < 0))
+                (rootCategory === "in" && +workElem.amount > 0) ||
+                (rootCategory === "out" && +workElem.amount < 0))
             ) {
               returnValue = addToCategory(
                 returnValue,
@@ -101,14 +104,17 @@ const store = new Vuex.Store({
                 date,
                 month,
                 day,
-                elem
+                workElem
               );
             }
             if (rootCategory === cat) rootCategory = ""; // revert special rootCategory magic
           }
-        } else if (elem.category && elem.category.startsWith(categoryPath)) {
+        } else if (
+          workElem.category &&
+          workElem.category.startsWith(categoryPath)
+        ) {
           // for special categories
-          let str = elem.category.replace(categoryPath, "");
+          let str = workElem.category.replace(categoryPath, "");
           if (str.startsWith(".")) {
             str = str.replace(".", "");
           }
@@ -123,7 +129,7 @@ const store = new Vuex.Store({
             date,
             month,
             day,
-            elem
+            workElem
           );
         }
       });
