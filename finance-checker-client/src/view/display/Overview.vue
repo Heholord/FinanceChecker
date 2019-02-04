@@ -87,7 +87,7 @@ export default {
     setTransparent(stacked) {
       this.transparent = !stacked;
       this.chartData = this.$createChartData(
-        this.$store.getters.filterByCategory("", this.displayDate),
+        this.$store.getters.filter("", this.displayDate),
         this.transparent
       ).historical;
     },
@@ -101,7 +101,7 @@ export default {
       // chartdata
       this.data = [];
       this.chartData = this.$createChartData(
-        this.$store.getters.filterByCategory("", this.displayDate),
+        this.$store.getters.filter("", this.displayDate),
         this.transparent
       ).historical;
       const dateList = this.$store.getters.dateList(this.displayDate);
@@ -119,7 +119,7 @@ export default {
         if (this.displayDate) {
           filterDate += this.displayDate; // for filtering when a year has been selected, format September2018
         }
-        let filteredData = this.$store.getters.filterByCategory("", filterDate);
+        let filteredData = this.$store.getters.filter("", filterDate);
         let values = [];
         if (Object.keys(filteredData.data).length > 0) {
           values = filteredData.sorting.map(key => {

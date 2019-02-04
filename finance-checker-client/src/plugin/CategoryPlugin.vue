@@ -10,7 +10,7 @@ const CategoryPlugin = {
     };
 
     /**
-     * @param {object} data output of the @see $filterByCategory function.
+     * @param {object} data output of the @see filter function in store.
      * Contains the historical sorting in as <tt>sorting</tt> and the actual data.
      * The data by itself contains the category (<tt>category</tt>), the sum of all entries (<tt>value</tt>) and the historical entries (<tt>values</tt>).
      */

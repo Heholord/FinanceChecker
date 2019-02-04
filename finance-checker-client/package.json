@@ -49,6 +49,12 @@
         {
           "commentPattern": "break[\\s\\w]*omitted"
         }
+      ],
+      "complexity": [
+        "warn",
+        {
+          "max": 8
+        }
       ]
     },
     "parserOptions": {

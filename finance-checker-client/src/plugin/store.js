@@ -47,7 +47,7 @@ const store = new Vuex.Store({
       return resolveCategory(parts, state.categories);
     },
     /**
-     *
+     * TODO: rename function to filter
      * @param {string} categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
      * @param {string} date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
      * @returns {object} creates an object with following structure:
@@ -59,7 +59,7 @@ const store = new Vuex.Store({
      *            So the historical key is dependent on the given date format. If date is "undefined" then the years are the keys. If the given date is a year (i.e 2010) then the months are the keys and if the year is of format (MMMMYYYY, i.e. February2000) then the keys are the days of this month.
      *            the value is the sum of all entries in this historical category.
      */
-    filterByCategory: (state, getters) => (categoryPath, date) => {
+    filter: (state, getters) => (categoryPath, date) => {
       var categoryList = {};
       let returnValue = {};
 
@@ -179,7 +179,7 @@ const store = new Vuex.Store({
     },
     addToCategory(state, params) {
       let { elem, categoryPath } = params;
-      const parts = categoryPath.split(".");
+      const parts = categoryPath.split("."); //todo substitute with common method (check resolveCategory function)
       let categories = state.categories;
       for (let idx in parts) {
         const part = parts[idx];

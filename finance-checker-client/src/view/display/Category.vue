@@ -144,7 +144,7 @@ export default {
       }
     },
     showEntries(row) {
-      let filteredData = this.$store.getters.filterByCategory(
+      let filteredData = this.$store.getters.filter(
         this.lastCategoryPath,
         this.displayDate
       );
@@ -158,7 +158,7 @@ export default {
     async setChartData(categoryPath) {
       this.loaded = false;
 
-      let filteredData = this.$store.getters.filterByCategory(
+      let filteredData = this.$store.getters.filter(
         categoryPath,
         this.displayDate
       );
