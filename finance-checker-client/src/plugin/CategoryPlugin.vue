@@ -110,6 +110,13 @@ const CategoryPlugin = {
     Vue.prototype.$isEmpty = obj => {
       return isEmpty(obj);
     };
+
+    Vue.prototype.$scrollMeTo = refName => {
+      var element = Vue.$refs[refName];
+      var top = element.offsetTop;
+
+      window.scrollTo(0, top);
+    };
   }
 };
 

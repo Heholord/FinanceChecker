@@ -66,10 +66,11 @@
           @click="newCategoryPopover = true"
         >New Category</el-button>
       </el-popover>
-      <el-button class="btn skip" icon="el-icon-caret-right" @click="nextEntry">Skip</el-button>
+      <el-button class="btn skip" type="info" icon="el-icon-caret-right" @click="nextEntry">Skip</el-button>
       <el-button
         class="btn place"
         icon="el-icon-arrow-right"
+        type="success"
         @click="addElemToCategory"
         :disabled="!canInsertIntoCategory"
       >place here</el-button>

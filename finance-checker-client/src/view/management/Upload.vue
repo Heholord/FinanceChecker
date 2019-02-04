@@ -1,5 +1,12 @@
 <template>
   <div class="uploader">
+    <el-steps direction="vertical" class="step-indicator" :active="activeStep" simple>
+      <el-step title="Choose a bank" icon="el-icon-tickets"></el-step>
+      <el-step title="Upload data" icon="el-icon-upload"></el-step>
+      <el-step title="Edit entries" icon="el-icon-edit"></el-step>
+      <el-step title="Categorize data" icon="el-icon-menu"></el-step>
+    </el-steps>
+
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
         <el-cascader
@@ -26,6 +33,13 @@
           <i class="el-icon-info" style="margin-right:15px;"/>Optional
         </h3>
         <entry-browser v-loading="loading" :entries="entries" @next="allowNextStep"/>
+        <el-button
+          class="jump-down"
+          icon="el-icon-arrow-down"
+          plain
+          circle
+          @click="scrollMeTo('navctrl')"
+        ></el-button>
       </div>
       <div class="step" v-else-if="activeStep === 3">
         <entries-to-category
@@ -35,28 +49,24 @@
         />
       </div>
     </div>
-    <el-button
-      class="stepButton"
-      v-show="activeStep > 0"
-      icon="el-icon-arrow-left"
-      circle
-      @click="previousStep"
-      ref="next"
-    ></el-button>
-    <el-button
-      class="stepButton"
-      icon="el-icon-arrow-right"
-      circle
-      @click="nextStep"
-      ref="next"
-      :disabled="disableNextStep"
-    ></el-button>
-    <el-steps :active="activeStep" align-center>
-      <el-step title="Choose a bank" icon="el-icon-tickets"></el-step>
-      <el-step title="Upload data" icon="el-icon-upload"></el-step>
-      <el-step title="Edit entries" icon="el-icon-edit"></el-step>
-      <el-step title="Categorize data" icon="el-icon-menu"></el-step>
-    </el-steps>
+    <div class="navigation-control" ref="navctrl">
+      <el-button
+        class="stepButton left"
+        v-show="activeStep > 0"
+        type="primary"
+        icon="el-icon-arrow-left"
+        @click="previousStep"
+        ref="next"
+      ></el-button>
+      <el-button
+        class="stepButton right"
+        icon="el-icon-arrow-right"
+        @click="nextStep"
+        type="primary"
+        ref="next"
+        :disabled="disableNextStep"
+      ></el-button>
+    </div>
   </div>
 </template>
 
@@ -162,6 +172,12 @@ export default {
       this.$store.dispatch("setData", entries).then(() => {
         // this.loading = false;
       });
+    },
+    scrollMeTo(refName) {
+      var element = this.$refs[refName];
+      var top = element.offsetTop;
+
+      window.scrollTo(0, top);
     }
   },
   mounted() {
@@ -175,8 +191,28 @@ export default {
 <style lang="scss">
 .uploader {
   display: block;
-  .stepButton.el-button {
-    margin: 40px 20px;
+  .navigation-control {
+    display: grid;
+    grid-template-areas: "left . . right";
+    margin: 50px 100px;
+    justify-content: space-between;
+
+    .stepButton.el-button {
+      width: 100px;
+      height: 50px;
+      &.right {
+        grid-area: right;
+        margin-left: 0;
+      }
+
+      &.left {
+        grid-area: left;
+      }
+    }
+    .step-indicator {
+      width: 100%;
+      margin: auto;
+    }
   }
   .stepContainer {
     justify-content: center;
@@ -186,6 +222,11 @@ export default {
 
     .step {
       margin: auto;
+      .jump-down {
+        position: fixed;
+        right: 250px;
+        top: 300px;
+      }
     }
   }
   .split-elem {
