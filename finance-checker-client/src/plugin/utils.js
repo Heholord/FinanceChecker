@@ -135,14 +135,7 @@ export function fillUpHistoricalData(
   return { sorting: dateList, data: returnValue };
 }
 
-export function addToCategory(
-  returnValue,
-  category,
-  dateSelection,
-  elemMonth,
-  elemDay,
-  elem
-) {
+export function addToCategory(returnValue, category, dateSelection, elem) {
   const value = +elem.amount;
   if (!returnValue[category])
     returnValue[category] = {
@@ -151,7 +144,7 @@ export function addToCategory(
       entries: []
     };
   returnValue[category].value += value;
-  const histValue = getHistoricalValue(dateSelection, elemMonth, elemDay, elem);
+  const histValue = getHistoricalValue(dateSelection, elem);
   if (!returnValue[category].values[histValue.key])
     returnValue[category].values[histValue.key] = 0;
   returnValue[category].values[histValue.key] += histValue.value;
@@ -215,17 +208,17 @@ export function renderCategory(path, cat) {
   return returnValue;
 }
 
-export function getHistoricalValue(date, month, day, elem) {
+export function getHistoricalValue(date, elem) {
   let historicalValue = { key: undefined, value: +elem.amount };
 
   if (date) {
     if (date.length === 4) {
-      historicalValue.key = getMonthAsString(month);
+      historicalValue.key = getMonthAsString(elem.month);
     } else if (date.length > 4) {
-      historicalValue.key = day;
+      historicalValue.key = elem.day;
     }
   } else {
-    historicalValue.key = getYear(month);
+    historicalValue.key = getYear(elem.month);
   }
   return historicalValue;
 }
@@ -390,4 +383,29 @@ export function replaceMonthName(monthName) {
     }
   });
   return returnValue;
+}
+
+export function firstPartOfCategory(str) {
+  const parts = str === "" ? [] : str.split(".");
+  return parts.length > 0 ? parts[0] : "";
+}
+
+/**
+ * Elements can be assigend to multiple categories if the rootcategory (i.e "in", "out", "save", "...") are different.
+ *
+ * @param {*} elem element that should be checked
+ * @param {string} categoryPath categorypath in which the element should be assigned
+ */
+export function isValidCat(elem, categoryPath) {
+  if (!elem.category) {
+    const rootCategory = firstPartOfCategory(categoryPath);
+    if (["in", "out"].includes(rootCategory)) {
+      if (rootCategory === "in" && +elem.amount < 0) {
+        return false;
+      } else if (rootCategory === "out" && +elem.amount > 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

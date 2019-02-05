@@ -1,5 +1,5 @@
 <template>
-  <div class="split">
+  <div class="root split">
     <button @click="routeTo('/manage')">
       <el-card class="box">
         <img src="@/assets/inquire.png" class="image">
@@ -41,7 +41,8 @@ export default {
 </script>
 
 <style lang="scss">
-.split {
+.root.split {
+  background-color: #f5f7fa;
   button {
     justify-self: center;
     align-self: center;

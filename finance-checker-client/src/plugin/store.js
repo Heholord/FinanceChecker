@@ -16,7 +16,9 @@ import {
   getDateList,
   isEmpty,
   addRedundantData,
-  clone
+  clone,
+  firstPartOfCategory,
+  isValidCat
 } from "./utils";
 
 Vue.use(Vuex);
@@ -65,7 +67,6 @@ const store = new Vuex.Store({
       let returnValue = {};
 
       const category = getters.findCategory(categoryPath);
-      let rootCategory = categoryPath !== "" ? categoryPath.split(".")[0] : "";
 
       // create flat category structure of all subcategories (if category is a leaf then create an all-subcategory)
       actOnCategory(
@@ -85,29 +86,17 @@ const store = new Vuex.Store({
       const data = getDataByDate(date, state.data);
 
       forEachElem(data, (month, day, elem) => {
-        // console.log(month + day);
         let workElem = clone(elem);
         workElem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
         if (!workElem.category) {
           // for normal categories
-          for (let cat in categoryList) {
-            if (rootCategory === "") rootCategory = cat; // in cases where cat is in, out, save
-            if (
-              categoryList[cat].includes(workElem.info) && // check if element is part of the category
-              (rootCategory === "save" || // and element is part of the right category tree  in this case (for example mom can be incoming and outgoing)
-                (rootCategory === "in" && +workElem.amount > 0) ||
-                (rootCategory === "out" && +workElem.amount < 0))
-            ) {
-              returnValue = addToCategory(
-                returnValue,
-                cat,
-                date,
-                month,
-                day,
-                workElem
-              );
-            }
-            if (rootCategory === cat) rootCategory = ""; // revert special rootCategory magic
+          const cat = getCorrespondingCategory(
+            workElem,
+            categoryPath,
+            categoryList
+          );
+          if (cat) {
+            returnValue = addToCategory(returnValue, cat, date, workElem);
           }
         } else if (
           workElem.category &&
@@ -118,17 +107,13 @@ const store = new Vuex.Store({
           if (str.startsWith(".")) {
             str = str.replace(".", "");
           }
-          const strParts = str === "" ? [] : str.split(".");
-          let displayCategory = "all";
-          if (strParts.length > 0) {
-            displayCategory = strParts[0];
-          }
+          const firstPart = firstPartOfCategory(str);
+          let displayCategory = isEmpty(firstPart) ? "all" : firstPart; //if it is leave category (i.e there are no subcategories), make a new subcat
+
           returnValue = addToCategory(
             returnValue,
             displayCategory,
             date,
-            month,
-            day,
             workElem
           );
         }
@@ -247,5 +232,15 @@ const store = new Vuex.Store({
     }
   }
 });
+
+function getCorrespondingCategory(elem, categoryPath, categoryList) {
+  for (let cat in categoryList) {
+    const subcatPath = isEmpty(categoryPath) ? cat : categoryPath + "." + cat;
+    if (categoryList[cat].includes(elem.info) && isValidCat(elem, subcatPath)) {
+      // check if element is part of the category
+      return cat;
+    }
+  }
+}
 
 export default store;

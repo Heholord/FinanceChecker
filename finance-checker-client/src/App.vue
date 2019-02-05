@@ -21,13 +21,31 @@ export default {
 
 <style lang="scss">
 body {
+  margin: 0;
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin: 30px;
+
+    ul.master-menu {
+      display: flex;
+      justify-content: space-around;
+      background: #f5f7fa;
+      & > li.el-menu-item {
+        width: 80%;
+        margin: auto;
+
+        &:hover {
+          background-color: #f5f7fa;
+          border-bottom: 2px solid #9ec0e4;
+        }
+      }
+      & + .tabs {
+        margin: 50px;
+      }
+    }
 
     .split {
       display: grid;
