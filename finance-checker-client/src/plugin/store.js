@@ -103,19 +103,8 @@ const store = new Vuex.Store({
           workElem.category.startsWith(categoryPath)
         ) {
           // for special categories
-          let str = workElem.category.replace(categoryPath, "");
-          if (str.startsWith(".")) {
-            str = str.replace(".", "");
-          }
-          const firstPart = firstPartOfCategory(str);
-          let displayCategory = isEmpty(firstPart) ? "all" : firstPart; //if it is leave category (i.e there are no subcategories), make a new subcat
-
-          returnValue = addToCategory(
-            returnValue,
-            displayCategory,
-            date,
-            workElem
-          );
+          const cat = getCorrespondingCategory(workElem, categoryPath);
+          returnValue = addToCategory(returnValue, cat, date, workElem);
         }
       });
 
@@ -234,13 +223,26 @@ const store = new Vuex.Store({
 });
 
 function getCorrespondingCategory(elem, categoryPath, categoryList) {
-  for (let cat in categoryList) {
-    const subcatPath = isEmpty(categoryPath) ? cat : categoryPath + "." + cat;
-    if (categoryList[cat].includes(elem.info) && isValidCat(elem, subcatPath)) {
-      // check if element is part of the category
-      return cat;
+  if (elem.category) {
+    let str = elem.category.replace(categoryPath, "");
+    if (str.startsWith(".")) {
+      str = str.replace(".", "");
+    }
+    const firstPart = firstPartOfCategory(str);
+    return isEmpty(firstPart) ? "all" : firstPart; //if it is leave category (i.e there are no subcategories), make a new subcat
+  } else {
+    for (let cat in categoryList) {
+      const subcatPath = isEmpty(categoryPath) ? cat : categoryPath + "." + cat;
+      if (
+        categoryList[cat].includes(elem.info) &&
+        isValidCat(elem, subcatPath)
+      ) {
+        // check if element is part of the category
+        return cat;
+      }
     }
   }
+  return false;
 }
 
 export default store;
