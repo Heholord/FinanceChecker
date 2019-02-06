@@ -42,7 +42,9 @@ export default {
 
 <style lang="scss">
 .root.split {
+  position: relative;
   background-color: #f5f7fa;
+  height: 100%;
   button {
     justify-self: center;
     align-self: center;
