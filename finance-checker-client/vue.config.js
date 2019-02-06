@@ -6,5 +6,6 @@ module.exports = {
     config.resolve.alias
       .set("@", path.resolve("src"))
       .set("vue$", "vue/dist/vue.common.js");
-  }
+  },
+  baseUrl: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/"
 };
