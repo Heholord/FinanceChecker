@@ -70,17 +70,26 @@ export function forEachElem(data, callback) {
   }
 }
 
-// Input format MMMMyyyy (i.e September2008)
+/**
+ * Returns the months as number
+ * @param {string} dateString Input format MMMMyyyy (i.e September2008)
+ */
 export function getMonthAsString(dateString) {
   return dateString.substring(0, dateString.length - 4);
 }
 
-// Input format MMMMyyyy (i.e September2008)
+/**
+ * Returns the months as string
+ * @param {string} dateString Input format MMMMyyyy (i.e September2008)
+ */
 export function getMonthAsNr(dateString) {
   return moment.months().indexOf(getMonthAsString(dateString)) + 1;
 }
 
-// Input format MMMMyyyy (i.e September2008)
+/**
+ * Returns the years as string
+ * @param {string} dateString Input format MMMMyyyy (i.e September2008)
+ */
 export function getYear(dateString) {
   return dateString.substring(dateString.length - 4, dateString.length);
 }
@@ -370,11 +379,12 @@ const replacements = [
   { repl: "December", find: ["Dezember"] }
 ];
 export function replaceMonthName(monthName) {
+  const month = getMonthAsString(monthName);
   let returnValue = monthName;
   replacements.forEach(repPair => {
     repPair.find.forEach(find => {
-      if (monthName.includes(find)) {
-        returnValue = monthName.replace(find, repPair.repl);
+      if (month === find) {
+        returnValue = repPair.repl + getYear(monthName);
         return returnValue;
       }
     });
