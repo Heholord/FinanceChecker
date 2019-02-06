@@ -22,7 +22,6 @@
           This project is open source on
           <img
             src="@/assets/GitHub-Mark-Light-32px.png"
-            style="margin-right: 5px;"
             class="image"
           >
           Check it out and contribute if you please
@@ -53,6 +52,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    background-color: #fcfcfc;
     height: 100%;
 
     ul.master-menu {
@@ -102,6 +102,9 @@ body {
       a {
         transition: font-size 0.3s ease, text-shadow 0.3s ease;
         line-height: 2;
+        img {
+          margin: 0 4px;
+        }
       }
 
       &:hover {

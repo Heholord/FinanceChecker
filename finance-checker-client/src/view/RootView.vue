@@ -11,7 +11,7 @@
         </div>
       </el-card>
     </button>
-    <button @click="routeTo('/visualizer')">
+    <button @click="routeTo('/visualize')">
       <el-card class="box">
         <img src="@/assets/display.jpg" class="image">
         <div style="margin-top: 20px; padding: 14px;">
