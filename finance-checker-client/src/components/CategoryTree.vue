@@ -16,6 +16,17 @@
           <i class="el-icon-sort"></i>Save
         </template>
         <el-tree
+          v-if="!$isEmpty(activeCategories)"
+          :default-expanded-keys="activeCategories"
+          :data="category.data"
+          :props="defaultProps"
+          :filter-node-method="filterNode"
+          :ref="'tree'+category.path"
+          @node-click="click"
+          node-key="id"
+        ></el-tree>
+        <el-tree
+          v-else
           :default-expand-all="expandAll"
           :data="category.data"
           :props="defaultProps"
@@ -41,6 +52,12 @@ export default {
     expandAll: {
       type: Boolean,
       default: false
+    },
+    activeCategories: {
+      type: Array,
+      default: () => {
+        return [];
+      }
     }
   },
   data() {
@@ -57,7 +74,7 @@ export default {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
-    async click(categoryPath) {
+    click(categoryPath) {
       let emitValue = categoryPath;
       if (categoryPath.id) emitValue = categoryPath.id;
       this.$emit("onSelect", emitValue);

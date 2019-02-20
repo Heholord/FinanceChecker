@@ -9,7 +9,10 @@
     -->
     <root-nav/>
     <el-tabs class="tabs" type="border-card">
-      <el-tab-pane label="Upload">
+      <el-tab-pane label="Quick Upload">
+        <QuickUpload/>
+      </el-tab-pane>
+      <el-tab-pane label="New Upload">
         <Upload/>
       </el-tab-pane>
       <el-tab-pane label="Download">
@@ -23,9 +26,10 @@
 import RootNav from "@/components/RootNav";
 import Upload from "./Upload";
 import Download from "./Download";
+import QuickUpload from "./QuickUpload";
 
 export default {
   name: "DataManagement",
-  components: { RootNav, Upload, Download }
+  components: { RootNav, Upload, Download, QuickUpload }
 };
 </script>

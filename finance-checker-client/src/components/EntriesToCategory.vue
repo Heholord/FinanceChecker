@@ -16,7 +16,7 @@
         <el-button type="primary" @click="use(true)">Yes</el-button>
       </span>
     </el-dialog>
-    <div v-if="!progressClass" class="category-chooser">
+    <div v-show="!progressClass" class="category-chooser">
       <em>{{elemText}}</em>
       <el-alert
         v-if="canInsertIntoCategory"
@@ -38,8 +38,8 @@
       <el-alert v-else title="No category selected" type="info" :closable="false" show-icon></el-alert>
       <category-tree
         :categories="[{path: rootPath(activeEntry), data: subCat(activeEntry)}]"
+        :activeCategories="[this.selectedCategory]"
         :filterMode="false"
-        :expandAll="false"
         @onSelect="selectCategory"
       ></category-tree>
       <div class="buttons-bar">
@@ -165,7 +165,7 @@ export default {
       this.shouldUse = false;
     },
     addElemToCategory() {
-      if (!this.$isEmpty(this.selectCategory)) {
+      if (!this.$isEmpty(this.selectedCategory)) {
         this.$store.commit("addToCategory", {
           elem: this.activeEntry,
           categoryPath: this.selectedCategory
@@ -178,6 +178,7 @@ export default {
       if (!this.$isEmpty(this.newCategory)) {
         this.selectedCategory = this.selectedCategory + "." + this.newCategory;
         this.$store.commit("buildCategory", this.selectedCategory);
+        this.newCategory = "";
       } else {
         this.selectedCategory = "";
       }
@@ -185,6 +186,7 @@ export default {
     },
     selectCategory(categorypath) {
       this.selectedCategory = categorypath;
+      // this.$refs.catTree.setChecked(categorypath);
     },
     setElemData(elem) {
       if (this.rootPath(elem) === "in") {
