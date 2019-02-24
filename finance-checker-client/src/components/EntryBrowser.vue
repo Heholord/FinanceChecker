@@ -1,26 +1,47 @@
 <template>
-  <el-collapse class="collapse">
-    <el-collapse-item
-      v-for="entryKey in Object.keys(entries)"
-      :key="entryKey"
-      :title="entryKey"
-      :name="entryKey"
+  <div>
+    <el-dialog
+      v-if="shouldUse"
+      title="I found a similar entry"
+      :visible.sync="editEntry"
+      width="50%"
+      center
     >
-      <el-table :span-method="objectSpanMethod" :data="join(entries[entryKey])">
-        <el-table-column prop="day" label="Day" width="50"></el-table-column>
-        <el-table-column prop="info" label="Info" width="300"></el-table-column>
-        <el-table-column prop="amount" label="Value" width="120"></el-table-column>
-        <el-table-column prop="category" label="Special Category" width="150"></el-table-column>
-        <el-table-column label="Operations" width="120">
-          <!-- eslint-disable-next-line vue/no-unused-vars -->
-          <template slot-scope="scope">
-            <el-button type="text" size="small">Detail</el-button>
-            <el-button type="text" size="small">Edit</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-collapse-item>
-  </el-collapse>
+      <span>
+        The entry {{activeEntry.info}} has similarities with a categorized entry {{shouldUse.elem}} ({{shouldUse.similarity}}% similarity). Sould the new entry be placed in path
+        <el-tag type="info">{{shouldUse.categoryPath.split(".").join(" > ")}}</el-tag>as well?
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="use(false)">No</el-button>
+        <el-button type="primary" @click="use(true)">Yes</el-button>
+      </span>
+    </el-dialog>
+    <el-collapse class="collapse">
+      <el-collapse-item
+        v-for="entryKey in Object.keys(entries)"
+        :key="entryKey"
+        :title="entryKey"
+        :name="entryKey"
+      >
+        <el-table :span-method="objectSpanMethod" :data="join(entries[entryKey])">
+          <el-table-column prop="day" label="Day" width="50"></el-table-column>
+          <el-table-column prop="info" label="Info" width="300"></el-table-column>
+          <el-table-column prop="amount" label="Value" width="120"></el-table-column>
+          <el-table-column prop="category" label="Special Category" width="150"></el-table-column>
+          <el-table-column label="Operations" width="200">
+            <template slot-scope="scope">
+              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)"
+              >Delete</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
 </template>
 
 
@@ -29,7 +50,11 @@ import { join } from "@/plugin/utils";
 export default {
   components: {},
   name: "EntryBrowser",
-  props: ["entries"],
+  props: {
+    entries: {
+      type: Object
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       this.$emit("loaded");
@@ -37,7 +62,19 @@ export default {
       // console.log("entry browser mounted");
     });
   },
+  computed: {
+    getEntries() {
+      if (this.$isEmpty(this.entries)) {
+      }
+    },
+    isEditable() {
+      if (this.$isEmpty(this.entries)) {
+        return false;
+      }
+    }
+  },
   methods: {
+    handleEdit(index, row) {},
     objectSpanMethod({ row, columnIndex }) {
       if (columnIndex === 0) {
         const dayEntry = this.isFirst(row);

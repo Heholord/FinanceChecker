@@ -2,7 +2,15 @@
   <div class="management">
     <!-- TODO  
        custom parsing,
-       html and/or json (make hirachy clear)
+       html and/or json (make hirachy clear) 
+        desicion component for:
+          -> upload existing data
+            -> add new data
+              -> entry browser, category browser, ect
+            -> entry browser, category browser, ect
+          -> upload bank data (html, csv)
+            -> usual flow
+
        options(delete, add, modify, special category) in entity view 
        make a finish page (with nice animations)
        jump to finish page option when store data and category exits
