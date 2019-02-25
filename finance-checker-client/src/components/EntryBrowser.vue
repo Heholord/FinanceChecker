@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog
+    <!-- <el-dialog
       v-if="shouldUse"
       title="I found a similar entry"
       :visible.sync="editEntry"
@@ -15,20 +15,21 @@
         <el-button @click="use(false)">No</el-button>
         <el-button type="primary" @click="use(true)">Yes</el-button>
       </span>
-    </el-dialog>
+    </el-dialog>-->
     <el-collapse class="collapse">
       <el-collapse-item
-        v-for="entryKey in Object.keys(entries)"
+        class="collapse-item"
+        v-for="entryKey in Object.keys(getEntries)"
         :key="entryKey"
         :title="entryKey"
         :name="entryKey"
       >
-        <el-table :span-method="objectSpanMethod" :data="join(entries[entryKey])">
+        <el-table class="table" :span-method="objectSpanMethod" :data="join(getEntries[entryKey])">
           <el-table-column prop="day" label="Day" width="50"></el-table-column>
           <el-table-column prop="info" label="Info" width="300"></el-table-column>
           <el-table-column prop="amount" label="Value" width="120"></el-table-column>
           <el-table-column prop="category" label="Special Category" width="150"></el-table-column>
-          <el-table-column label="Operations" width="200">
+          <el-table-column v-if="isEditable" label="Operations" align="right" width="200">
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
               <el-button
@@ -47,11 +48,16 @@
 
 <script>
 import { join } from "@/plugin/utils";
+import { mapGetters } from "vuex";
+
 export default {
   components: {},
   name: "EntryBrowser",
   props: {
     entries: {
+      default: () => {
+        return {};
+      },
       type: Object
     }
   },
@@ -64,17 +70,19 @@ export default {
   },
   computed: {
     getEntries() {
-      if (this.$isEmpty(this.entries)) {
+      if (!this.$isEmpty(this.entries)) {
+        return this.entries;
+      } else {
+        return this.storeEntries;
       }
     },
+    ...mapGetters({ storeEntries: "data" }),
     isEditable() {
-      if (this.$isEmpty(this.entries)) {
-        return false;
-      }
+      return this.$isEmpty(this.entries);
     }
   },
   methods: {
-    handleEdit(index, row) {},
+    // handleEdit(index, row) {},
     objectSpanMethod({ row, columnIndex }) {
       if (columnIndex === 0) {
         const dayEntry = this.isFirst(row);
@@ -121,5 +129,11 @@ export default {
 <style lang="scss">
 .collapse {
   min-width: 780px;
+  .collapse-item {
+    .table {
+      margin-top: 20px;
+      margin-left: 30px;
+    }
+  }
 }
 </style>

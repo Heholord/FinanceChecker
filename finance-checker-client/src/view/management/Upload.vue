@@ -32,7 +32,7 @@
         <h3>
           <i class="el-icon-info" style="margin-right:15px;"/>Optional
         </h3>
-        <entry-browser v-loading="loading" :entries="entries" @next="allowNextStep"/>
+        <entry-browser v-loading="loading" @next="allowNextStep"/>
         <el-button
           class="jump-down"
           icon="el-icon-arrow-down"
