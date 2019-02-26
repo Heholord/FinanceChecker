@@ -17,13 +17,10 @@
       rework utils (maybe in plugin)
     -->
     <div class="github-footer">
+      <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
       <p>
         <a href="https://github.com/Heholord/FinanceChecker">
-          This project is open source on
-          <img
-            src="@/assets/GitHub-Mark-Light-32px.png"
-            class="image"
-          >
+          This project is open source on GitHub.
           Check it out and contribute if you please
         </a>
       </p>
@@ -97,26 +94,33 @@ body {
       background: #121621;
       color: #ecedee;
       width: 100%;
-      height: 60px;
+      height: 70px;
       box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
-      a {
-        transition: font-size 0.3s ease, text-shadow 0.3s ease;
-        line-height: 2;
-        img {
-          margin: 0 4px;
+      p {
+        margin-top: 35px;
+        a {
+          color: white;
+          text-decoration: none;
+          transition: font-size 0.3s ease, text-shadow 0.3s ease;
+          line-height: 2;
+          &:hover {
+            text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.8);
+          }
         }
+      }
+      img {
+        position: absolute;
+        top: -35px;
+        margin: 0px 4px;
+        background-color: #121621;
+        border-radius: 50%;
+        border: solid #121621 5px;
+        box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
       }
 
       &:hover {
         a {
           font-size: 17px;
-        }
-      }
-      a {
-        color: white;
-        text-decoration: none;
-        &:hover {
-          text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.8);
         }
       }
     }
