@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="entrybrowser">
     <!-- <el-dialog
       v-if="shouldUse"
       title="I found a similar entry"
@@ -16,6 +16,13 @@
         <el-button type="primary" @click="use(true)">Yes</el-button>
       </span>
     </el-dialog>-->
+    <el-button
+      class="jump-down"
+      icon="el-icon-arrow-down"
+      plain
+      circle
+      @click="scrollMeTo('navctrl')"
+    ></el-button>
     <el-collapse class="collapse">
       <el-collapse-item
         class="collapse-item"
@@ -127,13 +134,22 @@ export default {
 </script>
 
 <style lang="scss">
-.collapse {
-  min-width: 780px;
-  .collapse-item {
-    .table {
-      margin-top: 20px;
-      margin-left: 30px;
+.entrybrowser {
+  overflow-y: scroll;
+  .collapse {
+    min-width: 780px;
+    .collapse-item {
+      .table {
+        margin-top: 20px;
+        margin-left: 30px;
+      }
     }
+  }
+  .jump-down {
+    position: sticky;
+    top: 10px;
+    float: right;
+    margin: 20px;
   }
 }
 </style>

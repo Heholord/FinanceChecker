@@ -33,13 +33,6 @@
           <i class="el-icon-info" style="margin-right:15px;"/>Optional
         </h3>
         <entry-browser v-loading="loading" @next="allowNextStep"/>
-        <el-button
-          class="jump-down"
-          icon="el-icon-arrow-down"
-          plain
-          circle
-          @click="scrollMeTo('navctrl')"
-        ></el-button>
       </div>
       <div class="step" v-else-if="activeStep === 3">
         <entries-to-category
@@ -190,7 +183,9 @@ export default {
 
 <style lang="scss">
 .uploader {
-  display: block;
+  box-sizing: border-box;
+  width: 100%;
+
   .navigation-control {
     display: grid;
     grid-template-areas: "left . . right";
@@ -214,28 +209,21 @@ export default {
       margin: auto;
     }
   }
+
   .stepContainer {
     justify-content: center;
     align-content: center;
     display: flex;
-    min-height: 300px;
+    height: 100%;
 
     .step {
       margin: auto;
-      .jump-down {
-        position: fixed;
-        right: 250px;
-        top: 300px;
-      }
     }
   }
   .split-elem {
     justify-self: center;
     align-self: center;
     margin: auto;
-  }
-  [v-cloak] {
-    display: none;
   }
 }
 </style>

@@ -41,3 +41,7 @@ export default {
   components: { RootNav, Upload, Download, QuickUpload }
 };
 </script>
+
+<style lang="scss">
+</style>
+

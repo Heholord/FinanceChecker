@@ -7,6 +7,9 @@
     
 <style lang="scss">
 .master-menu {
+  position: sticky;
+  top: 0px;
   margin-bottom: 30px;
+  z-index: 3;
 }
 </style>

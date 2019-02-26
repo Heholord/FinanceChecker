@@ -19,10 +19,9 @@
     <div class="github-footer">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
       <p>
-        <a href="https://github.com/Heholord/FinanceChecker">
-          This project is open source on GitHub.
-          Check it out and contribute if you please
-        </a>
+        <a
+          href="https://github.com/Heholord/FinanceChecker"
+        >This project is open source on GitHub. Check it out and contribute if you please</a>
       </p>
     </div>
   </div>
@@ -43,6 +42,14 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0px;
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -70,6 +77,12 @@ body {
       }
     }
 
+    .tabs {
+      height: 75vh;
+      overflow: auto;
+      // overflow-y: scroll;
+    }
+
     .split {
       display: grid;
       width: 100%;
@@ -82,10 +95,10 @@ body {
     }
 
     .github-banner {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      z-index: 3;
+      z-index: 10;
     }
 
     .github-footer {
