@@ -135,6 +135,7 @@ export default {
 
 <style lang="scss">
 .entrybrowser {
+  height: 50vh;
   overflow-y: scroll;
   .collapse {
     min-width: 780px;

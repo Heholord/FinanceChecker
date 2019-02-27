@@ -9,7 +9,7 @@
 .master-menu {
   position: sticky;
   top: 0px;
-  margin-bottom: 30px;
-  z-index: 3;
+  margin-bottom: 15px;
+  z-index: 10;
 }
 </style>

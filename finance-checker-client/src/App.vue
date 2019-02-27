@@ -72,15 +72,20 @@ body {
           border-bottom: 2px solid #9ec0e4;
         }
       }
-      & + .tabs {
-        margin: 50px;
-      }
     }
 
-    .tabs {
+    ul.master-menu + .tabs {
+      box-sizing: border-box;
+      margin: 30px;
       height: 75vh;
-      overflow: auto;
-      // overflow-y: scroll;
+      > .el-tabs__content {
+        height: 100%;
+        > div[role="tabpanel"] {
+          height: 100%;
+          overflow: auto;
+          // overflow-y: scroll;
+        }
+      }
     }
 
     .split {
@@ -98,12 +103,13 @@ body {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 10;
+      z-index: 11;
     }
 
     .github-footer {
       position: fixed;
       bottom: 0;
+      z-index: 10;
       background: #121621;
       color: #ecedee;
       width: 100%;
