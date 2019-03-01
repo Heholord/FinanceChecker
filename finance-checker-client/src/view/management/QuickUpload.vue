@@ -58,9 +58,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .uploader {
-  display: block;
+  justify-content: center;
+  align-content: center;
+  display: flex;
   a {
     margin: 10px;
     cursor: pointer;

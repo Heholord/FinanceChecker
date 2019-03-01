@@ -214,7 +214,8 @@ export default {
     justify-content: center;
     align-content: center;
     display: flex;
-    height: 100%;
+    height: 50%;
+    margin: 10px;
 
     .step {
       margin: auto;

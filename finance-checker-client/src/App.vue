@@ -76,13 +76,16 @@ body {
 
     ul.master-menu + .tabs {
       box-sizing: border-box;
-      margin: 30px;
-      height: 75vh;
+      margin: 60px 30px 30px 30px;
+      height: 70vh;
       > .el-tabs__content {
-        height: 100%;
+        height: 65vh;
         > div[role="tabpanel"] {
           height: 100%;
-          overflow: auto;
+          & > * {
+            height: 100%;
+            overflow: auto;
+          }
           // overflow-y: scroll;
         }
       }
@@ -113,7 +116,7 @@ body {
       background: #121621;
       color: #ecedee;
       width: 100%;
-      height: 70px;
+      height: 10vh;
       box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
       p {
         margin-top: 35px;
@@ -146,6 +149,10 @@ body {
   }
   .el-tag {
     margin: 0 8px;
+  }
+  .full {
+    height: 100%;
+    width: 100%;
   }
 }
 </style>
