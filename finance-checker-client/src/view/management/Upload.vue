@@ -189,7 +189,7 @@ export default {
   .navigation-control {
     display: grid;
     grid-template-areas: "left . . right";
-    margin: 50px 100px;
+    margin: 50px 100px 0px 100px;
     justify-content: space-between;
 
     .stepButton.el-button {

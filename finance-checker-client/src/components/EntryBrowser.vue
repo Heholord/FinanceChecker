@@ -107,8 +107,9 @@ export default {
       }
     },
     isFirst(row) {
-      if (this.isEqualEntry(this.entries[row.month][row.day][0], row)) {
-        return this.entries[row.month][row.day];
+      const entries = this.getEntries;
+      if (this.isEqualEntry(entries[row.month][row.day][0], row)) {
+        return entries[row.month][row.day];
       }
       return false;
     },
