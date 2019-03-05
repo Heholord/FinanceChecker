@@ -53,10 +53,8 @@ export default {
     height: 80%;
     width: 80%;
     margin: auto;
-    .box-card {
+    .el-card.box {
       height: 100%;
-    }
-    .box {
       border-radius: 20px;
     }
   }
@@ -74,21 +72,6 @@ export default {
   .bottom {
     margin-top: 13px;
     line-height: 12px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-
-  .clearfix:after {
-    clear: both;
   }
 }
 </style>

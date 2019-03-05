@@ -14,7 +14,8 @@
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
       think about the height of all views what should be the default height?
-      rework utils (maybe in plugin)
+      rework utils (maybe in plugin),
+      make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
     -->
     <div class="github-footer">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
@@ -153,6 +154,15 @@ body {
   .full {
     height: 100%;
     width: 100%;
+  }
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+
+  .clearfix:after {
+    clear: both;
   }
 }
 </style>

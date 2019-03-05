@@ -55,7 +55,9 @@
             ></switchable-line-chart>
             <div class="right"></div>
           </div>
-          <h1 v-if="noData">No data available</h1>
+          <div v-if="noData">
+            <choices :choices="choices" title="You didn't give me any data jet"></choices>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -65,11 +67,12 @@
 <script>
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import DataDownloader from "@/components/DataDownloader";
+import Choices from "@/components/Choices.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Overview",
-  components: { SwitchableLineChart, DataDownloader },
+  components: { SwitchableLineChart, DataDownloader, Choices },
   data() {
     return {
       noData: true,
@@ -81,7 +84,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["disabledDates"])
+    ...mapGetters(["disabledDates"]),
+    choices() {
+      return [
+        { text: "yes", subtext: "yes really" },
+        { text: "no", subtext: "sure no really" }
+      ];
+    }
   },
   beforeMount: function() {
     this.setData("");
