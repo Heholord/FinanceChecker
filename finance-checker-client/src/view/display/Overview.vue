@@ -56,7 +56,7 @@
             <div class="right"></div>
           </div>
           <div v-if="noData">
-            <choices :choices="choices" title="You didn't give me any data jet"></choices>
+            <choices :choices="choices" title="You haven't uploaded any data yet"></choices>
           </div>
         </el-main>
       </el-container>

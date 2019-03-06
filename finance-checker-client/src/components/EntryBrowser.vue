@@ -34,7 +34,7 @@
         <el-table class="table" :span-method="objectSpanMethod" :data="join(getEntries[entryKey])">
           <el-table-column prop="day" label="Day" width="50"></el-table-column>
           <el-table-column prop="info" label="Info" width="300"></el-table-column>
-          <el-table-column prop="amount" label="Value" width="120"></el-table-column>
+          <el-table-column prop="amount" label="Value" width="120" align="right"></el-table-column>
           <el-table-column prop="category" label="Special Category" width="150"></el-table-column>
           <el-table-column v-if="isEditable" label="Operations" align="right" width="200">
             <template slot-scope="scope">

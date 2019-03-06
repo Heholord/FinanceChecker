@@ -1,15 +1,5 @@
 <template>
   <div id="app">
-    <a class="github-banner" href="https://github.com/Heholord/FinanceChecker">
-      <img
-        width="120"
-        height="120"
-        src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=120%2C120"
-        class="attachment-full size-full"
-        alt="Fork me on GitHub"
-        data-recalc-dims="1"
-      >
-    </a>
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
@@ -101,13 +91,6 @@ body {
 
     .success {
       color: #67c23a;
-    }
-
-    .github-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 11;
     }
 
     .github-footer {

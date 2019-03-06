@@ -9,8 +9,8 @@
           class="table no-margin"
         >
           <el-table-column prop="date" label="Date" width="100"></el-table-column>
-          <el-table-column prop="info" label="Info" width="400"></el-table-column>
-          <el-table-column prop="amount" label="Amount" width="100"></el-table-column>
+          <el-table-column prop="info" label="Info" width="400" align="center"></el-table-column>
+          <el-table-column prop="amount" label="Amount" width="100" align="right"></el-table-column>
         </el-table>
       </div>
     </modal>
