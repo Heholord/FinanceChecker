@@ -1,0 +1,46 @@
+@import "@/variables.scss";
+
+ul.master-menu + .tabs {
+  box-sizing: border-box;
+  margin: 30px 30px 30px 30px;
+  height: $content-height;
+  > .el-tabs__content {
+    height: $content-height;
+    > div[role="tabpanel"] {
+      height: 100%;
+      & > * {
+        height: 100%;
+        overflow: auto;
+      }
+      // overflow-y: scroll;
+    }
+  }
+}
+
+.split {
+  display: grid;
+  width: 100%;
+  grid-template: auto / auto auto;
+  grid-gap: 50px;
+}
+
+.success {
+  color: #67c23a;
+}
+
+.el-tag {
+  margin: 0 8px;
+}
+.full {
+  height: 100%;
+  width: 100%;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}

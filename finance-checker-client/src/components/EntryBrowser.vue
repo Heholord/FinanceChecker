@@ -32,11 +32,28 @@
         :name="entryKey"
       >
         <el-table class="table" :span-method="objectSpanMethod" :data="join(getEntries[entryKey])">
-          <el-table-column prop="day" label="Day" width="50"></el-table-column>
-          <el-table-column prop="info" label="Info" width="300"></el-table-column>
-          <el-table-column prop="amount" label="Value" width="120" align="right"></el-table-column>
-          <el-table-column prop="category" label="Special Category" width="150"></el-table-column>
-          <el-table-column v-if="isEditable" label="Operations" align="right" width="200">
+          <el-table-column prop="day" label="Day" width="50" header-align="center"></el-table-column>
+          <el-table-column prop="info" label="Info" width="330" header-align="center"></el-table-column>
+          <el-table-column
+            prop="category"
+            label="Special Category"
+            width="150"
+            header-align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="amount"
+            label="Value"
+            width="140"
+            align="right"
+            header-align="center"
+          ></el-table-column>
+          <el-table-column
+            v-if="isEditable"
+            label="Operations"
+            align="right"
+            width="150"
+            header-align="center"
+          >
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
               <el-button
@@ -136,10 +153,8 @@ export default {
 
 <style lang="scss">
 .entrybrowser {
-  height: 50vh;
-  overflow-y: scroll;
   .collapse {
-    min-width: 780px;
+    min-width: 500px;
     .collapse-item {
       .table {
         margin-top: 20px;

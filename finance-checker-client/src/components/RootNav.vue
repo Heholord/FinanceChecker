@@ -6,10 +6,23 @@
 </template>
     
 <style lang="scss">
-.master-menu {
+ul.master-menu {
   position: sticky;
   top: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   z-index: 10;
+
+  display: flex;
+  justify-content: space-around;
+  background: #f5f7fa;
+  & > li.el-menu-item {
+    width: 80%;
+    margin: auto;
+
+    &:hover {
+      background-color: #f5f7fa;
+      border-bottom: 2px solid #9ec0e4;
+    }
+  }
 }
 </style>

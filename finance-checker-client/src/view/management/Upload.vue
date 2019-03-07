@@ -182,6 +182,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/variables.scss";
+
 .uploader {
   box-sizing: border-box;
   width: 100%;
@@ -189,7 +191,7 @@ export default {
   .navigation-control {
     display: grid;
     grid-template-areas: "left . . right";
-    margin: 50px 100px 0px 100px;
+    margin: 20px 100px 0px 100px;
     justify-content: space-between;
 
     .stepButton.el-button {
@@ -210,15 +212,20 @@ export default {
     }
   }
 
+  $step-height: $content-height - 30vh;
+
   .stepContainer {
     justify-content: center;
     align-content: center;
     display: flex;
-    height: 50%;
+    height: $step-height;
     margin: 10px;
 
     .step {
       margin: auto;
+      height: $step-height;
+      width: 85%;
+      overflow-y: scroll;
     }
   }
   .split-elem {

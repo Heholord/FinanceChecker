@@ -29,6 +29,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "base.scss";
+
 body {
   width: 100%;
   height: 100vh;
@@ -50,49 +52,6 @@ body {
     background-color: #fcfcfc;
     height: 100%;
 
-    ul.master-menu {
-      display: flex;
-      justify-content: space-around;
-      background: #f5f7fa;
-      & > li.el-menu-item {
-        width: 80%;
-        margin: auto;
-
-        &:hover {
-          background-color: #f5f7fa;
-          border-bottom: 2px solid #9ec0e4;
-        }
-      }
-    }
-
-    ul.master-menu + .tabs {
-      box-sizing: border-box;
-      margin: 60px 30px 30px 30px;
-      height: 70vh;
-      > .el-tabs__content {
-        height: 65vh;
-        > div[role="tabpanel"] {
-          height: 100%;
-          & > * {
-            height: 100%;
-            overflow: auto;
-          }
-          // overflow-y: scroll;
-        }
-      }
-    }
-
-    .split {
-      display: grid;
-      width: 100%;
-      grid-template: auto / auto auto;
-      grid-gap: 50px;
-    }
-
-    .success {
-      color: #67c23a;
-    }
-
     .github-footer {
       position: fixed;
       bottom: 0;
@@ -100,10 +59,10 @@ body {
       background: #121621;
       color: #ecedee;
       width: 100%;
-      height: 10vh;
+      height: 8vh;
       box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
       p {
-        margin-top: 35px;
+        margin-top: 30px;
         a {
           color: white;
           text-decoration: none;
@@ -116,8 +75,10 @@ body {
       }
       img {
         position: absolute;
-        top: -35px;
+        top: -25px;
         margin: 0px 4px;
+        width: 60px;
+        height: 60px;
         background-color: #121621;
         border-radius: 50%;
         border: solid #121621 5px;
@@ -130,22 +91,6 @@ body {
         }
       }
     }
-  }
-  .el-tag {
-    margin: 0 8px;
-  }
-  .full {
-    height: 100%;
-    width: 100%;
-  }
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-
-  .clearfix:after {
-    clear: both;
   }
 }
 </style>
