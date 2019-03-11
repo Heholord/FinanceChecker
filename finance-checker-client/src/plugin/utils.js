@@ -419,3 +419,15 @@ export function isValidCat(elem, categoryPath) {
     return true;
   }
 }
+
+export function isEqualEntry(entry, row) {
+  if (
+    entry.month === row.month &&
+    entry.day === row.day &&
+    entry.info === row.info &&
+    entry.amount === row.amount
+  ) {
+    return true;
+  }
+  return false;
+}

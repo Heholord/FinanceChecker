@@ -1,10 +1,14 @@
 <template>
   <div class="uploader">
     <el-steps direction="vertical" class="step-indicator" :active="activeStep" simple>
-      <el-step title="Choose a bank" icon="el-icon-tickets"></el-step>
-      <el-step title="Upload data" icon="el-icon-upload"></el-step>
-      <el-step title="Edit entries" icon="el-icon-edit"></el-step>
-      <el-step title="Categorize data" icon="el-icon-menu"></el-step>
+      <el-step v-if="activeStep === 0" title="Choose a bank" icon="el-icon-tickets"></el-step>
+      <el-step v-else icon="el-icon-tickets"></el-step>
+      <el-step v-if="activeStep === 1" title="Upload data" icon="el-icon-upload"></el-step>
+      <el-step v-else icon="el-icon-upload"></el-step>
+      <el-step v-if="activeStep === 2" title="Edit entries" icon="el-icon-edit"></el-step>
+      <el-step v-else icon="el-icon-edit"></el-step>
+      <el-step v-if="activeStep === 3" title="Categorize data" icon="el-icon-menu"></el-step>
+      <el-step v-else icon="el-icon-menu"></el-step>
     </el-steps>
 
     <div class="stepContainer" v-loading="loading">

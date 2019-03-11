@@ -125,9 +125,32 @@ const store = new Vuex.Store({
     setDataEndDate(state, dataEndDate) {
       state.dataEndDate = dataEndDate;
     },
-    updateEntriy(state, entry) {
-      state;
-      entry;
+    /**
+     * Edit entry. If oldEntry and newEntry are given, then an update is initiated.
+     * If only oldEntry is given then the corresponding entry will be deleted.
+     * If only a newEntry is given then the entry will be added to the store.
+     * @param {object} param
+     * - oldEntry
+     * - newEntry
+     */
+    updateEntriy(state, { oldEntry, newEntry }) {
+      if (oldEntry) {
+        if (newEntry) {
+          // update
+          updateElem(
+            state.data[oldEntry.month][oldEntry.day],
+            state.data,
+            oldEntry,
+            newEntry
+          );
+        } else {
+          // delete
+          deleteElem(state.data[oldEntry.month][oldEntry.day], oldEntry);
+        }
+      } else if (newEntry) {
+        //insert
+        insertElem(state.data, newEntry);
+      }
     },
     buildCategory(state, categoryPath) {
       const parts = categoryPath.split(".");
@@ -152,8 +175,7 @@ const store = new Vuex.Store({
         categories = categories[part];
       }
     },
-    addToCategory(state, params) {
-      let { elem, categoryPath } = params;
+    addToCategory(state, { elem, categoryPath }) {
       const parts = categoryPath.split("."); //todo substitute with common method (check resolveCategory function)
       let categories = state.categories;
       for (let idx in parts) {
@@ -251,6 +273,26 @@ function cleanStringHead(str) {
     return str.replace(".", "").trim();
   }
   return str;
+}
+
+function updateElem(list, data, oldValue, newValue) {
+  if (oldValue.month === newValue.month && oldValue.day === newValue.day) {
+    list.splice(list.indexOf(oldValue), 1, newValue);
+  } else {
+    deleteElem(list, oldValue);
+    insertElem(data, newValue);
+  }
+}
+
+function deleteElem(list, oldValue) {
+  list.splice(list.indexOf(oldValue), 1);
+}
+
+function insertElem(data, newValue) {
+  if (!data[newValue.month]) data[newValue.month] = {};
+  if (!data[newValue.month][newValue.day])
+    data[newValue.month][newValue.day] = [];
+  data[newValue.month][newValue.day].push(newValue);
 }
 
 export default store;

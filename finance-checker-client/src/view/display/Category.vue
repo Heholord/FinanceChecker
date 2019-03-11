@@ -39,7 +39,7 @@
             v-if="dateType==='month'"
             v-model="displayDate"
             type="month"
-            placeholder="Pick a year"
+            placeholder="Pick a month"
             format="yyyy-MM"
             value-format="MMMMyyyy"
             ref="monthPicker"

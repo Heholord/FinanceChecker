@@ -1,21 +1,24 @@
 <template>
   <div class="entrybrowser">
-    <!-- <el-dialog
-      v-if="shouldUse"
-      title="I found a similar entry"
-      :visible.sync="editEntry"
-      width="50%"
-      center
-    >
-      <span>
-        The entry {{activeEntry.info}} has similarities with a categorized entry {{shouldUse.elem}} ({{shouldUse.similarity}}% similarity). Sould the new entry be placed in path
-        <el-tag type="info">{{shouldUse.categoryPath.split(".").join(" > ")}}</el-tag>as well?
+    <el-dialog v-if="editEntry" :visible.sync="editEntry" width="50%" center>
+      <span slot="title">
+        <i class="el-icon-edit" style="margin-right:15px;"/>
+        {{selectedEntity.new.title}}
       </span>
+      <div class="edit-elem">
+        <input v-model="selectedEntity.new.info">
+        <el-date-picker
+          v-model="selectedEntity.new.date"
+          placeholder="Pick a day"
+          format="yyyy-MMM-dd"
+          value-format="yyyy-MM-dd"
+        ></el-date-picker>
+      </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="use(false)">No</el-button>
-        <el-button type="primary" @click="use(true)">Yes</el-button>
+        <el-button @click="editEntry = false">cancle</el-button>
+        <el-button type="primary" @click="updateEntity()">Update</el-button>
       </span>
-    </el-dialog>-->
+    </el-dialog>
     <el-button
       class="jump-down"
       icon="el-icon-arrow-down"
@@ -55,12 +58,8 @@
             header-align="center"
           >
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
-              >Delete</el-button>
+              <el-button size="mini" @click="handleEdit(scope.row)">Edit</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -71,7 +70,7 @@
 
 
 <script>
-import { join } from "@/plugin/utils";
+import { join, clone, isEqualEntry } from "@/plugin/utils";
 import { mapGetters } from "vuex";
 
 export default {
@@ -84,6 +83,14 @@ export default {
       },
       type: Object
     }
+  },
+  data() {
+    return {
+      selectedEntity: {
+        old: undefined,
+        new: undefined
+      }
+    };
   },
   mounted() {
     this.$nextTick(() => {
@@ -100,13 +107,52 @@ export default {
         return this.storeEntries;
       }
     },
+    editEntry: {
+      get: function() {
+        return this.selectedEntity.old !== undefined;
+      },
+      set: function(newValue) {
+        if (newValue === false) {
+          this.selectedEntity.old = undefined;
+          this.selectedEntity.new = undefined;
+        }
+      }
+    },
     ...mapGetters({ storeEntries: "data" }),
     isEditable() {
       return this.$isEmpty(this.entries);
     }
   },
   methods: {
-    // handleEdit(index, row) {},
+    updateEntity() {
+      let newEntry = clone(this.selectedEntity.new);
+      let date = this.$moment(this.selectedEntity.new.date, "YYYY-MM-DD");
+      newEntry.month = date.format("MMMMYYYY");
+      newEntry.day = date.format("D");
+      delete newEntry.date;
+      delete newEntry.title;
+
+      this.$store.commit("updateEntriy", {
+        oldEntry: this.selectedEntity.old,
+        newEntry: newEntry
+      });
+      this.editEntry = false;
+    },
+    handleEdit(row) {
+      this.selectedEntity.old = row;
+      this.selectedEntity.new = clone(row);
+      this.selectedEntity.new.date = this.$moment(
+        row.month + row.day,
+        "MMMMYYYYD"
+      ).format("YYYY-MM-DD");
+      this.selectedEntity.new.title =
+        this.selectedEntity.new.date + " " + row.info;
+    },
+    handleDelete(row) {
+      this.$store.commit("updateEntriy", {
+        oldEntry: row
+      });
+    },
     objectSpanMethod({ row, columnIndex }) {
       if (columnIndex === 0) {
         const dayEntry = this.isFirst(row);
@@ -125,28 +171,14 @@ export default {
     },
     isFirst(row) {
       const entries = this.getEntries;
-      if (this.isEqualEntry(entries[row.month][row.day][0], row)) {
+      if (isEqualEntry(entries[row.month][row.day][0], row)) {
         return entries[row.month][row.day];
-      }
-      return false;
-    },
-    isEqualEntry(entry, row) {
-      if (
-        entry.month === row.month &&
-        entry.day === row.day &&
-        entry.info === row.info &&
-        entry.amount === row.amount
-      ) {
-        return true;
       }
       return false;
     },
     join(obj) {
       return join(obj);
     }
-  },
-  data() {
-    return {};
   }
 };
 </script>

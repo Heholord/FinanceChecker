@@ -5,9 +5,12 @@ ul.master-menu + .tabs {
   margin: 30px 30px 30px 30px;
   height: $content-height;
   > .el-tabs__content {
-    height: $content-height;
+    height: $content-height - 5vh;
+    overflow-x: auto;
     > div[role="tabpanel"] {
       height: 100%;
+      min-width: 940px;
+
       & > * {
         height: 100%;
         overflow: auto;
