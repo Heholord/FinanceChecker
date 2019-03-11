@@ -88,22 +88,13 @@ const store = new Vuex.Store({
       forEachElem(data, (month, day, elem) => {
         let workElem = clone(elem);
         workElem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
-        if (!workElem.category) {
-          // for normal categories
-          const cat = getCorrespondingCategory(
-            workElem,
-            categoryPath,
-            categoryList
-          );
-          if (cat) {
-            returnValue = addToCategory(returnValue, cat, date, workElem);
-          }
-        } else if (
-          workElem.category &&
-          workElem.category.startsWith(categoryPath)
-        ) {
-          // for special categories
-          const cat = getCorrespondingCategory(workElem, categoryPath);
+        // for normal categories
+        const cat = getCorrespondingCategory(
+          workElem,
+          categoryPath,
+          categoryList
+        );
+        if (cat) {
           returnValue = addToCategory(returnValue, cat, date, workElem);
         }
       });
@@ -133,6 +124,10 @@ const store = new Vuex.Store({
     },
     setDataEndDate(state, dataEndDate) {
       state.dataEndDate = dataEndDate;
+    },
+    updateEntriy(state, entry) {
+      state;
+      entry;
     },
     buildCategory(state, categoryPath) {
       const parts = categoryPath.split(".");
@@ -222,12 +217,18 @@ const store = new Vuex.Store({
   }
 });
 
+/**
+ * Given a category tree and an element, this function returns the category to which the element belongs to.
+ * If the element has a special category configured then the root of this category will be returned
+ * TODO: Document further and correctly
+ * @param {*} elem
+ * @param {*} categoryPath
+ * @param {*} categoryList
+ */
 function getCorrespondingCategory(elem, categoryPath, categoryList) {
-  if (elem.category) {
+  if (elem.category && elem.category.startsWith(categoryPath)) {
     let str = elem.category.replace(categoryPath, "");
-    if (str.startsWith(".")) {
-      str = str.replace(".", "");
-    }
+    str = cleanStringHead(str);
     const firstPart = firstPartOfCategory(str);
     return isEmpty(firstPart) ? "all" : firstPart; //if it is leave category (i.e there are no subcategories), make a new subcat
   } else {
@@ -243,6 +244,13 @@ function getCorrespondingCategory(elem, categoryPath, categoryList) {
     }
   }
   return false;
+}
+
+function cleanStringHead(str) {
+  if (str.startsWith(".")) {
+    return str.replace(".", "").trim();
+  }
+  return str;
 }
 
 export default store;
