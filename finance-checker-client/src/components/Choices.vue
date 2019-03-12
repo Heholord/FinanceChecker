@@ -1,18 +1,17 @@
 <template>
   <div class="choices">
-    <h1>{{title}}</h1>
+    <h1 v-if="title">{{title}}</h1>
     <div class="choice-container">
-      <button @click="$emit('selected', choice)" v-for="choice in choices" :key="choice">
-        <el-card class="box">
-          <img v-if="choice.image" :src="getImage(choice)" class="image">
-          <div style="margin-top: 20px; padding: 14px;">
-            <span>{{choice.text}}</span>
-            <div class="bottom clearfix">
-              <span class="sub">{{choice.subtext}}</span>
-            </div>
+      <el-card v-for="choice in choices" :key="choice.title" :class="{big:big}" class="box">
+        <img v-if="choice.image" :src="getImage(choice)" class="image">
+        <div class="textarea">
+          <span>{{choice.text}}</span>
+          <div class="bottom clearfix">
+            <span class="sub">{{choice.subtext}}</span>
           </div>
-        </el-card>
-      </button>
+        </div>
+        <button @click="$emit('select', choice)" v-if="!choice.info"/>
+      </el-card>
     </div>
   </div>
 </template>
@@ -29,39 +28,80 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    big: {
+      type: Boolean,
+      default: false
     }
   },
-  computed: {
+  methods: {
     getImage(choice) {
-      return "@/assets/" + choice.image + ".png";
+      return require("@/assets/" + choice.image);
     }
   }
 };
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 .choices {
   .choice-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    button {
-      justify-self: center;
-      align-self: center;
-      background: none;
-      border: none;
-      width: 200px;
-      height: 200px;
+    > .box {
+      border-radius: 15px;
+      height: 100%;
+      width: 300px;
+      height: 300px;
       max-height: 500px;
       max-width: 500px;
-      margin: 0;
-      .el-card.box {
+      margin: 10px;
+      padding: 0;
+
+      &.big {
+        width: 500px;
+        height: 500px;
+        margin: 25px;
+
+        .image {
+          width: 500px;
+          height: 333px;
+        }
+      }
+
+      & > .el-card__body {
+        display: flex;
+        flex-wrap: wrap;
         height: 100%;
-        border-radius: 20px;
+        padding: 0px;
+
+        .textarea {
+          flex: 1 1 auto;
+          display: grid;
+          grid-template-rows: auto 1fr 1fr auto;
+          > span {
+            grid-row: 2;
+          }
+          > div.bottom {
+            grid-row: 3;
+          }
+        }
+
+        > button {
+          position: absolute;
+          background: none;
+          border: none;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+        }
       }
     }
+
     .sub {
       margin-top: 20px;
       font-size: 13px;
@@ -69,11 +109,13 @@ export default {
     }
 
     .image {
-      max-width: 300px;
-      max-height: 300px;
+      width: 300px;
+      height: 200px;
     }
 
     .bottom {
+      position: relative;
+      bottom: 10px;
       margin-top: 13px;
       line-height: 12px;
     }

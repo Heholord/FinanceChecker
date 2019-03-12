@@ -14,7 +14,7 @@
         </el-table>
       </div>
     </modal>
-    <el-container style="height: 100%; border: 1px solid #eee">
+    <el-container>
       <el-aside>
         <div>
           <p>

@@ -1,6 +1,6 @@
 <template>
   <div class="contentView">
-    <el-container style="height: 100%; border: 1px solid #eee">
+    <el-container>
       <el-aside>
         <div>
           <p>
@@ -87,8 +87,12 @@ export default {
     ...mapGetters(["disabledDates"]),
     choices() {
       return [
-        { text: "yes", subtext: "yes really" },
-        { text: "no", subtext: "sure no really" }
+        {
+          text: "Click here",
+          subtext: "and I will send you to the upload page",
+          image: "upload.jpg"
+        },
+        { text: "no", subtext: "sure no really", info: true }
       ];
     }
   },

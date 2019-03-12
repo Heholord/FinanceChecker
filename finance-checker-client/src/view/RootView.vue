@@ -1,8 +1,9 @@
 <template>
-  <div class="root split">
-    <button @click="routeTo('/manage')">
+  <div class="root">
+    <choices :choices="choices" big @select="execute"></choices>
+    <!-- <button @click="routeTo('/manage')">
       <el-card class="box">
-        <img src="@/assets/inquire.png" class="image">
+        <img src="@/assets/calculate.png" class="image">
         <div style="margin-top: 20px; padding: 14px;">
           <span>Manage data</span>
           <div class="bottom clearfix">
@@ -13,7 +14,7 @@
     </button>
     <button @click="routeTo('/visualize')">
       <el-card class="box">
-        <img src="@/assets/display.jpg" class="image">
+        <img src="@/assets/euro.jpg" class="image">
         <div style="margin-top: 20px; padding: 14px;">
           <span>View data</span>
           <div class="bottom clearfix">
@@ -21,57 +22,47 @@
           </div>
         </div>
       </el-card>
-    </button>
+    </button>-->
   </div>
 </template>
 
 <script>
+import Choices from "@/components/Choices.vue";
+
 export default {
   name: "RootView",
-  components: {},
+  components: { Choices },
   data() {
-    return {};
+    return {
+      choices: [
+        {
+          text: "Manage your data",
+          subtext: "and start your journey",
+          image: "calculate.png",
+          route: "/manage"
+        },
+        {
+          text: "View what you have",
+          subtext: "and enjoy your growth",
+          image: "euro.jpg",
+          route: "/visualize"
+        }
+      ]
+    };
   },
   methods: {
     routeTo(route) {
       this.$router.push(route);
+    },
+    execute(choice) {
+      this.routeTo(choice.route);
     }
   }
 };
 </script>
 
 <style lang="scss">
-.root.split {
-  position: relative;
-  background-color: #f5f7fa;
-  height: 100%;
-  button {
-    justify-self: center;
-    align-self: center;
-    background: none;
-    border: none;
-    height: 80%;
-    width: 80%;
-    margin: auto;
-    .el-card.box {
-      height: 100%;
-      border-radius: 20px;
-    }
-  }
-  .sub {
-    margin-top: 20px;
-    font-size: 13px;
-    color: #999;
-  }
-
-  .image {
-    max-width: 300px;
-    max-height: 300px;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
+.root {
+  margin: 50px;
 }
 </style>
