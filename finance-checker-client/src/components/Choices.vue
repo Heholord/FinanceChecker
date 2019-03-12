@@ -72,6 +72,7 @@ export default {
       }
 
       & > .el-card__body {
+        position: relative; // needed 4 button
         display: flex;
         flex-wrap: wrap;
         height: 100%;
