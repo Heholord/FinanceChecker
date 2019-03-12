@@ -89,10 +89,14 @@ export default {
       return [
         {
           text: "Click here",
-          subtext: "and I will send you to the upload page",
+          subtext: "and I will bring you to the upload page",
           image: "upload.jpg"
         },
-        { text: "no", subtext: "sure no really", info: true }
+        {
+          text: "... or stay on this page",
+          subtext: "There is no need to hurry",
+          info: true
+        }
       ];
     }
   },

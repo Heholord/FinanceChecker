@@ -2,7 +2,12 @@
   <div class="choices">
     <h1 v-if="title">{{title}}</h1>
     <div class="choice-container">
-      <el-card v-for="choice in choices" :key="choice.title" :class="{big:big}" class="box">
+      <el-card
+        v-for="choice in choices"
+        :key="choice.title"
+        :class="{big:big, info:choice.info}"
+        class="box"
+      >
         <img v-if="choice.image" :src="getImage(choice)" class="image">
         <div class="textarea">
           <span>{{choice.text}}</span>
@@ -81,7 +86,7 @@ export default {
         .textarea {
           flex: 1 1 auto;
           display: grid;
-          grid-template-rows: auto 1fr 1fr auto;
+          grid-template-rows: 1.3fr 1.1fr 0.8fr 0.8fr;
           > span {
             grid-row: 2;
           }
@@ -100,6 +105,12 @@ export default {
           top: 0;
           left: 0;
         }
+      }
+
+      &.info {
+        background: #fcfcfc;
+        border: dotted 1.8px lightgray;
+        box-shadow: none;
       }
     }
 
