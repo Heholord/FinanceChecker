@@ -17,13 +17,6 @@
     -->
     <root-nav/>
     <el-tabs class="tabs" type="border-card">
-      <el-tab-pane>
-        <span slot="label">
-          <i class="el-icon-upload"></i> Upload
-        </span>
-        <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
-        <router-view></router-view>
-      </el-tab-pane>
       <el-tab-pane v-if="$store.getters.hasData">
         <span slot="label">
           <i class="el-icon-download"></i> Download
@@ -35,6 +28,13 @@
           <i class="el-icon-edit"></i> Edit
         </span>
         <Download/>
+      </el-tab-pane>
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-upload"></i> Upload
+        </span>
+        <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
+        <router-view></router-view>
       </el-tab-pane>
     </el-tabs>
   </div>

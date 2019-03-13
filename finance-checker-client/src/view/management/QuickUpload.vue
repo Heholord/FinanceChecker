@@ -34,8 +34,8 @@ export default {
           delete: true
         },
         {
-          text: "Yeah I did",
-          subtext: "I just wanted to be sure",
+          text: "Yeah, you'r right",
+          subtext: "I just wanted to make sure I did",
           info: true
         }
       ]
