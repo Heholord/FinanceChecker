@@ -16,6 +16,8 @@
         <el-button type="primary" @click="use(true)">Yes</el-button>
       </span>
     </el-dialog>
+    <p v-if="progressClass">You are done :)</p>
+    <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
     <div v-show="!progressClass" class="category-chooser">
       <em>{{elemText}}</em>
       <el-alert
@@ -83,8 +85,6 @@
         >place here</el-button>
       </div>
     </div>
-    <p v-if="progressClass">You are done :)</p>
-    <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
   </div>
 </template>
 
@@ -261,16 +261,26 @@ export default {
 </script>
 
 <style lang="scss">
+$min-width: 250px;
 .assigner {
-  min-width: 600px;
+  box-sizing: border-box;
+  min-width: $min-width;
   & > .category-chooser {
     display: grid;
     grid-template: 1fr 1fr auto 1fr/ 1fr;
     grid-gap: 10px;
-    margin: 50px 0;
+    margin: 10px 0 20px 0px;
+    justify-items: center;
 
     & > * {
       margin: auto;
+    }
+
+    > .el-alert {
+      max-width: 500px;
+      min-width: $min-width;
+      margin: 0 40px;
+      justify-content: center;
     }
 
     .buttons-bar {
@@ -305,6 +315,7 @@ export default {
   }
   .progress {
     grid-area: progress;
+    margin: 20px;
     width: 100%;
   }
 }

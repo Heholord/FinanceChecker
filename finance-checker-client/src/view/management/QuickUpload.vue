@@ -1,35 +1,44 @@
 <template>
-  <div class="uploader" v-loading="loading">
-    <div v-if="$isEmpty(mergeEntries)">
+  <div class="quickupload" v-loading="loading">
+    <div v-if="!$store.getters.hasData">
       <file-uploader
         class="split-elem"
         fileType="json"
         :fileSize="20"
-        text="Drop optional json file here, if you have pre-existing data to merge"
+        text="You can quickdrop an existing data file here if you have one"
         @onFile="setMergeEntries"
       />
     </div>
     <div v-else>
-      Data has been uploaded. Do you want to
-      upload different data?
-      <a
-        @click="mergeEntries={}"
-      >Click here</a>
+      <choices :choices="choices" @select="execute" title="Didn't you give me some data already?"></choices>
     </div>
   </div>
 </template>
 
 <script>
 import FileUploader from "@/components/FileUploader";
+import Choices from "@/components/Choices";
 import { mapGetters } from "vuex";
 
 export default {
   name: "QuickUpload",
-  components: { FileUploader },
+  components: { FileUploader, Choices },
   data() {
     return {
       loading: false,
-      mergeEntries: {}
+      choices: [
+        {
+          text: "I want to upload some other data",
+          subtext: "and my old data can be deleted",
+          image: "caution.jpg",
+          delete: true
+        },
+        {
+          text: "Yeah I did",
+          subtext: "I just wanted to be sure",
+          info: true
+        }
+      ]
     };
   },
   computed: {
@@ -38,10 +47,15 @@ export default {
   methods: {
     setMergeEntries(file) {
       this.setFile(file, content => {
-        this.mergeEntries = JSON.parse(content);
-        this.$store.dispatch("setData", this.mergeEntries).then(() => {
+        let mergeEntries = JSON.parse(content);
+        this.updateStore(mergeEntries, () => {
           this.$router.push("/visualize");
         });
+      });
+    },
+    updateStore(data, doneAction) {
+      this.$store.dispatch("setData", data).then(() => {
+        if (doneAction) doneAction();
       });
     },
     setFile(file, contentCall) {
@@ -53,13 +67,16 @@ export default {
         this.loading = false;
       };
       reader.readAsText(file);
+    },
+    execute(choice) {
+      if (choice.delete) this.updateStore({ data: {}, categories: {} });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.uploader {
+.quickupload {
   justify-content: center;
   align-content: center;
   display: flex;

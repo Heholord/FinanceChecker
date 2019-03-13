@@ -11,7 +11,7 @@ import vmodal from "vue-js-modal";
 import store from "./plugin/store";
 
 Vue.use(Element, { locale: elemLocale });
-Vue.use(CategoryPlugin);
+Vue.use(CategoryPlugin, { router });
 Vue.use(moment);
 Vue.use(vmodal);
 

@@ -1,7 +1,7 @@
 <template>
   <div class="categories">
     <el-button v-if="categories.length > 1" round @click="click('')">
-      <i class="el-icon-tickets"></i> Categories
+      <i class="el-icon-menu"></i> Categories
     </el-button>
     <el-input v-if="filterMode" placeholder="Filter keyword" v-model="filterText"></el-input>
     <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="['in', 'out', 'save']">
@@ -92,6 +92,7 @@ export default {
 
 <style lang="scss">
 .categories {
+  min-width: 200px;
   & > * {
     margin: 10px;
   }

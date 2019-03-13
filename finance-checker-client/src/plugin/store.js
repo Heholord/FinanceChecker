@@ -36,6 +36,7 @@ const store = new Vuex.Store({
   getters: {
     categories: state => state.categories,
     data: state => state.data,
+    hasData: state => !isEmpty(state.data),
     disabledDates: state => date => {
       return (
         date.getTime() < moment(state.dataStartDate) ||

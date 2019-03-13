@@ -3,9 +3,9 @@
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
-      think about the height of all views what should be the default height?
       rework utils (maybe in plugin),
       make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
+      fix rootnav css
     -->
     <a
       style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
