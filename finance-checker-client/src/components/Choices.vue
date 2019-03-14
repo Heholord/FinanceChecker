@@ -8,7 +8,7 @@
         :class="{big:big, info:choice.info}"
         class="box"
       >
-        <img v-if="choice.image" :src="getImage(choice)" class="image">
+        <img v-if="choice.image" v-lazy="getImage(choice)" class="image">
         <div class="textarea">
           <span>{{choice.text}}</span>
           <div class="bottom clearfix">
@@ -86,7 +86,7 @@ export default {
         .textarea {
           flex: 1 1 auto;
           display: grid;
-          grid-template-rows: 1.3fr 1.1fr 0.8fr 0.8fr;
+          grid-template-rows: 1.5fr 0.3fr 0.4fr 0.8fr;
           > span {
             grid-row: 2;
           }
@@ -109,7 +109,7 @@ export default {
 
       &.info {
         background: #fcfcfc;
-        border: dotted 1.8px lightgray;
+        border: dotted 2px lightgray;
         box-shadow: none;
       }
     }

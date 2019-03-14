@@ -94,7 +94,7 @@ export default {
         },
         {
           text: "... or stay on this page",
-          subtext: "There is no need to hurry",
+          subtext: "why should we rush?",
           info: true
         }
       ];
