@@ -22,39 +22,37 @@
 
       <el-container>
         <el-main>
-          <div v-if="!noData" class="split">
-            <div class="left">
-              <el-collapse :value="data[0].date">
-                <el-collapse-item
-                  v-for="dataEntry in data"
-                  :key="dataEntry.date"
-                  :title="dataEntry.date"
-                  :name="dataEntry.date"
+          <div class="left">
+            <el-collapse :value="data[0].date">
+              <el-collapse-item
+                v-for="dataEntry in data"
+                :key="dataEntry.date"
+                :title="dataEntry.date"
+                :name="dataEntry.date"
+              >
+                <el-table
+                  show-summary
+                  :summary-method="getSummaries"
+                  :data="dataEntry.values"
+                  class="table no-margin"
                 >
-                  <el-table
-                    show-summary
-                    :summary-method="getSummaries"
-                    :data="dataEntry.values"
-                    class="table no-margin"
-                  >
-                    <el-table-column prop="date" label="Date" width="120"></el-table-column>
-                    <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
-                    <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
-                    <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
-                    <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
-                  </el-table>
-                </el-collapse-item>
-              </el-collapse>
-            </div>
-            <switchable-line-chart
-              class="chart"
-              :chartData="chartData"
-              :stacked="false"
-              v-if="loaded"
-              @stacked="setTransparent"
-            ></switchable-line-chart>
-            <div class="right"></div>
+                  <el-table-column prop="date" label="Date" width="120"></el-table-column>
+                  <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
+                  <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
+                  <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
+                  <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
+                </el-table>
+              </el-collapse-item>
+            </el-collapse>
           </div>
+          <switchable-line-chart
+            class="chart"
+            :chartData="chartData"
+            :stacked="false"
+            v-if="loaded"
+            @stacked="setTransparent"
+          ></switchable-line-chart>
+          <div class="right"></div>
         </el-main>
       </el-container>
     </el-container>
