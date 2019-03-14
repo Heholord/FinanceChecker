@@ -84,7 +84,7 @@
             header-align="center"
           >
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.row)">Edit</el-button>
+              <el-button size="mini" @click="editEntry=scope.row">Edit</el-button>
               <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete</el-button>
             </template>
           </el-table-column>
@@ -139,7 +139,7 @@ export default {
     },
     editEntry: {
       get: function() {
-        return this.selectedEntity.old !== undefined;
+        return this.selectedEntity.new !== undefined;
       },
       set: function(newValue) {
         if (newValue === false) {
@@ -147,6 +147,20 @@ export default {
           this.selectedEntity.new = undefined;
           this.selectedCategory = "";
           this.selectedDate = "";
+        } else {
+          this.selectedEntity.old = newValue;
+          let updateEntity = clone(newValue);
+          updateEntity.date = this.$moment(
+            newValue.month + newValue.day,
+            "MMMMYYYYD"
+          ).format("YYYY-MM-DD");
+
+          updateEntity.title = updateEntity.date + " " + updateEntity.info;
+          this.selectedDate = updateEntity.date;
+          if (updateEntity.category)
+            this.selectedCategory = updateEntity.category;
+
+          this.selectedEntity.new = updateEntity;
         }
       }
     },
@@ -183,19 +197,6 @@ export default {
         newEntry: newEntry
       });
       this.editEntry = false;
-    },
-    handleEdit(row) {
-      this.selectedEntity.old = row;
-      this.selectedEntity.new = clone(row);
-      this.selectedEntity.new.date = this.$moment(
-        row.month + row.day,
-        "MMMMYYYYD"
-      ).format("YYYY-MM-DD");
-      this.selectedEntity.new.title =
-        this.selectedEntity.new.date + " " + row.info;
-      this.selectedDate = this.selectedEntity.new.date;
-      if (this.selectedEntity.new.category)
-        this.selectedCategory = this.selectedEntity.new.category;
     },
     handleDelete(row) {
       this.$store.commit("updateEntriy", {
