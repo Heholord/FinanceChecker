@@ -8,14 +8,28 @@
         loading from upload to entity browser does not work correctly (maybe split methods?)
     -->
     <root-nav/>
-    <el-tabs class="tabs" type="border-card">
-      <el-tab-pane label="Overview">
+
+    <el-card v-if="!$store.getters.hasData" class="box-card tabs">
+      <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
+    </el-card>
+    <el-tabs v-else class="tabs" type="border-card">
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-view"></i> Overview
+        </span>
         <Overview/>
       </el-tab-pane>
-      <el-tab-pane label="Category Browser">
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-menu"></i> Category Browser
+        </span>
         <Category/>
       </el-tab-pane>
-      <el-tab-pane label="Special Stats"></el-tab-pane>
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-star-on"></i> Special Stats
+        </span>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -23,6 +37,7 @@
 <script>
 import Category from "./Category";
 import Overview from "./Overview";
+import Choices from "@/components/Choices.vue";
 import RootNav from "@/components/RootNav";
 
 export default {
@@ -30,10 +45,30 @@ export default {
   components: {
     Overview,
     Category,
-    RootNav
+    RootNav,
+    Choices
   },
   data() {
-    return {};
+    return {
+      choices: [
+        {
+          text: "Click here",
+          subtext: "and I will bring you to the upload page",
+          image: "upload.jpg",
+          route: "/manage"
+        },
+        {
+          text: "... or stay on this page",
+          subtext: "There is no need to hurry",
+          info: true
+        }
+      ]
+    };
+  },
+  methods: {
+    execute(choice) {
+      this.$routeTo(choice.route);
+    }
   }
 };
 </script>

@@ -12,7 +12,7 @@ import store from "./plugin/store";
 import VueLazyload from "vue-lazyload";
 
 Vue.use(Element, { locale: elemLocale });
-Vue.use(CategoryPlugin);
+Vue.use(CategoryPlugin, { router });
 Vue.use(moment);
 Vue.use(vmodal);
 Vue.use(VueLazyload);

@@ -4,7 +4,7 @@ import $ from "jquery";
 import { isEmpty } from "./utils";
 
 const CategoryPlugin = {
-  install(Vue) {
+  install(Vue, { router }) {
     Vue.prototype.$parseHtml = content => {
       return parseHTMLString(content);
     };
@@ -116,6 +116,14 @@ const CategoryPlugin = {
       var top = element.offsetTop;
 
       window.scrollTo(0, top);
+    };
+
+    Vue.prototype.$storeHasData = () => {
+      return Vue.$store.getters.hasData;
+    };
+
+    Vue.prototype.$routeTo = route => {
+      router.push(route);
     };
   }
 };

@@ -51,11 +51,8 @@ export default {
     };
   },
   methods: {
-    routeTo(route) {
-      this.$router.push(route);
-    },
     execute(choice) {
-      this.routeTo(choice.route);
+      this.$routeTo(choice.route);
     }
   }
 };

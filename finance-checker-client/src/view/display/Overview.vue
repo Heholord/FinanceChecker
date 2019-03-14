@@ -38,10 +38,10 @@
                     class="table no-margin"
                   >
                     <el-table-column prop="date" label="Date" width="120"></el-table-column>
-                    <el-table-column prop="in" label="Income" width="100"></el-table-column>
-                    <el-table-column prop="out" label="Outgoing" width="100"></el-table-column>
-                    <el-table-column prop="diff" label="Difference" width="100"></el-table-column>
-                    <el-table-column prop="save" label="Save" width="100"></el-table-column>
+                    <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
+                    <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
+                    <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
+                    <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
                   </el-table>
                 </el-collapse-item>
               </el-collapse>
@@ -55,9 +55,6 @@
             ></switchable-line-chart>
             <div class="right"></div>
           </div>
-          <div v-if="noData">
-            <choices :choices="choices" title="You haven't uploaded any data yet"></choices>
-          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -67,12 +64,11 @@
 <script>
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import DataDownloader from "@/components/DataDownloader";
-import Choices from "@/components/Choices.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Overview",
-  components: { SwitchableLineChart, DataDownloader, Choices },
+  components: { SwitchableLineChart, DataDownloader },
   data() {
     return {
       noData: true,
@@ -84,24 +80,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["disabledDates"]),
-    choices() {
-      return [
-        {
-          text: "Click here",
-          subtext: "and I will bring you to the upload page",
-          image: "upload.jpg"
-        },
-        {
-          text: "... or stay on this page",
-          subtext: "why should we rush?",
-          info: true
-        }
-      ];
+    ...mapGetters(["disabledDates"])
     }
   },
   beforeMount: function() {
-    this.setData("");
+    this.setData();
   },
   methods: {
     setTransparent(stacked) {

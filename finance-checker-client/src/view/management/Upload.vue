@@ -196,6 +196,7 @@ export default {
     display: grid;
     grid-template-areas: "left . . right";
     margin: 20px 100px 0px 100px;
+    padding: 0;
     justify-content: space-between;
 
     .stepButton.el-button {
@@ -216,7 +217,7 @@ export default {
     }
   }
 
-  $step-height: $content-height - 30vh;
+  $step-height: $content-height - 28vh;
 
   .stepContainer {
     justify-content: center;

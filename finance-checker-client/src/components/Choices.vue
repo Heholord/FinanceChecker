@@ -53,7 +53,7 @@ export default {
   .choice-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-content: center;
     > .box {
       border-radius: 15px;
@@ -62,13 +62,13 @@ export default {
       height: 300px;
       max-height: 500px;
       max-width: 500px;
-      margin: 10px;
+      margin: 5px;
       padding: 0;
 
       &.big {
         width: 500px;
         height: 500px;
-        margin: 25px;
+        margin: 10px;
 
         .image {
           width: 500px;
@@ -104,6 +104,9 @@ export default {
           width: 100%;
           top: 0;
           left: 0;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
 
