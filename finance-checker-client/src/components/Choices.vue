@@ -86,7 +86,7 @@ export default {
         .textarea {
           flex: 1 1 auto;
           display: grid;
-          grid-template-rows: 1.5fr 0.3fr 0.4fr 0.8fr;
+          grid-template-rows: 0.8fr 0.8fr 1fr;
           > span {
             grid-row: 2;
           }

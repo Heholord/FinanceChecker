@@ -2,7 +2,7 @@
 
 ul.master-menu + .tabs {
   box-sizing: border-box;
-  margin: 30px 30px 30px 30px;
+  margin: 20px;
   height: $content-height;
   > .el-tabs__content {
     height: $content-height - 5vh;

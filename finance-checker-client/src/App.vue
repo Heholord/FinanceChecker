@@ -6,7 +6,7 @@
       rework utils (maybe in plugin),
       make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
       fix rootnav css
-      Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
+      Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)npm 
     -->
     <a
       style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
@@ -84,7 +84,10 @@ body {
   }
 
   #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    @import url("https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro");
+    @import url("https://use.typekit.net/jbb1uil.css");
+    font-family: "acumin-pro", "fira-sans", "Source Sans Pro", "Lato",
+      "Helvetica Neue", Helvetica, Arial, sans-serif; //, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -99,10 +102,10 @@ body {
       background: #121621;
       color: #ecedee;
       width: 100%;
-      height: 8vh;
+      height: 9vh;
       box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
       p {
-        margin-top: 30px;
+        margin-top: 25px;
         a {
           color: white;
           text-decoration: none;

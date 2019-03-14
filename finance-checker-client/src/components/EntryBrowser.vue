@@ -7,17 +7,22 @@
             <span class="number">1</span>
             General infos
           </legend>
-          <el-input v-model="selectedEntity.new.info" placeholder="How is the entry called?"></el-input>
+          <el-input v-model.lazy="selectedEntity.new.info" placeholder="How is the entry called?"></el-input>
           <label for="date">When did that happen?</label>
           <el-date-picker
             id="date"
-            v-model="selectedEntity.new.date"
+            v-model="selectedDate"
             placeholder="Choose a date"
             format="yyyy-MMM-dd"
             value-format="yyyy-MM-dd"
+            @change="updateDate"
           ></el-date-picker>
           <label>About how much are we talking here?</label>
-          <el-input v-model="selectedEntity.new.amount" placeholder="Quanta costa?" class="money"></el-input>
+          <el-input
+            v-model.lazy="selectedEntity.new.amount"
+            placeholder="Quanta costa?"
+            class="money"
+          ></el-input>
         </fieldset>
         <fieldset>
           <legend>
@@ -35,22 +40,27 @@
         <el-button type="primary" @click="updateEntity()">Update</el-button>
       </div>
     </el-dialog>
-    <el-button
+    <!-- <el-button
       class="jump-down"
       icon="el-icon-arrow-down"
       plain
       circle
       @click="scrollMeTo('navctrl')"
-    ></el-button>
-    <el-collapse class="collapse">
+    ></el-button>-->
+    <el-collapse class="collapse" accordion @change="setOpen">
       <el-collapse-item
-        class="collapse-item"
         v-for="entryKey in Object.keys(getEntries)"
         :key="entryKey"
+        class="collapse-item"
         :title="entryKey"
         :name="entryKey"
       >
-        <el-table class="table" :span-method="objectSpanMethod" :data="join(getEntries[entryKey])">
+        <el-table
+          v-if="openMonth === entryKey"
+          class="table"
+          :span-method="objectSpanMethod"
+          :data="join(getEntries[entryKey])"
+        >
           <el-table-column prop="day" label="Day" width="50" header-align="center"></el-table-column>
           <el-table-column prop="info" label="Info" width="330" header-align="center"></el-table-column>
           <el-table-column
@@ -106,7 +116,10 @@ export default {
       selectedEntity: {
         old: undefined,
         new: undefined
-      }
+      },
+      openMonth: "",
+      selectedDate: "",
+      selectedCategory: ""
     };
   },
   mounted() {
@@ -132,6 +145,8 @@ export default {
         if (newValue === false) {
           this.selectedEntity.old = undefined;
           this.selectedEntity.new = undefined;
+          this.selectedCategory = "";
+          this.selectedDate = "";
         }
       }
     },
@@ -141,6 +156,17 @@ export default {
     }
   },
   methods: {
+    selectCategory(categoryPath) {
+      this.selectedCategory = categoryPath;
+      this.selectedEntity.new.category = categoryPath;
+    },
+    updateDate(newVal) {
+      this.selectedDate = newVal;
+      this.selectedEntity.new.date = this.selectedDate;
+    },
+    setOpen(month) {
+      this.openMonth = month;
+    },
     getTree() {
       return getCategoryTree("in", this.categories);
     },
@@ -151,7 +177,7 @@ export default {
       newEntry.day = date.format("D");
       delete newEntry.date;
       delete newEntry.title;
-
+      if (this.$isEmpty(newEntry.category)) delete newEntry.category;
       this.$store.commit("updateEntriy", {
         oldEntry: this.selectedEntity.old,
         newEntry: newEntry
@@ -167,6 +193,9 @@ export default {
       ).format("YYYY-MM-DD");
       this.selectedEntity.new.title =
         this.selectedEntity.new.date + " " + row.info;
+      this.selectedDate = this.selectedEntity.new.date;
+      if (this.selectedEntity.new.category)
+        this.selectedCategory = this.selectedEntity.new.category;
     },
     handleDelete(row) {
       this.$store.commit("updateEntriy", {

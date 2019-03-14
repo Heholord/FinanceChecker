@@ -33,9 +33,6 @@
         </div>
       </div>
       <div class="step" v-else-if="activeStep === 2">
-        <h3>
-          <i class="el-icon-info" style="margin-right:15px;"/>Optional
-        </h3>
         <entry-browser v-loading="loading" @next="allowNextStep"/>
       </div>
       <div class="step" v-else-if="activeStep === 3">

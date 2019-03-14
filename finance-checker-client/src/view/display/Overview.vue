@@ -1,5 +1,5 @@
 <template>
-  <div class="contentView">
+  <div class="overview">
     <el-container>
       <el-aside>
         <div>
@@ -7,7 +7,7 @@
             <i class="el-icon-date"></i>Date
           </p>
           <el-date-picker
-            v-model="displayDate"
+            :value="displayDate"
             type="year"
             placeholder="Pick a year"
             format="yyyy"
@@ -22,29 +22,27 @@
 
       <el-container>
         <el-main>
-          <div class="left">
-            <el-collapse :value="data[0].date">
-              <el-collapse-item
-                v-for="dataEntry in data"
-                :key="dataEntry.date"
-                :title="dataEntry.date"
-                :name="dataEntry.date"
+          <el-collapse :value="data[0].date">
+            <el-collapse-item
+              v-for="dataEntry in data"
+              :key="dataEntry.date"
+              :title="dataEntry.date"
+              :name="dataEntry.date"
+            >
+              <el-table
+                show-summary
+                :summary-method="getSummaries"
+                :data="dataEntry.values"
+                class="table"
               >
-                <el-table
-                  show-summary
-                  :summary-method="getSummaries"
-                  :data="dataEntry.values"
-                  class="table no-margin"
-                >
-                  <el-table-column prop="date" label="Date" width="120"></el-table-column>
-                  <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
-                  <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
-                  <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
-                  <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
-                </el-table>
-              </el-collapse-item>
-            </el-collapse>
-          </div>
+                <el-table-column prop="date" label="Date" width="120"></el-table-column>
+                <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
+                <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
+                <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
+                <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
+              </el-table>
+            </el-collapse-item>
+          </el-collapse>
           <switchable-line-chart
             class="chart"
             :chartData="chartData"
@@ -52,7 +50,6 @@
             v-if="loaded"
             @stacked="setTransparent"
           ></switchable-line-chart>
-          <div class="right"></div>
         </el-main>
       </el-container>
     </el-container>
@@ -69,7 +66,6 @@ export default {
   components: { SwitchableLineChart, DataDownloader },
   data() {
     return {
-      noData: true,
       loaded: false,
       chartData: { datasets: [], labels: [] },
       displayDate: undefined,
@@ -79,7 +75,6 @@ export default {
   },
   computed: {
     ...mapGetters(["disabledDates"])
-    }
   },
   beforeMount: function() {
     this.setData();
@@ -106,7 +101,6 @@ export default {
         this.transparent
       ).historical;
       const dateList = this.$store.getters.dateList(this.displayDate);
-      this.noData = true;
 
       //entries with table
       if (!this.displayDate) {
@@ -145,7 +139,6 @@ export default {
               save: save * -1 + " €"
             };
           });
-          this.noData = false;
         }
         this.data.push({
           date: date,
@@ -192,4 +185,12 @@ export default {
 </script>
 
 <style lang="scss">
+.overview {
+  .chart {
+    margin: 20px;
+  }
+  .table {
+    margin-left: 50px;
+  }
+}
 </style>

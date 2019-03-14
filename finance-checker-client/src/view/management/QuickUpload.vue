@@ -34,6 +34,12 @@ export default {
           delete: true
         },
         {
+          text: "I got lost",
+          subtext: "Can you bring me to the page with the charts and stuff",
+          image: "chart.jpg",
+          route: "/visualize"
+        },
+        {
           text: "Yeah, you'r right",
           subtext: "I just wanted to make sure I did",
           info: true
@@ -70,6 +76,7 @@ export default {
     },
     execute(choice) {
       if (choice.delete) this.updateStore({ data: {}, categories: {} });
+      if (choice.route) this.$routeTo(choice.route);
     }
   }
 };

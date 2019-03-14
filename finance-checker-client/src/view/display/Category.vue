@@ -57,31 +57,28 @@
 
       <el-container>
         <el-main>
-          <div v-if="!noData" class="split">
-            <el-table
-              show-summary
-              @row-contextmenu="showEntries"
-              :summary-method="getSummaries"
-              :data="tableData"
-              class="table"
-              oncontextmenu="return false;"
-            >
-              <el-table-column prop="category" label="Category" width="160"></el-table-column>
-              <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
-              <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
-              <el-table-column prop="avg" label="Average " width="100"></el-table-column>
-              <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
-            </el-table>
-            <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
-            <switchable-line-chart
-              class="chart"
-              :chartData="chartData.historical"
-              :stacked="true"
-              v-if="loaded"
-              @stacked="setTransparent"
-            ></switchable-line-chart>
-          </div>
-          <h1 v-if="noData">No data available</h1>
+          <el-table
+            show-summary
+            @row-contextmenu="showEntries"
+            :summary-method="getSummaries"
+            :data="tableData"
+            class="table"
+            oncontextmenu="return false;"
+          >
+            <el-table-column prop="category" label="Category" width="160"></el-table-column>
+            <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
+            <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
+            <el-table-column prop="avg" label="Average " width="100"></el-table-column>
+            <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
+          </el-table>
+          <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
+          <switchable-line-chart
+            class="chart"
+            :chartData="chartData.historical"
+            :stacked="true"
+            v-if="loaded"
+            @stacked="setTransparent"
+          ></switchable-line-chart>
         </el-main>
       </el-container>
     </el-container>
@@ -104,7 +101,6 @@ export default {
       inCategory: [],
       outCategory: [],
       saveCategory: [],
-      noData: true,
       entries: [],
       lastCategoryPath: "",
       loaded: false,
@@ -168,9 +164,6 @@ export default {
       if (Object.keys(filteredData.data).length > 0) {
         this.chartData = this.$createChartData(filteredData, this.transparent);
         this.tableData = this.$createTableData(filteredData);
-        this.noData = false;
-      } else {
-        this.noData = true;
       }
 
       this.loaded = true;
