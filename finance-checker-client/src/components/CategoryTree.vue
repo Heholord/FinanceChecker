@@ -4,16 +4,20 @@
       <i class="el-icon-menu"></i> Categories
     </el-button>
     <el-input v-if="filterMode" placeholder="Filter keyword" v-model="filterText"></el-input>
-    <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="['in', 'out', 'save']">
+    <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="getRoots">
       <el-submenu v-for="category in categories" :key="category.path" :index="category.path">
         <template v-if="category.path === 'in'" slot="title">
           <i class="el-icon-plus"></i>Incomming
         </template>
-        <template v-if="category.path === 'out'" slot="title">
+        <template v-else-if="category.path === 'out'" slot="title">
           <i class="el-icon-minus"></i>Outgoing
         </template>
-        <template v-if="category.path === 'save'" slot="title">
+        <template v-else-if="category.path === 'save'" slot="title">
           <i class="el-icon-sort"></i>Save
+        </template>
+        <template v-else slot="title">
+          <i class="el-icon-sort"></i>
+          {{category.path}}
         </template>
         <el-tree
           v-if="!$isEmpty(activeCategories)"
@@ -68,6 +72,11 @@ export default {
       },
       filterText: ""
     };
+  },
+  computed: {
+    getRoots() {
+      return this.categories.map(el => el.path);
+    }
   },
   methods: {
     filterNode(value, data) {
