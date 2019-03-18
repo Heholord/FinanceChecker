@@ -56,6 +56,7 @@ export default {
     justify-content: space-around;
     align-content: center;
     > .box {
+      border: none;
       border-radius: 15px;
       height: 100%;
       width: 300px;

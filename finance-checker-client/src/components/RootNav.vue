@@ -6,11 +6,14 @@
 </template>
     
 <style lang="scss">
+@import "@/variables.scss";
+
 ul.master-menu {
   position: sticky;
   top: 0px;
   margin-bottom: 20px;
   z-index: 10;
+  box-shadow: $shadow;
 
   display: flex;
   justify-content: space-around;

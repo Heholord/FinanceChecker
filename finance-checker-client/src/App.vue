@@ -92,7 +92,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    background-color: #fcfcfc;
+    // background-color: #fcfcfc;
+    background-image: linear-gradient(to bottom right, #2391a7, #ccfff0);
     height: 100%;
 
     .github-footer {
