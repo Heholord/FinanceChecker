@@ -39,7 +39,7 @@
       </el-alert>
       <el-alert v-else title="No category selected" type="info" :closable="false" show-icon></el-alert>
       <category-tree
-        :categories="[{path: rootPath(activeEntry), data: subCat(activeEntry)}]"
+        :categories="[rootPath(activeEntry)]"
         :activeCategories="[this.selectedCategory]"
         :filterMode="false"
         @onSelect="selectCategory"
@@ -90,7 +90,7 @@
 
 
 <script>
-import { getCategoryTree, flatten, getCategoryPath } from "@/plugin/utils";
+import { flatten, getCategoryPath } from "@/plugin/utils";
 import CategoryTree from "@/components/CategoryTree";
 const stringSimilarity = require("string-similarity");
 
@@ -112,14 +112,6 @@ export default {
   methods: {
     rootPath(entry) {
       return entry.amount > 0 ? "in" : "out";
-    },
-    subCat(entry) {
-      const isIn = entry.amount > 0;
-      if (isIn === true) {
-        return getCategoryTree("in", this.categories);
-      } else {
-        return getCategoryTree("out", this.categories);
-      }
     },
     nextEntry() {
       if (this.activeIndex < this.entries.length - 1) {

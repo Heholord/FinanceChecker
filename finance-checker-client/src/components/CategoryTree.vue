@@ -4,38 +4,36 @@
       <i class="el-icon-menu"></i> Categories
     </el-button>
     <el-input v-if="filterMode" placeholder="Filter keyword" v-model="filterText"></el-input>
-    <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="getRoots">
-      <el-submenu v-for="category in categories" :key="category.path" :index="category.path">
-        <template v-if="category.path === 'in'" slot="title">
-          <i class="el-icon-plus"></i>Incomming
+    <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="categories">
+      <el-submenu v-for="category in categories" :key="category" :index="category">
+        <template v-if="category === 'in'" slot="title">
+          <span class="mdi mdi-account-arrow-left"/>Incomming
         </template>
-        <template v-else-if="category.path === 'out'" slot="title">
-          <i class="el-icon-minus"></i>Outgoing
+        <template v-else-if="category === 'out'" slot="title">
+          <span class="mdi mdi-account-arrow-right"/>Outgoing
         </template>
-        <template v-else-if="category.path === 'save'" slot="title">
-          <i class="el-icon-sort"></i>Save
+        <template v-else-if="category === 'save'" slot="title">
+          <span class="mdi mdi-bank-transfer"/>Save
         </template>
-        <template v-else slot="title">
-          <i class="el-icon-sort"></i>
-          {{category.path}}
-        </template>
+        <template v-else slot="title">{{category}}</template>
         <el-tree
           v-if="!$isEmpty(activeCategories)"
           :default-expanded-keys="activeCategories"
-          :data="category.data"
+          :data="getCategoryTree(category)"
           :props="defaultProps"
           :filter-node-method="filterNode"
-          :ref="'tree'+category.path"
+          :ref="'tree'+category"
           @node-click="click"
+          :current-node-key="getCurrent"
           node-key="id"
         ></el-tree>
         <el-tree
           v-else
           :default-expand-all="expandAll"
-          :data="category.data"
+          :data="getCategoryTree(category)"
           :props="defaultProps"
           :filter-node-method="filterNode"
-          :ref="'tree'+category.path"
+          :ref="'tree'+category"
           @node-click="click"
         ></el-tree>
       </el-submenu>
@@ -45,6 +43,9 @@
 
 
 <script>
+import { mapGetters } from "vuex";
+import { renderCategory } from "@/plugin/utils";
+
 export default {
   name: "CategoryTree",
   props: {
@@ -74,8 +75,12 @@ export default {
     };
   },
   computed: {
-    getRoots() {
-      return this.categories.map(el => el.path);
+    ...mapGetters({ storeCategories: "categories" }),
+    getCurrent() {
+      if (this.activeCategories.length === 1) {
+        return this.activeCategories[0];
+      }
+      return undefined;
     }
   },
   methods: {
@@ -87,12 +92,19 @@ export default {
       let emitValue = categoryPath;
       if (categoryPath.id) emitValue = categoryPath.id;
       this.$emit("onSelect", emitValue);
+    },
+    getCategoryTree(startingpoint) {
+      let cat = renderCategory(
+        startingpoint,
+        this.storeCategories[startingpoint]
+      );
+      return cat;
     }
   },
   watch: {
     filterText(val) {
       for (let category in this.categories) {
-        this.$refs["tree" + this.categories[category].path].filter(val);
+        this.$refs["tree" + this.categories[category]].filter(val);
       }
     }
   }
@@ -104,6 +116,11 @@ export default {
   min-width: 200px;
   & > * {
     margin: 10px;
+  }
+
+  span,
+  i {
+    margin: 0px 5px 0px 5px;
   }
 
   .el-menu.treeMenu {

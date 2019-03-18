@@ -31,8 +31,8 @@
           </legend>
           <label>Select a special category</label>
           <category-tree
-            :categories="[{path: 'in', data: getTree()}]"
-            :activeCategories="[this.selectedCategory]"
+            :categories="[rootCat]"
+            :activeCategories="[selectedCategory]"
             :filterMode="false"
             @onSelect="selectCategory"
           ></category-tree>
@@ -40,13 +40,6 @@
         <el-button type="primary" @click="updateEntity()">Update</el-button>
       </div>
     </el-dialog>
-    <!-- <el-button
-      class="jump-down"
-      icon="el-icon-arrow-down"
-      plain
-      circle
-      @click="scrollMeTo('navctrl')"
-    ></el-button>-->
     <el-collapse class="collapse" accordion @change="setOpen">
       <el-collapse-item
         v-for="entryKey in Object.keys(getEntries)"
@@ -96,7 +89,7 @@
 
 
 <script>
-import { join, clone, isEqualEntry, getCategoryTree } from "@/plugin/utils";
+import { join, clone, isEqualEntry } from "@/plugin/utils";
 import { mapGetters } from "vuex";
 import CategoryTree from "@/components/CategoryTree";
 
@@ -122,13 +115,6 @@ export default {
       selectedCategory: ""
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.$emit("loaded");
-      this.$emit("next");
-      // console.log("entry browser mounted");
-    });
-  },
   computed: {
     getEntries() {
       if (!this.$isEmpty(this.entries)) {
@@ -147,6 +133,7 @@ export default {
           this.selectedEntity.new = undefined;
           this.selectedCategory = "";
           this.selectedDate = "";
+          this.rootCat = "";
         } else {
           this.selectedEntity.old = newValue;
           let updateEntity = clone(newValue);
@@ -160,6 +147,7 @@ export default {
           if (updateEntity.category)
             this.selectedCategory = updateEntity.category;
 
+          this.rootCat = updateEntity.amount > 0 ? "in" : "out";
           this.selectedEntity.new = updateEntity;
         }
       }
@@ -180,9 +168,6 @@ export default {
     },
     setOpen(month) {
       this.openMonth = month;
-    },
-    getTree() {
-      return getCategoryTree("in", this.categories);
     },
     updateEntity() {
       let newEntry = clone(this.selectedEntity.new);

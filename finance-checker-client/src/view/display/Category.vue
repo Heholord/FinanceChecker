@@ -48,10 +48,7 @@
           ></el-date-picker>
         </div>
         <hr>
-        <CategoryTree
-          :categories="[{path: 'in', data: inCategory}, {path: 'out', data: outCategory}, {path: 'save', data: saveCategory}]"
-          @onSelect="setChartData"
-        />
+        <CategoryTree :categories="['in', 'out','save']" @onSelect="setChartData"/>
         <data-downloader></data-downloader>
       </el-aside>
 
@@ -90,7 +87,6 @@ import Doughnut from "@/components/Doughnut.vue";
 import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 import DataDownloader from "@/components/DataDownloader";
-import { getCategoryTree } from "@/plugin/utils";
 import { mapGetters } from "vuex";
 
 export default {
@@ -98,9 +94,6 @@ export default {
   components: { CategoryTree, Doughnut, SwitchableLineChart, DataDownloader },
   data() {
     return {
-      inCategory: [],
-      outCategory: [],
-      saveCategory: [],
       entries: [],
       lastCategoryPath: "",
       loaded: false,
@@ -124,9 +117,6 @@ export default {
     ...mapGetters(["disabledDates", "categories"])
   },
   beforeMount: function() {
-    this.inCategory = getCategoryTree("in", this.categories);
-    this.outCategory = getCategoryTree("out", this.categories);
-    this.saveCategory = getCategoryTree("save", this.categories);
     this.setChartData("");
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="content-view overview">
+  <div class="contentView overview">
     <el-container>
       <el-aside>
         <div>

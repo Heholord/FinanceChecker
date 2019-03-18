@@ -207,7 +207,8 @@ export function renderCategory(path, cat) {
   let returnValue = [];
 
   actOnCategory(cat, (key, subCategory) => {
-    const newPath = path + "." + key;
+    const prefix = isEmpty(path) ? path : path + ".";
+    const newPath = prefix + key;
     returnValue.push({
       id: newPath,
       label: key,
@@ -278,10 +279,6 @@ export function getDateList(date, dataStartDate, dataEndDate) {
     }
   }
   return datesList;
-}
-
-export function getCategoryTree(startingpoint, categories) {
-  return renderCategory(startingpoint, categories[startingpoint]);
 }
 
 /**

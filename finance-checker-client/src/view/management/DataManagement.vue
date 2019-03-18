@@ -16,7 +16,7 @@
        jump to finish page option when store data and category exits
     -->
     <root-nav/>
-    <el-tabs ref="manTabs" class="tabs" type="border-card">
+    <el-tabs :value="tabVal" class="tabs" type="border-card">
       <el-tab-pane v-if="$store.getters.hasData">
         <span slot="label">
           <i class="el-icon-download"></i> Download
@@ -63,7 +63,8 @@ export default {
           image: "easy.jpg",
           route: "/manage/upload/quick"
         }
-      ]
+      ],
+      tabVal: "upload"
     };
   },
   methods: {
@@ -71,7 +72,7 @@ export default {
       this.$routeTo(choice.route);
     },
     openUpload() {
-      this.$refs["manTabs"].value = "upload";
+      this.$refs.manTabs.value = "upload";
     }
   }
 };
