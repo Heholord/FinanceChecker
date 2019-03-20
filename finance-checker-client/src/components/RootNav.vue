@@ -13,7 +13,7 @@ ul.master-menu {
   top: 0px;
   margin-bottom: 20px;
   z-index: 10;
-  box-shadow: $shadow;
+  box-shadow: $flying-shadow-s3;
 
   display: flex;
   justify-content: space-around;

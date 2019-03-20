@@ -4,6 +4,7 @@ import RootView from "@/view/RootView";
 import DataVisualizer from "@/view/display/DataVisualizer";
 import DataManagement from "@/view/management/DataManagement";
 import QuickUpload from "@/view/management/QuickUpload";
+import DesignSystems from "@/view/systems/DesignSystems";
 import Upload from "@/view/management/Upload";
 
 Vue.use(VueRouter);
@@ -13,6 +14,10 @@ export default new VueRouter({
     {
       path: "/",
       component: RootView
+    },
+    {
+      path: "/design",
+      component: DesignSystems
     },
     {
       path: "/visualize",

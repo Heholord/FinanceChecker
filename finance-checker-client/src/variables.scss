@@ -1,2 +1,39 @@
 $content-height: 76vh;
-$shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+
+$primary-p1: hsl(220, 100%, 90%);
+$primary-p2: hsl(220, 88%, 85%);
+$primary-p3: hsl(220, 80%, 76%);
+$primary-p4: hsl(224, 70%, 70%);
+$primary-p5: hsl(224, 65%, 56%);
+$primary-p6: hsl(224, 64%, 41%);
+$primary-p7: hsl(224, 70%, 32%);
+$primary-p8: hsl(224, 84%, 20%);
+$primary-p9: hsl(224, 100%, 12%);
+
+$neutral-n1: hsl(222, 25%, 98%);
+$neutral-n2: hsl(220, 30%, 90%);
+$neutral-n3: hsl(224, 40%, 80%);
+$neutral-n4: hsl(222, 34%, 64%);
+$neutral-n5: hsl(225, 25%, 52%);
+$neutral-n6: hsl(224, 28%, 42%);
+$neutral-n7: hsl(224, 22%, 36%);
+$neutral-n8: hsl(222, 18%, 24%);
+$neutral-n9: hsl(220, 15%, 20%);
+
+@mixin make-out-shadow($light-color) {
+  box-shadow: inset 0 3px 0 $light-color, 0 3px 5px hsla(0, 0%, 0%, 0.1);
+}
+
+@mixin make-in-shadow($light-color) {
+  box-shadow: 0 1px 0 $light-color, inset 0 1px 3px hsla(0, 0%, 0%, 0.3);
+}
+
+$flying-shadow-s1: 0 1px 3px hsla(0, 0%, 0%, 0.12),
+  0 1px 2px 0 hsla(0, 0%, 0%, 0.24);
+$flying-shadow-s2: 0 3px 6px hsla(0, 0%, 0%, 0.15),
+  0 2px 4px hsla(0, 0%, 0%, 0.12);
+$flying-shadow-s3: 0 10px 20px hsla(0, 0%, 0%, 0.15),
+  0 3px 6px hsla(0, 0%, 0%, 0.1);
+$flying-shadow-s4: 0 15px 25px hsla(0, 0%, 0%, 0.15),
+  0 5px 10px hsla(0, 0%, 0%, 0.5);
+$flying-shadow-s5: 0 20px 40px hsla(0, 0%, 0%, 0.2);
