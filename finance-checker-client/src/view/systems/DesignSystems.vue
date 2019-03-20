@@ -1,8 +1,14 @@
 <template>
   <div>
-    <h1 class="headline thick">Design System Cheatsheat</h1>
+    <div class="heading primary p7">
+      <div class="content">
+        <h1 class="headline thick">Design System Cheatsheat</h1>
+        <img class="headline-img" src="@/assets/design.svg">
+      </div>
+    </div>
+
     <section class="systemblock">
-      <h1 class="title fs3">Fonts</h1>
+      <h1 class="title fs4">Fonts</h1>
       <ul>
         <li class="headline thick">.headline.thick: Roboto Black
           <br>Text with short linespacing. Because this is a title man.
@@ -16,11 +22,11 @@
       </ul>
     </section>
     <section class="systemblock">
-      <h1 class="title fs3">Font Size</h1>
+      <h1 class="title fs4">Font Size</h1>
       <ul>
         <li class="fs1">.fs1: The dog and the cat run all day long</li>
         <li class="fs2">.fs2: The dog and the cat run all day long</li>
-        <li class="fs3">.fs3: The dog and the cat run all day long</li>
+        <li class="fs4">.fs4: The dog and the cat run all day long</li>
         <li class="fs4">.fs4: The dog and the cat run all day long</li>
         <li class="fs5">.fs5: The dog and the cat run all day long</li>
         <li class="fs6">.fs6: The dog and the cat run all day long</li>
@@ -30,7 +36,7 @@
       </ul>
     </section>
     <section class="systemblock">
-      <h1 class="title fs3">Font Weight</h1>
+      <h1 class="title fs4">Font Weight</h1>
       <ul>
         <li class="fw1 fs5">.fw1: The dog and the cat run all day long</li>
         <li class="fw2 fs5">.fw2: The dog and the cat run all day long</li>
@@ -40,7 +46,7 @@
       </ul>
     </section>
     <section class="systemblock">
-      <h1 class="title fs3">Color</h1>
+      <h1 class="title fs4">Color</h1>
       <div class="splitcolumn">
         <p class="title">.primary</p>
         <ul class="color">
@@ -101,11 +107,38 @@ export default {
 
 div {
   text-align: left;
-  h1.headline {
-    text-align: center;
+  .heading {
+    position: relative;
+    height: 100px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: $flying-shadow-s2;
+    margin: 0 0 80px 0;
+
+    .content {
+      position: relative;
+      text-align: center;
+      max-width: 1000px;
+      min-width: 850px;
+      h1.headline {
+        text-align: left;
+        margin: 0;
+      }
+      .headline-img {
+        position: absolute;
+        right: 10%;
+        top: -10px;
+        background: $primary-p9;
+        box-shadow: $flying-shadow-s2;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+      }
+    }
   }
 
   .systemblock {
+    display: relative;
     margin: 100px;
     margin-top: 0px;
 
@@ -113,10 +146,10 @@ div {
     ul {
       list-style-type: none;
       border-radius: 0px;
-      background-color: $neutral-n2;
-      box-shadow: $flying-shadow-s2;
+      box-shadow: $flying-shadow-s1;
       padding: 20px;
       max-width: 800px;
+      background-color: white;
       li {
         margin-bottom: 20px;
       }
@@ -140,10 +173,10 @@ div {
         li {
           width: 40px;
           height: 40px;
-          border-radius: 5px;
+          border-radius: 0px;
           padding-top: 10px;
           text-align: center;
-          @include make-in-shadow($neutral-n2);
+          @include make-in-shadow($neutral-n1);
         }
       }
     }

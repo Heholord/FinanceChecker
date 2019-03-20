@@ -10,13 +10,12 @@ body {
   height: 100%;
   min-height: 100vh;
   margin: 0px;
-  color: hsl(260, 40%, 30%);
   box-sizing: border-box;
   font-family: "Inter", "Lato", sans-serif; //maybe avenir next
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // background-color: #fcfcfc;
-  background-image: linear-gradient(to bottom right, $neutral-n1, $neutral-n1);
+  background-color: $neutral-n2;
 
   *,
   *:before,
@@ -151,11 +150,11 @@ body {
   .primary {
     &.p1 {
       background-color: $primary-p1;
-      color: $primary-p8;
+      color: $primary-p9;
     }
     &.p2 {
       background-color: $primary-p2;
-      color: $primary-p8;
+      color: $primary-p9;
     }
     &.p3 {
       background-color: $primary-p3;
@@ -179,11 +178,11 @@ body {
     }
     &.p8 {
       background-color: $primary-p8;
-      color: $primary-p2;
+      color: $primary-p1;
     }
     &.p9 {
       background-color: $primary-p9;
-      color: $primary-p2;
+      color: $primary-p1;
     }
   }
 
@@ -191,11 +190,11 @@ body {
   .neutral {
     &.n1 {
       background-color: $neutral-n1;
-      color: $neutral-n8;
+      color: $neutral-n9;
     }
     &.n2 {
       background-color: $neutral-n2;
-      color: $neutral-n8;
+      color: $neutral-n9;
     }
     &.n3 {
       background-color: $neutral-n3;
@@ -219,11 +218,11 @@ body {
     }
     &.n8 {
       background-color: $neutral-n8;
-      color: $neutral-n2;
+      color: $neutral-n1;
     }
     &.n9 {
       background-color: $neutral-n9;
-      color: $neutral-n2;
+      color: $neutral-n1;
     }
   }
   // - Support
@@ -232,7 +231,7 @@ body {
     &.negative {
       &.n1 {
         background-color: $support-negative-n1;
-        color: $support-negative-n4;
+        color: $support-negative-n5;
       }
       &.n2 {
         background-color: $support-negative-n2;
@@ -240,7 +239,7 @@ body {
       }
       &.n3 {
         background-color: $support-negative-n3;
-        color: $support-negative-n5;
+        color: $support-negative-n1;
       }
       &.n4 {
         background-color: $support-negative-n4;
@@ -248,7 +247,7 @@ body {
       }
       &.n5 {
         background-color: $support-negative-n5;
-        color: $support-negative-n2;
+        color: $support-negative-n1;
       }
     }
 
@@ -256,7 +255,7 @@ body {
     &.positive {
       &.p1 {
         background-color: $support-positive-p1;
-        color: $support-positive-p4;
+        color: $support-positive-p5;
       }
       &.p2 {
         background-color: $support-positive-p2;
@@ -272,7 +271,7 @@ body {
       }
       &.p5 {
         background-color: $support-positive-p5;
-        color: $support-positive-p2;
+        color: $support-positive-p1;
       }
     }
 
@@ -280,7 +279,7 @@ body {
     &.alert {
       &.a1 {
         background-color: $support-alert-a1;
-        color: $support-alert-a4;
+        color: $support-alert-a5;
       }
       &.a2 {
         background-color: $support-alert-a2;
@@ -296,7 +295,7 @@ body {
       }
       &.a5 {
         background-color: $support-alert-a5;
-        color: $support-alert-a2;
+        color: $support-alert-a1;
       }
     }
   }

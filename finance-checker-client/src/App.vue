@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="neutral n2">
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
@@ -8,7 +8,7 @@
       fix rootnav css
       Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)npm 
     -->
-    <div class="github-footer">
+    <div class="github-footer primary p9">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
       <p>
         <a
@@ -40,15 +40,13 @@ export default {
     position: fixed;
     bottom: 0;
     z-index: 10;
-    background: #121621;
-    color: #ecedee;
     width: 100%;
     height: 9vh;
-    box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
     p {
       margin-top: 25px;
       a {
-        color: white;
+        color: $primary-p1;
         text-decoration: none;
         transition: font-size 0.3s ease, text-shadow 0.3s ease;
         line-height: 2;
@@ -66,7 +64,7 @@ export default {
       background-color: #121621;
       border-radius: 50%;
       border: solid #121621 5px;
-      box-shadow: 3px -1px 8px 0px rgba(0, 0, 0, 0.8);
+      box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
     }
 
     &:hover {
