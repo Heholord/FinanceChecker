@@ -44,45 +44,45 @@
       <div class="splitcolumn">
         <p class="title">.primary</p>
         <ul class="color">
-          <li class="primary p1 very light">.p1</li>
-          <li class="primary p2 very light">.p2</li>
-          <li class="primary p3 very light">.p3</li>
-          <li class="primary p4 light">.p4</li>
-          <li class="primary p5 light">.p5</li>
-          <li class="primary p6 dark">.p6</li>
-          <li class="primary p7 dark">.p7</li>
-          <li class="primary p8 very dark">.p8</li>
-          <li class="primary p9 very dark">.p9</li>
+          <li class="primary p1">.p1</li>
+          <li class="primary p2">.p2</li>
+          <li class="primary p3">.p3</li>
+          <li class="primary p4">.p4</li>
+          <li class="primary p5">.p5</li>
+          <li class="primary p6">.p6</li>
+          <li class="primary p7">.p7</li>
+          <li class="primary p8">.p8</li>
+          <li class="primary p9">.p9</li>
         </ul>
         <p class="title">.neutral</p>
         <ul class="color">
-          <li class="neutral n1 very light">.n1</li>
-          <li class="neutral n2 very light">.n2</li>
-          <li class="neutral n3 very light">.n3</li>
-          <li class="neutral n4 light">.n4</li>
-          <li class="neutral n5 light">.n5</li>
-          <li class="neutral n6 dark">.n6</li>
-          <li class="neutral n7 dark">.n7</li>
-          <li class="neutral n8 very dark">.n8</li>
-          <li class="neutral n9 very dark">.n9</li>
+          <li class="neutral n1">.n1</li>
+          <li class="neutral n2">.n2</li>
+          <li class="neutral n3">.n3</li>
+          <li class="neutral n4">.n4</li>
+          <li class="neutral n5">.n5</li>
+          <li class="neutral n6">.n6</li>
+          <li class="neutral n7">.n7</li>
+          <li class="neutral n8">.n8</li>
+          <li class="neutral n9">.n9</li>
         </ul>
         <p class="title">.support[.negative|.positive|.alert]</p>
         <ul class="color many">
-          <li class="support negative n1 very light">.n1</li>
-          <li class="support negative n2 light">.n2</li>
-          <li class="support negative n3 dark">.n3</li>
-          <li class="support negative n4 dark">.n4</li>
-          <li class="support negative n5 very dark">.n5</li>
-          <li class="support positive p1 very light">.p1</li>
-          <li class="support positive p2 light">.p2</li>
-          <li class="support positive p3 dark">.p3</li>
-          <li class="support positive p4 dark">.p4</li>
-          <li class="support positive p5 very dark">.p5</li>
-          <li class="support alert a1 very light">.a1</li>
-          <li class="support alert a2 light">.a2</li>
-          <li class="support alert a3 light">.a3</li>
-          <li class="support alert a4 dark">.a4</li>
-          <li class="support alert a5 very dark">.a5</li>
+          <li class="support negative n1">.n1</li>
+          <li class="support negative n2">.n2</li>
+          <li class="support negative n3">.n3</li>
+          <li class="support negative n4">.n4</li>
+          <li class="support negative n5">.n5</li>
+          <li class="support positive p1">.p1</li>
+          <li class="support positive p2">.p2</li>
+          <li class="support positive p3">.p3</li>
+          <li class="support positive p4">.p4</li>
+          <li class="support positive p5">.p5</li>
+          <li class="support alert a1">.a1</li>
+          <li class="support alert a2">.a2</li>
+          <li class="support alert a3">.a3</li>
+          <li class="support alert a4">.a4</li>
+          <li class="support alert a5">.a5</li>
         </ul>
       </div>
     </section>
@@ -144,18 +144,6 @@ div {
           padding-top: 10px;
           text-align: center;
           @include make-in-shadow($neutral-n2);
-          &.dark {
-            color: $neutral-n2;
-            &.very {
-              color: $neutral-n1;
-            }
-          }
-          &.light {
-            color: $neutral-n8;
-            &.very {
-              color: $neutral-n9;
-            }
-          }
         }
       }
     }

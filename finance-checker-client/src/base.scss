@@ -151,32 +151,39 @@ body {
   .primary {
     &.p1 {
       background-color: $primary-p1;
-      color: $primary-p1;
+      color: $primary-p8;
     }
     &.p2 {
       background-color: $primary-p2;
-      color: $primary-p2;
+      color: $primary-p8;
     }
     &.p3 {
       background-color: $primary-p3;
+      color: $primary-p9;
     }
     &.p4 {
       background-color: $primary-p4;
+      color: $primary-p9;
     }
     &.p5 {
       background-color: $primary-p5;
+      color: $primary-p9;
     }
     &.p6 {
       background-color: $primary-p6;
+      color: $primary-p1;
     }
     &.p7 {
       background-color: $primary-p7;
+      color: $primary-p1;
     }
     &.p8 {
       background-color: $primary-p8;
+      color: $primary-p2;
     }
     &.p9 {
       background-color: $primary-p9;
+      color: $primary-p2;
     }
   }
 
@@ -184,30 +191,39 @@ body {
   .neutral {
     &.n1 {
       background-color: $neutral-n1;
+      color: $neutral-n8;
     }
     &.n2 {
       background-color: $neutral-n2;
+      color: $neutral-n8;
     }
     &.n3 {
       background-color: $neutral-n3;
+      color: $neutral-n9;
     }
     &.n4 {
       background-color: $neutral-n4;
+      color: $neutral-n9;
     }
     &.n5 {
       background-color: $neutral-n5;
+      color: $neutral-n9;
     }
     &.n6 {
       background-color: $neutral-n6;
+      color: $neutral-n1;
     }
     &.n7 {
       background-color: $neutral-n7;
+      color: $neutral-n1;
     }
     &.n8 {
       background-color: $neutral-n8;
+      color: $neutral-n2;
     }
     &.n9 {
       background-color: $neutral-n9;
+      color: $neutral-n2;
     }
   }
   // - Support
@@ -215,61 +231,75 @@ body {
     // negative
     &.negative {
       &.n1 {
-        background-color: hsl(12, 100%, 95%);
+        background-color: $support-negative-n1;
+        color: $support-negative-n4;
       }
       &.n2 {
-        background-color: hsl(15, 90%, 80%);
+        background-color: $support-negative-n2;
+        color: $support-negative-n5;
       }
       &.n3 {
-        background-color: hsl(12, 50%, 50%);
+        background-color: $support-negative-n3;
+        color: $support-negative-n5;
       }
       &.n4 {
-        background-color: hsl(10, 35%, 32%);
+        background-color: $support-negative-n4;
+        color: $support-negative-n1;
       }
       &.n5 {
-        background-color: hsl(12, 80%, 19%);
+        background-color: $support-negative-n5;
+        color: $support-negative-n2;
       }
     }
 
+    // positive
     &.positive {
       &.p1 {
-        background-color: hsl(120, 80%, 95%);
+        background-color: $support-positive-p1;
+        color: $support-positive-p4;
       }
       &.p2 {
-        background-color: hsl(120, 51%, 70%);
+        background-color: $support-positive-p2;
+        color: $support-positive-p5;
       }
       &.p3 {
-        background-color: hsl(120, 38%, 42%);
+        background-color: $support-positive-p3;
+        color: $support-positive-p1;
       }
       &.p4 {
-        background-color: hsl(120, 25%, 28%);
+        background-color: $support-positive-p4;
+        color: $support-positive-p1;
       }
       &.p5 {
-        background-color: hsl(125, 32%, 16%);
+        background-color: $support-positive-p5;
+        color: $support-positive-p2;
       }
     }
 
+    // alert
     &.alert {
       &.a1 {
-        background-color: hsl(58, 95%, 95%);
+        background-color: $support-alert-a1;
+        color: $support-alert-a4;
       }
       &.a2 {
-        background-color: hsl(55, 77%, 72%);
+        background-color: $support-alert-a2;
+        color: $support-alert-a5;
       }
       &.a3 {
-        background-color: hsl(58, 58%, 50%);
+        background-color: $support-alert-a3;
+        color: $support-alert-a5;
       }
       &.a4 {
-        background-color: hsl(58, 57%, 26%);
+        background-color: $support-alert-a4;
+        color: $support-alert-a1;
       }
       &.a5 {
-        background-color: hsl(55, 76%, 12%);
+        background-color: $support-alert-a5;
+        color: $support-alert-a2;
       }
     }
   }
-
-  // positive
-  // alert
 
   // ------------ Margin
   // ------------ Padding
