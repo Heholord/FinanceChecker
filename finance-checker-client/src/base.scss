@@ -301,11 +301,39 @@ body {
   }
 
   // ------------ Margin
+
   // ------------ Padding
   // ------------ Width
   // ------------ Height
   // ------------ Box shadows
+  .bs1 {
+    box-shadow: $flying-shadow-s1;
+  }
+  .bs2 {
+    box-shadow: $flying-shadow-s2;
+  }
+  .bs3 {
+    box-shadow: $flying-shadow-s3;
+  }
+  .bs4 {
+    box-shadow: $flying-shadow-s4;
+  }
+  .bs5 {
+    box-shadow: $flying-shadow-s5;
+  }
+
   // ------------ Border radius
+  .border-radius {
+    border-radius: 0px;
+    &.soft {
+      border-radius: 2px;
+    }
+
+    &.hard {
+      border-radius: 5px;
+    }
+  }
+
   // ------------ Border width
   // ------------ Opacity
 }

@@ -92,6 +92,16 @@
         </ul>
       </div>
     </section>
+    <section class="systemblock">
+      <h1 class="title fs4">Box shadow</h1>
+      <ul class="box-shadow">
+        <li class="bs1">.bs1</li>
+        <li class="bs2">.bs2</li>
+        <li class="bs3">.bs3</li>
+        <li class="bs4">.bs4</li>
+        <li class="bs5">.bs5</li>
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -152,6 +162,18 @@ div {
       background-color: white;
       li {
         margin-bottom: 20px;
+      }
+
+      &.box-shadow {
+        display: grid;
+        grid-template: 1fr / repeat(9, 1fr);
+        grid-gap: 5px;
+        li {
+          width: 40px;
+          height: 40px;
+          padding-top: 10px;
+          text-align: center;
+        }
       }
     }
 
