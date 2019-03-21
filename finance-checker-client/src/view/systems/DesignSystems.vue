@@ -157,7 +157,7 @@ div {
 
     .splitcolumn {
       display: grid;
-      grid-template: 1fr 1fr 2fr / 1fr 1fr;
+      grid-template: 1fr 1fr 1.5fr / 1fr 1fr;
       ul.color {
         background: none;
         border: none;
@@ -165,7 +165,7 @@ div {
         display: grid;
         grid-template: 1fr / repeat(9, 1fr);
         grid-gap: 5px;
-
+        justify-items: center;
         &.many {
           grid-template: 1fr 1fr 1fr / repeat(5, 1fr);
         }
