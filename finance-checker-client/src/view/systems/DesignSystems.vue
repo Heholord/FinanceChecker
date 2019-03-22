@@ -246,9 +246,22 @@ div {
         }
       }
 
+      @mixin createBox() {
+        border: 2px solid $primary-p9;
+        @include make-in-shadow($neutral-n2);
+        background-image: linear-gradient(
+          to right bottom,
+          $primary-p2,
+          $primary-p3,
+          $primary-p4,
+          $primary-p5
+        );
+        color: $primary-p9;
+      }
+
       &.padding-box {
         > li.margin {
-          border: 2px solid $neutral-n8;
+          @include createBox();
         }
       }
       &.margin-box {
@@ -256,7 +269,8 @@ div {
           border: 1px solid $neutral-n4;
           > p {
             width: $size2;
-            border: 2px solid $neutral-n8;
+            @include make-in-shadow($neutral-n2);
+            @include createBox();
           }
         }
       }
@@ -266,9 +280,7 @@ div {
           padding-top: $space4;
           @include square($size4);
           @include make-in-shadow($neutral-n2);
-          border-color: $primary-p9;
-          background: $primary-p2;
-          color: $primary-p9;
+          @include createBox();
         }
       }
 
