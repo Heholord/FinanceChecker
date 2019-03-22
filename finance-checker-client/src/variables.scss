@@ -1,5 +1,44 @@
 $content-height: 76vh;
 
+$fs1: 12px;
+$fs2: 14px;
+$fs3: 16px;
+$fs4: 18px;
+$fs5: 20px;
+$fs6: 24px;
+$fs7: 32px;
+$fs8: 48px;
+$fs9: 66px;
+
+$fw1: 400;
+$fw2: 450;
+$fw3: 550;
+$fw4: 700;
+$fw5: 900;
+
+$space1: 5px;
+$space2: 12px;
+$space3: 30px;
+$space4: 50px;
+$space5: 80px;
+$space6: 120px;
+
+$size1: 30px;
+$size2: 50px;
+$size3: 80px;
+$size4: 150px;
+$size5: 200px;
+$size6: 300px;
+$size7: 550px;
+$size8: 800px;
+$size9: 1200px;
+$size10: 1800px;
+
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
 $primary-p1: hsl(220, 100%, 98%);
 $primary-p2: hsl(220, 88%, 90%);
 $primary-p3: hsl(220, 80%, 80%);

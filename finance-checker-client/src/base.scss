@@ -32,7 +32,7 @@ body {
       overflow-x: auto;
       > div[role="tabpanel"] {
         height: 100%;
-        min-width: 940px;
+        min-width: $size8;
 
         & > * {
           height: 100%;
@@ -75,16 +75,16 @@ body {
   // ------------ Fonts
   .headline {
     font-family: "Roboto";
-    font-weight: 500;
-    font-size: 48px;
+    font-weight: $fw3;
+    font-size: $fs7;
     letter-spacing: -0.03em;
     line-height: 1;
 
     &.thick {
-      font-weight: 900;
+      font-weight: $fw5;
     }
     &.bold {
-      font-weight: 700;
+      font-weight: $fw4;
     }
   }
 
@@ -94,55 +94,55 @@ body {
   }
 
   .title {
-    font-weight: 400;
+    font-weight: $fw2;
     letter-spacing: -0.02em;
     line-height: 1;
   }
 
   // ------------ Font size
   .fs1 {
-    font-size: 12px;
+    font-size: $fs1;
   }
   .fs2 {
-    font-size: 14px;
+    font-size: $fs2;
   }
   .fs3 {
-    font-size: 16px;
+    font-size: $fs3;
   }
   .fs4 {
-    font-size: 18px;
+    font-size: $fs4;
   }
   .fs5 {
-    font-size: 20px;
+    font-size: $fs5;
   }
   .fs6 {
-    font-size: 24px;
+    font-size: $fs6;
   }
   .fs7 {
-    font-size: 32px;
+    font-size: $fs7;
   }
   .fs8 {
-    font-size: 48px;
+    font-size: $fs8;
   }
   .fs9 {
-    font-size: 66px;
+    font-size: $fs9;
   }
 
   // ------------ Font weight
   .fw1 {
-    font-weight: 400;
+    font-weight: $fw1;
   }
   .fw2 {
-    font-weight: 450;
+    font-weight: $fw2;
   }
   .fw3 {
-    font-weight: 550;
+    font-weight: $fw3;
   }
   .fw4 {
-    font-weight: 700;
+    font-weight: $fw4;
   }
   .fw5 {
-    font-weight: 900;
+    font-weight: $fw5;
   }
 
   // ------------ Color
@@ -301,10 +301,116 @@ body {
   }
 
   // ------------ Margin
+  .margin {
+    &.m1 {
+      margin: $space1;
+    }
+    &.m2 {
+      margin: $space2;
+    }
+    &.m3 {
+      margin: $space3;
+    }
+    &.m4 {
+      margin: $space4;
+    }
+    &.m5 {
+      margin: $space5;
+    }
+    &.m6 {
+      margin: $space6;
+    }
+  }
 
   // ------------ Padding
-  // ------------ Width
-  // ------------ Height
+  .padding {
+    &.p1 {
+      padding: $space1;
+    }
+    &.p2 {
+      padding: $space2;
+    }
+    &.p3 {
+      padding: $space3;
+    }
+    &.p4 {
+      padding: $space4;
+    }
+    &.p5 {
+      padding: $space5;
+    }
+    &.p6 {
+      padding: $space6;
+    }
+  }
+
+  // ------------ Size
+  .size {
+    // - Width
+    &.w1 {
+      width: $size1;
+    }
+    &.w2 {
+      width: $size2;
+    }
+    &.w3 {
+      width: $size3;
+    }
+    &.w4 {
+      width: $size4;
+    }
+    &.w5 {
+      width: $size5;
+    }
+    &.w6 {
+      width: $size6;
+    }
+    &.w7 {
+      width: $size7;
+    }
+    &.w8 {
+      width: $size8;
+    }
+    &.w9 {
+      width: $size9;
+    }
+    &.w10 {
+      width: $size10;
+    }
+
+    // - Height
+    &.h1 {
+      height: $size1;
+    }
+    &.h2 {
+      height: $size2;
+    }
+    &.h3 {
+      height: $size3;
+    }
+    &.h4 {
+      height: $size4;
+    }
+    &.h5 {
+      height: $size5;
+    }
+    &.h6 {
+      height: $size6;
+    }
+    &.h7 {
+      height: $size7;
+    }
+    &.h8 {
+      height: $size8;
+    }
+    &.h9 {
+      height: $size9;
+    }
+    &.h10 {
+      height: $size10;
+    }
+  }
+
   // ------------ Box shadows
   .bs1 {
     box-shadow: $flying-shadow-s1;
@@ -325,15 +431,26 @@ body {
   // ------------ Border radius
   .border-radius {
     border-radius: 0px;
-    &.soft {
-      border-radius: 2px;
+    border-style: solid;
+    &.br-soft {
+      border-radius: 5px;
     }
 
-    &.hard {
-      border-radius: 5px;
+    &.br-softer {
+      border-radius: 10px;
     }
   }
 
-  // ------------ Border width
-  // ------------ Opacity
+  // ------------ Border
+  .border-width {
+    border-width: 2px;
+    border-style: solid;
+    &.bw-soft {
+      border-width: 1px;
+    }
+
+    &.bw-hard {
+      border-width: 3px;
+    }
+  }
 }

@@ -102,6 +102,76 @@
         <li class="bs5">.bs5</li>
       </ul>
     </section>
+
+    <section class="systemblock">
+      <h1 class="title fs4">Margin</h1>
+      <ul class="margin-box">
+        <li>.margin</li>
+        <li class="margin m1">
+          <p class="margin m1">.m1</p>
+        </li>
+        <li class="margin m1">
+          <p class="margin m2">.m2</p>
+        </li>
+        <li class="margin m1">
+          <p class="margin m3">.m3</p>
+        </li>
+        <li class="margin m1">
+          <p class="margin m4">.m4</p>
+        </li>
+        <li class="margin m1">
+          <p class="margin m5">.m5</p>
+        </li>
+        <li class="margin m1">
+          <p class="margin m6">.m6</p>
+        </li>
+      </ul>
+    </section>
+    <section class="systemblock">
+      <h1 class="title fs4">Padding</h1>
+      <ul class="padding-box">
+        <li>.padding</li>
+        <li class="margin m1 padding p1">.m1</li>
+        <li class="margin m1 padding p2">.m2</li>
+        <li class="margin m1 padding p3">.m3</li>
+        <li class="margin m1 padding p4">.m4</li>
+        <li class="margin m1 padding p5">.m5</li>
+        <li class="margin m1 padding p6">.m6</li>
+      </ul>
+    </section>
+    <section class="systemblock">
+      <h1 class="title fs4">Height/Widht</h1>
+      <ul class="size-box">
+        <li>.size</li>
+        <li class="size w1">.h1|.w1</li>
+        <li class="size w2">.h2|.w2</li>
+        <li class="size w3">.h3|.w3</li>
+        <li class="size w4">.h4|.w4</li>
+        <li class="size w5">.h5|.w5</li>
+        <li class="size w6">.h6|.w6</li>
+        <li class="size w7">.h7|.w7</li>
+        <li class="size w8">.h8|.w8</li>
+        <li class="size w9">.h9|.w9</li>
+      </ul>
+    </section>
+    <section class="systemblock">
+      <h1 class="title fs4">Border radius</h1>
+      <ul class="border">
+        <li>.border-radius</li>
+        <li class="margin m1 border-radius">/</li>
+        <li class="margin m1 border-radius br-soft">.br-soft</li>
+        <li class="margin m1 border-radius br-softer">.br-softer</li>
+      </ul>
+    </section>
+    <section class="systemblock">
+      <h1 class="title fs4">Border width</h1>
+      <ul class="border">
+        <li>.border-width</li>
+        <li class="margin m1 border-width bw-soft">.bw-soft</li>
+        <li class="margin m1 border-width">/</li>
+        <li class="margin m1 border-width bw-hard">.bw-hard</li>
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -141,8 +211,7 @@ div {
         background: $primary-p9;
         box-shadow: $flying-shadow-s2;
         border-radius: 50%;
-        width: 150px;
-        height: 150px;
+        @include square($size4);
       }
     }
   }
@@ -158,21 +227,77 @@ div {
       border-radius: 0px;
       box-shadow: $flying-shadow-s1;
       padding: 20px;
-      max-width: 800px;
+      max-width: $size8;
       background-color: white;
-      li {
-        margin-bottom: 20px;
+
+      > li {
+        margin-bottom: 30px;
       }
 
       &.box-shadow {
         display: grid;
-        grid-template: 1fr / repeat(9, 1fr);
-        grid-gap: 5px;
-        li {
-          width: 40px;
-          height: 40px;
-          padding-top: 10px;
+        grid-template: 1fr / repeat(5, 1fr);
+        grid-gap: $space1;
+        justify-items: center;
+        > li {
+          @include square($size2);
+          padding-top: $space2;
           text-align: center;
+        }
+      }
+
+      &.padding-box {
+        > li.margin {
+          border: 2px solid $neutral-n8;
+        }
+      }
+      &.margin-box {
+        > li.margin {
+          border: 1px solid $neutral-n4;
+          > p {
+            width: $size2;
+            border: 2px solid $neutral-n8;
+          }
+        }
+      }
+
+      &.border {
+        > li.margin {
+          padding-top: $space4;
+          @include square($size4);
+          @include make-in-shadow($neutral-n2);
+          border-color: $primary-p9;
+          background: $primary-p2;
+          color: $primary-p9;
+        }
+      }
+
+      &.padding-box,
+      &.margin-box,
+      &.border {
+        > li.margin {
+          display: inline-block;
+          text-align: center;
+        }
+      }
+
+      &.size-box {
+        max-width: $size9 + 40px;
+        min-width: $size9 + 40px;
+        > li.size {
+          height: $size1;
+          background-image: linear-gradient(
+            to left,
+            $primary-p1,
+            $primary-p3,
+            $primary-p5,
+            $primary-p7,
+            $primary-p9
+          );
+          padding-top: $space1;
+          padding-right: $space1;
+          @include make-in-shadow($support-alert-a3);
+          text-align: right;
         }
       }
     }
@@ -192,11 +317,10 @@ div {
           grid-template: 1fr 1fr 1fr / repeat(5, 1fr);
         }
 
-        li {
-          width: 40px;
-          height: 40px;
+        > li {
+          @include square($size2);
           border-radius: 0px;
-          padding-top: 10px;
+          padding-top: $space2;
           text-align: center;
           @include make-in-shadow($neutral-n1);
         }
