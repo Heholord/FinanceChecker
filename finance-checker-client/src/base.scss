@@ -15,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // background-color: #fcfcfc;
-  background-color: $neutral-n2;
+  background-color: $neutral2;
 
   *,
   *:before,
@@ -147,310 +147,301 @@ body {
 
   // ------------ Color
   // - Primary
-  .primary {
-    &.p1 {
-      background-color: $primary-p1;
-      color: $primary-p9;
-    }
-    &.p2 {
-      background-color: $primary-p2;
-      color: $primary-p9;
-    }
-    &.p3 {
-      background-color: $primary-p3;
-      color: $primary-p9;
-    }
-    &.p4 {
-      background-color: $primary-p4;
-      color: $primary-p9;
-    }
-    &.p5 {
-      background-color: $primary-p5;
-      color: $primary-p9;
-    }
-    &.p6 {
-      background-color: $primary-p6;
-      color: $primary-p1;
-    }
-    &.p7 {
-      background-color: $primary-p7;
-      color: $primary-p1;
-    }
-    &.p8 {
-      background-color: $primary-p8;
-      color: $primary-p1;
-    }
-    &.p9 {
-      background-color: $primary-p9;
-      color: $primary-p1;
-    }
+  .primary1 {
+    background-color: $primary1;
+    color: $primary9;
+  }
+  .primary2 {
+    background-color: $primary2;
+    color: $primary9;
+  }
+  .primary3 {
+    background-color: $primary3;
+    color: $primary9;
+  }
+  .primary4 {
+    background-color: $primary4;
+    color: $primary9;
+  }
+  .primary5 {
+    background-color: $primary5;
+    color: $primary9;
+  }
+  .primary6 {
+    background-color: $primary6;
+    color: $primary1;
+  }
+  .primary7 {
+    background-color: $primary7;
+    color: $primary1;
+  }
+  .primary8 {
+    background-color: $primary8;
+    color: $primary1;
+  }
+  .primary9 {
+    background-color: $primary9;
+    color: $primary1;
   }
 
   // - Neutral
-  .neutral {
-    &.n1 {
-      background-color: $neutral-n1;
-      color: $neutral-n9;
-    }
-    &.n2 {
-      background-color: $neutral-n2;
-      color: $neutral-n9;
-    }
-    &.n3 {
-      background-color: $neutral-n3;
-      color: $neutral-n9;
-    }
-    &.n4 {
-      background-color: $neutral-n4;
-      color: $neutral-n9;
-    }
-    &.n5 {
-      background-color: $neutral-n5;
-      color: $neutral-n9;
-    }
-    &.n6 {
-      background-color: $neutral-n6;
-      color: $neutral-n1;
-    }
-    &.n7 {
-      background-color: $neutral-n7;
-      color: $neutral-n1;
-    }
-    &.n8 {
-      background-color: $neutral-n8;
-      color: $neutral-n1;
-    }
-    &.n9 {
-      background-color: $neutral-n9;
-      color: $neutral-n1;
-    }
+
+  .neutral1 {
+    background-color: $neutral1;
+    color: $neutral9;
   }
+  .neutral2 {
+    background-color: $neutral2;
+    color: $neutral9;
+  }
+  .neutral3 {
+    background-color: $neutral3;
+    color: $neutral9;
+  }
+  .neutral4 {
+    background-color: $neutral4;
+    color: $neutral9;
+  }
+  .neutral5 {
+    background-color: $neutral5;
+    color: $neutral9;
+  }
+  .neutral6 {
+    background-color: $neutral6;
+    color: $neutral1;
+  }
+  .neutral7 {
+    background-color: $neutral7;
+    color: $neutral1;
+  }
+  .neutral8 {
+    background-color: $neutral8;
+    color: $neutral1;
+  }
+  .neutral9 {
+    background-color: $neutral9;
+    color: $neutral1;
+  }
+
   // - Support
-  .support {
-    // negative
-    &.negative {
-      &.n1 {
-        background-color: $support-negative-n1;
-        color: $support-negative-n5;
-      }
-      &.n2 {
-        background-color: $support-negative-n2;
-        color: $support-negative-n5;
-      }
-      &.n3 {
-        background-color: $support-negative-n3;
-        color: $support-negative-n1;
-      }
-      &.n4 {
-        background-color: $support-negative-n4;
-        color: $support-negative-n1;
-      }
-      &.n5 {
-        background-color: $support-negative-n5;
-        color: $support-negative-n1;
-      }
-    }
+  // negative
+  .support-negative1 {
+    background-color: $support-negative1;
+    color: $support-negative5;
+  }
+  .support-negative2 {
+    background-color: $support-negative2;
+    color: $support-negative5;
+  }
+  .support-negative3 {
+    background-color: $support-negative3;
+    color: $support-negative1;
+  }
+  .support-negative4 {
+    background-color: $support-negative4;
+    color: $support-negative1;
+  }
+  .support-negative5 {
+    background-color: $support-negative5;
+    color: $support-negative1;
+  }
 
-    // positive
-    &.positive {
-      &.p1 {
-        background-color: $support-positive-p1;
-        color: $support-positive-p5;
-      }
-      &.p2 {
-        background-color: $support-positive-p2;
-        color: $support-positive-p5;
-      }
-      &.p3 {
-        background-color: $support-positive-p3;
-        color: $support-positive-p1;
-      }
-      &.p4 {
-        background-color: $support-positive-p4;
-        color: $support-positive-p1;
-      }
-      &.p5 {
-        background-color: $support-positive-p5;
-        color: $support-positive-p1;
-      }
-    }
+  // positive
+  .support-positive1 {
+    background-color: $support-positive1;
+    color: $support-positive5;
+  }
+  .support-positive2 {
+    background-color: $support-positive2;
+    color: $support-positive5;
+  }
+  .support-positive3 {
+    background-color: $support-positive3;
+    color: $support-positive1;
+  }
+  .support-positive4 {
+    background-color: $support-positive4;
+    color: $support-positive1;
+  }
+  .support-positive5 {
+    background-color: $support-positive5;
+    color: $support-positive1;
+  }
 
-    // alert
-    &.alert {
-      &.a1 {
-        background-color: $support-alert-a1;
-        color: $support-alert-a5;
-      }
-      &.a2 {
-        background-color: $support-alert-a2;
-        color: $support-alert-a5;
-      }
-      &.a3 {
-        background-color: $support-alert-a3;
-        color: $support-alert-a5;
-      }
-      &.a4 {
-        background-color: $support-alert-a4;
-        color: $support-alert-a1;
-      }
-      &.a5 {
-        background-color: $support-alert-a5;
-        color: $support-alert-a1;
-      }
-    }
+  // alert
+  .support-alert1 {
+    background-color: $support-alert1;
+    color: $support-alert5;
+  }
+  .support-alert2 {
+    background-color: $support-alert2;
+    color: $support-alert5;
+  }
+  .support-alert3 {
+    background-color: $support-alert3;
+    color: $support-alert5;
+  }
+  .support-alert4 {
+    background-color: $support-alert4;
+    color: $support-alert1;
+  }
+  .support-alert5 {
+    background-color: $support-alert5;
+    color: $support-alert1;
   }
 
   // ------------ Margin
-  .margin {
-    &.m1 {
-      margin: $space1;
-    }
-    &.m2 {
-      margin: $space2;
-    }
-    &.m3 {
-      margin: $space3;
-    }
-    &.m4 {
-      margin: $space4;
-    }
-    &.m5 {
-      margin: $space5;
-    }
-    &.m6 {
-      margin: $space6;
-    }
+  .margin1 {
+    margin: $space1;
+  }
+  .margin2 {
+    margin: $space2;
+  }
+  .margin3 {
+    margin: $space3;
+  }
+  .margin4 {
+    margin: $space4;
+  }
+  .margin5 {
+    margin: $space5;
+  }
+  .margin6 {
+    margin: $space6;
   }
 
   // ------------ Padding
-  .padding {
-    &.p1 {
-      padding: $space1;
-    }
-    &.p2 {
-      padding: $space2;
-    }
-    &.p3 {
-      padding: $space3;
-    }
-    &.p4 {
-      padding: $space4;
-    }
-    &.p5 {
-      padding: $space5;
-    }
-    &.p6 {
-      padding: $space6;
-    }
+
+  .padding1 {
+    padding: $space1;
+  }
+  .padding2 {
+    padding: $space2;
+  }
+  .padding3 {
+    padding: $space3;
+  }
+  .padding4 {
+    padding: $space4;
+  }
+  .padding5 {
+    padding: $space5;
+  }
+  .padding6 {
+    padding: $space6;
   }
 
   // ------------ Size
-  .size {
-    // - Width
-    &.w1 {
-      width: $size1;
-    }
-    &.w2 {
-      width: $size2;
-    }
-    &.w3 {
-      width: $size3;
-    }
-    &.w4 {
-      width: $size4;
-    }
-    &.w5 {
-      width: $size5;
-    }
-    &.w6 {
-      width: $size6;
-    }
-    &.w7 {
-      width: $size7;
-    }
-    &.w8 {
-      width: $size8;
-    }
-    &.w9 {
-      width: $size9;
-    }
-    &.w10 {
-      width: $size10;
-    }
+  // - Width
+  .size-width1 {
+    width: $size1;
+  }
+  .size-width2 {
+    width: $size2;
+  }
+  .size-width3 {
+    width: $size3;
+  }
+  .size-width4 {
+    width: $size4;
+  }
+  .size-width5 {
+    width: $size5;
+  }
+  .size-width6 {
+    width: $size6;
+  }
+  .size-width7 {
+    width: $size7;
+  }
+  .size-width8 {
+    width: $size8;
+  }
+  .size-width9 {
+    width: $size9;
+  }
+  .size-width10 {
+    width: $size10;
+  }
 
-    // - Height
-    &.h1 {
-      height: $size1;
-    }
-    &.h2 {
-      height: $size2;
-    }
-    &.h3 {
-      height: $size3;
-    }
-    &.h4 {
-      height: $size4;
-    }
-    &.h5 {
-      height: $size5;
-    }
-    &.h6 {
-      height: $size6;
-    }
-    &.h7 {
-      height: $size7;
-    }
-    &.h8 {
-      height: $size8;
-    }
-    &.h9 {
-      height: $size9;
-    }
-    &.h10 {
-      height: $size10;
-    }
+  // - Height
+  .size-height1 {
+    height: $size1;
+  }
+  .size-height2 {
+    height: $size2;
+  }
+  .size-height3 {
+    height: $size3;
+  }
+  .size-height4 {
+    height: $size4;
+  }
+  .size-height5 {
+    height: $size5;
+  }
+  .size-height6 {
+    height: $size6;
+  }
+  .size-height7 {
+    height: $size7;
+  }
+  .size-height8 {
+    height: $size8;
+  }
+  .size-height9 {
+    height: $size9;
+  }
+  .size-height10 {
+    height: $size10;
   }
 
   // ------------ Box shadows
   .bs1 {
-    box-shadow: $flying-shadow-s1;
+    box-shadow: $flying-shadow1;
   }
   .bs2 {
-    box-shadow: $flying-shadow-s2;
+    box-shadow: $flying-shadow2;
   }
   .bs3 {
-    box-shadow: $flying-shadow-s3;
+    box-shadow: $flying-shadow3;
   }
   .bs4 {
-    box-shadow: $flying-shadow-s4;
+    box-shadow: $flying-shadow4;
   }
   .bs5 {
-    box-shadow: $flying-shadow-s5;
+    box-shadow: $flying-shadow5;
+  }
+
+  @mixin default-border() {
+    border-style: solid;
   }
 
   // ------------ Border radius
-  .border-radius {
+  .br-normal {
     border-radius: 0px;
-    border-style: solid;
-    &.br-soft {
-      border-radius: 5px;
-    }
-
-    &.br-softer {
-      border-radius: 10px;
-    }
+    @include default-border();
+  }
+  .br-soft {
+    border-radius: 5px;
+    @include default-border();
+  }
+  .br-softer {
+    border-radius: 10px;
+    @include default-border();
   }
 
   // ------------ Border
-  .border-width {
+  .bw-normal {
     border-width: 2px;
-    border-style: solid;
-    &.bw-soft {
-      border-width: 1px;
-    }
-
-    &.bw-hard {
-      border-width: 3px;
-    }
+    @include default-border();
+  }
+  .bw-soft {
+    border-width: 1px;
+    @include default-border();
+  }
+  .bw-hard {
+    border-width: 3px;
+    @include default-border();
   }
 }
