@@ -23,16 +23,17 @@ $space4: 50px;
 $space5: 80px;
 $space6: 120px;
 
-$size1: 30px;
-$size2: 50px;
-$size3: 80px;
-$size4: 150px;
-$size5: 200px;
-$size6: 300px;
-$size7: 550px;
-$size8: 800px;
-$size9: 1200px;
-$size10: 1800px;
+$size1: 15px;
+$size2: 30px;
+$size3: 50px;
+$size4: 80px;
+$size5: 150px;
+$size6: 200px;
+$size7: 300px;
+$size8: 550px;
+$size9: 800px;
+$size10: 1200px;
+$size11: 1800px;
 
 @mixin square($size) {
   height: $size;

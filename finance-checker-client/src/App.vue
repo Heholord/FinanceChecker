@@ -8,7 +8,7 @@
       fix rootnav css
       Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)npm 
     -->
-    <div class="github-footer primary p9">
+    <div class="github-footer size h4 primary p9">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
       <p>
         <a
@@ -41,7 +41,6 @@ export default {
     bottom: 0;
     z-index: 10;
     width: 100%;
-    height: 9vh;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
     p {
       margin-top: 25px;

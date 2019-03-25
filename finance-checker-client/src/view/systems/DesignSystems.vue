@@ -152,12 +152,13 @@
         <li class="size w7">.h7|.w7</li>
         <li class="size w8">.h8|.w8</li>
         <li class="size w9">.h9|.w9</li>
+        <li class="size w10">.h10|.w10</li>
       </ul>
     </section>
     <section class="systemblock">
       <h1 class="title fs4">Border radius</h1>
       <ul class="border">
-        <li>.border-radius</li>
+        <li class="title">.border-radius</li>
         <li class="margin m1 border-radius">/</li>
         <li class="margin m1 border-radius br-soft">.br-soft</li>
         <li class="margin m1 border-radius br-softer">.br-softer</li>
@@ -166,7 +167,7 @@
     <section class="systemblock">
       <h1 class="title fs4">Border width</h1>
       <ul class="border">
-        <li>.border-width</li>
+        <li class="title">.border-width</li>
         <li class="margin m1 border-width bw-soft">.bw-soft</li>
         <li class="margin m1 border-width">/</li>
         <li class="margin m1 border-width bw-hard">.bw-hard</li>
@@ -198,8 +199,8 @@ div {
     .content {
       position: relative;
       text-align: center;
-      max-width: 1000px;
-      min-width: 850px;
+      max-width: $size10;
+      min-width: $size9;
       h1.headline {
         text-align: left;
         margin: 0;
@@ -211,7 +212,7 @@ div {
         background: $primary-p9;
         box-shadow: $flying-shadow-s2;
         border-radius: 50%;
-        @include square($size4);
+        @include square($size5);
       }
     }
   }
@@ -220,6 +221,7 @@ div {
     display: relative;
     margin: 100px;
     margin-top: 0px;
+    min-width: $size9;
 
     .splitcolumn,
     ul {
@@ -227,7 +229,7 @@ div {
       border-radius: 0px;
       box-shadow: $flying-shadow-s1;
       padding: 20px;
-      max-width: $size8;
+      max-width: $size9;
       background-color: white;
 
       > li {
@@ -240,14 +242,13 @@ div {
         grid-gap: $space1;
         justify-items: center;
         > li {
-          @include square($size2);
+          @include square($size3);
           padding-top: $space2;
           text-align: center;
         }
       }
 
       @mixin createBox() {
-        border: 2px solid $primary-p9;
         @include make-in-shadow($neutral-n2);
         background-image: linear-gradient(
           to right bottom,
@@ -262,25 +263,37 @@ div {
       &.padding-box {
         > li.margin {
           @include createBox();
+          border: 2px solid $primary-p9;
         }
       }
       &.margin-box {
         > li.margin {
           border: 1px solid $neutral-n4;
           > p {
-            width: $size2;
+            padding-top: $space2;
+            @include square($size3);
             @include make-in-shadow($neutral-n2);
             @include createBox();
+            border: 2px solid $primary-p9;
           }
         }
       }
 
       &.border {
-        > li.margin {
-          padding-top: $space4;
-          @include square($size4);
-          @include make-in-shadow($neutral-n2);
-          @include createBox();
+        display: grid;
+        grid-template: 1fr 2fr / 1fr 1fr 1fr;
+        justify-items: center;
+        > li {
+          &.title {
+            grid-column: 1 / span 3;
+            justify-self: left;
+          }
+          &.margin {
+            padding-top: $space4;
+            @include square($size5);
+            @include make-in-shadow($neutral-n2);
+            @include createBox();
+          }
         }
       }
 
@@ -294,10 +307,10 @@ div {
       }
 
       &.size-box {
-        max-width: $size9 + 40px;
-        min-width: $size9 + 40px;
+        max-width: $size10 + 40px;
+        min-width: $size10 + 40px;
         > li.size {
-          height: $size1;
+          height: $size3;
           background-image: linear-gradient(
             to left,
             $primary-p1,
@@ -330,7 +343,7 @@ div {
         }
 
         > li {
-          @include square($size2);
+          @include square($size3);
           border-radius: 0px;
           padding-top: $space2;
           text-align: center;
