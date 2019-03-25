@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="neutral n2">
+  <div id="app" class="neutral2">
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
@@ -8,7 +8,7 @@
       fix rootnav css
       Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)npm 
     -->
-    <div class="github-footer primary p9">
+    <div class="github-footer primary9">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
       <p>
         <a
@@ -46,7 +46,7 @@ export default {
     p {
       margin-top: 25px;
       a {
-        color: $primary-p1;
+        color: $primary1;
         text-decoration: none;
         transition: font-size 0.3s ease, text-shadow 0.3s ease;
         line-height: 2;

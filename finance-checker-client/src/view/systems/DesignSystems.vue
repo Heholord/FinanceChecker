@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="heading primary p7">
+    <div class="heading primary7">
       <div class="content">
         <h1 class="headline thick">Design System Cheatsheat</h1>
         <img class="headline-img" src="@/assets/design.svg">
@@ -50,45 +50,45 @@
       <div class="splitcolumn">
         <p class="title">.primary</p>
         <ul class="color">
-          <li class="primary p1">.p1</li>
-          <li class="primary p2">.p2</li>
-          <li class="primary p3">.p3</li>
-          <li class="primary p4">.p4</li>
-          <li class="primary p5">.p5</li>
-          <li class="primary p6">.p6</li>
-          <li class="primary p7">.p7</li>
-          <li class="primary p8">.p8</li>
-          <li class="primary p9">.p9</li>
+          <li class="primary1">.p1</li>
+          <li class="primary2">.p2</li>
+          <li class="primary3">.p3</li>
+          <li class="primary4">.p4</li>
+          <li class="primary5">.p5</li>
+          <li class="primary6">.p6</li>
+          <li class="primary7">.p7</li>
+          <li class="primary8">.p8</li>
+          <li class="primary9">.p9</li>
         </ul>
         <p class="title">.neutral</p>
         <ul class="color">
-          <li class="neutral n1">.n1</li>
-          <li class="neutral n2">.n2</li>
-          <li class="neutral n3">.n3</li>
-          <li class="neutral n4">.n4</li>
-          <li class="neutral n5">.n5</li>
-          <li class="neutral n6">.n6</li>
-          <li class="neutral n7">.n7</li>
-          <li class="neutral n8">.n8</li>
-          <li class="neutral n9">.n9</li>
+          <li class="neutral1">.n1</li>
+          <li class="neutral2">.n2</li>
+          <li class="neutral3">.n3</li>
+          <li class="neutral4">.n4</li>
+          <li class="neutral5">.n5</li>
+          <li class="neutral6">.n6</li>
+          <li class="neutral7">.n7</li>
+          <li class="neutral8">.n8</li>
+          <li class="neutral9">.n9</li>
         </ul>
         <p class="title">.support[.negative|.positive|.alert]</p>
         <ul class="color many">
-          <li class="support negative n1">.n1</li>
-          <li class="support negative n2">.n2</li>
-          <li class="support negative n3">.n3</li>
-          <li class="support negative n4">.n4</li>
-          <li class="support negative n5">.n5</li>
-          <li class="support positive p1">.p1</li>
-          <li class="support positive p2">.p2</li>
-          <li class="support positive p3">.p3</li>
-          <li class="support positive p4">.p4</li>
-          <li class="support positive p5">.p5</li>
-          <li class="support alert a1">.a1</li>
-          <li class="support alert a2">.a2</li>
-          <li class="support alert a3">.a3</li>
-          <li class="support alert a4">.a4</li>
-          <li class="support alert a5">.a5</li>
+          <li class="support-negative1">.n1</li>
+          <li class="support-negative2">.n2</li>
+          <li class="support-negative3">.n3</li>
+          <li class="support-negative4">.n4</li>
+          <li class="support-negative5">.n5</li>
+          <li class="support-positive1">.p1</li>
+          <li class="support-positive2">.p2</li>
+          <li class="support-positive3">.p3</li>
+          <li class="support-positive4">.p4</li>
+          <li class="support-positive5">.p5</li>
+          <li class="support-alert1">.a1</li>
+          <li class="support-alert2">.a2</li>
+          <li class="support-alert3">.a3</li>
+          <li class="support-alert4">.a4</li>
+          <li class="support-alert5">.a5</li>
         </ul>
       </div>
     </section>
@@ -106,70 +106,65 @@
     <section class="systemblock">
       <h1 class="title fs4">Margin</h1>
       <ul class="margin-box">
-        <li>.margin</li>
-        <li class="margin m1">
-          <p class="margin m1">.m1</p>
+        <li class="margin1">
+          <p class="margin1">.margin1</p>
         </li>
-        <li class="margin m1">
-          <p class="margin m2">.m2</p>
+        <li class="margin1">
+          <p class="margin2">.margin2</p>
         </li>
-        <li class="margin m1">
-          <p class="margin m3">.m3</p>
+        <li class="margin1">
+          <p class="margin3">.margin3</p>
         </li>
-        <li class="margin m1">
-          <p class="margin m4">.m4</p>
+        <li class="margin1">
+          <p class="margin4">.margin4</p>
         </li>
-        <li class="margin m1">
-          <p class="margin m5">.m5</p>
+        <li class="margin1">
+          <p class="margin5">.margin5</p>
         </li>
-        <li class="margin m1">
-          <p class="margin m6">.m6</p>
+        <li class="margin1">
+          <p class="margin6">.margin6</p>
         </li>
       </ul>
     </section>
     <section class="systemblock">
       <h1 class="title fs4">Padding</h1>
       <ul class="padding-box">
-        <li>.padding</li>
-        <li class="margin m1 padding p1">.m1</li>
-        <li class="margin m1 padding p2">.m2</li>
-        <li class="margin m1 padding p3">.m3</li>
-        <li class="margin m1 padding p4">.m4</li>
-        <li class="margin m1 padding p5">.m5</li>
-        <li class="margin m1 padding p6">.m6</li>
+        <li class="margin1 padding1">.padding1</li>
+        <li class="margin1 padding2">.padding2</li>
+        <li class="margin1 padding3">.padding3</li>
+        <li class="margin1 padding4">.padding4</li>
+        <li class="margin1 padding5">.padding5</li>
+        <li class="margin1 padding6">.padding6</li>
       </ul>
     </section>
     <section class="systemblock">
       <h1 class="title fs4">Height/Widht</h1>
       <ul class="size-box">
-        <li>.size</li>
-        <li class="size w1">.h1|.w1</li>
-        <li class="size w2">.h2|.w2</li>
-        <li class="size w3">.h3|.w3</li>
-        <li class="size w4">.h4|.w4</li>
-        <li class="size w5">.h5|.w5</li>
-        <li class="size w6">.h6|.w6</li>
-        <li class="size w7">.h7|.w7</li>
-        <li class="size w8">.h8|.w8</li>
-        <li class="size w9">.h9|.w9</li>
+        <li class="size-width1">.size-[height1|width1]</li>
+        <li class="size-width2">.size-[height2|width2]</li>
+        <li class="size-width3">.size-[height3|width3]</li>
+        <li class="size-width4">.size-[height4|width4]</li>
+        <li class="size-width5">.size-[height5|width5]</li>
+        <li class="size-width6">.size-[height6|width6]</li>
+        <li class="size-width7">.size-[height7|width7]</li>
+        <li class="size-width8">.size-[height8|width8]</li>
+        <li class="size-width9">.size-[height9|width9]</li>
       </ul>
     </section>
     <section class="systemblock">
       <h1 class="title fs4">Border radius</h1>
       <ul class="border">
-        <li>.border-radius</li>
-        <li class="margin m1 border-radius">/</li>
-        <li class="margin m1 border-radius br-soft">.br-soft</li>
-        <li class="margin m1 border-radius br-softer">.br-softer</li>
+        <li class="margin1 bw-normal br-normal">.br-normal</li>
+        <li class="margin1 bw-normal br-soft">.br-soft</li>
+        <li class="margin1 bw-normal br-softer">.br-softer</li>
       </ul>
     </section>
     <section class="systemblock">
       <h1 class="title fs4">Border width</h1>
       <ul class="border">
-        <li>.border-width</li>
-        <li class="margin m1 border-width bw-soft">.bw-soft</li>
-        <li class="margin m1 border-width">/</li>
-        <li class="margin m1 border-width bw-hard">.bw-hard</li>
+        <li class="margin1 bw-soft">.bw-soft</li>
+        <li class="margin1 bw-normal">.bw-normal</li>
+        <li class="margin1 bw-hard">.bw-hard</li>
       </ul>
     </section>
   </div>
@@ -192,7 +187,7 @@ div {
     height: 100px;
     width: 100%;
     padding: 20px;
-    box-shadow: $flying-shadow-s2;
+    box-shadow: $flying-shadow2;
     margin: 0 0 80px 0;
 
     .content {
@@ -208,8 +203,8 @@ div {
         position: absolute;
         right: 10%;
         top: -10px;
-        background: $primary-p9;
-        box-shadow: $flying-shadow-s2;
+        background: $primary9;
+        box-shadow: $flying-shadow2;
         border-radius: 50%;
         @include square($size4);
       }
@@ -225,7 +220,7 @@ div {
     ul {
       list-style-type: none;
       border-radius: 0px;
-      box-shadow: $flying-shadow-s1;
+      box-shadow: $flying-shadow1;
       padding: 20px;
       max-width: $size8;
       background-color: white;
@@ -247,39 +242,38 @@ div {
       }
 
       @mixin createBox() {
-        border: 2px solid $primary-p9;
-        @include make-in-shadow($neutral-n2);
+        @include make-in-shadow($neutral1);
         background-image: linear-gradient(
-          to right bottom,
-          $primary-p2,
-          $primary-p3,
-          $primary-p4,
-          $primary-p5
+          to top,
+          $primary2,
+          $primary3,
+          $primary4,
+          $primary5
         );
-        color: $primary-p9;
+        color: $primary9;
       }
 
       &.padding-box {
-        > li.margin {
+        > li[class^="margin"] {
           @include createBox();
+          border: 2px solid $primary9;
         }
       }
       &.margin-box {
-        > li.margin {
-          border: 1px solid $neutral-n4;
+        > li[class^="margin"] {
+          border: 1px solid $neutral4;
           > p {
-            width: $size2;
-            @include make-in-shadow($neutral-n2);
+            width: $size3;
             @include createBox();
+            border: 2px solid $primary9;
           }
         }
       }
 
       &.border {
-        > li.margin {
+        > li[class^="margin"] {
           padding-top: $space4;
           @include square($size4);
-          @include make-in-shadow($neutral-n2);
           @include createBox();
         }
       }
@@ -287,7 +281,7 @@ div {
       &.padding-box,
       &.margin-box,
       &.border {
-        > li.margin {
+        > li[class^="margin"] {
           display: inline-block;
           text-align: center;
         }
@@ -296,19 +290,19 @@ div {
       &.size-box {
         max-width: $size9 + 40px;
         min-width: $size9 + 40px;
-        > li.size {
+        > li[class^="size"] {
           height: $size1;
           background-image: linear-gradient(
             to left,
-            $primary-p1,
-            $primary-p3,
-            $primary-p5,
-            $primary-p7,
-            $primary-p9
+            $primary1,
+            $primary3,
+            $primary5,
+            $primary7,
+            $primary9
           );
           padding-top: $space1;
           padding-right: $space1;
-          @include make-in-shadow($support-alert-a3);
+          @include make-in-shadow($primary1);
           text-align: right;
         }
       }
@@ -334,7 +328,7 @@ div {
           border-radius: 0px;
           padding-top: $space2;
           text-align: center;
-          @include make-in-shadow($neutral-n1);
+          @include make-in-shadow($neutral1);
         }
       }
     }
