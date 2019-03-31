@@ -1,5 +1,6 @@
 <template>
   <div class="root">
+    <heading heading="Finance Checker"/>
     <choices :choices="choices" big @select="execute"></choices>
     <!-- <button @click="routeTo('/manage')">
       <el-card class="box">
@@ -27,11 +28,12 @@
 </template>
 
 <script>
-import Choices from "@/components/Choices.vue";
+import Choices from "@/components/Choices";
+import Heading from "@/components/Heading";
 
 export default {
   name: "RootView",
-  components: { Choices },
+  components: { Choices, Heading },
   data() {
     return {
       choices: [

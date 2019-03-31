@@ -6,7 +6,8 @@
       rework utils (maybe in plugin),
       make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
       fix rootnav css
-      Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)npm 
+      Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
+      Tagline: Cause spreadsheats are not enought
     -->
     <div class="github-footer size-h4 primary9">
       <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">

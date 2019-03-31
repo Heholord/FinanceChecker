@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="heading primary7">
-      <div class="content">
-        <h1 class="headline thick">Design System Cheatsheat</h1>
-        <img class="headline-img" src="@/assets/design.svg">
-      </div>
-    </div>
+    <heading img="design.svg" heading="Design System Cheatsheat"></heading>
 
     <section class="systemblock">
       <h1 class="title fs4">Fonts</h1>
@@ -48,47 +43,47 @@
     <section class="systemblock">
       <h1 class="title fs4">Color</h1>
       <div class="splitcolumn">
-        <p class="title">.primary</p>
+        <p class="title">Primary</p>
         <ul class="color">
-          <li class="primary1">.p1</li>
-          <li class="primary2">.p2</li>
-          <li class="primary3">.p3</li>
-          <li class="primary4">.p4</li>
-          <li class="primary5">.p5</li>
-          <li class="primary6">.p6</li>
-          <li class="primary7">.p7</li>
-          <li class="primary8">.p8</li>
-          <li class="primary9">.p9</li>
+          <li class="primary1">.primary1</li>
+          <li class="primary2">.primary2</li>
+          <li class="primary3">.primary3</li>
+          <li class="primary4">.primary4</li>
+          <li class="primary5">.primary5</li>
+          <li class="primary6">.primary6</li>
+          <li class="primary7">.primary7</li>
+          <li class="primary8">.primary8</li>
+          <li class="primary9">.primary9</li>
         </ul>
-        <p class="title">.neutral</p>
+        <p class="title">Neutral</p>
         <ul class="color">
-          <li class="neutral1">.n1</li>
-          <li class="neutral2">.n2</li>
-          <li class="neutral3">.n3</li>
-          <li class="neutral4">.n4</li>
-          <li class="neutral5">.n5</li>
-          <li class="neutral6">.n6</li>
-          <li class="neutral7">.n7</li>
-          <li class="neutral8">.n8</li>
-          <li class="neutral9">.n9</li>
+          <li class="neutral1">.neutral1</li>
+          <li class="neutral2">.neutral2</li>
+          <li class="neutral3">.neutral3</li>
+          <li class="neutral4">.neutral4</li>
+          <li class="neutral5">.neutral5</li>
+          <li class="neutral6">.neutral6</li>
+          <li class="neutral7">.neutral7</li>
+          <li class="neutral8">.neutral8</li>
+          <li class="neutral9">.neutral9</li>
         </ul>
-        <p class="title">.support[.negative|.positive|.alert]</p>
+        <p class="title">Support</p>
         <ul class="color many">
-          <li class="support-negative1">.n1</li>
-          <li class="support-negative2">.n2</li>
-          <li class="support-negative3">.n3</li>
-          <li class="support-negative4">.n4</li>
-          <li class="support-negative5">.n5</li>
-          <li class="support-positive1">.p1</li>
-          <li class="support-positive2">.p2</li>
-          <li class="support-positive3">.p3</li>
-          <li class="support-positive4">.p4</li>
-          <li class="support-positive5">.p5</li>
-          <li class="support-alert1">.a1</li>
-          <li class="support-alert2">.a2</li>
-          <li class="support-alert3">.a3</li>
-          <li class="support-alert4">.a4</li>
-          <li class="support-alert5">.a5</li>
+          <li class="support-negative1">.support-negative1</li>
+          <li class="support-negative2">.support-negative2</li>
+          <li class="support-negative3">.support-negative3</li>
+          <li class="support-negative4">.support-negative4</li>
+          <li class="support-negative5">.support-negative5</li>
+          <li class="support-positive1">.support-positive1</li>
+          <li class="support-positive2">.support-positive2</li>
+          <li class="support-positive3">.support-positive3</li>
+          <li class="support-positive4">.support-positive4</li>
+          <li class="support-positive5">.support-positive5</li>
+          <li class="support-alert1">.support-alert1</li>
+          <li class="support-alert2">.support-alert2</li>
+          <li class="support-alert3">.support-alert3</li>
+          <li class="support-alert4">.support-alert4</li>
+          <li class="support-alert5">.support-alert5</li>
         </ul>
       </div>
     </section>
@@ -171,9 +166,10 @@
 </template>
 
 <script>
+import Heading from "@/components/Heading";
 export default {
   name: "DesignSystem",
-  components: {}
+  components: { Heading }
 };
 </script>
 
@@ -184,11 +180,9 @@ div {
   text-align: left;
   .heading {
     position: relative;
-    height: 100px;
     width: 100%;
-    padding: 20px;
     box-shadow: $flying-shadow2;
-    margin: 0 0 80px 0;
+    margin: 0 0 $space4 0;
 
     .content {
       position: relative;
@@ -201,8 +195,8 @@ div {
       }
       .headline-img {
         position: absolute;
-        right: 10%;
-        top: -10px;
+        top: -$space2;
+        right: 0;
         background: $primary9;
         box-shadow: $flying-shadow2;
         border-radius: 50%;
@@ -213,8 +207,8 @@ div {
 
   .systemblock {
     display: relative;
-    margin: 100px;
-    margin-top: 0px;
+    margin: $space5;
+    margin-top: 0;
     min-width: $size9;
 
     .splitcolumn,
@@ -230,18 +224,6 @@ div {
         margin-bottom: 30px;
       }
 
-      &.box-shadow {
-        display: grid;
-        grid-template: 1fr / repeat(5, 1fr);
-        grid-gap: $space1;
-        justify-items: center;
-        > li {
-          @include square($size3);
-          padding-top: $space2;
-          text-align: center;
-        }
-      }
-
       @mixin createBox() {
         @include make-in-shadow($neutral1);
         background-image: linear-gradient(
@@ -253,10 +235,10 @@ div {
         );
         color: $primary9;
       }
-
-      &.padding-box {
+      &.box-shadow &.padding-box {
         > li[class^="margin"] {
           @include createBox();
+          min-width: $size4;
           border: 2px solid $primary9;
         }
       }
@@ -264,39 +246,42 @@ div {
         > li[class^="margin"] {
           border: 1px solid $neutral4;
           > p {
-            padding-top: $space2;
-            @include square($size3);
+            @include square($size4);
             @include createBox();
+            padding-top: $space3;
             border: 2px solid $primary9;
           }
         }
       }
 
       &.border {
-        display: grid;
-        grid-template: 1fr / 1fr 1fr 1fr;
-        justify-items: center;
-        > li[class^="margin"]{
-            padding-top: $space4;
-            @include square($size5);
-            @include createBox();
-          }
+        > li[class^="margin"] {
+          padding-top: $space4;
+          @include square($size5);
+          @include createBox();
         }
       }
 
+      &.box-shadow,
       &.padding-box,
       &.margin-box,
       &.border {
-        > li[class^="margin"] {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+        gap: $space2;
+        & > li[class^="margin"] {
           display: inline-block;
           text-align: center;
+          margin: auto;
         }
       }
 
       &.size-box {
-        max-width: $size10 + 40px;
-        min-width: $size10 + 40px;
-        > li.size {
+        max-width: $size9 + $space4;
+        min-width: $size9 + $space4;
+        > li[class^="size"] {
           height: $size3;
           background-image: linear-gradient(
             to left,
@@ -316,21 +301,21 @@ div {
 
     .splitcolumn {
       display: grid;
-      grid-template: 1fr 1fr 1.5fr / 1fr 1fr;
+      grid-template: 1fr 1fr 1.5fr / 0.2fr 1fr;
       ul.color {
         background: none;
         border: none;
         box-shadow: none;
         display: grid;
-        grid-template: 1fr / repeat(9, 1fr);
-        grid-gap: 5px;
+        grid-template: 1fr 1fr / repeat(5, 1fr);
+        grid-gap: $space1;
         justify-items: center;
         &.many {
           grid-template: 1fr 1fr 1fr / repeat(5, 1fr);
         }
 
         > li {
-          @include square($size3);
+          @include square($size4);
           border-radius: 0px;
           padding-top: $space2;
           text-align: center;
