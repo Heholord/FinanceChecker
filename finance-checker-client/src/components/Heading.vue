@@ -30,12 +30,9 @@ export default {
 div {
   text-align: left;
   .heading {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     box-shadow: $flying-shadow2;
-    margin: 0 0 $space4 0;
+    margin: 0 0 $space5 0;
 
     .bar {
       position: absolute;
@@ -48,8 +45,8 @@ div {
     .content {
       position: relative;
       text-align: center;
-      max-width: $size10;
-      min-width: $size9;
+      max-width: $size11;
+      min-width: $size10;
       h1.headline {
         text-align: left;
         vertical-align: baseline;

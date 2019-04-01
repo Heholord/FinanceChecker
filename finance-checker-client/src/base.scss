@@ -79,6 +79,7 @@ body {
     font-size: $fs7;
     letter-spacing: -0.03em;
     line-height: 1;
+    vertical-align: baseline;
 
     &.thick {
       font-weight: $fw5;
@@ -90,6 +91,7 @@ body {
 
   .article {
     font-family: source-sans-pro;
+    vertical-align: baseline;
     line-height: 1.75;
   }
 
@@ -97,6 +99,7 @@ body {
     font-weight: $fw2;
     letter-spacing: -0.02em;
     line-height: 1;
+    vertical-align: baseline;
   }
 
   // ------------ Font size

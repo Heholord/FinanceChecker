@@ -21,7 +21,7 @@
       <ul>
         <li class="fs1">.fs1: The dog and the cat run all day long</li>
         <li class="fs2">.fs2: The dog and the cat run all day long</li>
-        <li class="fs4">.fs4: The dog and the cat run all day long</li>
+        <li class="fs3">.fs3: The dog and the cat run all day long</li>
         <li class="fs4">.fs4: The dog and the cat run all day long</li>
         <li class="fs5">.fs5: The dog and the cat run all day long</li>
         <li class="fs6">.fs6: The dog and the cat run all day long</li>
@@ -144,6 +144,7 @@
         <li class="size-width7">.size-[height7|width7]</li>
         <li class="size-width8">.size-[height8|width8]</li>
         <li class="size-width9">.size-[height9|width9]</li>
+        <li class="size-width10">.size-[height10|width10]</li>
       </ul>
     </section>
     <section class="systemblock">
@@ -178,38 +179,12 @@ export default {
 
 div {
   text-align: left;
-  .heading {
-    position: relative;
-    width: 100%;
-    box-shadow: $flying-shadow2;
-    margin: 0 0 $space4 0;
-
-    .content {
-      position: relative;
-      text-align: center;
-      max-width: $size10;
-      min-width: $size9;
-      h1.headline {
-        text-align: left;
-        margin: 0;
-      }
-      .headline-img {
-        position: absolute;
-        top: -$space2;
-        right: 0;
-        background: $primary9;
-        box-shadow: $flying-shadow2;
-        border-radius: 50%;
-        @include square($size5);
-      }
-    }
-  }
 
   .systemblock {
     display: relative;
     margin: $space5;
     margin-top: 0;
-    min-width: $size9;
+    min-width: $size10;
 
     .splitcolumn,
     ul {
@@ -217,7 +192,7 @@ div {
       border-radius: 0px;
       box-shadow: $flying-shadow1;
       padding: 20px;
-      max-width: $size9;
+      max-width: $size10;
       background-color: white;
 
       > li {
@@ -235,7 +210,8 @@ div {
         );
         color: $primary9;
       }
-      &.box-shadow &.padding-box {
+      &.box-shadow,
+      &.padding-box {
         > li[class^="margin"] {
           @include createBox();
           min-width: $size4;
@@ -279,8 +255,8 @@ div {
       }
 
       &.size-box {
-        max-width: $size9 + $space4;
-        min-width: $size9 + $space4;
+        max-width: $size10 + $space4;
+        min-width: $size10 + $space4;
         > li[class^="size"] {
           height: $size3;
           background-image: linear-gradient(

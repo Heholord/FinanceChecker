@@ -1,29 +1,8 @@
 <template>
   <div class="root">
-    <heading heading="Finance Checker"/>
+    <heading heading="Finance Checker" img="fc.svg" logo-left/>
+    <!-- TODO logoleft -->
     <choices :choices="choices" big @select="execute"></choices>
-    <!-- <button @click="routeTo('/manage')">
-      <el-card class="box">
-        <img src="@/assets/calculate.png" class="image">
-        <div style="margin-top: 20px; padding: 14px;">
-          <span>Manage data</span>
-          <div class="bottom clearfix">
-            <span class="sub">Start your journey</span>
-          </div>
-        </div>
-      </el-card>
-    </button>
-    <button @click="routeTo('/visualize')">
-      <el-card class="box">
-        <img src="@/assets/euro.jpg" class="image">
-        <div style="margin-top: 20px; padding: 14px;">
-          <span>View data</span>
-          <div class="bottom clearfix">
-            <span class="sub">Enjoy what you have earned</span>
-          </div>
-        </div>
-      </el-card>
-    </button>-->
   </div>
 </template>
 
@@ -61,7 +40,4 @@ export default {
 </script>
 
 <style lang="scss">
-.root {
-  margin: 50px;
-}
 </style>

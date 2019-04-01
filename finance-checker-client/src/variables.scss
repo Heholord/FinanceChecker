@@ -29,11 +29,12 @@ $size3: 50px;
 $size4: 80px;
 $size5: 150px;
 $size6: 200px;
-$size7: 300px;
-$size8: 550px;
-$size9: 800px;
-$size10: 1200px;
-$size11: 1800px;
+$size7: 280px;
+$size8: 412px;
+$size9: 550px;
+$size10: 800px;
+$size11: 1200px;
+$size12: 1800px;
 
 @mixin square($size) {
   height: $size;

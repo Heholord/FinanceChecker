@@ -6,11 +6,11 @@
         v-for="choice in choices"
         :key="choice.title"
         :class="{big:big, info:choice.info}"
-        class="box"
+        class="box br-softer"
       >
         <img v-if="choice.image" v-lazy="getImage(choice)" class="image">
         <div class="textarea">
-          <span>{{choice.text}}</span>
+          <span class="title">{{choice.text}}</span>
           <div class="bottom clearfix">
             <span class="sub">{{choice.subtext}}</span>
           </div>
@@ -49,31 +49,32 @@ export default {
 
 
 <style lang="scss">
+@import "@/variables.scss";
+
 .choices {
   .choice-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-content: center;
+    height: 100%;
     > .box {
       border: none;
-      border-radius: 15px;
       height: 100%;
-      width: 300px;
-      height: 300px;
-      max-height: 500px;
-      max-width: 500px;
-      margin: 5px;
+      @include square($size7);
+      max-height: $size8;
+      max-width: $size8;
       padding: 0;
+      margin: $space1;
 
       &.big {
-        width: 500px;
-        height: 500px;
-        margin: 10px;
+        @include square($size8);
+        margin: $space2;
+        font-size: $fs6;
 
         .image {
-          width: 500px;
-          height: 333px;
+          width: $size8;
+          height: $size7;
         }
       }
 
@@ -86,8 +87,9 @@ export default {
 
         .textarea {
           flex: 1 1 auto;
+          margin: $space2;
           display: grid;
-          grid-template-rows: 0.8fr 0.8fr 1fr;
+          grid-template-rows: 0.6fr 0.8fr 1.2fr;
           > span {
             grid-row: 2;
           }
@@ -119,14 +121,14 @@ export default {
     }
 
     .sub {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #999;
+      margin-top: $space1;
+      font-size: $fs2;
+      color: $neutral5;
     }
 
     .image {
-      width: 300px;
-      height: 200px;
+      width: $size7;
+      height: $size6;
     }
 
     .bottom {
