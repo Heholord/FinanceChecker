@@ -150,9 +150,9 @@
     <section class="systemblock">
       <h1 class="title fs4">Border radius</h1>
       <ul class="border">
-        <li class="margin1 bw-normal br-normal">.br-normal</li>
-        <li class="margin1 bw-normal br-soft">.br-soft</li>
-        <li class="margin1 bw-normal br-softer">.br-softer</li>
+        <li class="margin1 bw-soft br-normal">.br-normal</li>
+        <li class="margin1 bw-soft br-soft">.br-soft</li>
+        <li class="margin1 bw-soft br-softer">.br-softer</li>
       </ul>
     </section>
     <section class="systemblock">
@@ -199,23 +199,29 @@ div {
         margin-bottom: 30px;
       }
 
+      @mixin background() {
+        background-image: linear-gradient(to top, $primary1, $primary2);
+      }
       @mixin createBox() {
         @include make-in-shadow($neutral1);
-        background-image: linear-gradient(
-          to top,
-          $primary2,
-          $primary3,
-          $primary4,
-          $primary5
-        );
+        @include background();
         color: $primary9;
       }
-      &.box-shadow,
+
+      &.box-shadow {
+        > li {
+          @include square($size4);
+          @include background();
+          text-align: center;
+          vertical-align: baseline;
+          padding-top: $space3;
+        }
+      }
       &.padding-box {
         > li[class^="margin"] {
           @include createBox();
           min-width: $size4;
-          border: 2px solid $primary9;
+          border: 1px solid $primary9;
         }
       }
       &.margin-box {
@@ -225,7 +231,7 @@ div {
             @include square($size4);
             @include createBox();
             padding-top: $space3;
-            border: 2px solid $primary9;
+            border: 1px solid $primary9;
           }
         }
       }
