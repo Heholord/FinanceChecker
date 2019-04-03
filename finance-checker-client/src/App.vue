@@ -9,13 +9,16 @@
       Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
       Tagline: Cause spreadsheats are not enought
     -->
-    <div class="github-footer size-h4 primary9">
-      <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
-      <p>
-        <a
-          href="https://github.com/Heholord/FinanceChecker"
-        >This project is open source on GitHub. Check it out and contribute if you please</a>
-      </p>
+    <div class="github-footer size-h4 primary9 width-center">
+      <div class="center-content">
+        <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
+        <p>
+          <a
+            class="article"
+            href="https://github.com/Heholord/FinanceChecker"
+          >This project is open source on GitHub. Check it out and contribute if you please</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +39,7 @@ export default {
 #app {
   text-align: center;
   height: 100%;
+  max-width: 1000px;
 
   .github-footer {
     position: fixed;
@@ -44,7 +48,8 @@ export default {
     width: 100%;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
     p {
-      margin-top: 25px;
+      margin-top: $space1;
+      margin-left: $space5;
       a {
         color: $primary1;
         text-decoration: none;

@@ -1,15 +1,17 @@
 <template>
-  <div class="navbox">
-    <ul class="root-navigation title">
-      <li class="br-soft" :class="{active: isActive('/manage')}">
-        <img v-lazy="require('@/assets/dataSuccess.svg')">
-        <span>Management</span>
-      </li>
-      <li class="br-soft" :class="{active: isActive('/visualize')}">
-        <img v-lazy="require('@/assets/dataSuccess.svg')">
-        <span>Visualization</span>
-      </li>
-    </ul>
+  <div class="width-center">
+    <div class="navbox center-content">
+      <ul class="root-navigation title">
+        <li class="br-soft" :class="{active: isActive('/manage')}">
+          <img v-lazy="require('@/assets/dataSuccess.svg')">
+          <span>Management</span>
+        </li>
+        <li class="br-soft" :class="{active: isActive('/visualize')}">
+          <img v-lazy="require('@/assets/dataSuccess.svg')">
+          <span>Visualization</span>
+        </li>
+      </ul>
+    </div>
   </div>
   <!-- <el-menu :default-active="$route.path" class="master-menu" mode="horizontal" router>
     <el-menu-item index="/manage">Management</el-menu-item>
@@ -28,72 +30,77 @@ export default {
 </script>
 
     
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/variables.scss";
 
 $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
   width 0.2s ease-out, border-radius 0.2s ease-out;
 
-.navbox {
-  background: $neutral2;
-  z-index: 9;
+.width-center {
   position: absolute;
-  top: -80px;
-  width: 100vw;
+  top: -30px;
+  z-index: 9;
   transition: $toptrans;
-  min-width: $size9;
 
   &:hover {
-    top: -80px;
-    > ul.root-navigation {
-      height: $size7;
-      border-radius: 300px;
-      margin: 0 $space5;
-      > li {
-        top: 140px;
-        margin: $space3;
+    top: 45px;
+    > .center-content.navbox {
+      > ul.root-navigation {
+        > li {
+          top: 10px;
+          margin: $space3;
+        }
       }
     }
   }
 
-  ul.root-navigation {
-    background-color: $neutral7;
-    color: $neutral2;
-    // @include make-in-shadow($neutral1);
-    box-shadow: 0 1px 0 $neutral1, inset 0 0 5px hsla(0, 0%, 0%, 0.25);
-    border-radius: 80%;
-    margin: 0 $space1;
-    height: $size6;
-    z-index: 7;
-    display: flex;
-    padding: 0;
-    justify-content: center;
-    list-style: none;
-    overflow: hidden;
+  .center-content.navbox {
+    background: $neutral2;
+
     transition: $toptrans;
+    width: $size10;
+    text-align: left;
 
-    > li {
-      @include square($size4);
-      background-color: $primary4;
-      box-shadow: $flying-shadow1;
-      position: relative;
-      top: 170px;
-      z-index: 8;
-      margin: $space2;
+    ul.root-navigation {
+      background-color: $neutral7;
+      color: $neutral2;
+      // @include make-in-shadow($neutral1);
+      box-shadow: 0 1px 200px $neutral1, inset 0 0 6px hsla(0, 0%, 0%, 0.25);
+      border-radius: $br-softer;
+      margin: 0 $space2;
+      height: $size5;
+      z-index: 7;
+      display: flex;
+      padding: 0;
+      justify-content: center;
+      list-style: none;
+      overflow: hidden;
       transition: $toptrans;
-      > span {
-        position: absolute;
-        left: -$space1;
-        bottom: -20px;
-      }
-      > img {
-        padding: $space1;
-        @include square($size4);
-      }
+      width: $size8;
 
-      &.active {
-        background-color: $primary7;
-        border: solid 3px $support-positive2;
+      > li {
+        @include square($size4);
+        background-color: $neutral3;
+        box-shadow: $flying-shadow1;
+        position: relative;
+        top: 110px;
+        z-index: 8;
+        margin: $space2;
+        transition: $toptrans;
+        > span {
+          position: absolute;
+          left: -$space1;
+          bottom: -20px;
+        }
+        > img {
+          padding: $space1;
+          @include square($size4);
+        }
+
+        &.active {
+          background-color: $primary7;
+          border: solid 3px $support-positive2;
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
-  <div class="heading size-height4 padding3 primary7">
+  <div class="heading size-height4 padding3 primary7 width-center">
     <div class="bar primary2"/>
-    <div class="content">
+    <div class="center-content content">
       <h1 class="headline thick">{{heading}}</h1>
       <img v-if="img" class="headline-img" v-lazy="getImage">
     </div>
@@ -28,7 +28,7 @@ export default {
 @import "@/variables.scss";
 
 .heading {
-  width: 100%;
+  width: 100vw;
   box-shadow: $flying-shadow2;
   margin: 0 0 $space6 0;
   text-align: left;

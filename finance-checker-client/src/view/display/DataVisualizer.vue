@@ -9,28 +9,32 @@
     -->
     <heading heading="Data Visualizer" img="dataSuccess.svg"/>
     <root-nav/>
-    <el-card v-if="!$store.getters.hasData" class="box-card tabs">
-      <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
-    </el-card>
-    <el-tabs v-else class="tabs" type="border-card">
-      <el-tab-pane>
-        <span slot="label">
-          <i class="el-icon-view"></i> Overview
-        </span>
-        <Overview/>
-      </el-tab-pane>
-      <el-tab-pane>
-        <span slot="label">
-          <i class="el-icon-menu"></i> Category Browser
-        </span>
-        <Category/>
-      </el-tab-pane>
-      <el-tab-pane>
-        <span slot="label">
-          <i class="el-icon-star-on"></i> Special Stats
-        </span>
-      </el-tab-pane>
-    </el-tabs>
+    <div class="width-center">
+      <div class="center-content">
+        <el-card v-if="!$store.getters.hasData" class="box-card tabs">
+          <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
+        </el-card>
+        <el-tabs v-else class="tabs" type="border-card">
+          <el-tab-pane>
+            <span slot="label">
+              <i class="el-icon-view"></i> Overview
+            </span>
+            <Overview/>
+          </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label">
+              <i class="el-icon-menu"></i> Category Browser
+            </span>
+            <Category/>
+          </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label">
+              <i class="el-icon-star-on"></i> Special Stats
+            </span>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
