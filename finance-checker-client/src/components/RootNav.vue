@@ -1,11 +1,11 @@
 <template>
   <div class="navbox">
     <ul class="root-navigation title">
-      <li class="br-soft">
+      <li class="br-soft" :class="{active: isActive('/manage')}">
         <img v-lazy="require('@/assets/dataSuccess.svg')">
         <span>Management</span>
       </li>
-      <li class="br-soft">
+      <li class="br-soft" :class="{active: isActive('/visualize')}">
         <img v-lazy="require('@/assets/dataSuccess.svg')">
         <span>Visualization</span>
       </li>
@@ -16,6 +16,17 @@
     <el-menu-item index="/visualize">Visualization</el-menu-item>
   </el-menu>-->
 </template>
+
+<script>
+export default {
+  methods: {
+    isActive(path) {
+      return path === this.$route.path;
+    }
+  }
+};
+</script>
+
     
 <style lang="scss">
 @import "@/variables.scss";
@@ -78,6 +89,11 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
       > img {
         padding: $space1;
         @include square($size4);
+      }
+
+      &.active {
+        background-color: $primary7;
+        border: solid 3px $support-positive2;
       }
     }
   }
