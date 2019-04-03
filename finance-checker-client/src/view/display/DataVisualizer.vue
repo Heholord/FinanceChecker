@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="conentView dataVisualizer">
     <!-- TODO  
         8k-view
         special stats
@@ -7,8 +7,8 @@
         no data component (that offers to go to inquire page or offers an quickupload)
         loading from upload to entity browser does not work correctly (maybe split methods?)
     -->
+    <heading heading="Data Visualizer" img="dataSuccess.svg"/>
     <root-nav/>
-
     <el-card v-if="!$store.getters.hasData" class="box-card tabs">
       <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
     </el-card>
@@ -39,6 +39,7 @@ import Category from "./Category";
 import Overview from "./Overview";
 import Choices from "@/components/Choices.vue";
 import RootNav from "@/components/RootNav";
+import Heading from "@/components/Heading";
 
 export default {
   name: "DataVisualizer",
@@ -46,7 +47,8 @@ export default {
     Overview,
     Category,
     RootNav,
-    Choices
+    Choices,
+    Heading
   },
   data() {
     return {
@@ -94,7 +96,7 @@ export default {
   }
 
   .tabs {
-    height: 100%;
+    height: 80vh;
   }
 
   .el-aside {

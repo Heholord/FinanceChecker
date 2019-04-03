@@ -27,40 +27,41 @@ export default {
 <style lang="scss">
 @import "@/variables.scss";
 
-div {
+.heading {
+  width: 100%;
+  box-shadow: $flying-shadow2;
+  margin: 0 0 $space6 0;
   text-align: left;
-  .heading {
-    width: 100%;
-    box-shadow: $flying-shadow2;
-    margin: 0 0 $space5 0;
+  z-index: 12;
+  position: relative;
 
-    .bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 0; //$space1;
+  .bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0; //$space1;
+  }
+
+  .content {
+    position: relative;
+    text-align: center;
+    max-width: $size11;
+    min-width: $size10;
+    h1.headline {
+      text-align: left;
+      vertical-align: baseline;
+      margin: 0;
     }
-
-    .content {
-      position: relative;
-      text-align: center;
-      max-width: $size11;
-      min-width: $size10;
-      h1.headline {
-        text-align: left;
-        vertical-align: baseline;
-        margin: 0;
-      }
-      .headline-img {
-        position: absolute;
-        top: -$space2;
-        right: 0;
-        background: $primary9;
-        box-shadow: $flying-shadow2;
-        border-radius: 50%;
-        @include square($size5);
-      }
+    .headline-img {
+      position: absolute;
+      top: -$space2;
+      right: 0;
+      padding: $space1;
+      background: $primary9;
+      box-shadow: $flying-shadow2;
+      border-radius: 50%;
+      @include square($size5);
     }
   }
 }

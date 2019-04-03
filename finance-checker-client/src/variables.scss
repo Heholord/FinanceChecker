@@ -79,6 +79,10 @@ $support-alert3: hsl(58, 58%, 50%);
 $support-alert4: hsl(58, 57%, 26%);
 $support-alert5: hsl(55, 76%, 12%);
 
+$br-normal: 0px;
+$br-soft: 5px;
+$br-softer: 10px;
+
 @mixin make-out-shadow($light-color) {
   box-shadow: inset 0 3px 0 $light-color, 0 3px 5px hsla(0, 0%, 0%, 0.1);
 }

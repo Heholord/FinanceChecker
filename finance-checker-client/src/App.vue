@@ -64,7 +64,7 @@ export default {
       background-color: #121621;
       border-radius: 50%;
       border: solid #121621 5px;
-      box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
+      box-shadow: 1px -3px 3px -3px rgba(0, 0, 0, 0.8);
     }
 
     &:hover {

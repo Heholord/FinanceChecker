@@ -25,7 +25,7 @@ export default {
         {
           text: "View what you have",
           subtext: "and enjoy your growth",
-          image: "euro.jpg",
+          image: "data.svg",
           route: "/visualize"
         }
       ]

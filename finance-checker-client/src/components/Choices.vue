@@ -8,7 +8,7 @@
         :class="{big:big, info:choice.info}"
         class="box br-softer"
       >
-        <img v-if="choice.image" v-lazy="getImage(choice)" class="image">
+        <img v-if="choice.image" v-lazy="getImage(choice)" class="image padding2">
         <div class="textarea">
           <span class="title">{{choice.text}}</span>
           <div class="bottom clearfix">

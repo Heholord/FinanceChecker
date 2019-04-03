@@ -16,6 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // background-color: #fcfcfc;
   background-color: $neutral2;
+  z-index: 0;
 
   *,
   *:before,
@@ -422,16 +423,13 @@ body {
 
   // ------------ Border radius
   .br-normal {
-    border-radius: 0px;
-    @include default-border();
+    border-radius: $br-normal;
   }
   .br-soft {
-    border-radius: 5px;
-    @include default-border();
+    border-radius: $br-soft;
   }
   .br-softer {
-    border-radius: 10px;
-    @include default-border();
+    border-radius: $br-softer;
   }
 
   // ------------ Border
