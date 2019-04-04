@@ -2,12 +2,16 @@
   <div class="width-center">
     <div class="navbox center-content">
       <ul class="root-navigation title">
-        <li class="br-soft" :class="{active: isActive('/manage')}">
+        <li class="br-soft" :class="{active: isActive('/manage')}" @click="$routeTo('/manage')">
           <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')">
           <img v-else v-lazy="require('@/assets/manage-s.svg')">
           <span>Management</span>
         </li>
-        <li class="br-soft" :class="{active: isActive('/visualize')}">
+        <li
+          class="br-soft"
+          :class="{active: isActive('/visualize')}"
+          @click="$routeTo('/visualize')"
+        >
           <img v-if="isActive('/visualize')" v-lazy="require('@/assets/data-i-s.svg')">
           <img v-else v-lazy="require('@/assets/data-s.svg')">
           <span>Visualization</span>
@@ -42,7 +46,11 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
   position: absolute;
   top: -30px;
   z-index: 9;
+  widows: 100vw;
   transition: $toptrans;
+  background-color: $neutral7;
+  color: $neutral2;
+  box-shadow: 0 1px 200px $neutral1, inset 0 0 6px hsla(0, 0%, 0%, 0.25);
 
   &:hover {
     top: 45px;
@@ -57,28 +65,22 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
   }
 
   .center-content.navbox {
-    background: $neutral2;
-
     transition: $toptrans;
     width: $size10;
-    text-align: left;
+    margin: 0;
 
     ul.root-navigation {
-      background-color: $neutral7;
-      color: $neutral2;
-      // @include make-in-shadow($neutral1);
-      box-shadow: 0 1px 200px $neutral1, inset 0 0 6px hsla(0, 0%, 0%, 0.25);
-      border-radius: $br-softer;
       margin: 0 $space2;
       height: $size5;
       z-index: 7;
       display: flex;
       padding: 0;
-      justify-content: center;
+      justify-content: flex-start;
       list-style: none;
       overflow: hidden;
       transition: $toptrans;
-      width: $size8;
+      width: $size10;
+      border: none;
 
       > li {
         @include square($size4);

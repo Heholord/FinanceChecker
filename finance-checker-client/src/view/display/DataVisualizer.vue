@@ -1,5 +1,5 @@
 <template>
-  <div class="conentView dataVisualizer">
+  <div class="contentView dataVisualizer">
     <!-- TODO  
         8k-view
         special stats
@@ -7,32 +7,68 @@
         no data component (that offers to go to inquire page or offers an quickupload)
         loading from upload to entity browser does not work correctly (maybe split methods?)
     -->
-    <heading heading="Data Visualizer" img="data-invert.svg"/>
+    <heading heading="Data Visualizer" img="data-i.svg"/>
     <root-nav/>
     <div class="width-center">
       <div class="center-content">
-        <el-card v-if="!$store.getters.hasData" class="box-card tabs">
+        <div v-if="!$store.getters.hasData" class="tabs">
           <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
-        </el-card>
-        <el-tabs v-else class="tabs" type="border-card">
-          <el-tab-pane>
-            <span slot="label">
-              <i class="el-icon-view"></i> Overview
-            </span>
-            <Overview/>
-          </el-tab-pane>
-          <el-tab-pane>
-            <span slot="label">
-              <i class="el-icon-menu"></i> Category Browser
-            </span>
-            <Category/>
-          </el-tab-pane>
-          <el-tab-pane>
-            <span slot="label">
-              <i class="el-icon-star-on"></i> Special Stats
-            </span>
-          </el-tab-pane>
-        </el-tabs>
+        </div>
+        <div v-else class="tabs">
+          <div class="selection">
+            <ul>
+              <li
+                @click="selected = 'overview'"
+                @mouseover="over"
+                @mouseleave="leave"
+                :class="{active: isSelected('overview')}"
+              >
+                <i class="el-icon-view"></i> Overview
+              </li>
+              <li
+                @click="selected = 'category'"
+                @mouseover="over"
+                @mouseleave="leave"
+                :class="{active: isSelected('category')}"
+              >
+                <i class="el-icon-menu"></i> Category Browser
+              </li>
+              <li
+                @click="selected = 'special'"
+                @mouseover="over"
+                @mouseleave="leave"
+                :class="{active: isSelected('special')}"
+              >
+                <i class="el-icon-star-on"></i> Special Stats
+              </li>
+            </ul>
+          </div>
+          <div class="content">
+            <Overview v-if="selected === 'overview'"/>
+            <Category v-if="selected === 'category'"/>
+            <Category v-if="selected === 'special'"/>
+          </div>
+
+          <el-tabs type="border-card">
+            <el-tab-pane>
+              <span slot="label">
+                <i class="el-icon-view"></i> Overview
+              </span>
+              <Overview/>
+            </el-tab-pane>
+            <el-tab-pane>
+              <span slot="label">
+                <i class="el-icon-menu"></i> Category Browser
+              </span>
+              <Category/>
+            </el-tab-pane>
+            <el-tab-pane>
+              <span slot="label">
+                <i class="el-icon-star-on"></i> Special Stats
+              </span>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
       </div>
     </div>
   </div>
@@ -56,6 +92,8 @@ export default {
   },
   data() {
     return {
+      selected: "overview",
+      isOver: false,
       choices: [
         {
           text: "Click here",
@@ -74,15 +112,25 @@ export default {
   methods: {
     execute(choice) {
       this.$routeTo(choice.route);
+    },
+    over() {
+      this.isOver = true;
+    },
+    leave() {
+      this.isOver = false;
+    },
+    isSelected(tab) {
+      if (this.isOver === false) {
+        return tab === this.selected;
+      }
+      return false;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.master-menu {
-  margin-bottom: 50px;
-}
+@import "@/variables.scss";
 
 .contentView {
   height: 100%;
@@ -100,7 +148,50 @@ export default {
   }
 
   .tabs {
-    height: 80vh;
+    > .selection {
+      display: inline-block;
+      ul {
+        list-style: none;
+        display: flex;
+        height: $size2;
+        justify-content: space-between;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: $flying-shadow1;
+        overflow: visible;
+        padding: 0;
+        transition: width 0.2s ease-out;
+
+        > li {
+          position: relative;
+          max-width: $size7;
+          padding: $space1;
+          color: $neutral7;
+          padding: $space1 $space2;
+          border-radius: 20px;
+          transition: width 0.1s ease-out, height 0.1s ease-out,
+            background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+
+          > i {
+            color: $neutral4;
+          }
+
+          &:hover,
+          &.active {
+            height: $size2 + 10px;
+            top: -$space1;
+            background-color: $neutral6;
+            color: $neutral1;
+            box-shadow: $flying-shadow2;
+            padding: ($space2 - 3px) $space2;
+            margin: 0;
+            > i {
+              color: $primary3;
+            }
+          }
+        }
+      }
+    }
   }
 
   .el-aside {
@@ -123,22 +214,6 @@ export default {
         & > i {
           margin-right: 6px;
         }
-      }
-    }
-  }
-  .el-main {
-    .split {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-gap: 50px;
-      .el-card.box-card {
-        margin-bottom: 10px;
-      }
-      .chart {
-        justify-self: center;
-        position: relative;
-        width: 75%;
-        height: 75%;
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="choices">
-    <h1 v-if="title">{{title}}</h1>
+    <h1 v-if="title" class="title fs6">{{title}}</h1>
     <div class="choice-container">
       <el-card
         v-for="choice in choices"
@@ -55,7 +55,7 @@ export default {
   .choice-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: center;
     height: 100%;
     > .box {
@@ -114,7 +114,7 @@ export default {
       }
 
       &.info {
-        background: #fcfcfc;
+        background: $neutral2;
         border: dotted 2px lightgray;
         box-shadow: none;
       }
