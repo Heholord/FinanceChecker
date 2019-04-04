@@ -42,11 +42,13 @@ export default {
   max-width: 1000px;
 
   .github-footer {
-    position: fixed;
-    bottom: 0;
+    position: relative;
+    bottom: 0px;
     z-index: 10;
-    width: 100%;
+    width: 100vw;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
+    margin-top: $space4;
+
     p {
       margin-top: $space1;
       margin-left: $space5;

@@ -1,5 +1,6 @@
 <template>
   <div class="management">
+    <heading heading="Manage your data" img="manage-i.svg"></heading>
     <!-- TODO  
        custom parsing,
        html and/or json (make hirachy clear) 
@@ -16,27 +17,31 @@
        jump to finish page option when store data and category exits
     -->
     <root-nav/>
-    <el-tabs :value="tabVal" class="tabs" type="border-card">
-      <el-tab-pane v-if="$store.getters.hasData">
-        <span slot="label">
-          <i class="el-icon-download"></i> Download
-        </span>
-        <Download/>
-      </el-tab-pane>
-      <el-tab-pane v-if="$store.getters.hasData">
-        <span slot="label">
-          <i class="el-icon-edit"></i> Edit
-        </span>
-        <Download/>
-      </el-tab-pane>
-      <el-tab-pane name="upload">
-        <span slot="label">
-          <i class="el-icon-upload"></i> Upload
-        </span>
-        <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
-        <router-view></router-view>
-      </el-tab-pane>
-    </el-tabs>
+    <div class="width-center">
+      <div class="center-content">
+        <el-tabs :value="tabVal" class="tabs" type="border-card">
+          <el-tab-pane v-if="$store.getters.hasData">
+            <span slot="label">
+              <i class="el-icon-download"></i> Download
+            </span>
+            <Download/>
+          </el-tab-pane>
+          <el-tab-pane v-if="$store.getters.hasData">
+            <span slot="label">
+              <i class="el-icon-edit"></i> Edit
+            </span>
+            <Download/>
+          </el-tab-pane>
+          <el-tab-pane name="upload">
+            <span slot="label">
+              <i class="el-icon-upload"></i> Upload
+            </span>
+            <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
+            <router-view></router-view>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,23 +49,24 @@
 import RootNav from "@/components/RootNav";
 import Choices from "@/components/Choices";
 import Download from "./Download";
+import Heading from "@/components/Heading";
 
 export default {
   name: "DataManagement",
-  components: { RootNav, Download, Choices },
+  components: { RootNav, Download, Choices, Heading },
   data() {
     return {
       uploadChoices: [
         {
           text: "Setup",
           subtext: "Everything that is great beginns with a setup",
-          image: "setup.jpg",
+          image: "setup.svg",
           route: "/manage/upload/setup"
         },
         {
           text: "Upload your existing data",
           subtext: "That's quick and easy",
-          image: "easy.jpg",
+          image: "quickupload.svg",
           route: "/manage/upload/quick"
         }
       ],

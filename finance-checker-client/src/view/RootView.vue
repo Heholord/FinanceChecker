@@ -19,7 +19,7 @@ export default {
         {
           text: "Manage your data",
           subtext: "and start your journey",
-          image: "calculate.png",
+          image: "manage.svg",
           route: "/manage"
         },
         {

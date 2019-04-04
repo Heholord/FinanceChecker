@@ -7,7 +7,7 @@
         no data component (that offers to go to inquire page or offers an quickupload)
         loading from upload to entity browser does not work correctly (maybe split methods?)
     -->
-    <heading heading="Data Visualizer" img="dataSuccess.svg"/>
+    <heading heading="Data Visualizer" img="data-invert.svg"/>
     <root-nav/>
     <div class="width-center">
       <div class="center-content">
@@ -60,7 +60,7 @@ export default {
         {
           text: "Click here",
           subtext: "and I will bring you to the upload page",
-          image: "upload.jpg",
+          image: "upload.svg",
           route: "/manage"
         },
         {

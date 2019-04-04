@@ -3,11 +3,13 @@
     <div class="navbox center-content">
       <ul class="root-navigation title">
         <li class="br-soft" :class="{active: isActive('/manage')}">
-          <img v-lazy="require('@/assets/dataSuccess.svg')">
+          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')">
+          <img v-else v-lazy="require('@/assets/manage-s.svg')">
           <span>Management</span>
         </li>
         <li class="br-soft" :class="{active: isActive('/visualize')}">
-          <img v-lazy="require('@/assets/dataSuccess.svg')">
+          <img v-if="isActive('/visualize')" v-lazy="require('@/assets/data-i-s.svg')">
+          <img v-else v-lazy="require('@/assets/data-s.svg')">
           <span>Visualization</span>
         </li>
       </ul>
@@ -99,7 +101,7 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
 
         &.active {
           background-color: $primary7;
-          border: solid 3px $support-positive2;
+          // border: solid 3px $support-positive2;
         }
       }
     }
