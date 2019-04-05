@@ -17,9 +17,7 @@
     <el-container>
       <el-aside>
         <div>
-          <p>
-            <i class="el-icon-date"></i>Date
-          </p>
+          <p>Pick a date</p>
           <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
             <el-radio-button label="year"></el-radio-button>
             <el-radio-button label="month"></el-radio-button>
@@ -54,6 +52,7 @@
 
       <el-container>
         <el-main>
+          <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
           <el-table
             show-summary
             @row-contextmenu="showEntries"
@@ -68,7 +67,6 @@
             <el-table-column prop="avg" label="Average " width="100"></el-table-column>
             <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
           </el-table>
-          <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
           <switchable-line-chart
             class="chart"
             :chartData="chartData.historical"

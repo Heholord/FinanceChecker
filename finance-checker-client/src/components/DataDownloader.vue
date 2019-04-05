@@ -24,7 +24,23 @@ export default {
 
 
 <style lang="scss">
+@import "@/variables.scss";
 .download-container {
   padding: 50px 0px;
+  a {
+    margin: 0;
+    > button {
+      background-color: $support-positive4;
+      border-color: $support-positive4;
+      color: $support-positive1;
+      @include make-out-shadow($support-positive3);
+
+      &:hover {
+        background-color: $support-positive3;
+        border-color: $support-positive3;
+        box-shadow: none;
+      }
+    }
+  }
 }
 </style>

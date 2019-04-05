@@ -2,26 +2,29 @@
   <div class="contentView overview">
     <el-container>
       <el-aside>
-        <div>
-          <p>
-            <i class="el-icon-date"></i>Date
-          </p>
-          <el-date-picker
-            :value="displayDate"
-            type="year"
-            placeholder="Pick a year"
-            format="yyyy"
-            value-format="yyyy"
-            ref="yearPicker"
-            @change="reloadChart"
-            :picker-options="{disabledDate: disabledDates}"
-          ></el-date-picker>
-        </div>
+        <p>Pick a date</p>
+        <el-date-picker
+          v-model="displayDate"
+          type="year"
+          placeholder="Pick a year"
+          format="yyyy"
+          value-format="yyyy"
+          ref="yearPicker"
+          @change="reloadChart"
+          :picker-options="{disabledDate: disabledDates}"
+        ></el-date-picker>
         <data-downloader></data-downloader>
       </el-aside>
 
       <el-container>
         <el-main>
+          <switchable-line-chart
+            class="chart"
+            :chartData="chartData"
+            :stacked="false"
+            v-if="loaded"
+            @stacked="setTransparent"
+          ></switchable-line-chart>
           <el-collapse :value="data[0].date">
             <el-collapse-item
               v-for="dataEntry in data"
@@ -43,13 +46,6 @@
               </el-table>
             </el-collapse-item>
           </el-collapse>
-          <switchable-line-chart
-            class="chart"
-            :chartData="chartData"
-            :stacked="false"
-            v-if="loaded"
-            @stacked="setTransparent"
-          ></switchable-line-chart>
         </el-main>
       </el-container>
     </el-container>
@@ -90,10 +86,10 @@ export default {
     focusPicker() {
       this.displayDate = undefined;
     },
-    async reloadChart() {
-      await this.setData();
+    reloadChart() {
+      this.setData();
     },
-    async setData() {
+    setData() {
       // chartdata
       this.data = [];
       this.chartData = this.$createChartData(

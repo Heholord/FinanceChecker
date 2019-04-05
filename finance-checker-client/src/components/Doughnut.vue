@@ -17,7 +17,7 @@ export default {
           maintainAspectRatio: false,
           cutoutPercentage: 60,
           circumference: Math.PI,
-          rotation: (Math.PI * 3) / 2
+          rotation: (Math.PI * 3) / 3
         };
       }
     }

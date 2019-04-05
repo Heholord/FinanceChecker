@@ -15,59 +15,18 @@
           <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
         </div>
         <div v-else class="tabs">
-          <div class="selection">
-            <ul>
-              <li
-                @click="selected = 'overview'"
-                @mouseover="over"
-                @mouseleave="leave"
-                :class="{active: isSelected('overview')}"
-              >
-                <i class="el-icon-view"></i> Overview
-              </li>
-              <li
-                @click="selected = 'category'"
-                @mouseover="over"
-                @mouseleave="leave"
-                :class="{active: isSelected('category')}"
-              >
-                <i class="el-icon-menu"></i> Category Browser
-              </li>
-              <li
-                @click="selected = 'special'"
-                @mouseover="over"
-                @mouseleave="leave"
-                :class="{active: isSelected('special')}"
-              >
-                <i class="el-icon-star-on"></i> Special Stats
-              </li>
-            </ul>
-          </div>
+          <selection
+            :selections="[{key:'overview', icon:'el-icon-view', text:'Overview'},
+              {key:'category', icon:'el-icon-menu', text:'Category Browser'},
+              {key:'special', icon:'el-icon-star-on', text:'Special Stats'}]"
+            default="overview"
+            @selected="key => this.selected = key"
+          />
           <div class="content">
             <Overview v-if="selected === 'overview'"/>
             <Category v-if="selected === 'category'"/>
             <Category v-if="selected === 'special'"/>
           </div>
-
-          <el-tabs type="border-card">
-            <el-tab-pane>
-              <span slot="label">
-                <i class="el-icon-view"></i> Overview
-              </span>
-              <Overview/>
-            </el-tab-pane>
-            <el-tab-pane>
-              <span slot="label">
-                <i class="el-icon-menu"></i> Category Browser
-              </span>
-              <Category/>
-            </el-tab-pane>
-            <el-tab-pane>
-              <span slot="label">
-                <i class="el-icon-star-on"></i> Special Stats
-              </span>
-            </el-tab-pane>
-          </el-tabs>
         </div>
       </div>
     </div>
@@ -80,6 +39,7 @@ import Overview from "./Overview";
 import Choices from "@/components/Choices.vue";
 import RootNav from "@/components/RootNav";
 import Heading from "@/components/Heading";
+import Selection from "@/components/Selection";
 
 export default {
   name: "DataVisualizer",
@@ -88,12 +48,12 @@ export default {
     Category,
     RootNav,
     Choices,
-    Heading
+    Heading,
+    Selection
   },
   data() {
     return {
       selected: "overview",
-      isOver: false,
       choices: [
         {
           text: "Click here",
@@ -112,18 +72,6 @@ export default {
   methods: {
     execute(choice) {
       this.$routeTo(choice.route);
-    },
-    over() {
-      this.isOver = true;
-    },
-    leave() {
-      this.isOver = false;
-    },
-    isSelected(tab) {
-      if (this.isOver === false) {
-        return tab === this.selected;
-      }
-      return false;
     }
   }
 };
@@ -147,76 +95,41 @@ export default {
     }
   }
 
-  .tabs {
-    > .selection {
-      display: inline-block;
-      ul {
-        list-style: none;
-        display: flex;
-        height: $size2;
-        justify-content: space-between;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: $flying-shadow1;
-        overflow: visible;
-        padding: 0;
-        transition: width 0.2s ease-out;
-
-        > li {
-          position: relative;
-          max-width: $size7;
-          padding: $space1;
-          color: $neutral7;
-          padding: $space1 $space2;
-          border-radius: 20px;
-          transition: width 0.1s ease-out, height 0.1s ease-out,
-            background-color 0.1s ease-out, box-shadow 0.1s ease-out;
-
-          > i {
-            color: $neutral4;
-          }
-
-          &:hover,
-          &.active {
-            height: $size2 + 10px;
-            top: -$space1;
-            background-color: $neutral6;
-            color: $neutral1;
-            box-shadow: $flying-shadow2;
-            padding: ($space2 - 3px) $space2;
-            margin: 0;
-            > i {
-              color: $primary3;
-            }
-          }
-        }
-      }
-    }
-  }
-
   .el-aside {
-    text-align: center;
-    background-color: white;
-    border-right: solid 1px #e6e6e6;
-    padding: 20px 20px;
-    width: 300px;
-    & > hr {
-      color: #e6e6e6;
-      margin: 20px;
+    text-align: left;
+    color: $neutral7;
+    width: $size5;
+
+    p {
+      font-weight: $fw4;
+      font-size: $fs4;
+      background-color: $neutral7;
+      color: transparent;
+      text-shadow: 0px 1px 3px hsla(220, 35%, 94%, 0.5);
+      background-clip: text;
+      margin-top: $space2;
+      margin-bottom: $space1;
     }
-    & > div {
-      margin: 30px 10px;
-      & > * {
-        margin: 10px;
+
+    .el-input__inner {
+      background-color: $neutral1;
+      color: $neutral9;
+      font-size: $fs3;
+      @include make-in-shadow($neutral1);
+      border: none;
+
+      &::placeholder {
+        color: $neutral8;
       }
-      & > p {
-        margin-bottom: 0px;
-        & > i {
-          margin-right: 6px;
-        }
+
+      & ~ .el-input__prefix,
+      & ~ .el-input__suffix {
+        color: $neutral6;
+        font-size: $fs2;
       }
     }
   }
+
   .table {
     margin: 10px;
     margin-left: 50px;

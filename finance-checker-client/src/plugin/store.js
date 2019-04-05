@@ -89,7 +89,6 @@ const store = new Vuex.Store({
       forEachElem(data, (month, day, elem) => {
         let workElem = clone(elem);
         workElem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
-        // for normal categories
         const cat = getCorrespondingCategory(
           workElem,
           categoryPath,
