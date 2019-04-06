@@ -29,7 +29,7 @@ export default {
 
 .heading {
   width: 100vw;
-  box-shadow: $flying-shadow2;
+  box-shadow: $flying-shadow3;
   margin: 0 0 $space6 0;
   text-align: left;
   z-index: 12;

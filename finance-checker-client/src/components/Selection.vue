@@ -76,6 +76,7 @@ export default {
     transition: width 0.2s ease-out;
 
     > li {
+      cursor: pointer;
       position: relative;
       max-width: $size7;
       padding: $space1;

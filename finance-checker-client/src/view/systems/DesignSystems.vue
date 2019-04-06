@@ -6,12 +6,14 @@
         <section class="systemblock">
           <h1 class="title fs4">Fonts</h1>
           <ul>
-            <li class="headline thick">.headline.thick: Roboto Black
+            <li class="headline thick">
+              .headline.thick: Roboto Black
               <br>Text with short linespacing. Because this is a title man.
             </li>
             <li class="headline bold">.headline.bold (for buttons): Roboto Bold</li>
             <li class="headline">.headline: Roboto</li>
-            <li class="article">.article: Source Sans
+            <li class="article">
+              .article: Source Sans
               <br>Example: Long texts need more line spacing because it is harder to tell where the line starts. Headlines and titles on the other hand don't need as much line spacing.
             </li>
             <li>General UI: Inter; Fallback: Lato, sans-serif</li>
@@ -195,7 +197,6 @@ div {
       border-radius: 0px;
       box-shadow: $flying-shadow1;
       padding: 20px;
-      max-width: $size10;
       background-color: white;
 
       > li {
@@ -264,8 +265,6 @@ div {
       }
 
       &.size-box {
-        max-width: $size10 + $space4;
-        min-width: $size10 + $space4;
         > li[class^="size"] {
           height: $size3;
           background-image: linear-gradient(to left, $primary1, $primary5);

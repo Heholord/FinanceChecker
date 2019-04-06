@@ -2,6 +2,9 @@ const path = require("path");
 
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== "production",
+  configureWebpack: {
+    devtool: "source-map"
+  },
   chainWebpack: config => {
     config.resolve.alias
       .set("@", path.resolve("src"))

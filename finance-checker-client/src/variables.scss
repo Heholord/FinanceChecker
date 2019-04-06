@@ -100,3 +100,21 @@ $flying-shadow4: 0 10px 20px hsla(0, 0%, 0%, 0.15),
   0 4px 10px hsla(0, 0%, 0%, 0.1);
 $flying-shadow5: 0 15px 25px hsla(0, 0%, 0%, 0.15),
   0 5px 15px hsla(0, 0%, 0%, 0.05);
+
+// defined
+$background: $neutral3;
+
+@mixin insetTextShadow {
+  color: transparent;
+  text-shadow: 0px 1px 3px hsla(224, 30%, 85%, 0.5);
+  background-clip: text;
+  background-color: $neutral7;
+}
+
+@mixin label {
+  font-weight: $fw4;
+  font-size: $fs4;
+  @include insetTextShadow;
+  margin-top: $space3;
+  margin-bottom: $space1;
+}

@@ -1,6 +1,6 @@
 <template>
   <a class="file-download" :href="filecontent" :download="filename">
-    <el-button type="primary" icon="el-icon-download">{{text}}</el-button>
+    <el-button icon="el-icon-download">{{text}}</el-button>
   </a>
 </template>
 

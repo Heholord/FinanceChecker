@@ -15,33 +15,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // background-color: #fcfcfc;
-  background-color: $neutral2;
+  background-color: $neutral3;
   z-index: 0;
 
   *,
   *:before,
   *:after {
     box-sizing: inherit;
-  }
-
-  ul.master-menu + .tabs {
-    box-sizing: border-box;
-    margin: 20px;
-    height: $content-height;
-    > .el-tabs__content {
-      height: $content-height - 5vh;
-      overflow-x: auto;
-      > div[role="tabpanel"] {
-        height: 100%;
-        min-width: $size8;
-
-        & > * {
-          height: 100%;
-          overflow: auto;
-        }
-        // overflow-y: scroll;
-      }
-    }
   }
 
   .split {
@@ -78,7 +58,7 @@ body {
     justify-content: center;
     > .center-content {
       margin: $space1;
-      width: $size10;
+      width: $size11;
     }
   }
 
@@ -454,5 +434,139 @@ body {
   .bw-hard {
     border-width: 3px;
     @include default-border();
+  }
+
+  // defined
+  .chart,
+  .el-collapse,
+  .table {
+    min-width: $size7;
+    max-width: $size10;
+
+    padding: $space3;
+    box-shadow: $flying-shadow2;
+    border-radius: $br-soft;
+    margin-bottom: $space3;
+  }
+
+  .chart {
+    min-height: $size7;
+    max-height: $size10;
+  }
+
+  .el-aside {
+    text-align: left;
+    color: $neutral7;
+    width: $size5;
+
+    p {
+      @include label;
+    }
+
+    .el-input__inner {
+      background-color: $neutral1;
+      color: $neutral9;
+      font-size: $fs3;
+      @include make-in-shadow($neutral1);
+      border: none;
+
+      &::placeholder {
+        color: $neutral8;
+      }
+
+      & ~ .el-input__prefix,
+      & ~ .el-input__suffix {
+        color: $neutral6;
+        font-size: $fs2;
+      }
+    }
+    .el-radio-group {
+      margin-bottom: $space1;
+      .el-radio-button__inner {
+        background-color: $neutral1;
+        box-shadow: $flying-shadow1;
+      }
+      .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+        background-color: $neutral5;
+        border-color: $neutral5;
+        color: $neutral1;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .el-menu,
+  .el-tree {
+    background: none;
+    color: $neutral8;
+  }
+
+  .el-submenu__title {
+    color: $neutral8;
+    @include insetTextShadow;
+    &:hover,
+    &:focus {
+      background: $neutral4;
+      color: $neutral9;
+    }
+  }
+
+  .el-tree-node__content {
+    &:hover,
+    &:focus {
+      background: $neutral2;
+      color: $neutral9;
+    }
+  }
+
+  .el-collapse-item__header,
+  .chart,
+  .el-collapse,
+  .el-collapse-item__wrap,
+  .el-table tr,
+  .el-table,
+  .el-table th {
+    background-color: $neutral1;
+  }
+
+  .el-table--enable-row-hover .el-table__body tr:hover > td {
+    background-color: $neutral2;
+  }
+
+  .el-table__footer-wrapper tbody td {
+    background-color: $neutral3;
+  }
+  .el-picker-panel {
+    background-color: $neutral1;
+  }
+  .el-popper[x-placement^="top"] > .popper__arrow::after {
+    border-top-color: $neutral1;
+  }
+
+  .el-popper[x-placement^="bottom"] > .popper__arrow::after {
+    border-bottom-color: $neutral1;
+  }
+
+  .el-button {
+    background-color: $neutral1;
+    color: $neutral6;
+    box-shadow: $flying-shadow1;
+    &:focus,
+    &:hover {
+      background: $neutral2;
+      color: $neutral8;
+    }
+  }
+
+  .table {
+    justify-self: center;
+    align-self: start;
+    &.no-margin {
+      margin: 0;
+
+      td {
+        padding: 0.2em 0;
+      }
+    }
   }
 }

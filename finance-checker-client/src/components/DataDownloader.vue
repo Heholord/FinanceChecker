@@ -35,10 +35,13 @@ export default {
       color: $support-positive1;
       @include make-out-shadow($support-positive3);
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: $support-positive3;
         border-color: $support-positive3;
-        box-shadow: none;
+        color: $support-positive5;
+        box-shadow: inset 0px 1px 0 $support-positive2,
+          0px 1px 2px hsla(0, 0%, 0%, 0.3);
       }
     }
   }

@@ -52,12 +52,18 @@ export default {
 @import "@/variables.scss";
 
 .choices {
+  h1.title {
+    text-align: center;
+    margin-bottom: $space2;
+    @include label;
+  }
   .choice-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-content: center;
     height: 100%;
+
     > .box {
       border: none;
       height: 100%;
@@ -114,8 +120,8 @@ export default {
       }
 
       &.info {
-        background: $neutral2;
-        border: dotted 2px lightgray;
+        background: $background;
+        border: dotted 2px $neutral4;
         box-shadow: none;
       }
     }

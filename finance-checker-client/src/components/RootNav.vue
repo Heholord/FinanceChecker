@@ -39,8 +39,10 @@ export default {
 <style lang="scss" scoped>
 @import "@/variables.scss";
 
-$toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
-  width 0.2s ease-out, border-radius 0.2s ease-out;
+$time: 0.1s ease-out;
+
+$toptrans: top $time, margin $time, height $time, width $time,
+  opacity 0.2s ease-out;
 
 .width-center {
   position: absolute;
@@ -50,7 +52,7 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
   transition: $toptrans;
   background-color: $neutral7;
   color: $neutral2;
-  box-shadow: 0 1px 200px $neutral1, inset 0 0 6px hsla(0, 0%, 0%, 0.25);
+  box-shadow: $flying-shadow1; //0 1px 2px $neutral1, inset 0 1px 2px hsla(0, 0%, 0%, 0.25);
 
   &:hover {
     top: 45px;
@@ -59,6 +61,9 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
         > li {
           top: 10px;
           margin: $space3;
+          > span {
+            opacity: 1;
+          }
         }
       }
     }
@@ -66,7 +71,6 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
 
   .center-content.navbox {
     transition: $toptrans;
-    width: $size10;
     margin: 0;
 
     ul.root-navigation {
@@ -83,18 +87,22 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
       border: none;
 
       > li {
+        cursor: pointer;
         @include square($size4);
         background-color: $neutral3;
         box-shadow: $flying-shadow1;
         position: relative;
-        top: 110px;
+        // top: 110px;
+        bottom: -40px;
         z-index: 8;
         margin: $space2;
         transition: $toptrans;
         > span {
+          transition: $toptrans;
           position: absolute;
           left: -$space1;
           bottom: -20px;
+          opacity: 0;
         }
         > img {
           padding: $space1;
@@ -102,7 +110,7 @@ $toptrans: top 0.2s ease-out, margin 0.2s ease-out, height 0.2s ease-out,
         }
 
         &.active {
-          background-color: $primary7;
+          background-color: $primary6;
           // border: solid 3px $support-positive2;
         }
       }

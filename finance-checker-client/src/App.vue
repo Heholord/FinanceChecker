@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="neutral2">
+  <div id="app">
     <router-view></router-view>
     <!-- TODO  
       make an animation list (what would be nice if it'd be animated)
@@ -39,7 +39,6 @@ export default {
 #app {
   text-align: center;
   height: 100%;
-  max-width: 1000px;
 
   .github-footer {
     position: relative;

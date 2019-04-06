@@ -16,36 +16,34 @@
     </modal>
     <el-container>
       <el-aside>
-        <div>
-          <p>Pick a date</p>
-          <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
-            <el-radio-button label="year"></el-radio-button>
-            <el-radio-button label="month"></el-radio-button>
-          </el-radio-group>
-          <el-date-picker
-            v-if="dateType==='year'"
-            v-model="displayDate"
-            type="year"
-            placeholder="Pick a year"
-            format="yyyy"
-            value-format="yyyy"
-            ref="yearPicker"
-            @change="reloadChart"
-            :picker-options="{disabledDate: disabledDates}"
-          ></el-date-picker>
-          <el-date-picker
-            v-if="dateType==='month'"
-            v-model="displayDate"
-            type="month"
-            placeholder="Pick a month"
-            format="yyyy-MM"
-            value-format="MMMMyyyy"
-            ref="monthPicker"
-            @change="reloadChart"
-            :picker-options="{disabledDate: disabledDates}"
-          ></el-date-picker>
-        </div>
-        <hr>
+        <p>Pick a date</p>
+        <el-radio-group v-model="dateType" @change="focusPicker" size="medium">
+          <el-radio-button label="year"></el-radio-button>
+          <el-radio-button label="month"></el-radio-button>
+        </el-radio-group>
+        <el-date-picker
+          v-if="dateType==='year'"
+          v-model="displayDate"
+          type="year"
+          placeholder="Pick a year"
+          format="yyyy"
+          value-format="yyyy"
+          ref="yearPicker"
+          @change="reloadChart"
+          :picker-options="{disabledDate: disabledDates}"
+        ></el-date-picker>
+        <el-date-picker
+          v-if="dateType==='month'"
+          v-model="displayDate"
+          type="month"
+          placeholder="Pick a month"
+          format="yyyy-MM"
+          value-format="MMMMyyyy"
+          ref="monthPicker"
+          @change="reloadChart"
+          :picker-options="{disabledDate: disabledDates}"
+        ></el-date-picker>
+        <p>Select a category</p>
         <CategoryTree :categories="['in', 'out','save']" @onSelect="setChartData"/>
         <data-downloader></data-downloader>
       </el-aside>
@@ -62,10 +60,10 @@
             oncontextmenu="return false;"
           >
             <el-table-column prop="category" label="Category" width="160"></el-table-column>
-            <el-table-column prop="sum" label="Sum" width="100"></el-table-column>
-            <el-table-column prop="count" label="# of Entries" width="100"></el-table-column>
-            <el-table-column prop="avg" label="Average " width="100"></el-table-column>
-            <el-table-column prop="std" label="Standard Deviation" width="150"></el-table-column>
+            <el-table-column prop="sum" label="Sum" width="100" align="right"></el-table-column>
+            <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
+            <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
+            <el-table-column prop="std" label="Standard Deviation" width="150" align="right"></el-table-column>
           </el-table>
           <switchable-line-chart
             class="chart"

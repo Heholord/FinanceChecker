@@ -182,9 +182,6 @@ export default {
 
 <style lang="scss">
 .overview {
-  .chart {
-    margin: 20px;
-  }
   .table {
     margin-left: 50px;
   }
