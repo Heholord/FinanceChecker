@@ -19,13 +19,13 @@
       <el-container>
         <el-main>
           <switchable-line-chart
-            class="chart"
+            class="chart visual-content"
             :chartData="chartData"
             :stacked="false"
             v-if="loaded"
             @stacked="setTransparent"
           ></switchable-line-chart>
-          <el-collapse :value="data[0].date">
+          <el-collapse :value="data[0].date" class="visual-content">
             <el-collapse-item
               v-for="dataEntry in data"
               :key="dataEntry.date"
@@ -42,7 +42,13 @@
                 <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
                 <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
                 <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
-                <el-table-column prop="save" label="Save" width="100" align="right"></el-table-column>
+                <el-table-column
+                  prop="save"
+                  label="Save"
+                  width="100"
+                  header-align="left"
+                  align="right"
+                ></el-table-column>
               </el-table>
             </el-collapse-item>
           </el-collapse>

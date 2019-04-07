@@ -1,9 +1,19 @@
 @import "@/variables.scss";
+@import "@/assets/Inter/inter.scss";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato|Roboto");
 @import url("https://use.typekit.net/jbb1uil.css");
 @import url("https://rsms.me/inter/inter.css");
+
+html {
+  font-family: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: "Inter var", sans-serif;
+  }
+}
 
 body {
   width: 100%;
@@ -437,9 +447,7 @@ body {
   }
 
   // defined
-  .chart,
-  .el-collapse,
-  .table {
+  .visual-content {
     min-width: $size7;
     max-width: $size10;
 

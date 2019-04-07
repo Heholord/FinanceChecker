@@ -50,23 +50,23 @@
 
       <el-container>
         <el-main>
-          <doughnut class="chart don" v-if="loaded" :chartData="chartData.general"></doughnut>
+          <doughnut class="chart don visual-content" v-if="loaded" :chartData="chartData.general"></doughnut>
           <el-table
             show-summary
             @row-contextmenu="showEntries"
             :summary-method="getSummaries"
             :data="tableData"
-            class="table"
+            class="table visual-content"
             oncontextmenu="return false;"
           >
             <el-table-column prop="category" label="Category" width="160"></el-table-column>
-            <el-table-column prop="sum" label="Sum" width="100" align="right"></el-table-column>
-            <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
+            <el-table-column prop="sum" label="Sum" width="100" align="center"></el-table-column>
+            <el-table-column prop="count" label="# of Entries" width="100" align="center"></el-table-column>
             <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
-            <el-table-column prop="std" label="Standard Deviation" width="150" align="right"></el-table-column>
+            <el-table-column prop="std" label="Standard Deviation" width="160" align="right"></el-table-column>
           </el-table>
           <switchable-line-chart
-            class="chart"
+            class="chart visual-content"
             :chartData="chartData.historical"
             :stacked="true"
             v-if="loaded"

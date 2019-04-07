@@ -1,8 +1,12 @@
 <template>
   <div class="root">
-    <heading heading="Finance Checker" img="fc.svg" logo-left/>
-    <!-- TODO logoleft -->
-    <choices :choices="choices" big @select="execute"></choices>
+    <heading heading="Finance Checker"/>
+    <div class="width-center">
+      <div class="center-content">
+        <!-- TODO logoleft -->
+        <choices :choices="choices" big @select="execute"></choices>
+      </div>
+    </div>
   </div>
 </template>
 

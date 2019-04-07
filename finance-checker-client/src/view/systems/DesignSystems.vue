@@ -179,12 +179,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/variables.scss";
-
+<style lang="scss" scoped>
 div {
   text-align: left;
-
   .systemblock {
     display: relative;
     margin: $space5;
@@ -193,11 +190,11 @@ div {
 
     .splitcolumn,
     ul {
-      list-style-type: none;
       border-radius: 0px;
       box-shadow: $flying-shadow1;
       padding: 20px;
       background-color: white;
+      list-style: none;
 
       > li {
         margin-bottom: 30px;

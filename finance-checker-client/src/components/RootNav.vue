@@ -29,7 +29,7 @@
 export default {
   methods: {
     isActive(path) {
-      return path === this.$route.path;
+      return this.$route.path.startsWith(path);
     }
   }
 };
@@ -37,8 +37,6 @@ export default {
 
     
 <style lang="scss" scoped>
-@import "@/variables.scss";
-
 $time: 0.1s ease-out;
 
 $toptrans: top $time, margin $time, height $time, width $time,

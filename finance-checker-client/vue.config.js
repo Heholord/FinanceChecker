@@ -10,5 +10,16 @@ module.exports = {
       .set("@", path.resolve("src"))
       .set("vue$", "vue/dist/vue.common.js");
   },
-  baseUrl: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/"
+  baseUrl: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/",
+  css: {
+    modules: true,
+    loaderOptions: {
+      // pass options to sass-loader
+      sass: {
+        // @/ is an alias to src/
+        // so this assumes you have a file named `src/variables.scss`
+        data: `@import "~@/variables.scss";`
+      }
+    }
+  }
 };
