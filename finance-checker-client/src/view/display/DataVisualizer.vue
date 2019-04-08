@@ -78,9 +78,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/variables.scss";
-
-.contentView {
-  height: 100%;
-}
 </style>

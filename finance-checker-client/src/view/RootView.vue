@@ -1,5 +1,5 @@
 <template>
-  <div class="root">
+  <div class="root contentView">
     <heading heading="Finance Checker"/>
     <div class="width-center">
       <div class="center-content">

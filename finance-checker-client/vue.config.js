@@ -12,7 +12,6 @@ module.exports = {
   },
   baseUrl: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/",
   css: {
-    modules: true,
     loaderOptions: {
       // pass options to sass-loader
       sass: {

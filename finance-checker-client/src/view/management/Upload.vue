@@ -5,9 +5,7 @@
       <el-step v-else icon="el-icon-tickets"></el-step>
       <el-step v-if="activeStep === 1" title="Upload data" icon="el-icon-upload"></el-step>
       <el-step v-else icon="el-icon-upload"></el-step>
-      <el-step v-if="activeStep === 2" title="Edit entries" icon="el-icon-edit"></el-step>
-      <el-step v-else icon="el-icon-edit"></el-step>
-      <el-step v-if="activeStep === 3" title="Categorize data" icon="el-icon-menu"></el-step>
+      <el-step v-if="activeStep === 2" title="Categorize data" icon="el-icon-menu"></el-step>
       <el-step v-else icon="el-icon-menu"></el-step>
     </el-steps>
 
@@ -33,9 +31,6 @@
         </div>
       </div>
       <div class="step" v-else-if="activeStep === 2">
-        <entry-browser v-loading="loading" @next="allowNextStep"/>
-      </div>
-      <div class="step" v-else-if="activeStep === 3">
         <entries-to-category
           :entries="join(entries)"
           :categories="categories"
@@ -66,14 +61,13 @@
 
 <script>
 import FileUploader from "@/components/FileUploader";
-import EntryBrowser from "@/components/EntryBrowser";
 import EntriesToCategory from "@/components/EntriesToCategory";
 import { mapGetters } from "vuex";
 import { join } from "@/plugin/utils";
 
 export default {
   name: "Upload",
-  components: { FileUploader, EntryBrowser, EntriesToCategory },
+  components: { FileUploader, EntriesToCategory },
   data() {
     return {
       activeStep: 0,

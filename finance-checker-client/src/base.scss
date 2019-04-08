@@ -1,5 +1,5 @@
 @import "@/variables.scss";
-@import "@/assets/Inter/inter.scss";
+// @import "@/assets/Inter/inter.css";
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato|Roboto");
@@ -447,6 +447,11 @@ body {
   }
 
   // defined
+
+  .contentView {
+    min-height: 85vh;
+  }
+
   .visual-content {
     min-width: $size7;
     max-width: $size10;

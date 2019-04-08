@@ -1,6 +1,5 @@
 <template>
-  <div class="management">
-    <heading heading="Manage your data" img="manage-i.svg"></heading>
+  <div class="management contentView">
     <!-- TODO  
        custom parsing,
        html and/or json (make hirachy clear) 
@@ -16,30 +15,34 @@
        make a finish page (with nice animations)
        jump to finish page option when store data and category exits
     -->
+    <heading heading="Manage your data" img="manage-i.svg"></heading>
     <root-nav/>
     <div class="width-center">
       <div class="center-content">
-        <el-tabs :value="tabVal" class="tabs" type="border-card">
-          <el-tab-pane v-if="$store.getters.hasData">
-            <span slot="label">
-              <i class="el-icon-download"></i> Download
-            </span>
-            <Download/>
-          </el-tab-pane>
-          <el-tab-pane v-if="$store.getters.hasData">
-            <span slot="label">
-              <i class="el-icon-edit"></i> Edit
-            </span>
-            <Download/>
-          </el-tab-pane>
-          <el-tab-pane name="upload">
-            <span slot="label">
-              <i class="el-icon-upload"></i> Upload
-            </span>
-            <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
-            <router-view></router-view>
-          </el-tab-pane>
-        </el-tabs>
+        <div class="tabs">
+          <selection
+            v-if="$store.getters.hasData"
+            :selections="[{key:'download', icon:'el-icon-download', text:'Download'},
+              {key:'edit', icon:'el-icon-edit', text:'Editor'},
+              {key:'upload', icon:'el-icon-upload', text:'Upload'}]"
+            default="upload"
+            @selected="key => this.selected = key"
+          />
+          <selection
+            v-else
+            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'}]"
+            default="upload"
+            @selected="key => this.selected = key"
+          />
+          <div class="content">
+            <Download v-if="selected === 'download'"/>
+            <EntryBrowser v-if="selected === 'edit'"/>
+            <div v-if="selected === 'upload'">
+              <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
+              <router-view></router-view>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,10 +53,12 @@ import RootNav from "@/components/RootNav";
 import Choices from "@/components/Choices";
 import Download from "./Download";
 import Heading from "@/components/Heading";
+import Selection from "@/components/Selection";
+import EntryBrowser from "@/components/EntryBrowser";
 
 export default {
   name: "DataManagement",
-  components: { RootNav, Download, Choices, Heading },
+  components: { RootNav, Download, Choices, Heading, Selection, EntryBrowser },
   data() {
     return {
       uploadChoices: [
@@ -70,7 +75,7 @@ export default {
           route: "/manage/upload/quick"
         }
       ],
-      tabVal: "upload"
+      selected: "upload"
     };
   },
   methods: {

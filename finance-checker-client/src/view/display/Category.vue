@@ -60,8 +60,8 @@
             oncontextmenu="return false;"
           >
             <el-table-column prop="category" label="Category" width="160"></el-table-column>
-            <el-table-column prop="sum" label="Sum" width="100" align="center"></el-table-column>
-            <el-table-column prop="count" label="# of Entries" width="100" align="center"></el-table-column>
+            <el-table-column prop="sum" header-align="left" label="Sum" width="100" align="right"></el-table-column>
+            <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
             <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
             <el-table-column prop="std" label="Standard Deviation" width="160" align="right"></el-table-column>
           </el-table>

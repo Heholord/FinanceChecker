@@ -1,8 +1,8 @@
 <template>
   <div class="heading size-height4 primary7 width-center">
     <div class="bar primary2"/>
-    <img class="logo margin2" v-lazy="require('@/assets/fc_s.svg')">
-    <div class="center-content content padding3">
+    <img class="logo" v-lazy="require('@/assets/fc_s.svg')" @click="$routeTo('/')">
+    <div class="center-content content">
       <h1 class="headline thick">{{heading}}</h1>
       <img v-if="img" class="headline-img" v-lazy="getImage">
     </div>
@@ -26,14 +26,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/variables.scss";
-
 .heading {
   width: 100vw;
   box-shadow: $flying-shadow3;
   text-align: left;
   z-index: 12;
   position: relative;
+  padding: $space2;
+  margin-bottom: $space4;
 
   .bar {
     position: absolute;
@@ -55,6 +55,7 @@ export default {
     text-align: center;
     max-width: $size11;
     min-width: $size10;
+    padding: $space2;
     h1.headline {
       text-align: left;
       vertical-align: baseline;

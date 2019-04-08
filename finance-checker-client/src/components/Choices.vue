@@ -8,7 +8,7 @@
         :class="{big:big, info:choice.info}"
         class="box br-softer"
       >
-        <img v-if="choice.image" v-lazy="getImage(choice)" class="image padding2">
+        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2">
         <div class="textarea">
           <span class="title">{{choice.text}}</span>
           <div class="bottom clearfix">
@@ -41,7 +41,12 @@ export default {
   },
   methods: {
     getImage(choice) {
-      return require("@/assets/" + choice.image);
+      if (choice.image) {
+        return require("@/assets/" + choice.image);
+      } else if (choice.info) {
+        return require("@/assets/waiting_i.svg");
+      }
+      return undefined;
     }
   }
 };
@@ -53,7 +58,6 @@ export default {
 
 .choices {
   h1.title {
-    text-align: center;
     margin-bottom: $space2;
     @include label;
   }
@@ -92,10 +96,11 @@ export default {
         padding: 0px;
 
         .textarea {
+          text-align: left;
           flex: 1 1 auto;
           margin: $space2;
           display: grid;
-          grid-template-rows: 0.6fr 0.8fr 1.2fr;
+          grid-template-rows: 0.5fr 0.8fr 2fr;
           > span {
             grid-row: 2;
           }

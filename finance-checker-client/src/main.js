@@ -3,6 +3,7 @@ import App from "./App.vue";
 
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
+import "@/assets/Inter/inter.css";
 import router from "./router";
 import CategoryPlugin from "@/plugin/CategoryPlugin.vue";
 import elemLocale from "element-ui/lib/locale/lang/en";
