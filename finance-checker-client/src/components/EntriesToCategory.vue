@@ -17,7 +17,8 @@
       </span>
     </el-dialog>
     <p v-if="progressClass">You are done :)</p>
-    <el-progress class="progress" :percentage="progress" :status="progressClass"></el-progress>
+    <!-- make check animation here -->
+    <div class="progress" :style="'width: ' + progress + 'vw'"></div>
     <div v-show="!progressClass" class="category-chooser">
       <em>{{elemText}}</em>
       <el-alert
@@ -257,6 +258,19 @@ $min-width: 250px;
 .assigner {
   box-sizing: border-box;
   min-width: $min-width;
+
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: $space1 + 3px;
+    background-color: $support-positive2;
+    transition: width 0.2s ease-out;
+    z-index: 15;
+    margin: 0;
+    padding: 0;
+  }
+
   & > .category-chooser {
     display: grid;
     grid-template: 1fr 1fr auto 1fr/ 1fr;
@@ -304,11 +318,6 @@ $min-width: 250px;
         }
       }
     }
-  }
-  .progress {
-    grid-area: progress;
-    margin: 20px;
-    width: 100%;
   }
 }
 

@@ -221,7 +221,13 @@ export default {
       margin: auto;
       height: $step-height;
       width: 85%;
-      overflow-y: scroll;
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .split {
+        height: 100%;
+      }
     }
   }
   .split-elem {

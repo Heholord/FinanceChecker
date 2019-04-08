@@ -571,6 +571,28 @@ body {
     }
   }
 
+  .el-steps--simple {
+    padding: 13px 8%;
+    border-radius: $br-soft;
+    background: $neutral1;
+    box-shadow: $flying-shadow1;
+
+    .el-step__head.is-finish {
+      color: $support-positive2;
+    }
+
+    .el-step__title.is-process {
+      color: $neutral9;
+    }
+    .el-step__head.is-process {
+      color: $neutral7;
+    }
+
+    .el-step__head.is-wait {
+      color: $neutral3;
+    }
+  }
+
   .table {
     justify-self: center;
     align-self: start;
