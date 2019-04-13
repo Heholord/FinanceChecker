@@ -37,23 +37,29 @@ const CategoryPlugin = {
         return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
       });
 
+      let backgrounds = [];
+      if (listData.length > 9) {
+        backgrounds = palette("tol-dv", listData.length).map(hex => {
+          return "#" + hex;
+        });
+      } else {
+        backgrounds = palette("cb-Blues", listData.length).map(hex => {
+          return "#" + hex;
+        });
+      }
+
       //general
       chartData.general.datasets.push({
         data: listData.map(el => {
           return Math.abs(el.value);
         }),
-        backgroundColor: palette("tol-dv", listData.length).map(hex => {
-          return "#" + hex;
-        })
+        backgroundColor: backgrounds
       });
       chartData.general.labels = listData.map(el => {
         return el.category;
       });
 
       // historical data
-      const backgrounds = palette("tol-dv", listData.length).map(hex => {
-        return "#" + hex;
-      });
 
       for (let index in listData) {
         chartData.historical.datasets.push({

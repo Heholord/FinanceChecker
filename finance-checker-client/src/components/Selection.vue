@@ -63,6 +63,7 @@ export default {
 
 .selection {
   display: inline-block;
+  margin: $space2;
   ul {
     list-style: none;
     display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="root contentView">
     <heading heading="Finance Checker"/>
-    <div class="width-center">
+    <div class="width-center h100 w100">
       <div class="center-content">
         <!-- TODO logoleft -->
         <choices :choices="choices" big @select="execute"></choices>
@@ -43,5 +43,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.root {
+  .center-content,
+  .choices {
+    height: 100%;
+    margin: auto;
+  }
+}
 </style>

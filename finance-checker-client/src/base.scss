@@ -103,6 +103,18 @@ body {
     vertical-align: baseline;
   }
 
+  .h100 {
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .w100 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   // ------------ Font size
   .fs1 {
     font-size: $fs1;
@@ -449,7 +461,7 @@ body {
   // defined
 
   .contentView {
-    min-height: 85vh;
+    min-height: 90vh;
   }
 
   .visual-content {
@@ -508,10 +520,63 @@ body {
     }
   }
 
+  .el-upload-dragger {
+    background: none;
+    border-color: $neutral5;
+    color: $neutral5;
+    .el-icon-upload {
+      color: $neutral5;
+    }
+    .el-upload__text {
+      color: $neutral7;
+      em {
+        color: $support-alert3;
+      }
+    }
+  }
+  .el-upload__tip {
+    color: $neutral7;
+  }
+
+  .el-cascader,
+  .el-input {
+    background-color: $neutral1;
+    color: $neutral9;
+    font-size: $fs3;
+    @include make-in-shadow($neutral1);
+    border: none;
+
+    &::placeholder {
+      color: $neutral8;
+    }
+
+    & ~ .el-input__prefix,
+    & ~ .el-input__suffix {
+      color: $neutral6;
+      font-size: $fs2;
+    }
+  }
+
   .el-menu,
   .el-tree {
     background: none;
     color: $neutral8;
+  }
+
+  .el-button.stepButton {
+    background-color: $neutral5;
+    color: $support-positive1;
+    border: none;
+    box-shadow: $flying-shadow1;
+
+    &.is-disabled {
+      background-color: $neutral4;
+    }
+
+    &:hover {
+      background-color: $neutral4;
+      color: $support-positive5;
+    }
   }
 
   .el-submenu__title {
