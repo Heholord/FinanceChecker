@@ -3,8 +3,6 @@ import Vuex from "vuex";
 import {
   moment,
   forEachElem,
-  getMonthAsNr,
-  getYear,
   findEarliestLatestDate,
   fillUpHistoricalData,
   addToCategory,
@@ -29,7 +27,7 @@ const store = new Vuex.Store({
   state: {
     categories: {},
     data: {},
-    dataStartDate: "0000-01-01",
+    dataStartDate: "1900-01-01",
     dataEndDate: "9999-12-31"
   },
   strict: debug,
@@ -58,7 +56,7 @@ const store = new Vuex.Store({
      * - sorting {array}: list with the sorted keys of the historical data (i.e [2000, 2001, ..., 2020], [Jannuar, Feb...., December], [01, 02, ..., 31])
      * - data {object}: Object with the subcategories of the given categoryPath as keys. Each entry of the data consists of three values:
      *  - category {string}: name of the category
-     *  - value {integer}: sum of all entries in this category by a given date
+     *  - sum {integer}: sum of all entries in this category by a given date
      *  - values {object}: historical data (all date entries are classified into historical data).
      *            So the historical key is dependent on the given date format. If date is "undefined" then the years are the keys. If the given date is a year (i.e 2010) then the months are the keys and if the year is of format (MMMMYYYY, i.e. February2000) then the keys are the days of this month.
      *            the value is the sum of all entries in this historical category.
@@ -86,9 +84,11 @@ const store = new Vuex.Store({
 
       const data = getDataByDate(date, state.data);
 
-      forEachElem(data, (month, day, elem) => {
+      forEachElem(data, (year, month, day, elem) => {
         let workElem = clone(elem);
-        workElem.date = moment(month + day, "MMMMYYYYD").format("YYYY-MM-DD");
+        workElem.date = moment(year + month + day, "YYYYMMMMD").format(
+          "YYYY-MM-DD"
+        );
         const cat = getCorrespondingCategory(
           workElem,
           categoryPath,
@@ -138,14 +138,17 @@ const store = new Vuex.Store({
         if (newEntry) {
           // update
           updateElem(
-            state.data[oldEntry.month][oldEntry.day],
+            state.data[oldEntry.year][oldEntry.month][oldEntry.day],
             state.data,
             oldEntry,
             newEntry
           );
         } else {
           // delete
-          deleteElem(state.data[oldEntry.month][oldEntry.day], oldEntry);
+          deleteElem(
+            state.data[oldEntry.year][oldEntry.month][oldEntry.day],
+            oldEntry
+          );
         }
       } else if (newEntry) {
         //insert
@@ -196,22 +199,10 @@ const store = new Vuex.Store({
 
       const startEndDates = findEarliestLatestDate(data.data);
 
-      commit(
-        "setDataStartDate",
-        getYear(startEndDates[0]) + "-" + getMonthAsNr(startEndDates[0]) + "-01"
-      );
-      commit(
-        "setDataEndDate",
-        moment(
-          new Date(
-            +getYear(startEndDates[1]),
-            getMonthAsNr(startEndDates[1]),
-            0
-          )
-        ).format("YYYY-MM-DD")
-      );
+      commit("setDataStartDate", moment(startEndDates[0]).format("YYYY-MM-DD"));
+      commit("setDataEndDate", moment(startEndDates[1]).format("YYYY-MM-DD"));
       // special categories preprocessing (adding to categories-object) if not existent
-      forEachElem(data.data, (month, day, elem) => {
+      forEachElem(data.data, (year, month, day, elem) => {
         if (elem.category) {
           const strParts = elem.category.split(".");
           let lastCat = categories;
@@ -276,7 +267,11 @@ function cleanStringHead(str) {
 }
 
 function updateElem(list, data, oldValue, newValue) {
-  if (oldValue.month === newValue.month && oldValue.day === newValue.day) {
+  if (
+    oldValue.year === newValue.year &&
+    oldValue.month === newValue.month &&
+    oldValue.day === newValue.day
+  ) {
     list.splice(list.indexOf(oldValue), 1, newValue);
   } else {
     deleteElem(list, oldValue);
@@ -289,10 +284,15 @@ function deleteElem(list, oldValue) {
 }
 
 function insertElem(data, newValue) {
-  if (!data[newValue.month]) data[newValue.month] = {};
-  if (!data[newValue.month][newValue.day])
-    data[newValue.month][newValue.day] = [];
-  data[newValue.month][newValue.day].push(newValue);
+  if (!data[newValue.year]) data[newValue.year] = {};
+
+  if (!data[newValue.year][newValue.month])
+    data[newValue.year][newValue.month] = {};
+
+  if (!data[newValue.year][newValue.month][newValue.day])
+    data[newValue.year][newValue.month][newValue.day] = [];
+
+  data[newValue.year][newValue.month][newValue.day].push(newValue);
 }
 
 export default store;

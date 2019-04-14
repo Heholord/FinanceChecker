@@ -1,7 +1,7 @@
 <script>
 import palette from "google-palette";
 import $ from "jquery";
-import { isEmpty } from "./utils";
+import { isEmpty, getYear, getMonthAsString } from "./utils";
 
 const CategoryPlugin = {
   install(Vue, { router }) {
@@ -12,7 +12,7 @@ const CategoryPlugin = {
     /**
      * @param {object} data output of the @see filter function in store.
      * Contains the historical sorting in as <tt>sorting</tt> and the actual data.
-     * The data by itself contains the category (<tt>category</tt>), the sum of all entries (<tt>value</tt>) and the historical entries (<tt>values</tt>).
+     * The data by itself contains the category (<tt>category</tt>), the sum of all entries (<tt>sum</tt>) and the historical entries (<tt>values</tt>).
      */
     Vue.prototype.$createChartData = (data, transparent) => {
       let chartData = {
@@ -25,16 +25,17 @@ const CategoryPlugin = {
         }
       };
 
+      // make list out of map
       let listData = Object.keys(data.data).map(key => {
         return {
           category: key,
-          value: data.data[key].value,
+          sum: data.data[key].sum,
           values: data.data[key].values
         };
       });
 
       listData.sort((e1, e2) => {
-        return Math.abs(e1.value) > Math.abs(e2.value) ? -1 : 1;
+        return Math.abs(e1.sum) > Math.abs(e2.sum) ? -1 : 1;
       });
 
       let backgrounds = [];
@@ -51,7 +52,7 @@ const CategoryPlugin = {
       //general
       chartData.general.datasets.push({
         data: listData.map(el => {
-          return Math.abs(el.value);
+          return Math.abs(el.sum);
         }),
         backgroundColor: backgrounds
       });
@@ -81,19 +82,19 @@ const CategoryPlugin = {
 
       let keys = Object.keys(data.data);
       keys.sort((e1, e2) => {
-        return Math.abs(data.data[e1].value) > Math.abs(data.data[e2].value)
+        return Math.abs(data.data[e1].sum) > Math.abs(data.data[e2].sum)
           ? -1
           : 1;
       });
       keys.forEach(key => {
         tableData.push({
           category: key,
-          sum: Math.abs(Math.round(data.data[key].value * 100) / 100) + " €",
+          sum: Math.abs(Math.round(data.data[key].sum * 100) / 100) + " €",
           count: data.data[key].entries.length,
           avg:
             Math.abs(
               Math.round(
-                (data.data[key].value * 100) / data.data[key].entries.length
+                (data.data[key].sum * 100) / data.data[key].entries.length
               ) / 100
             ) + " €",
           std:
@@ -141,21 +142,29 @@ function parseHTMLString(content) {
 
   html.find(".transactionlist").each((index, monthView) => {
     monthView = $(monthView);
-    const month = monthView
+    const yearMonth = monthView
       .find("thead h2")
       .text()
       .trim()
       .replace(/\s/gm, "");
 
-    if (month) {
-      data[month] = {};
+    if (yearMonth) {
+      const year = getYear(yearMonth);
+      const month = getMonthAsString(yearMonth);
+      if (!data[year]) data[year] = {};
+      data[year][month] = {};
       monthView.find("tbody .transaction-line").each((index, dayEntry) => {
-        dayEntry = $(dayEntry);
-        let day = dayEntry.find(".datecol .day").text();
-        if (!data[month][day]) data[month][day] = [];
         let parsedDayEntry = parseDayEntry(dayEntry);
         if (parsedDayEntry) {
-          data[month][day].push({ month: month, day: day, ...parsedDayEntry });
+          dayEntry = $(dayEntry);
+          let day = dayEntry.find(".datecol .day").text();
+          if (!data[year][month][day]) data[yearMonth][day] = [];
+          data[yearMonth][day].push({
+            year: year,
+            month: month,
+            day: day,
+            ...parsedDayEntry
+          });
         }
       });
     }

@@ -22,15 +22,18 @@
         <div class="tabs">
           <selection
             v-if="$store.getters.hasData"
-            :selections="[{key:'download', icon:'el-icon-download', text:'Download'},
+            :selections="[
+              {key:'download', icon:'el-icon-download', text:'Download'},
               {key:'edit', icon:'el-icon-edit', text:'Editor'},
-              {key:'upload', icon:'el-icon-upload', text:'Upload'}]"
+              {key:'upload', icon:'el-icon-upload', text:'Upload'},
+              {key:'convert', icon:'el-icon-upload', text:'Convert'}]"
             default="upload"
             @selected="key => this.selected = key"
           />
           <selection
             v-else
-            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'}]"
+            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'},
+            {key:'convert', icon:'el-icon-upload', text:'Convert'}]"
             default="upload"
             @selected="key => this.selected = key"
           />
@@ -41,6 +44,7 @@
               <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
               <router-view></router-view>
             </div>
+            <Converter v-if="selected === 'convert'"/>
           </div>
         </div>
       </div>
@@ -55,10 +59,19 @@ import Download from "./Download";
 import Heading from "@/components/Heading";
 import Selection from "@/components/Selection";
 import EntryBrowser from "@/components/EntryBrowser";
+import Converter from "./Converter";
 
 export default {
   name: "DataManagement",
-  components: { RootNav, Download, Choices, Heading, Selection, EntryBrowser },
+  components: {
+    RootNav,
+    Download,
+    Choices,
+    Heading,
+    Selection,
+    EntryBrowser,
+    Converter
+  },
   data() {
     return {
       uploadChoices: [

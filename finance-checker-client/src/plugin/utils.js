@@ -47,27 +47,15 @@ export function flatten(category) {
 }
 
 export function forEachElem(data, callback) {
-  if (!Array.isArray(data)) {
-    Object.keys(data).forEach(month => {
-      if (!Array.isArray(data[month])) {
-        Object.keys(data[month]).forEach(day => {
-          data[month][day].forEach(elem => {
-            callback(month, day, elem);
-          });
+  Object.keys(data).forEach(year => {
+    Object.keys(data[year]).forEach(month => {
+      Object.keys(data[year][month]).forEach(day => {
+        data[year][month][day].forEach(elem => {
+          callback(year, month, day, elem);
         });
-      } else {
-        // TODO: wtf should that happen?
-        data[month].forEach(elem => {
-          callback(month, undefined, elem);
-        });
-      }
+      });
     });
-  } else {
-    // TODO: wtf should that happen?
-    data.forEach(elem => {
-      callback(undefined, undefined, elem);
-    });
-  }
+  });
 }
 
 /**
@@ -83,7 +71,11 @@ export function getMonthAsString(dateString) {
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
  */
 export function getMonthAsNr(dateString) {
-  return moment.months().indexOf(getMonthAsString(dateString)) + 1;
+  return monthToNr(getMonthAsString(dateString));
+}
+
+export function monthToNr(month) {
+  return moment.months().indexOf(month) + 1;
 }
 
 /**
@@ -95,25 +87,15 @@ export function getYear(dateString) {
 }
 
 export function findEarliestLatestDate(data) {
-  let lowestDate = "December2999";
-  let highestDate = "January0000";
-  Object.keys(data).forEach(key => {
-    let year = getYear(key);
-    let month = getMonthAsNr(key);
-    if (getYear(lowestDate) > year) {
-      lowestDate = key;
-    } else if (getYear(lowestDate) == year) {
-      if (getMonthAsNr(lowestDate) > month) {
-        lowestDate = key;
-      }
+  let lowestDate = moment("9999-12-31", "YYYY-MM-DD").toDate();
+  let highestDate = moment("0000-01-01", "YYYY-MM-DD").toDate();
+  forEachElem(data, (year, month, day) => {
+    const date = moment(year + "-" + month + "-" + day, "YYYY-MM-DD").toDate();
+    if (date.getTime() < lowestDate.getTime()) {
+      lowestDate = date;
     }
-
-    if (getYear(highestDate) < year) {
-      highestDate = key;
-    } else if (getYear(highestDate) == year) {
-      if (getMonthAsNr(highestDate) < month) {
-        highestDate = key;
-      }
+    if (date.getTime() > highestDate.getTime()) {
+      highestDate = date;
     }
   });
   return [lowestDate, highestDate];
@@ -145,14 +127,14 @@ export function fillUpHistoricalData(
 }
 
 export function addToCategory(returnValue, category, dateSelection, elem) {
-  const value = +elem.amount;
+  const sum = +elem.amount;
   if (!returnValue[category])
     returnValue[category] = {
-      value: 0,
+      sum: 0,
       values: {}, //historical values
       entries: []
     };
-  returnValue[category].value += value;
+  returnValue[category].sum += sum;
   const histValue = getHistoricalValue(dateSelection, elem);
   if (!returnValue[category].values[histValue.key])
     returnValue[category].values[histValue.key] = 0;
@@ -222,13 +204,13 @@ export function getHistoricalValue(date, elem) {
   let historicalValue = { key: undefined, value: +elem.amount };
 
   if (date) {
-    if (date.length === 4) {
-      historicalValue.key = getMonthAsString(elem.month);
-    } else if (date.length > 4) {
+    if (!isNaN(+date)) {
+      historicalValue.key = elem.month;
+    } else {
       historicalValue.key = elem.day;
     }
   } else {
-    historicalValue.key = getYear(elem.month);
+    historicalValue.key = elem.year;
   }
   return historicalValue;
 }
@@ -239,18 +221,20 @@ export function getDataByDate(date, fullData) {
   if (date) {
     if (date.length === 4) {
       data = {};
-      Object.keys(fullData).forEach(key => {
-        const year = getYear(key);
+      Object.keys(fullData).forEach(year => {
         if (year === date) {
-          data[key] = fullData[key];
+          data[year] = fullData[year];
         }
       });
     } else if (date.length > 4) {
       data = {};
-      Object.keys(fullData).forEach(key => {
-        if (key === date) {
-          data[key] = fullData[key];
-        }
+      Object.keys(fullData).forEach(year => {
+        Object.keys(fullData[year]).forEach(month => {
+          if (month + year === date) {
+            if (data[year]) data[year] = {};
+            data[year][month] = fullData[year][month];
+          }
+        });
       });
     }
   }
@@ -315,11 +299,19 @@ export function getCategoryPath(path, findValue, categories) {
 
 export function addRedundantData(data) {
   let returnValue = {};
-  forEachElem(data, (month, day, elem) => {
+  forEachElem(data, (year, month, day, elem) => {
     let replacedMonth = replaceMonthName(month);
-    if (!returnValue[replacedMonth]) returnValue[replacedMonth] = {};
-    if (!returnValue[replacedMonth][day]) returnValue[replacedMonth][day] = [];
-    returnValue[replacedMonth][day].push({
+
+    if (!returnValue[year]) returnValue[year] = {};
+
+    if (!returnValue[year][replacedMonth])
+      returnValue[year][replacedMonth] = {};
+
+    if (!returnValue[year][replacedMonth][day])
+      returnValue[year][replacedMonth][day] = [];
+
+    returnValue[year][replacedMonth][day].push({
+      year: year,
       month: replacedMonth,
       day: day,
       ...elem
@@ -330,14 +322,21 @@ export function addRedundantData(data) {
 
 export function removeRedundantData(data) {
   let returnValue = { categories: data.categories, data: {} };
-  forEachElem(data.data, (month, day, elem) => {
+  forEachElem(data.data, (year, month, day, elem) => {
     let copyElem = clone(elem);
+    delete copyElem.year;
     delete copyElem.month;
     delete copyElem.day;
     delete copyElem.date;
-    if (!returnValue.data[month]) returnValue.data[month] = {};
-    if (!returnValue.data[month][day]) returnValue.data[month][day] = [];
-    returnValue.data[month][day].push(copyElem);
+
+    if (!returnValue.data[year]) returnValue.data[year] = {};
+
+    if (!returnValue.data[year][month]) returnValue.data[year][month] = {};
+
+    if (!returnValue.data[year][month][day])
+      returnValue.data[year][month][day] = [];
+
+    returnValue.data[year][month][day].push(copyElem);
   });
   return returnValue;
 }
@@ -375,18 +374,17 @@ const replacements = [
   { repl: "November", find: ["november"] },
   { repl: "December", find: ["Dezember"] }
 ];
-export function replaceMonthName(monthName) {
-  const month = getMonthAsString(monthName);
-  let returnValue = monthName;
+export function replaceMonthName(month) {
+  let returnValue = month;
   replacements.forEach(repPair => {
     repPair.find.forEach(find => {
       if (month === find) {
-        returnValue = repPair.repl + getYear(monthName);
-        return returnValue;
+        returnValue = repPair.repl;
+        return;
       }
     });
-    if (returnValue !== monthName) {
-      return returnValue;
+    if (returnValue !== month) {
+      return;
     }
   });
   return returnValue;
@@ -417,12 +415,13 @@ export function isValidCat(elem, categoryPath) {
   }
 }
 
-export function isEqualEntry(entry, row) {
+export function isEqualEntry(entry, compareEntry) {
   if (
-    entry.month === row.month &&
-    entry.day === row.day &&
-    entry.info === row.info &&
-    entry.amount === row.amount
+    entry.year === compareEntry.year &&
+    entry.month === compareEntry.month &&
+    entry.day === compareEntry.day &&
+    entry.info === compareEntry.info &&
+    entry.amount === compareEntry.amount
   ) {
     return true;
   }
