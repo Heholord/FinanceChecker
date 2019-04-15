@@ -26,7 +26,7 @@
               {key:'download', icon:'el-icon-download', text:'Download'},
               {key:'edit', icon:'el-icon-edit', text:'Editor'},
               {key:'upload', icon:'el-icon-upload', text:'Upload'},
-              {key:'convert', icon:'el-icon-upload', text:'Convert'}]"
+              {key:'convert', icon:'el-icon-sort', text:'Convert'}]"
             default="upload"
             @selected="key => this.selected = key"
           />

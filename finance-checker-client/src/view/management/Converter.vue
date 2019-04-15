@@ -4,7 +4,7 @@
       class="split-elem"
       fileType="json"
       :fileSize="20"
-      text="You can your data with the old format"
+      text="You can upload your data with the old format"
       @onFile="setOld"
       v-if="$isEmpty(oldData)"
     />

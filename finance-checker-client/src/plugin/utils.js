@@ -219,19 +219,19 @@ export function getDataByDate(date, fullData) {
   let data = fullData;
 
   if (date) {
-    if (date.length === 4) {
+    if (!isNaN(+date)) {
       data = {};
       Object.keys(fullData).forEach(year => {
         if (year === date) {
           data[year] = fullData[year];
         }
       });
-    } else if (date.length > 4) {
+    } else {
       data = {};
       Object.keys(fullData).forEach(year => {
         Object.keys(fullData[year]).forEach(month => {
           if (month + year === date) {
-            if (data[year]) data[year] = {};
+            data[year] = {};
             data[year][month] = fullData[year][month];
           }
         });
