@@ -23,17 +23,15 @@
           <selection
             v-if="$store.getters.hasData"
             :selections="[
-              {key:'download', icon:'el-icon-download', text:'Download'},
-              {key:'edit', icon:'el-icon-edit', text:'Editor'},
-              {key:'upload', icon:'el-icon-upload', text:'Upload'},
-              {key:'convert', icon:'el-icon-sort', text:'Convert'}]"
+          {key:'download', icon:'el-icon-download', text:'Download'},
+          {key:'edit', icon:'el-icon-edit', text:'Editor'},
+          {key:'upload', icon:'el-icon-upload', text:'Upload'}]"
             default="upload"
             @selected="key => this.selected = key"
           />
           <selection
             v-else
-            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'},
-            {key:'convert', icon:'el-icon-sort', text:'Convert'}]"
+            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'}]"
             default="upload"
             @selected="key => this.selected = key"
           />
@@ -44,7 +42,6 @@
               <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
               <router-view></router-view>
             </div>
-            <Converter v-if="selected === 'convert'"/>
           </div>
         </div>
       </div>
@@ -59,7 +56,6 @@ import Download from "./Download";
 import Heading from "@/components/Heading";
 import Selection from "@/components/Selection";
 import EntryBrowser from "@/components/EntryBrowser";
-import Converter from "./Converter";
 
 export default {
   name: "DataManagement",
@@ -69,23 +65,22 @@ export default {
     Choices,
     Heading,
     Selection,
-    EntryBrowser,
-    Converter
+    EntryBrowser
   },
   data() {
     return {
       uploadChoices: [
         {
-          text: "Setup",
-          subtext: "Everything that is great beginns with a setup",
-          image: "setup.svg",
-          route: "/manage/upload/setup"
-        },
-        {
           text: "Upload your existing data",
           subtext: "That's quick and easy",
           image: "quickupload.svg",
           route: "/manage/upload/quick"
+        },
+        {
+          text: "Setup",
+          subtext: "Everything that is great beginns with a setup",
+          image: "setup.svg",
+          route: "/manage/upload/setup"
         }
       ],
       selected: "upload"

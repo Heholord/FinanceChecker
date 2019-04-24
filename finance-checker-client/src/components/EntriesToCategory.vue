@@ -21,20 +21,12 @@
     <div class="progress" :style="'width: ' + progress + 'vw'"></div>
     <div v-show="!progressClass" class="category-chooser">
       <em>{{elemText}}</em>
-      <el-alert
-        v-if="canInsertIntoCategory"
-        type="success"
-        :closable="false"
-        show-icon
-      >Currently category
+      <el-alert v-if="canInsertIntoCategory" type="success" :closable="false" show-icon>
+        Currently category
         <el-tag type="info">{{selectedCategoryPrint}}</el-tag>is selected
       </el-alert>
-      <el-alert
-        v-else-if="isCategorySelected"
-        type="warning"
-        :closable="false"
-        show-icon
-      >The selected category
+      <el-alert v-else-if="isCategorySelected" type="warning" :closable="false" show-icon>
+        The selected category
         <el-tag type="info">{{selectedCategoryPrint}}</el-tag>has subcategories, thus no entries can be added to this category.
         <br>Please specify the category or add a new subcategory.
       </el-alert>
@@ -57,7 +49,8 @@
             <p>Do you want to create a new category in</p>
             <el-tag type="info">{{selectedCategoryPrint}}</el-tag>
             <el-alert v-if="isLeaf(selectedCategory)" type="warning" :closable="false" show-icon>
-              <p>The selected category
+              <p>
+                The selected category
                 <el-tag type="info">{{selectedCategoryPrint}}</el-tag>contains entries. If you still decide to add a new subcategory to this category, the existing entries will be placed into an
                 <el-tag type="info">{{selectedCategoryPrint}} > other</el-tag>subcategory.
               </p>
@@ -189,6 +182,8 @@ export default {
           " (" +
           elem.amount +
           "€) found on " +
+          elem.year +
+          " " +
           elem.month +
           " " +
           elem.day +
@@ -200,6 +195,8 @@ export default {
           " (" +
           elem.amount +
           "€) found on " +
+          elem.year +
+          " " +
           elem.month +
           " " +
           elem.day +

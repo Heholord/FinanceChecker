@@ -1,4 +1,6 @@
 export const moment = require("moment");
+const dataVersionNumber = 2;
+export const dataVersion = "v" + dataVersionNumber;
 
 // Speed up calls to hasOwnProperty
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -321,7 +323,11 @@ export function addRedundantData(data) {
 }
 
 export function removeRedundantData(data) {
-  let returnValue = { categories: data.categories, data: {} };
+  let returnValue = {
+    version: dataVersion,
+    categories: data.categories,
+    data: {}
+  };
   forEachElem(data.data, (year, month, day, elem) => {
     let copyElem = clone(elem);
     delete copyElem.year;
@@ -342,7 +348,10 @@ export function removeRedundantData(data) {
 }
 
 export function download(categories, data) {
-  let downloadData = { categories: categories, data: data };
+  let downloadData = {
+    categories: categories,
+    data: data
+  };
   return (
     "data:text/json;charset=utf-8," +
     encodeURIComponent(JSON.stringify(removeRedundantData(downloadData)))
@@ -426,4 +435,33 @@ export function isEqualEntry(entry, compareEntry) {
     return true;
   }
   return false;
+}
+
+const converter = [
+  undefined, // v0
+  function(oldData) {
+    // v1 -> v2
+    let returnValue = {};
+
+    Object.keys(oldData.data).forEach(yearMonth => {
+      const year = getYear(yearMonth);
+      const month = getMonthAsString(yearMonth);
+      if (!returnValue[year]) returnValue[year] = {};
+      if (!returnValue[year][month]) returnValue[year][month] = {};
+
+      Object.keys(oldData.data[yearMonth]).forEach(day => {
+        returnValue[year][month][day] = oldData.data[yearMonth][day];
+      });
+    });
+    return { version: "v2", categories: oldData.categories, data: returnValue };
+  }
+];
+
+export function convert(oldData) {
+  let currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
+  while (currentVersionNr < dataVersionNumber) {
+    oldData = converter[currentVersionNr](oldData);
+    currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
+  }
+  return oldData;
 }

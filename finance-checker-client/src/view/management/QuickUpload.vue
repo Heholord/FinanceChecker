@@ -19,6 +19,7 @@
 import FileUploader from "@/components/FileUploader";
 import Choices from "@/components/Choices";
 import { mapGetters } from "vuex";
+import { convert } from "@/plugin/utils.js";
 
 export default {
   name: "QuickUpload",
@@ -60,6 +61,7 @@ export default {
       });
     },
     updateStore(data, doneAction) {
+      data = convert(data);
       this.$store.dispatch("setData", data).then(() => {
         if (doneAction) doneAction();
       });

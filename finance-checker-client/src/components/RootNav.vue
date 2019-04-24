@@ -2,11 +2,6 @@
   <div class="width-center">
     <div class="navbox center-content">
       <ul class="root-navigation title">
-        <li class="br-soft" :class="{active: isActive('/manage')}" @click="$routeTo('/manage')">
-          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')">
-          <img v-else v-lazy="require('@/assets/manage-s.svg')">
-          <span>Management</span>
-        </li>
         <li
           class="br-soft"
           :class="{active: isActive('/visualize')}"
@@ -16,13 +11,14 @@
           <img v-else v-lazy="require('@/assets/data-s.svg')">
           <span>Visualization</span>
         </li>
+        <li class="br-soft" :class="{active: isActive('/manage')}" @click="$routeTo('/manage')">
+          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')">
+          <img v-else v-lazy="require('@/assets/manage-s.svg')">
+          <span>Management</span>
+        </li>
       </ul>
     </div>
   </div>
-  <!-- <el-menu :default-active="$route.path" class="master-menu" mode="horizontal" router>
-    <el-menu-item index="/manage">Management</el-menu-item>
-    <el-menu-item index="/visualize">Visualization</el-menu-item>
-  </el-menu>-->
 </template>
 
 <script>
