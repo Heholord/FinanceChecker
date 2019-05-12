@@ -60,6 +60,12 @@ export function forEachElem(data, callback) {
   });
 }
 
+export function convertMonthToString(month) {
+  return moment()
+    .month(month)
+    .format("MMMM");
+}
+
 /**
  * Returns the months as number
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
@@ -77,7 +83,9 @@ export function getMonthAsNr(dateString) {
 }
 
 export function monthToNr(month) {
-  return moment.months().indexOf(month) + 1;
+  return +moment()
+    .month(month)
+    .format("M");
 }
 
 /**

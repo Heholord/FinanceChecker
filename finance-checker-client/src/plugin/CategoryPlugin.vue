@@ -1,12 +1,12 @@
 <script>
 import palette from "google-palette";
-import $ from "jquery";
-import { isEmpty, getYear, getMonthAsString } from "./utils";
+import { isEmpty } from "./utils";
 
 const CategoryPlugin = {
   install(Vue, { router }) {
-    Vue.prototype.$parseHtml = content => {
-      return parseHTMLString(content);
+    Vue.prototype.$parseHtml = (content, bank) => {
+      let bankParser = require("@/plugin/parser/" + bank + "_html.js");
+      return bankParser.parse(content);
     };
 
     /**
@@ -135,60 +135,7 @@ const CategoryPlugin = {
   }
 };
 
-function parseHTMLString(content) {
-  let data = {};
-
-  let html = $(content);
-
-  html.find(".transactionlist").each((index, monthView) => {
-    monthView = $(monthView);
-    const yearMonth = monthView
-      .find("thead h2")
-      .text()
-      .trim()
-      .replace(/\s/gm, "");
-
-    if (yearMonth) {
-      const year = getYear(yearMonth);
-      const month = getMonthAsString(yearMonth);
-      if (!data[year]) data[year] = {};
-      data[year][month] = {};
-      monthView.find("tbody .transaction-line").each((index, dayEntry) => {
-        let parsedDayEntry = parseDayEntry(dayEntry);
-        if (parsedDayEntry) {
-          dayEntry = $(dayEntry);
-          let day = dayEntry.find(".datecol .day").text();
-          if (!data[year][month][day]) data[yearMonth][day] = [];
-          data[yearMonth][day].push({
-            year: year,
-            month: month,
-            day: day,
-            ...parsedDayEntry
-          });
-        }
-      });
-    }
-  });
-
-  return data;
-}
-
-function parseDayEntry(dayEntry) {
-  let data = {};
-
-  data.info = getText(dayEntry.find(".accountcol h5")).toUpperCase();
-  data.amount = getText(dayEntry.find(".amountcol .balance")).replace(",", ".");
-
-  if (isNaN(data.amount) || +data.amount == 0) return false; // *** Abschlussbuchung per 30.09.2018 **** interessiert uns nicht
-  return data;
-}
-
-function getText(elem) {
-  return elem
-    .text()
-    .replace(/(\r\n\t|\n|\r\t|\.)/gm, "")
-    .trim();
-}
+export default CategoryPlugin;
 
 function getNumWithSetDec(num, numOfDec) {
   var pow10s = Math.pow(10, numOfDec || 0);
@@ -229,6 +176,4 @@ function getStandardDeviation(numArr, numOfDec) {
   var stdDev = Math.sqrt(getVariance(numArr, numOfDec));
   return getNumWithSetDec(stdDev, numOfDec);
 }
-
-export default CategoryPlugin;
 </script>

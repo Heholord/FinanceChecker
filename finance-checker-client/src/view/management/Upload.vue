@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       activeStep: 0,
-      totalSteps: 4,
+      totalSteps: 3,
       disableNextStep: true,
       options: [
         {
@@ -85,6 +85,20 @@ export default {
             {
               value: "raiffeisen",
               label: "Raiffeisen"
+            }
+          ]
+        },
+        {
+          value: "international",
+          label: "International",
+          children: [
+            {
+              value: "paypal",
+              label: "Paypal"
+            },
+            {
+              value: "westernunion",
+              label: "Western Union"
             }
           ]
         }
@@ -122,7 +136,6 @@ export default {
       this.disableNextStep = false;
     },
     setHTMLFile(file) {
-      this.disableNextStep = true;
       this.setFile(file, content => {
         this.content = content;
         this.allowNextStep();
@@ -150,9 +163,9 @@ export default {
     merge() {
       let mergeEntries = this.mergeEntries;
       if (this.$isEmpty(mergeEntries)) {
-        mergeEntries = { categories: {}, data: {} };
+        mergeEntries = { categories: { out: [], in: [] }, data: {} };
       }
-      let entries = this.$parseHtml(this.content);
+      let entries = this.$parseHtml(this.content, this.selectedBank.join("."));
       entries = {
         categories: mergeEntries.categories,
         data: { ...entries, ...this.mergeEntries.data }
@@ -160,12 +173,6 @@ export default {
       this.$store.dispatch("setData", entries).then(() => {
         // this.loading = false;
       });
-    },
-    scrollMeTo(refName) {
-      var element = this.$refs[refName];
-      var top = element.offsetTop;
-
-      window.scrollTo(0, top);
     }
   },
   mounted() {
