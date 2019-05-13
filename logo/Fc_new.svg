@@ -14,8 +14,8 @@
    viewBox="0 0 1000px 1000px"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14"
-   sodipodi:docname="drawing (copy 1).svg.2019_04_29_20_53_48.0.svg">
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="Fc_new.svg">
   <metadata
      id="metadata38">
     <rdf:RDF>
@@ -772,16 +772,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49733177"
-     inkscape:cx="-73.286546"
+     inkscape:cx="206.20495"
      inkscape:cy="411.07204"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1080"
-     inkscape:window-x="2560"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
      inkscape:snap-bbox="false"
      inkscape:snap-global="true"
      inkscape:snap-nodes="true"
@@ -805,28 +805,27 @@
      style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;line-height:1.25;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.22183797"
      id="flowRoot2364">
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0c2c7f;fill-opacity:1;stroke-width:0.78472626"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#339933;fill-opacity:1;stroke-width:0.78472626;opacity:1"
        d="m 246.39453,114.31445 v 284.79102 c 39.66098,-25.30054 74.78286,-27.16131 109.11914,0.92187 v -32.80859 h 103.16797 l 35.71289,-67.74219 H 355.51367 V 185.2832 H 577.7207 v -70.96875 z"
        transform="matrix(0.22798078,0,0,0.35053965,53.960928,223.31283)"
        id="path2944"
        inkscape:connector-curvature="0" />
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#367b36;fill-opacity:1;stroke-width:0.78472626"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0372ba;fill-opacity:1;stroke-width:0.78472626"
        d="m 300.19531,420.4668 c -19.01313,0.31424 -37.77369,7.76281 -53.80078,20.6289 v 156.83399 h 99.56445 c -0.0369,1.89215 -0.0605,3.79643 -0.0605,5.72265 v 102.39844 c 0,40 6.93216,71.20156 20.79883,93.60156 14.4,21.86667 37.33411,38.13217 68.80078,48.79883 19.2,6.4 43.2,9.59961 72,9.59961 30.93333,0 62.93333,-4.26549 96,-12.79883 l -19.20117,-68.80078 c -24.00002,6.93334 -48,10.40039 -72,10.40039 -27.20002,0 -49.59922,-5.60078 -67.19922,-16.80078 -17.6,-11.2 -26.40039,-29.59922 -26.40039,-55.19922 v -116 c 0,-20.81983 4.53781,-38.04092 13.59961,-51.67383 -6.06819,-8.4251 -12.09479,-17.03689 -18.09961,-25.67968 -8.91927,-12.83759 -17.80407,-25.67798 -26.71289,-37.83203 -14.39918,14.1268 -25.05015,31.71411 -31.97071,52.74414 v -93.76758 c -17.03959,-15.66995 -36.30526,-22.49003 -55.3184,-22.17578 z"
        transform="matrix(0.22798078,0,0,0.35053965,53.960928,223.31283)"
        id="path2942"
        inkscape:connector-curvature="0" />
     <path
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0c2c7f;fill-opacity:1;stroke-width:0.78472626"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:226.15577698px;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#339933;fill-opacity:1;stroke-width:0.78472626;opacity:1"
        d="m 516.69727,426.05078 c -40.7181,0 -74.4974,12.02739 -101.34571,36.06836 9.20167,12.52411 18.30474,25.70051 27.41602,38.81445 5.51776,7.94177 11.04156,15.83493 16.58008,23.55664 1.43539,-1.6774 2.94962,-3.29195 4.55078,-4.83789 16,-15.46666 37.86627,-23.20117 65.59961,-23.20117 23.46666,0 48.26705,5.33334 74.40039,16 l 20,-60.79883 C 599.33842,436.73696 551.36393,426.05078 516.69727,426.05078 Z"
        transform="matrix(0.22798078,0,0,0.35053965,53.960928,223.31283)"
        id="path2901"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#323948;stroke-width:3.99308348;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2232)"
-       d="m 65.627357,500.26384 c 14.182651,-6.40818 21.48877,-133.65847 56.955653,-136.52354 22.54803,-1.82147 28.47587,68.65388 58.3983,70.81778 44.72213,3.23416 47.79352,-136.26677 51.18754,-170.77897"
+       style="fill:none;stroke:#323948;stroke-width:3.32756948;stroke-opacity:1;marker-end:url(#marker2232);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 65.627357,500.26384 c 14.182651,-6.40818 21.48877,-133.65847 56.955653,-136.52354 22.54803,-1.82147 28.47587,68.65389 58.3983,70.81778 39.97948,2.89119 46.67369,-108.28462 50.06859,-156.55254 0.40273,-5.72589 0.75902,-10.56651 1.11895,-14.22643"
        id="path2969"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cssc" />
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
