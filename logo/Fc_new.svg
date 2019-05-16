@@ -772,8 +772,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49733177"
-     inkscape:cx="206.20495"
-     inkscape:cy="411.07204"
+     inkscape:cx="158.95279"
+     inkscape:cy="1215.3641"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -783,7 +783,7 @@
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="false"
-     inkscape:snap-global="true"
+     inkscape:snap-global="false"
      inkscape:snap-nodes="true"
      inkscape:snap-grids="true"
      showguides="true"
@@ -823,9 +823,20 @@
        id="path2901"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#323948;stroke-width:3.32756948;stroke-opacity:1;marker-end:url(#marker2232);stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 65.627357,500.26384 c 14.182651,-6.40818 21.48877,-133.65847 56.955653,-136.52354 22.54803,-1.82147 28.47587,68.65389 58.3983,70.81778 39.97948,2.89119 46.67369,-108.28462 50.06859,-156.55254 0.40273,-5.72589 0.75902,-10.56651 1.11895,-14.22643"
+       style="fill:none;stroke:#323948;stroke-width:3.32756948;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2232)"
+       d="m 65.627357,500.26384 c 14.182651,-6.40818 29.119481,-76.58607 55.516753,-80.72173 19.01781,-2.97952 31.12448,-42.389 50.48436,-41.83304 26.07667,0.74886 34.50866,-24.40204 48.31795,-71.64561 1.77553,-6.07436 0.3993,-3.37612 3.2773,-14.22643"
        id="path2969"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssc" />
   </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:533.33331299px;line-height:1.25;font-family:'Advent Pro';-inkscape-font-specification:'Advent Pro, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:60;stroke-miterlimit:4;stroke-dasharray:none"
+     x="-124.66527"
+     y="-206.43811"
+     id="text1151"><tspan
+       sodipodi:role="line"
+       id="tspan1149"
+       x="-124.66527"
+       y="-206.43811">Fc</tspan></text>
 </svg>
