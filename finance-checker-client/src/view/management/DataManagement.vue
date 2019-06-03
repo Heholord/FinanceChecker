@@ -1,19 +1,26 @@
 <template>
   <div class="management contentView">
     <!-- TODO  
-       custom parsing,
-       html and/or json (make hirachy clear) 
-        desicion component for:
+       1) html and/or json (make hirachy clear) 
+       2) desicion component for:
           -> upload existing data
             -> add new data
               -> entry browser, category browser, ect
             -> entry browser, category browser, ect
           -> upload bank data (html, csv)
             -> usual flow
+        
+      3)
+      [first upload your existing data (q: do you have existing data? a: upload existing, continue)
+      select bank
+      add new data
+      merge strategy (newest, merge non empty days, merge months, merge years, merge everything)]
 
-       options(delete, add, modify, special category) in entity view 
-       make a finish page (with nice animations)
-       jump to finish page option when store data and category exits
+
+      4) options(delete, add, modify, special category) in entity view 
+      5) make a finish page (with nice animations)
+      6) jump to finish page option when store data and category exits
+      7) loading from upload to entity browser does not work correctly (maybe split methods?). check if fixed
     -->
     <heading heading="Manage your data" img="manage-i.svg"></heading>
     <root-nav/>

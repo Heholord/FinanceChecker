@@ -2,12 +2,12 @@
   <div id="app">
     <router-view></router-view>
     <!-- TODO  
-      make an animation list (what would be nice if it'd be animated)
-      rework utils (maybe in plugin),
-      make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
-      fix rootnav css
-      Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
-      Tagline: Cause spreadsheats are not enought
+      1) make an animation list (what would be nice if it'd be animated)
+      2) rework utils (maybe in plugin),
+      3) make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
+      Don't offer yes, no answers
+      4) Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
+      5) Tagline: Cause spreadsheats are not enought
     -->
     <div class="github-footer size-h4 primary9 width-center">
       <div class="center-content">

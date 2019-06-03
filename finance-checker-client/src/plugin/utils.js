@@ -467,6 +467,7 @@ const converter = [
 
 export function convert(oldData) {
   let currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
+  // convert as long as it's not up-to-date
   while (currentVersionNr < dataVersionNumber) {
     oldData = converter[currentVersionNr](oldData);
     currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
