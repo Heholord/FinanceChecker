@@ -1,11 +1,9 @@
 <template>
   <div class="contentView dataVisualizer">
     <!-- TODO  
-        8k-view
-        special stats
-        janika in/out bug   # check if fixed
-        no data component (that offers to go to inquire page or offers an quickupload)
-        loading from upload to entity browser does not work correctly (maybe split methods?)
+        1) 8k-view (needs to be hidden 4 normal users)
+        2) special stats
+        3) janika in/out bug   # check if fixed
     -->
     <heading heading="Data Visualizer" img="data-i.svg"/>
     <root-nav/>
@@ -25,7 +23,7 @@
           <div class="content">
             <Overview v-if="selected === 'overview'"/>
             <Category v-if="selected === 'category'"/>
-            <Category v-if="selected === 'special'"/>
+            <SpecialStats v-if="selected === 'special'"/>
           </div>
         </div>
       </div>
@@ -34,6 +32,7 @@
 </template>
 
 <script>
+import SpecialStats from "./SpecialStats";
 import Category from "./Category";
 import Overview from "./Overview";
 import Choices from "@/components/Choices.vue";
@@ -44,6 +43,7 @@ import Selection from "@/components/Selection";
 export default {
   name: "DataVisualizer",
   components: {
+    SpecialStats,
     Overview,
     Category,
     RootNav,

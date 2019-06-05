@@ -49,7 +49,8 @@ const store = new Vuex.Store({
       return resolveCategory(parts, state.categories);
     },
     /**
-     * TODO: rename function to filter
+     * TODO: this should only be a filter
+     * the assignment to categories should be a nother function
      * @param {string} categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
      * @param {string} date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
      * @returns {object} creates an object with following structure:
@@ -208,13 +209,13 @@ const store = new Vuex.Store({
           let lastCat = categories;
           for (let index in strParts) {
             const part = strParts[index];
+            // if category does not exist yet
             if (!lastCat[part]) {
-              // if category does not exist yet
+              //if it is the last category
               if (index == strParts.length - 1) {
-                //if it is the last category
                 lastCat[part] = [];
               } else {
-                //if there are subcategories waiting
+                //else if there are subcategories waiting
                 lastCat[part] = {};
               }
             }

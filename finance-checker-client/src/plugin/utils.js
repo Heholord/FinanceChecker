@@ -48,14 +48,32 @@ export function flatten(category) {
   return returnValue;
 }
 
-export function forEachElem(data, callback) {
+export function forEachYear(data, callback) {
   Object.keys(data).forEach(year => {
-    Object.keys(data[year]).forEach(month => {
-      Object.keys(data[year][month]).forEach(day => {
-        data[year][month][day].forEach(elem => {
-          callback(year, month, day, elem);
-        });
-      });
+    callback(year, data[year]);
+  });
+}
+
+export function forEachMonth(data, callback) {
+  forEachYear(data, (year, yearData) => {
+    Object.keys(yearData).forEach(month => {
+      callback(year, month, yearData[month]);
+    });
+  });
+}
+
+export function forEachDay(data, callback) {
+  forEachMonth(data, (year, month, monthData) => {
+    Object.keys(monthData).forEach(day => {
+      callback(year, month, day, monthData[day]);
+    });
+  });
+}
+
+export function forEachElem(data, callback) {
+  forEachDay(data, (year, month, day, dayData) => {
+    dayData.forEach(elem => {
+      callback(year, month, day, elem);
     });
   });
 }
@@ -88,6 +106,12 @@ export function monthToNr(month) {
     .format("M");
 }
 
+export function monthToString(month) {
+  return moment()
+    .month(month)
+    .format("MMMM");
+}
+
 /**
  * Returns the years as string
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
@@ -99,7 +123,7 @@ export function getYear(dateString) {
 export function findEarliestLatestDate(data) {
   let lowestDate = moment("9999-12-31", "YYYY-MM-DD").toDate();
   let highestDate = moment("0000-01-01", "YYYY-MM-DD").toDate();
-  forEachElem(data, (year, month, day) => {
+  forEachDay(data, (year, month, day) => {
     const date = moment(year + "-" + month + "-" + day, "YYYY-MM-DD").toDate();
     if (date.getTime() < lowestDate.getTime()) {
       lowestDate = date;
