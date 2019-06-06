@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
+import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
 import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 

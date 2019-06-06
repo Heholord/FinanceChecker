@@ -12,7 +12,7 @@
 
 
 <script>
-import LineChart from "@/components/LineChart.vue";
+import LineChart from "./LineChart.vue";
 
 export default {
   components: {

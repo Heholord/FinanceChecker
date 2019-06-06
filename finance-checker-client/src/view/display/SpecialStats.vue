@@ -34,24 +34,30 @@
 
       <el-container>
         <el-main>
-          <div v-for="(day,index) in week.avg" :key="index">
-            <h2>{{dayName(index)}}</h2>
-            <em>Sum / Count</em>
-            <p>{{week.sum[index]}} / {{week.count[index]}}</p>
-            <em>Average</em>
-            <p>{{day}}</p>
-            <hr>
-          </div>
-        </el-main>
-        <el-main>
-          <div v-for="(mon,index) in month.avg" :key="index">
-            <h2>{{monthName(index)}}</h2>
-            <em>Sum / Count</em>
-            <p>{{month.sum[index]}} / {{month.count[index]}}</p>
-            <em>Average</em>
-            <p>{{mon}}</p>
-            <hr>
-          </div>
+          <section class="visual-content">
+            <bar-chart :chartData="weekChartData"/>
+            <div class="flex-container">
+              <div class="flex-item" v-for="(day,index) in week.total.avg" :key="index">
+                <h2>{{dayName(index)}}</h2>
+                <em>Sum / Count</em>
+                <p>{{week.total.sum[index]}} / {{week.total.count[index]}}</p>
+                <em>Average</em>
+                <p>{{day}}</p>
+              </div>
+            </div>
+          </section>
+          <section class="visual-content">
+            <bar-chart :chartData="monthChartData"/>
+            <div class="flex-container">
+              <div class="flex-item" v-for="(mon,index) in month.total.avg" :key="index">
+                <h2>{{monthName(index)}}</h2>
+                <em>Sum / Count</em>
+                <p>{{month.total.sum[index]}} / {{month.total.count[index]}}</p>
+                <em>Average</em>
+                <p>{{mon}}</p>
+              </div>
+            </div>
+          </section>
         </el-main>
       </el-container>
     </el-container>
@@ -60,6 +66,7 @@
 
 <script>
 import CategoryTree from "@/components/CategoryTree.vue";
+import BarChart from "@/components/charts/BarChart.vue";
 import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 import {
@@ -69,6 +76,7 @@ import {
   forEachDay,
   forEachMonth
 } from "@/plugin/utils";
+import palette from "google-palette";
 
 const days = [
   "Monday",
@@ -82,25 +90,92 @@ const days = [
 
 export default {
   name: "SpecialStats",
-  components: { CategoryTree, DataDownloader },
+  components: { CategoryTree, DataDownloader, BarChart },
   data() {
     return {
       week: {
-        sum: [],
-        avg: [],
-        count: []
+        total: {
+          sum: [],
+          avg: [],
+          count: []
+        },
+        percent: {
+          sum: [],
+          avg: [],
+          count: []
+        }
       },
       month: {
-        sum: [],
-        avg: [],
-        count: []
+        total: {
+          sum: [],
+          avg: [],
+          count: []
+        },
+        percent: {
+          sum: [],
+          avg: [],
+          count: []
+        }
       },
       displayDate: undefined,
       dateType: "year"
     };
   },
   computed: {
-    ...mapGetters(["disabledDates", "data"])
+    ...mapGetters(["disabledDates", "data"]),
+    weekChartData() {
+      let backgrounds = palette("cb-Blues", 3).map(hex => {
+        return "#" + hex;
+      });
+      const datasets = [
+        {
+          label: "Total",
+          backgroundColor: backgrounds[0],
+          data: this.week.percent.sum
+        },
+        {
+          label: "Average per item",
+          backgroundColor: backgrounds[1],
+          data: this.week.percent.avg
+        },
+        {
+          label: "Count",
+          backgroundColor: backgrounds[2],
+          data: this.week.percent.count
+        }
+      ];
+      return {
+        labels: days,
+        datasets
+      };
+    },
+    monthChartData() {
+      let backgrounds = palette("cb-Blues", 3).map(hex => {
+        return "#" + hex;
+      });
+
+      const datasets = [
+        {
+          label: "Total",
+          backgroundColor: backgrounds[0],
+          data: this.month.percent.sum
+        },
+        {
+          label: "Average per item",
+          backgroundColor: backgrounds[1],
+          data: this.month.percent.avg
+        },
+        {
+          label: "Count",
+          backgroundColor: backgrounds[2],
+          data: this.month.percent.count
+        }
+      ];
+      return {
+        labels: moment.months(),
+        datasets
+      };
+    }
   },
   beforeMount: function() {
     this.setData("");
@@ -120,7 +195,9 @@ export default {
         this.$refs.monthPicker.focus();
       }
     },
-    async setData(categoryPath) {
+    async setData() {
+      //(categoryPath) {
+
       // let filteredData = this.$store.getters.filter(
       //   categoryPath,
       //   this.displayDate
@@ -146,10 +223,10 @@ export default {
         });
       }
 
-      this.week.count = entries.map(elem => elem.length);
+      this.week.total.count = entries.map(elem => elem.length);
 
-      this.week.sum = [...entries];
-      this.week.sum = this.week.sum.map((elem, index) => {
+      this.week.total.sum = [...entries];
+      this.week.total.sum = this.week.total.sum.map((elem, index) => {
         if (elem)
           return (
             Math.round(
@@ -160,14 +237,15 @@ export default {
         return 0;
       });
 
-      this.week.avg = [...this.week.sum];
-      this.week.avg = this.week.avg.map(
-        (sum, index) => Math.round((sum / this.week.count[index]) * 100) / 100
+      this.week.total.avg = [...this.week.total.sum];
+      this.week.total.avg = this.week.total.avg.map(
+        (sum, index) =>
+          Math.round((sum / this.week.total.count[index]) * 100) / 100
       );
 
       entries = [];
       forEachMonth(this.data, (year, month, monthData) => {
-        const monthNr = monthToNr(month)-1;
+        const monthNr = monthToNr(month) - 1;
         if (!Array.isArray(entries[monthNr])) {
           entries[monthNr] = [];
         }
@@ -183,10 +261,10 @@ export default {
         });
       }
 
-      this.month.count = entries.map(elem => elem.length);
+      this.month.total.count = entries.map(elem => elem.length);
 
-      this.month.sum = [...entries];
-      this.month.sum = this.month.sum.map((elem, index) => {
+      this.month.total.sum = [...entries];
+      this.month.total.sum = this.month.total.sum.map((elem, index) => {
         if (elem)
           return (
             Math.round(
@@ -197,14 +275,52 @@ export default {
         return 0;
       });
 
-      this.month.avg = [...this.month.sum];
-      this.month.avg = this.month.avg.map(
-        (sum, index) => Math.round((sum / this.month.count[index]) * 100) / 100
+      this.month.total.avg = [...this.month.total.sum];
+      this.month.total.avg = this.month.total.avg.map(
+        (sum, index) =>
+          Math.round((sum / this.month.total.count[index]) * 100) / 10
+      );
+
+      let sum = this.week.total.avg.reduce((s, e) => s + e);
+      this.week.percent.avg = this.week.total.avg.map(
+        e => Math.round((e / sum) * 1000) / 10
+      );
+      sum = this.week.total.sum.reduce((s, e) => s + e);
+      this.week.percent.sum = this.week.total.sum.map(
+        e => Math.round((e / sum) * 1000) / 10
+      );
+      sum = this.week.total.count.reduce((s, e) => s + e);
+      this.week.percent.count = this.week.total.count.map(
+        e => Math.round((e / sum) * 1000) / 10
+      );
+
+      sum = this.month.total.avg.reduce((s, e) => s + e);
+      this.month.percent.avg = this.month.total.avg.map(
+        e => Math.round((e / sum) * 1000) / 10
+      );
+      sum = this.month.total.sum.reduce((s, e) => s + e);
+      this.month.percent.sum = this.month.total.sum.map(
+        e => Math.round((e / sum) * 1000) / 10
+      );
+      sum = this.week.total.count.reduce((s, e) => s + e);
+      this.month.percent.count = this.month.total.count.map(
+        e => Math.round((e / sum) * 1000) / 10
       );
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space2;
+  padding-top: $space3;
+  justify-content: space-around;
+  .flex-item {
+    width: $size6;
+    box-shadow: $flying-shadow1;
+  }
+}
 </style>

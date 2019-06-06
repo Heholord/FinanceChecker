@@ -15,6 +15,8 @@
       select bank
       add new data
       merge strategy (newest, merge non empty days, merge months, merge years, merge everything)]
+        -> name side effects of each merge strategy (maybe in bulletpoints)
+        -> explain what it does (i.e: creates new days, extends days, extends months)
 
 
       4) options(delete, add, modify, special category) in entity view 

@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import Doughnut from "@/components/Doughnut.vue";
-import SwitchableLineChart from "@/components/SwitchableLineChart.vue";
+import Doughnut from "@/components/charts/Doughnut.vue";
+import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
