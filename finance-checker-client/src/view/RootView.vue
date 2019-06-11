@@ -3,7 +3,6 @@
     <heading heading="Finance Checker"/>
     <div class="width-center h100 w100">
       <div class="center-content">
-        <!-- TODO logoleft -->
         <choices :choices="choices" big @select="execute"></choices>
       </div>
     </div>
