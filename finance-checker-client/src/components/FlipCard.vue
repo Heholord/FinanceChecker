@@ -5,18 +5,22 @@
       class="flip-card-inner"
       @mouseenter="hoverFlipCard()"
       @mouseleave="hoverFlipCard()"
-      :class="{flip:flip}"
+      :class="{flip:flip, preview:flipPreview}"
     >
       <div class="flip-card-front">
-        <el-button circle v-if="buttonFlip" @click="flipCard()">
-          <span class="mdi mdi-swap-horizontal"/>
-        </el-button>
+        <div @mouseenter="toggleFlipPreview()" @mouseleave="toggleFlipPreview()">
+          <el-button circle v-if="buttonFlip" @click="flipCard()">
+            <span class="mdi mdi-swap-horizontal"/>
+          </el-button>
+        </div>
         <slot name="front"></slot>
       </div>
       <div class="flip-card-back">
-        <el-button circle v-if="buttonFlip" @click="flipCard()">
-          <span class="mdi mdi-swap-horizontal"/>
-        </el-button>
+        <div @mouseenter="toggleFlipPreview()" @mouseleave="toggleFlipPreview()">
+          <el-button circle v-if="buttonFlip" @click="flipCard()">
+            <span class="mdi mdi-swap-horizontal"/>
+          </el-button>
+        </div>
         <slot name="back"></slot>
       </div>
     </div>
@@ -35,7 +39,8 @@ export default {
   },
   data() {
     return {
-      flip: false
+      flip: false,
+      flipPreview: false
     };
   },
   methods: {
@@ -43,6 +48,9 @@ export default {
       if (!this.buttonFlip) {
         this.flipCard();
       }
+    },
+    toggleFlipPreview() {
+      this.flipPreview = !this.flipPreview;
     },
     flipCard() {
       this.flip = !this.flip;
@@ -57,9 +65,7 @@ export default {
 
 .flip-card {
   background-color: transparent;
-  perspective: 100000px;
-  width: 100%;
-  height: 100%;
+  perspective: 10000px;
 
   .flip-card-inner {
     position: relative;
@@ -79,6 +85,10 @@ export default {
       .flip-card-back {
         display: block;
       }
+    }
+
+    &.preview {
+      transform: rotateY(10deg);
     }
 
     .flip-card-front,

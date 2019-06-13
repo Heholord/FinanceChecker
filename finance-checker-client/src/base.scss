@@ -479,6 +479,10 @@ body {
     max-height: $size10;
   }
 
+  .el-main {
+    overflow: auto;
+  }
+
   .el-aside {
     text-align: left;
     color: $neutral7;

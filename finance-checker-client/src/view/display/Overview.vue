@@ -18,7 +18,7 @@
 
       <el-container>
         <el-main>
-          <flip-card buttonFlip>
+          <flip-card buttonFlip class="flip-content">
             <switchable-line-chart
               class="chart visual-content"
               :chartData="chartData"

@@ -78,4 +78,13 @@ export default {
 </script>
 
 <style lang="scss">
+.el-main {
+  > .flip-content {
+    position: absolute;
+    min-width: $size8;
+    max-width: $size10;
+    min-height: $size8;
+    max-height: $size10;
+  }
+}
 </style>
