@@ -1,5 +1,5 @@
 <template>
-  <div class="contentView overview">
+  <div class="contentView contentArea overview">
     <aside>
       <p>Pick a date</p>
       <el-date-picker
@@ -190,15 +190,6 @@ export default {
 .overview {
   .table {
     margin-left: 50px;
-  }
-}
-
-.contentView {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 3fr;
-  main {
-    overflow: auto;
   }
 }
 </style>

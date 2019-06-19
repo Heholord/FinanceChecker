@@ -74,7 +74,6 @@ export default {
 .flip-card {
   background-color: transparent;
   perspective: 10000px;
-  margin: $space3;
 
   .flip-card-inner {
     text-align: center;

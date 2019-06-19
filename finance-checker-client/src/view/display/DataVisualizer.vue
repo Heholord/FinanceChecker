@@ -78,13 +78,13 @@ export default {
 </script>
 
 <style lang="scss">
-.el-main {
-  > .flip-content {
-    position: absolute;
-    min-width: $size8;
-    max-width: $size10;
-    min-height: $size8;
-    max-height: $size10;
+.contentArea {
+  display: grid;
+  grid-gap: $space3;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 3fr;
+  main {
+    overflow: auto;
   }
 }
 </style>

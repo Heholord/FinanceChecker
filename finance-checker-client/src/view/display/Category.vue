@@ -1,5 +1,5 @@
 <template>
-  <div class="contentView">
+  <div class="contentView contentArea">
     <modal :adaptive="true" :delay="1" height="auto" scrollable name="entry">
       <div class="entry-list">
         <el-table
