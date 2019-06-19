@@ -41,12 +41,11 @@ export default {
   height: 100%;
 
   .github-footer {
-    position: relative;
-    bottom: 0px;
+    position: sticky;
+    bottom: 0;
     z-index: 10;
     width: 100vw;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
-    margin-top: $space4;
 
     p {
       margin-top: $space1;

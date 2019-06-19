@@ -8,7 +8,11 @@
       :class="{flip:flip, preview:flipPreview}"
     >
       <div class="flip-card-front">
-        <div @mouseenter="toggleFlipPreview()" @mouseleave="toggleFlipPreview()">
+        <div
+          class="flip-button"
+          @mouseenter="toggleFlipPreview()"
+          @mouseleave="toggleFlipPreview()"
+        >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
             <span class="mdi mdi-swap-horizontal"/>
           </el-button>
@@ -16,7 +20,11 @@
         <slot name="front"></slot>
       </div>
       <div class="flip-card-back">
-        <div @mouseenter="toggleFlipPreview()" @mouseleave="toggleFlipPreview()">
+        <div
+          class="flip-button"
+          @mouseenter="toggleFlipPreview()"
+          @mouseleave="toggleFlipPreview()"
+        >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
             <span class="mdi mdi-swap-horizontal"/>
           </el-button>
@@ -66,15 +74,16 @@ export default {
 .flip-card {
   background-color: transparent;
   perspective: 10000px;
+  margin: $space3;
 
   .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
+
+    $flip-preview: 12deg;
 
     &.flip {
       transform: rotateY(180deg);
@@ -85,26 +94,29 @@ export default {
       .flip-card-back {
         display: block;
       }
+
+      &.preview {
+        transform: rotateY(180deg - $flip-preview);
+      }
     }
 
     &.preview {
-      transform: rotateY(10deg);
+      transform: rotateY($flip-preview);
     }
 
     .flip-card-front,
     .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
       backface-visibility: hidden;
 
-      .el-button.is-circle {
+      .flip-button {
         position: absolute;
         top: 5px;
         right: 20px;
-        background-color: $neutral2;
-        box-shadow: make-in-shadow($neutral1);
         border: none;
+        .el-button {
+          background-color: $neutral2;
+          box-shadow: make-in-shadow($neutral2);
+        }
       }
     }
 

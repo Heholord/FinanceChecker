@@ -465,28 +465,24 @@ body {
   }
 
   .visual-content {
-    min-width: $size7;
+    min-width: $size8;
     max-width: $size10;
+    width: 100%;
+    height: 100%;
 
     padding: $space3;
     box-shadow: $flying-shadow2;
     border-radius: $br-soft;
-    margin-bottom: $space3;
   }
 
-  .chart {
-    min-height: $size7;
-    max-height: $size10;
-  }
-
-  .el-main {
+  main {
     overflow: auto;
   }
 
-  .el-aside {
+  aside {
     text-align: left;
     color: $neutral7;
-    width: $size5;
+    width: 100%;
 
     p {
       @include label;

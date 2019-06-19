@@ -1,63 +1,59 @@
 <template>
   <div class="contentView overview">
-    <el-container>
-      <el-aside>
-        <p>Pick a date</p>
-        <el-date-picker
-          v-model="displayDate"
-          type="year"
-          placeholder="Pick a year"
-          format="yyyy"
-          value-format="yyyy"
-          ref="yearPicker"
-          @change="reloadChart"
-          :picker-options="{disabledDate: disabledDates}"
-        ></el-date-picker>
-        <data-downloader></data-downloader>
-      </el-aside>
+    <aside>
+      <p>Pick a date</p>
+      <el-date-picker
+        v-model="displayDate"
+        type="year"
+        placeholder="Pick a year"
+        format="yyyy"
+        value-format="yyyy"
+        ref="yearPicker"
+        @change="reloadChart"
+        :picker-options="{disabledDate: disabledDates}"
+      ></el-date-picker>
+      <data-downloader></data-downloader>
+    </aside>
 
-      <el-container>
-        <el-main>
-          <flip-card buttonFlip class="flip-content">
-            <switchable-line-chart
-              class="chart visual-content"
-              :chartData="chartData"
-              :stacked="false"
-              v-if="loaded"
-              @stacked="setTransparent"
-              slot="front"
-            ></switchable-line-chart>
-            <el-collapse :value="data[0].date" class="visual-content" slot="back">
-              <el-collapse-item
-                v-for="dataEntry in data"
-                :key="dataEntry.date"
-                :title="dataEntry.date"
-                :name="dataEntry.date"
-              >
-                <el-table
-                  show-summary
-                  :summary-method="getSummaries"
-                  :data="dataEntry.values"
-                  class="table"
-                >
-                  <el-table-column prop="date" label="Date" width="120"></el-table-column>
-                  <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
-                  <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
-                  <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
-                  <el-table-column
-                    prop="save"
-                    label="Save"
-                    width="100"
-                    header-align="left"
-                    align="right"
-                  ></el-table-column>
-                </el-table>
-              </el-collapse-item>
-            </el-collapse>
-          </flip-card>
-        </el-main>
-      </el-container>
-    </el-container>
+    <main>
+      <flip-card buttonFlip class="flip-content">
+        <switchable-line-chart
+          class="chart visual-content"
+          :chartData="chartData"
+          :stacked="false"
+          v-if="loaded"
+          @stacked="setTransparent"
+          slot="front"
+        ></switchable-line-chart>
+        <el-collapse :value="data[0].date" class="visual-content" slot="back">
+          <el-collapse-item
+            v-for="dataEntry in data"
+            :key="dataEntry.date"
+            :title="dataEntry.date"
+            :name="dataEntry.date"
+          >
+            <el-table
+              show-summary
+              :summary-method="getSummaries"
+              :data="dataEntry.values"
+              class="table"
+            >
+              <el-table-column prop="date" label="Date" width="120"></el-table-column>
+              <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
+              <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
+              <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
+              <el-table-column
+                prop="save"
+                label="Save"
+                width="100"
+                header-align="left"
+                align="right"
+              ></el-table-column>
+            </el-table>
+          </el-collapse-item>
+        </el-collapse>
+      </flip-card>
+    </main>
   </div>
 </template>
 
@@ -190,10 +186,19 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .overview {
   .table {
     margin-left: 50px;
+  }
+}
+
+.contentView {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 3fr;
+  main {
+    overflow: auto;
   }
 }
 </style>
