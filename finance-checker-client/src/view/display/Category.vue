@@ -48,7 +48,9 @@
     </aside>
 
     <main>
-      <doughnut class="chart don visual-content" v-if="loaded" :chartData="chartData.general"></doughnut>
+      <div class="chart visual-content">
+        <doughnut v-if="loaded" :chartData="chartData.general"></doughnut>
+      </div>
       <el-table
         show-summary
         @row-contextmenu="showEntries"

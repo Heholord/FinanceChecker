@@ -18,14 +18,14 @@
     <main>
       <flip-card buttonFlip class="flip-content">
         <switchable-line-chart
-          class="chart visual-content"
+          class="chart"
           :chartData="chartData"
           :stacked="false"
           v-if="loaded"
           @stacked="setTransparent"
           slot="front"
         ></switchable-line-chart>
-        <el-collapse :value="data[0].date" class="visual-content" slot="back">
+        <el-collapse :value="data[0].date" slot="back">
           <el-collapse-item
             v-for="dataEntry in data"
             :key="dataEntry.date"

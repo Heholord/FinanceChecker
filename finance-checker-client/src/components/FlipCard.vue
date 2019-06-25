@@ -14,10 +14,12 @@
           @mouseleave="toggleFlipPreview()"
         >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
-            <span class="mdi mdi-swap-horizontal"/>
+            <span class="mdi mdi-36px mdi-swap-horizontal"/>
           </el-button>
         </div>
-        <slot name="front"></slot>
+        <div class="front-container visual-content" :class="{paddingtop: buttonFlip}">
+          <slot name="front"></slot>
+        </div>
       </div>
       <div class="flip-card-back">
         <div
@@ -26,10 +28,12 @@
           @mouseleave="toggleFlipPreview()"
         >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
-            <span class="mdi mdi-swap-horizontal"/>
+            <span class="mdi mdi-36px mdi-swap-horizontal"/>
           </el-button>
         </div>
-        <slot name="back"></slot>
+        <div class="back-container visual-content" :class="{paddingtop: buttonFlip}">
+          <slot name="back"></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -74,13 +78,12 @@ export default {
 .flip-card {
   background-color: transparent;
   perspective: 10000px;
+  box-shadow: $flying-shadow2;
 
   .flip-card-inner {
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    flex-grow: 1;
 
     $flip-preview: 12deg;
 
@@ -106,15 +109,19 @@ export default {
     .flip-card-front,
     .flip-card-back {
       backface-visibility: hidden;
+      position: relative;
 
       .flip-button {
         position: absolute;
-        top: 5px;
-        right: 20px;
+        top: $space1;
+        right: $size3;
         border: none;
+        background: none;
+
         .el-button {
-          background-color: $neutral2;
-          box-shadow: make-in-shadow($neutral2);
+          background: none;
+          box-shadow: none;
+          border: none;
         }
       }
     }
@@ -123,6 +130,10 @@ export default {
       transform: rotateY(180deg);
       display: none;
     }
+  }
+
+  .paddingtop {
+    padding-top: $space4;
   }
 }
 </style>

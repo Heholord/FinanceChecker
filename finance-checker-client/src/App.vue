@@ -46,6 +46,7 @@ export default {
     z-index: 10;
     width: 100vw;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
+    margin-top: $space3;
 
     p {
       margin-top: $space1;
