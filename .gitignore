@@ -9,3 +9,4 @@ categorizer*.json
 *.bak.json
 *.bak*.json
 *_bak/
+!data.demo.json
