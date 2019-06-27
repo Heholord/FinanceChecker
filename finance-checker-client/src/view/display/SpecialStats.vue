@@ -71,8 +71,8 @@ import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 import {
   moment,
-  monthToString,
-  monthToNr,
+  convertMonthToString,
+  convertMonthToNr,
   forEachDay,
   forEachMonth
 } from "@/plugin/utils";
@@ -185,7 +185,7 @@ export default {
       return days[dayNr];
     },
     monthName(monthNr) {
-      return monthToString(monthNr);
+      return convertMonthToString(monthNr);
     },
     focusPicker() {
       //this.displayDate = "undefined";
@@ -245,7 +245,7 @@ export default {
 
       entries = [];
       forEachMonth(this.data, (year, month, monthData) => {
-        const monthNr = monthToNr(month) - 1;
+        const monthNr = convertMonthToNr(month) - 1;
         if (!Array.isArray(entries[monthNr])) {
           entries[monthNr] = [];
         }

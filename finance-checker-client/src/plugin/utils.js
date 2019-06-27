@@ -78,12 +78,6 @@ export function forEachElem(data, callback) {
   });
 }
 
-export function convertMonthToString(month) {
-  return moment()
-    .month(month)
-    .format("MMMM");
-}
-
 /**
  * Returns the months as number
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
@@ -100,13 +94,13 @@ export function getMonthAsNr(dateString) {
   return monthToNr(getMonthAsString(dateString));
 }
 
-export function monthToNr(month) {
+export function convertMonthToNr(month) {
   return +moment()
     .month(month)
     .format("M");
 }
 
-export function monthToString(month) {
+export function convertMonthToString(month) {
   return moment()
     .month(month)
     .format("MMMM");
@@ -255,20 +249,18 @@ export function getDataByDate(date, fullData) {
   if (date) {
     if (!isNaN(+date)) {
       data = {};
-      Object.keys(fullData).forEach(year => {
+      forEachYear(fullData, year => {
         if (year === date) {
           data[year] = fullData[year];
         }
       });
     } else {
       data = {};
-      Object.keys(fullData).forEach(year => {
-        Object.keys(fullData[year]).forEach(month => {
-          if (month + year === date) {
-            data[year] = {};
-            data[year][month] = fullData[year][month];
-          }
-        });
+      forEachMonth(fullData, (year, month) => {
+        if (month + year === date) {
+          data[year] = {};
+          data[year][month] = fullData[year][month];
+        }
       });
     }
   }
@@ -469,7 +461,7 @@ export function isEqualEntry(entry, compareEntry) {
   return false;
 }
 
-const converter = [
+const converterFunctions = [
   undefined, // v0
   function(oldData) {
     // v1 -> v2
@@ -493,7 +485,7 @@ export function convert(oldData) {
   let currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
   // convert as long as it's not up-to-date
   while (currentVersionNr < dataVersionNumber) {
-    oldData = converter[currentVersionNr](oldData);
+    oldData = converterFunctions[currentVersionNr](oldData);
     currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
   }
   return oldData;

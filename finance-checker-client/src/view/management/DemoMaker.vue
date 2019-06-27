@@ -17,7 +17,7 @@
 <script>
 import FileUploader from "@/components/FileUploader";
 import FileDownloader from "@/components/FileDownloader";
-import { getYear, getMonthAsString, download } from "../../plugin/utils";
+import { download, forEachElem, clone, flatten } from "../../plugin/utils";
 
 export default {
   name: "Converter",
@@ -31,17 +31,30 @@ export default {
   computed: {
     newData() {
       let returnValue = {};
+      let conversion = [4, 3, 1, 6, 5, 2, 9, 0, 7, 8];
+      let flatInCategories = flatten(this.oldData.categories.in);
+      let flatOutCategories = flatten(this.oldData.categories.out);
 
-      Object.keys(this.oldData.data).forEach(yearMonth => {
-        const year = getYear(yearMonth);
-        const month = getMonthAsString(yearMonth);
-        if (!returnValue[year]) returnValue[year] = {};
-        if (!returnValue[year][month]) returnValue[year][month] = {};
-
-        Object.keys(this.oldData.data[yearMonth]).forEach(day => {
-          returnValue[year][month][day] = this.oldData.data[yearMonth][day];
-        });
+      forEachElem(this.oldData.data, (year, month, day, elem) => {
+        if (isInCat(elem, flatInCategories, flatOutCategories)) {
+          if (!returnValue[year]) returnValue[year] = {};
+          if (!returnValue[year][month]) returnValue[year][month] = {};
+          if (!returnValue[year][month][day])
+            returnValue[year][month][day] = [];
+          let newElem = clone(elem);
+          let newAmount = "";
+          for (let i = 0; i < elem.amount.length; i++) {
+            if (!isNaN(+elem.amount[i])) {
+              newAmount += conversion[+elem.amount[i]];
+            } else {
+              newAmount += elem.amount[i];
+            }
+          }
+          newElem.amount = newAmount;
+          returnValue[year][month][day].push(newElem);
+        }
       });
+
       return download(this.oldData.categories, returnValue);
     }
   },
@@ -63,6 +76,13 @@ export default {
     }
   }
 };
+
+function isInCat(elem, flatInCategories, flatOutCategories) {
+  if (+elem.amount > 0 && flatInCategories.indexOf(elem.info) < 0) return false;
+  if (+elem.amount < 0 && flatOutCategories.indexOf(elem.info) < 0)
+    return false;
+  return true;
+}
 </script>
 
 <style lang="scss" scoped>
