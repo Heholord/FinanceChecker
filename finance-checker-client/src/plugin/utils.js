@@ -91,7 +91,7 @@ export function getMonthAsString(dateString) {
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
  */
 export function getMonthAsNr(dateString) {
-  return monthToNr(getMonthAsString(dateString));
+  return convertMonthToNr(getMonthAsString(dateString));
 }
 
 export function convertMonthToNr(month) {
@@ -323,18 +323,17 @@ export function getCategoryPath(path, findValue, categories) {
   return returnValue;
 }
 
+export function prepareDataOnDate(year, month, day, data) {
+  if (!data[year]) data[year] = {};
+  if (!data[year][month]) data[year][month] = {};
+  if (!data[year][month][day]) data[year][month][day] = [];
+}
+
 export function addRedundantData(data) {
   let returnValue = {};
   forEachElem(data, (year, month, day, elem) => {
     let replacedMonth = replaceMonthName(month);
-
-    if (!returnValue[year]) returnValue[year] = {};
-
-    if (!returnValue[year][replacedMonth])
-      returnValue[year][replacedMonth] = {};
-
-    if (!returnValue[year][replacedMonth][day])
-      returnValue[year][replacedMonth][day] = [];
+    prepareDataOnDate(year, replacedMonth, day, returnValue);
 
     returnValue[year][replacedMonth][day].push({
       year: year,
@@ -359,12 +358,7 @@ export function removeRedundantData(data) {
     delete copyElem.day;
     delete copyElem.date;
 
-    if (!returnValue.data[year]) returnValue.data[year] = {};
-
-    if (!returnValue.data[year][month]) returnValue.data[year][month] = {};
-
-    if (!returnValue.data[year][month][day])
-      returnValue.data[year][month][day] = [];
+    prepareDataOnDate(year, month, day, returnValue);
 
     returnValue.data[year][month][day].push(copyElem);
   });

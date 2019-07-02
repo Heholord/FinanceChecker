@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { convertMonthToString } from "@/plugin/utils";
+import { convertMonthToString, prepareDataOnDate } from "@/plugin/utils";
 
 export function parse(content) {
   let data = {};
@@ -14,9 +14,7 @@ export function parse(content) {
       const day = getText(transactionItem.find(".dateParts > .dateDay"));
       const year = getText(transactionItem.find(".dateParts > .accessAid"));
 
-      if (!data[year]) data[year] = {};
-      if (!data[year][month]) data[year][month] = {};
-      if (!data[year][month][day]) data[year][month][day] = [];
+      prepareDataOnDate(year, month, day, data);
 
       let parsedDayEntry = parseDayEntry(transactionItem);
       if (parsedDayEntry) {

@@ -17,7 +17,13 @@
 <script>
 import FileUploader from "@/components/FileUploader";
 import FileDownloader from "@/components/FileDownloader";
-import { download, forEachElem, clone, flatten } from "../../plugin/utils";
+import {
+  download,
+  forEachElem,
+  clone,
+  flatten,
+  prepareDataOnDate
+} from "../../plugin/utils";
 
 export default {
   name: "Converter",
@@ -37,10 +43,6 @@ export default {
 
       forEachElem(this.oldData.data, (year, month, day, elem) => {
         if (isInCat(elem, flatInCategories, flatOutCategories)) {
-          if (!returnValue[year]) returnValue[year] = {};
-          if (!returnValue[year][month]) returnValue[year][month] = {};
-          if (!returnValue[year][month][day])
-            returnValue[year][month][day] = [];
           let newElem = clone(elem);
           let newAmount = "";
           for (let i = 0; i < elem.amount.length; i++) {
@@ -51,6 +53,7 @@ export default {
             }
           }
           newElem.amount = newAmount;
+          prepareDataOnDate(year, month, day, returnValue);
           returnValue[year][month][day].push(newElem);
         }
       });
