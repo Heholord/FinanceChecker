@@ -358,7 +358,7 @@ export function removeRedundantData(data) {
     delete copyElem.day;
     delete copyElem.date;
 
-    prepareDataOnDate(year, month, day, returnValue);
+    prepareDataOnDate(year, month, day, returnValue.data);
 
     returnValue.data[year][month][day].push(copyElem);
   });
