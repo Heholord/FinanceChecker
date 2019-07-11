@@ -41,7 +41,9 @@
                 <h2>{{dayName(index)}}</h2>
                 <em>Sum / Count</em>
                 <p>{{week.total.sum[index]}} / {{week.total.count[index]}}</p>
-                <em>Average</em>
+                <em>
+                  <span>Average</span>
+                </em>
                 <p>{{day}}</p>
               </div>
             </div>
@@ -204,7 +206,7 @@ export default {
       // );
       // if (Object.keys(filteredData.data).length > 0) {
 
-      const out = false;
+      const out = true;
 
       let entries = [];
       forEachDay(this.data, (year, month, day, dayData) => {
@@ -321,6 +323,23 @@ export default {
   .flex-item {
     width: $size6;
     box-shadow: $flying-shadow1;
+    background-color: $neutral2;
+    border-radius: $br-soft;
+
+    > h2 {
+      font-size: $fs6;
+    }
+    > em {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      &::before {
+        text-align: left;
+      }
+    }
+    > p {
+      font-weight: $fw3;
+    }
   }
 }
 </style>
