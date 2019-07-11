@@ -78,4 +78,13 @@ export default {
 </script>
 
 <style lang="scss">
+.contentArea {
+  display: grid;
+  grid-gap: $space3;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 3fr;
+  main {
+    overflow: auto;
+  }
+}
 </style>

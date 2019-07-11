@@ -10,7 +10,7 @@ module.exports = {
       .set("@", path.resolve("src"))
       .set("vue$", "vue/dist/vue.common.js");
   },
-  baseUrl: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/FinanceChecker/" : "/",
   css: {
     loaderOptions: {
       // pass options to sass-loader

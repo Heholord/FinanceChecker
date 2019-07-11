@@ -78,12 +78,6 @@ export function forEachElem(data, callback) {
   });
 }
 
-export function convertMonthToString(month) {
-  return moment()
-    .month(month)
-    .format("MMMM");
-}
-
 /**
  * Returns the months as number
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
@@ -97,16 +91,16 @@ export function getMonthAsString(dateString) {
  * @param {string} dateString Input format MMMMyyyy (i.e September2008)
  */
 export function getMonthAsNr(dateString) {
-  return monthToNr(getMonthAsString(dateString));
+  return convertMonthToNr(getMonthAsString(dateString));
 }
 
-export function monthToNr(month) {
+export function convertMonthToNr(month) {
   return +moment()
     .month(month)
     .format("M");
 }
 
-export function monthToString(month) {
+export function convertMonthToString(month) {
   return moment()
     .month(month)
     .format("MMMM");
@@ -255,20 +249,18 @@ export function getDataByDate(date, fullData) {
   if (date) {
     if (!isNaN(+date)) {
       data = {};
-      Object.keys(fullData).forEach(year => {
+      forEachYear(fullData, year => {
         if (year === date) {
           data[year] = fullData[year];
         }
       });
     } else {
       data = {};
-      Object.keys(fullData).forEach(year => {
-        Object.keys(fullData[year]).forEach(month => {
-          if (month + year === date) {
-            data[year] = {};
-            data[year][month] = fullData[year][month];
-          }
-        });
+      forEachMonth(fullData, (year, month) => {
+        if (month + year === date) {
+          data[year] = {};
+          data[year][month] = fullData[year][month];
+        }
       });
     }
   }
@@ -331,18 +323,17 @@ export function getCategoryPath(path, findValue, categories) {
   return returnValue;
 }
 
+export function prepareDataOnDate(year, month, day, data) {
+  if (!data[year]) data[year] = {};
+  if (!data[year][month]) data[year][month] = {};
+  if (!data[year][month][day]) data[year][month][day] = [];
+}
+
 export function addRedundantData(data) {
   let returnValue = {};
   forEachElem(data, (year, month, day, elem) => {
     let replacedMonth = replaceMonthName(month);
-
-    if (!returnValue[year]) returnValue[year] = {};
-
-    if (!returnValue[year][replacedMonth])
-      returnValue[year][replacedMonth] = {};
-
-    if (!returnValue[year][replacedMonth][day])
-      returnValue[year][replacedMonth][day] = [];
+    prepareDataOnDate(year, replacedMonth, day, returnValue);
 
     returnValue[year][replacedMonth][day].push({
       year: year,
@@ -367,12 +358,7 @@ export function removeRedundantData(data) {
     delete copyElem.day;
     delete copyElem.date;
 
-    if (!returnValue.data[year]) returnValue.data[year] = {};
-
-    if (!returnValue.data[year][month]) returnValue.data[year][month] = {};
-
-    if (!returnValue.data[year][month][day])
-      returnValue.data[year][month][day] = [];
+    prepareDataOnDate(year, month, day, returnValue.data);
 
     returnValue.data[year][month][day].push(copyElem);
   });
@@ -469,7 +455,7 @@ export function isEqualEntry(entry, compareEntry) {
   return false;
 }
 
-const converter = [
+const converterFunctions = [
   undefined, // v0
   function(oldData) {
     // v1 -> v2
@@ -493,7 +479,7 @@ export function convert(oldData) {
   let currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
   // convert as long as it's not up-to-date
   while (currentVersionNr < dataVersionNumber) {
-    oldData = converter[currentVersionNr](oldData);
+    oldData = converterFunctions[currentVersionNr](oldData);
     currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
   }
   return oldData;

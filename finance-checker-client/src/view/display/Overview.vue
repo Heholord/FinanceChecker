@@ -1,71 +1,71 @@
 <template>
-  <div class="contentView overview">
-    <el-container>
-      <el-aside>
-        <p>Pick a date</p>
-        <el-date-picker
-          v-model="displayDate"
-          type="year"
-          placeholder="Pick a year"
-          format="yyyy"
-          value-format="yyyy"
-          ref="yearPicker"
-          @change="reloadChart"
-          :picker-options="{disabledDate: disabledDates}"
-        ></el-date-picker>
-        <data-downloader></data-downloader>
-      </el-aside>
+  <div class="contentView contentArea overview">
+    <aside>
+      <p>Pick a date</p>
+      <el-date-picker
+        v-model="displayDate"
+        type="year"
+        placeholder="Pick a year"
+        format="yyyy"
+        value-format="yyyy"
+        ref="yearPicker"
+        @change="reloadChart"
+        :picker-options="{disabledDate: disabledDates}"
+      ></el-date-picker>
+      <data-downloader></data-downloader>
+    </aside>
 
-      <el-container>
-        <el-main>
-          <switchable-line-chart
-            class="chart visual-content"
-            :chartData="chartData"
-            :stacked="false"
-            v-if="loaded"
-            @stacked="setTransparent"
-          ></switchable-line-chart>
-          <el-collapse :value="data[0].date" class="visual-content">
-            <el-collapse-item
-              v-for="dataEntry in data"
-              :key="dataEntry.date"
-              :title="dataEntry.date"
-              :name="dataEntry.date"
+    <main>
+      <flip-card buttonFlip class="flip-content">
+        <switchable-line-chart
+          class="chart"
+          :chartData="chartData"
+          :stacked="false"
+          v-if="loaded"
+          @stacked="setTransparent"
+          slot="front"
+        ></switchable-line-chart>
+        <el-collapse :value="data[0].date" slot="back">
+          <el-collapse-item
+            v-for="dataEntry in data"
+            :key="dataEntry.date"
+            :title="dataEntry.date"
+            :name="dataEntry.date"
+          >
+            <el-table
+              show-summary
+              :summary-method="getSummaries"
+              :data="dataEntry.values"
+              class="table"
             >
-              <el-table
-                show-summary
-                :summary-method="getSummaries"
-                :data="dataEntry.values"
-                class="table"
-              >
-                <el-table-column prop="date" label="Date" width="120"></el-table-column>
-                <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
-                <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
-                <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
-                <el-table-column
-                  prop="save"
-                  label="Save"
-                  width="100"
-                  header-align="left"
-                  align="right"
-                ></el-table-column>
-              </el-table>
-            </el-collapse-item>
-          </el-collapse>
-        </el-main>
-      </el-container>
-    </el-container>
+              <el-table-column prop="date" label="Date" width="120"></el-table-column>
+              <el-table-column prop="in" label="Income" width="100" align="right"></el-table-column>
+              <el-table-column prop="out" label="Outgoing" width="100" align="right"></el-table-column>
+              <el-table-column prop="diff" label="Difference" width="100" align="right"></el-table-column>
+              <el-table-column
+                prop="save"
+                label="Save"
+                width="100"
+                header-align="left"
+                align="right"
+              ></el-table-column>
+            </el-table>
+          </el-collapse-item>
+        </el-collapse>
+      </flip-card>
+    </main>
   </div>
 </template>
 
 <script>
-import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
+import SwitchableLineChart from "@/components/charts/SwitchableLineChart";
+import FlipCard from "@/components/FlipCard";
 import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Overview",
-  components: { SwitchableLineChart, DataDownloader },
+  components: { SwitchableLineChart, DataDownloader, FlipCard },
   data() {
     return {
       loaded: false,
@@ -186,7 +186,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .overview {
   .table {
     margin-left: 50px;

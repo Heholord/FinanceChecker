@@ -1,0 +1,5193 @@
+{
+  "version": "v2",
+  "categories": {
+    "in": {
+      "other": ["friend 1", "friend 2", "some dude", "business refund"],
+      "bank": ["bank interests", "special deal"],
+      "family": {
+        "mom": ["Ms. Mom", "Savings from Mom"],
+        "dad": ["Mr. Dad"],
+        "so": ["Beauty babe / handsome dude"]
+      },
+      "salary": {
+        "small_tech_comp": ["no_one_knows"],
+        "big_tech_comp": ["everyone_knows"],
+        "unemployment": ["unemployment office"],
+        "medium_tech_comp": ["some_know"]
+      },
+      "gov": ["finance office"]
+    },
+    "out": {
+      "food": {
+        "supermarket": {
+          "wallmart": ["Wallmart"],
+          "wholes_food": ["wholes foods"],
+          "ralphs": ["Ralphs"],
+          "other": ["Tesco", "Asia Market", "unknown market"]
+        },
+        "restaurant_snacks": {
+          "university": ["uni food cort"],
+          "burger": ["Creazy Beaf", "Vegan Burgers", "Hard Rock Caffe"],
+          "asian": ["Stargazing", "SUSHICAFE"],
+          "subway": ["Subway"],
+          "ice cream": ["vegan ice cream"],
+          "other": [
+            "some unkown restaurant",
+            "some unkown restaurant 2",
+            "some unkown restaurant 3"
+          ],
+          "coffee": {
+            "starbucks": ["STARBUCKS"],
+            "costa": ["COSTA GASTRO CAFE", "COSTA CAFE"],
+            "other": ["unkown coffe place"]
+          },
+          "drinks": ["COZY BAR", "IRISH PUB"],
+          "mcdonalds": ["MCDONALDS 1", "MCDONALDS 2", "MCDONALDS 3"]
+        }
+      },
+      "living": {
+        "fix": {
+          "communication": ["Vodaphone", "O2"],
+          "flat": ["CITY ENERGIE", "Immob co."],
+          "insurance": ["HEALTH INSURANCE"]
+        },
+        "cash_maschine": [
+          "CASH MASCHINE 1",
+          "CASH MASCHINE 2",
+          "CASH MASCHINE 3",
+          "CASH MASCHINE 4",
+          "CASH MASCHINE 5"
+        ],
+        "furniture_co": {
+          "furni": ["FURNI STORE"],
+          "ikea": ["IKEA"]
+        },
+        "cloths": {
+          "newyorker": ["NEW YORKER"],
+          "c&a": ["C&A"],
+          "shoes": ["CCC", "ZALANDO SE"],
+          "h&m": ["H&M"],
+          "bluetomato": ["BLUE TOMATO"],
+          "zara": ["ZARA"]
+        },
+        "public_transport": ["BUS", "TRAIN", "AIRPORT TRANSFERE", "CITY TRANS"],
+        "car": {
+          "other": ["CAR RESELLER"],
+          "gas": ["EASY GAS", "TURMOEL", "BP"],
+          "insurance": ["CAR INSURANCE"]
+        }
+      },
+      "other": {
+        "aliexpress": ["ALIEXPRESS", "KLARNA AB"],
+        "plants": ["AMMON", "ARBOR"],
+        "action": ["ACTION", "ACTION"],
+        "sports": ["SPORT 1", "SPORT 2"],
+        "tea": ["DEMMERS TEE"],
+        "lush": ["LUSH"],
+        "studies": ["TECHNICAL UNIVERSITY"],
+        "bike": ["STAR BIKE"]
+      },
+      "family": {
+        "so": [
+          "Beauty babe / handsome dude",
+          "nice look",
+          "flower shop",
+          "drill shop"
+        ]
+      },
+      "experience": {
+        "sightseeing": [
+          "MUSEUM",
+          "EIFEL TOWER",
+          "STATUE OF LIBERTY",
+          "MOUNTAINS",
+          "FARY WHEEL VIENNA",
+          "CASINO",
+          "THERMAL WATER"
+        ],
+        "flight": ["USAIR", "RAYEN AIR", "WIZZ AIR", "DEUTSCHE LUFTHANSA AG"],
+        "train": ["REGIO TRAIN", "FRANCE TRAIN"],
+        "carrent": ["EUROCAR"],
+        "cinema": ["CINNEMON"],
+        "hotel": ["FAT MARGARET TALLINN", "HILTON"],
+        "bus": ["DRIVE AWAY"]
+      }
+    }
+  },
+  "data": {
+    "2015": {
+      "December": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "7": [
+          {
+            "info": "O2",
+            "amount": "-11.04"
+          }
+        ],
+        "9": [
+          {
+            "info": "Ralphs",
+            "amount": "-7.02"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-58"
+          },
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-2.90"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-9.73"
+          }
+        ],
+        "23": [
+          {
+            "info": "TURMOEL",
+            "amount": "-00.32"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "Ralphs",
+            "amount": "-04.44"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ]
+      },
+      "November": {
+        "4": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "5": [
+          {
+            "info": "unemployment office",
+            "amount": "514.32"
+          }
+        ],
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-42.29"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "11": [
+          {
+            "info": "wholes foods",
+            "amount": "-9.37"
+          }
+        ],
+        "12": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ]
+      },
+      "October": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.69"
+          }
+        ],
+        "2": [
+          {
+            "info": "wholes foods",
+            "amount": "-05.33"
+          }
+        ],
+        "5": [
+          {
+            "info": "O2",
+            "amount": "-93.22"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "6": [
+          {
+            "info": "unemployment office",
+            "amount": "399.57"
+          }
+        ],
+        "7": [
+          {
+            "info": "Tesco",
+            "amount": "-6.55"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-7.98"
+          }
+        ],
+        "9": [
+          {
+            "info": "wholes foods",
+            "amount": "-00.44"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-08.06"
+          }
+        ],
+        "12": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "14": [
+          {
+            "info": "SPORT 2",
+            "amount": "-60"
+          }
+        ],
+        "15": [
+          {
+            "info": "MCDONALDS 3",
+            "amount": "-3.08"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-28"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-2.08"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "28": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "29": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          },
+          {
+            "info": "BP",
+            "amount": "-9.44"
+          }
+        ]
+      },
+      "September": {
+        "2": [
+          {
+            "info": "some unkown restaurant 3",
+            "amount": "-4.18"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-38"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "4": [
+          {
+            "info": "O2",
+            "amount": "-98.15"
+          },
+          {
+            "info": "unemployment office",
+            "amount": "0807.85"
+          }
+        ],
+        "7": [
+          {
+            "info": "ZARA",
+            "amount": "-44.78"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-38"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "8": [
+          {
+            "info": "wholes foods",
+            "amount": "-2.37"
+          },
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-1.38"
+          },
+          {
+            "info": "BP",
+            "amount": "-7.77"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "11": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.93"
+          },
+          {
+            "info": "MCDONALDS 2",
+            "amount": "-7.38"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-018"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-28"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-78.23"
+          }
+        ],
+        "15": [
+          {
+            "info": "HEALTH INSURANCE",
+            "amount": "-59.18"
+          }
+        ],
+        "16": [
+          {
+            "info": "CCC",
+            "amount": "-94.48"
+          }
+        ],
+        "17": [
+          {
+            "info": "friend 1",
+            "amount": "34"
+          }
+        ],
+        "28": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "29": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-08.18"
+          }
+        ]
+      },
+      "August": {
+        "3": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "H&M",
+            "amount": "-58.41"
+          },
+          {
+            "info": "O2",
+            "amount": "-95.65"
+          }
+        ],
+        "4": [
+          {
+            "info": "Ralphs",
+            "amount": "-01.37"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-97"
+          },
+          {
+            "info": "unemployment office",
+            "amount": "0807.85"
+          }
+        ],
+        "6": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-988"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-088"
+          }
+        ],
+        "12": [
+          {
+            "info": "wholes foods",
+            "amount": "-05.17"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ],
+        "20": [
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-24"
+          }
+        ],
+        "25": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-06.29"
+          }
+        ],
+        "28": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "31": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-95.55"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-3.12"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-52.39"
+          },
+          {
+            "info": "unknown market",
+            "amount": "-02"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ]
+      },
+      "July": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "3": [
+          {
+            "info": "CAR RESELLER",
+            "amount": "-6000"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          }
+        ],
+        "6": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "O2",
+            "amount": "-002.94"
+          },
+          {
+            "info": "SPORT 1",
+            "amount": "-021"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "10": [
+          {
+            "info": "Ralphs",
+            "amount": "-6.71"
+          }
+        ],
+        "13": [
+          {
+            "info": "wholes foods",
+            "amount": "-9.54"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-58"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-38"
+          }
+        ],
+        "16": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-07.38"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-48"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.54"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "MCDONALDS 3",
+            "amount": "-2.47"
+          },
+          {
+            "info": "EASY GAS",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-988"
+          }
+        ],
+        "30": [
+          {
+            "info": "CINNEMON",
+            "amount": "-61.58"
+          }
+        ]
+      },
+      "June": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "BP",
+            "amount": "-67.68"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "10": [
+          {
+            "info": "wholes foods",
+            "amount": "-4.71"
+          }
+        ],
+        "15": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-48"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-6.07"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "18": [
+          {
+            "info": "Ralphs",
+            "amount": "-00.80"
+          }
+        ],
+        "19": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "23": [
+          {
+            "info": "BP",
+            "amount": "-64.29"
+          }
+        ],
+        "24": [
+          {
+            "info": "FRANCE TRAIN",
+            "amount": "-68"
+          }
+        ],
+        "26": [
+          {
+            "info": "some_know",
+            "amount": "6167.43"
+          }
+        ],
+        "29": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-018"
+          },
+          {
+            "info": "some unkown restaurant 3",
+            "amount": "-91.51"
+          }
+        ]
+      },
+      "May": {
+        "4": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-38"
+          }
+        ],
+        "6": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "EASY GAS",
+            "amount": "-081.03"
+          }
+        ],
+        "7": [
+          {
+            "info": "BUS",
+            "amount": "-621"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "11": [
+          {
+            "info": "BP",
+            "amount": "-9.54"
+          },
+          {
+            "info": "EASY GAS",
+            "amount": "-67.92"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "12": [
+          {
+            "info": "DEUTSCHE LUFTHANSA AG",
+            "amount": "-728.42"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "15": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "18": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          },
+          {
+            "info": "friend 1",
+            "amount": "18"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          },
+          {
+            "info": "MCDONALDS 2",
+            "amount": "-7"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-01.43"
+          },
+          {
+            "info": "MCDONALDS 3",
+            "amount": "-01"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-098"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "26": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "27": [
+          {
+            "info": "some_know",
+            "amount": "0294.96"
+          }
+        ]
+      },
+      "April": {
+        "2": [
+          {
+            "info": "wholes foods",
+            "amount": "-08.09"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "22": [
+          {
+            "info": "wholes foods",
+            "amount": "-7.13"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          }
+        ],
+        "28": [
+          {
+            "info": "some_know",
+            "amount": "0294.96"
+          }
+        ],
+        "30": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ]
+      },
+      "March": {
+        "2": [
+          {
+            "info": "Tesco",
+            "amount": "-70.75"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "3": [
+          {
+            "info": "finance office",
+            "amount": "0600"
+          }
+        ],
+        "5": [
+          {
+            "info": "wholes foods",
+            "amount": "-00.51"
+          }
+        ],
+        "6": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-5.77"
+          },
+          {
+            "info": "friend 2",
+            "amount": "36"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ],
+        "17": [
+          {
+            "info": "wholes foods",
+            "amount": "-4.28"
+          }
+        ],
+        "23": [
+          {
+            "info": "TURMOEL",
+            "amount": "-67.40"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-08.02"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          }
+        ],
+        "27": [
+          {
+            "info": "some_know",
+            "amount": "0140.33"
+          }
+        ],
+        "30": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-99.21"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-4.21"
+          }
+        ],
+        "31": [
+          {
+            "info": "bank interests",
+            "amount": "8.80"
+          }
+        ]
+      },
+      "February": {
+        "2": [
+          {
+            "info": "Tesco",
+            "amount": "-95.78"
+          },
+          {
+            "info": "ZARA",
+            "amount": "-95.48"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-088"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "4": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-38"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "9": [
+          {
+            "info": "Ralphs",
+            "amount": "-08.02"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ],
+        "12": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ],
+        "16": [
+          {
+            "info": "wholes foods",
+            "amount": "-3.63"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-09.28"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          }
+        ],
+        "18": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          }
+        ],
+        "24": [
+          {
+            "info": "EASY GAS",
+            "amount": "-62.06"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-2.57"
+          }
+        ],
+        "25": [
+          {
+            "info": "some_know",
+            "amount": "0202.28"
+          }
+        ],
+        "27": [
+          {
+            "info": "wholes foods",
+            "amount": "-7.42"
+          }
+        ]
+      },
+      "January": {
+        "2": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-01.07"
+          }
+        ],
+        "5": [
+          {
+            "info": "ZARA",
+            "amount": "-04.44"
+          }
+        ],
+        "7": [
+          {
+            "info": "BP",
+            "amount": "-60.75"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          }
+        ],
+        "9": [
+          {
+            "info": "SPORT 1",
+            "amount": "-16.28"
+          },
+          {
+            "info": "SPORT 1",
+            "amount": "-7.48"
+          }
+        ],
+        "12": [
+          {
+            "info": "Ralphs",
+            "amount": "-7.59"
+          }
+        ],
+        "13": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.87"
+          }
+        ],
+        "16": [
+          {
+            "info": "wholes foods",
+            "amount": "-08.72"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "19": [
+          {
+            "info": "Tesco",
+            "amount": "-3.43"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-09.44"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-088"
+          }
+        ],
+        "23": [
+          {
+            "info": "SPORT 1",
+            "amount": "-76"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-7.13"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-018"
+          }
+        ],
+        "26": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-68"
+          },
+          {
+            "info": "BP",
+            "amount": "-57.48"
+          },
+          {
+            "info": "SPORT 1",
+            "amount": "-61.18"
+          }
+        ],
+        "28": [
+          {
+            "info": "some_know",
+            "amount": "0122.45"
+          }
+        ]
+      }
+    },
+    "2016": {
+      "December": {
+        "5": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-08"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "O2",
+            "amount": "-52.36"
+          }
+        ],
+        "9": [
+          {
+            "info": "Ms. Mom",
+            "amount": "558"
+          }
+        ],
+        "12": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "15": [
+          {
+            "info": "no_one_knows",
+            "amount": "958"
+          }
+        ],
+        "19": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "21": [
+          {
+            "info": "friend 2",
+            "amount": "1"
+          },
+          {
+            "info": "TURMOEL",
+            "amount": "-65.06"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-2.89"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-1.36"
+          },
+          {
+            "info": "friend 1",
+            "amount": "7.58"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "bank interests",
+            "amount": "8.81"
+          }
+        ]
+      },
+      "November": {
+        "4": [
+          {
+            "info": "H&M",
+            "amount": "-95.44"
+          },
+          {
+            "info": "O2",
+            "amount": "-18.93"
+          }
+        ],
+        "8": [
+          {
+            "info": "wholes foods",
+            "amount": "-02.25"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "10": [
+          {
+            "info": "friend 2",
+            "amount": "5"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.17"
+          }
+        ],
+        "16": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "22": [
+          {
+            "info": "friend 1",
+            "amount": "060.27"
+          }
+        ],
+        "24": [
+          {
+            "info": "unkown coffe place",
+            "amount": "-54.78"
+          },
+          {
+            "info": "friend 2",
+            "amount": "1"
+          }
+        ]
+      },
+      "October": {
+        "3": [
+          {
+            "info": "Ralphs",
+            "amount": "-04.80"
+          }
+        ],
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-52.38"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-38"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-6.67"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-08.40"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-088"
+          }
+        ],
+        "28": [
+          {
+            "info": "friend 2",
+            "amount": "088"
+          }
+        ],
+        "31": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ]
+      },
+      "September": {
+        "5": [
+          {
+            "info": "IKEA",
+            "amount": "-9.44"
+          },
+          {
+            "info": "ACTION",
+            "amount": "-96.06"
+          },
+          {
+            "info": "O2",
+            "amount": "-57"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "998"
+          }
+        ],
+        "12": [
+          {
+            "info": "BLUE TOMATO",
+            "amount": "-65.41"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-08.14"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          }
+        ],
+        "15": [
+          {
+            "info": "BP",
+            "amount": "-60.45"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-088"
+          }
+        ],
+        "26": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-38"
+          }
+        ],
+        "29": [
+          {
+            "info": "friend 2",
+            "amount": "088"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ]
+      },
+      "August": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-908"
+          }
+        ],
+        "2": [
+          {
+            "info": "friend 2",
+            "amount": "38"
+          }
+        ],
+        "3": [
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-08.58"
+          }
+        ],
+        "4": [
+          {
+            "info": "SPORT 2",
+            "amount": "-0"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "friend 2",
+            "amount": "98"
+          }
+        ],
+        "5": [
+          {
+            "info": "wholes foods",
+            "amount": "-2.47"
+          },
+          {
+            "info": "O2",
+            "amount": "-19.27"
+          }
+        ],
+        "8": [
+          {
+            "info": "IKEA",
+            "amount": "-08.53"
+          },
+          {
+            "info": "TRAIN",
+            "amount": "-5.28"
+          }
+        ],
+        "10": [
+          {
+            "info": "CITY ENERGIE",
+            "amount": "-49.98"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-16.23"
+          },
+          {
+            "info": "business refund",
+            "amount": "21"
+          }
+        ],
+        "12": [
+          {
+            "info": "COZY BAR",
+            "amount": "-2.61"
+          }
+        ],
+        "16": [
+          {
+            "info": "friend 1",
+            "amount": "8.80"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-09.98"
+          },
+          {
+            "info": "friend 2",
+            "amount": "49.98"
+          },
+          {
+            "info": "DEUTSCHE LUFTHANSA AG",
+            "amount": "-989.63"
+          }
+        ],
+        "18": [
+          {
+            "info": "friend 2",
+            "amount": "6"
+          },
+          {
+            "info": "STAR BIKE",
+            "amount": "-344"
+          }
+        ],
+        "29": [
+          {
+            "info": "CINNEMON",
+            "amount": "-00.38"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ]
+      },
+      "July": {
+        "4": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-008"
+          },
+          {
+            "info": "friend 2",
+            "amount": "18"
+          },
+          {
+            "info": "CINNEMON",
+            "amount": "-7.38"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "O2",
+            "amount": "-14.38"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-2.62"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "6": [
+          {
+            "info": "friend 2",
+            "amount": "18"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "Vegan Burgers",
+            "amount": "-6.08"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-964"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "13": [
+          {
+            "info": "friend 2",
+            "amount": "08"
+          }
+        ],
+        "15": [
+          {
+            "info": "wholes foods",
+            "amount": "-66.75"
+          },
+          {
+            "info": "IKEA",
+            "amount": "-63.60"
+          }
+        ],
+        "18": [
+          {
+            "info": "wholes foods",
+            "amount": "-97.09"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "25": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-04.98"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "26": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-088"
+          }
+        ],
+        "28": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-098"
+          }
+        ]
+      },
+      "June": {
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-52.05"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "9": [
+          {
+            "info": "Ralphs",
+            "amount": "-2.02"
+          }
+        ],
+        "10": [
+          {
+            "info": "Ms. Mom",
+            "amount": "988.58"
+          }
+        ],
+        "13": [
+          {
+            "info": "friend 2",
+            "amount": "4"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "friend 1",
+            "amount": "08"
+          },
+          {
+            "info": "friend 2",
+            "amount": "4"
+          }
+        ],
+        "15": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "17": [
+          {
+            "info": "Tesco",
+            "amount": "-6.55"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          },
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-98.48"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "24": [
+          {
+            "info": "Ralphs",
+            "amount": "-1.53"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "friend 2",
+            "amount": "91"
+          },
+          {
+            "info": "friend 2",
+            "amount": "65"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.97"
+          },
+          {
+            "info": "MCDONALDS 2",
+            "amount": "-6.28"
+          },
+          {
+            "info": "MCDONALDS 3",
+            "amount": "-7.08"
+          }
+        ],
+        "29": [
+          {
+            "info": "Ralphs",
+            "amount": "-08.25"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "bank interests",
+            "amount": "8.86"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-1.90"
+          }
+        ]
+      },
+      "May": {
+        "2": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "CITY TRANS",
+            "amount": "-7.78"
+          }
+        ],
+        "3": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.47"
+          }
+        ],
+        "4": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          }
+        ],
+        "6": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-08"
+          },
+          {
+            "info": "O2",
+            "amount": "-63.51"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASINO",
+            "amount": "-96"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          },
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-5"
+          },
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-4"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "18": [
+          {
+            "info": "BP",
+            "amount": "-3.67"
+          }
+        ],
+        "23": [
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-6.64"
+          },
+          {
+            "info": "MCDONALDS 1",
+            "amount": "-7.58"
+          }
+        ],
+        "25": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "Hard Rock Caffe",
+            "amount": "-4.48"
+          }
+        ],
+        "30": [
+          {
+            "info": "DEUTSCHE LUFTHANSA AG",
+            "amount": "-015.06"
+          },
+          {
+            "info": "friend 2",
+            "amount": "2"
+          }
+        ],
+        "31": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ]
+      },
+      "April": {
+        "4": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "O2",
+            "amount": "-26.28"
+          },
+          {
+            "info": "MCDONALDS 2",
+            "amount": "-3.98"
+          }
+        ],
+        "7": [
+          {
+            "info": "Stargazing",
+            "amount": "-68.58"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-4.73"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "14": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-657.48"
+          }
+        ],
+        "18": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "KLARNA AB",
+            "amount": "-06.68"
+          },
+          {
+            "info": "KLARNA AB",
+            "amount": "-3"
+          },
+          {
+            "info": "KLARNA AB",
+            "amount": "-9"
+          },
+          {
+            "info": "KLARNA AB",
+            "amount": "-9"
+          },
+          {
+            "info": "friend 2",
+            "amount": "93"
+          }
+        ],
+        "19": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          }
+        ],
+        "21": [
+          {
+            "info": "wholes foods",
+            "amount": "-01.56"
+          }
+        ],
+        "25": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "26": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.33"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "29": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "MCDONALDS 2",
+            "amount": "-7.18"
+          }
+        ]
+      },
+      "March": {
+        "1": [
+          {
+            "info": "finance office",
+            "amount": "0096"
+          }
+        ],
+        "2": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "4": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "7": [
+          {
+            "info": "BP",
+            "amount": "-6.44"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-08"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-08"
+          },
+          {
+            "info": "O2",
+            "amount": "-61.85"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-38"
+          }
+        ],
+        "16": [
+          {
+            "info": "Ms. Mom",
+            "amount": "0606"
+          }
+        ],
+        "17": [
+          {
+            "info": "Tesco",
+            "amount": "-6.85"
+          },
+          {
+            "info": "friend 1",
+            "amount": "655.45"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.64"
+          }
+        ],
+        "29": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ],
+        "30": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-97.62"
+          }
+        ],
+        "31": [
+          {
+            "info": "bank interests",
+            "amount": "8.87"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-97.58"
+          }
+        ]
+      },
+      "February": {
+        "1": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-9.47"
+          },
+          {
+            "info": "BP",
+            "amount": "-6.94"
+          },
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-07.38"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "friend 2",
+            "amount": "08"
+          }
+        ],
+        "4": [
+          {
+            "info": "O2",
+            "amount": "-68.05"
+          }
+        ],
+        "5": [
+          {
+            "info": "KLARNA AB",
+            "amount": "-9.43"
+          },
+          {
+            "info": "friend 2",
+            "amount": "08"
+          }
+        ],
+        "8": [
+          {
+            "info": "friend 2",
+            "amount": "8.38"
+          },
+          {
+            "info": "EASY GAS",
+            "amount": "-93.69"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "16": [
+          {
+            "info": "ZALANDO SE",
+            "amount": "-94.41"
+          }
+        ],
+        "18": [
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-29.58"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "19": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-58"
+          }
+        ],
+        "22": [
+          {
+            "info": "SPORT 1",
+            "amount": "-53"
+          }
+        ],
+        "29": [
+          {
+            "info": "wholes foods",
+            "amount": "-5.26"
+          },
+          {
+            "info": "THERMAL WATER",
+            "amount": "-21"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-58"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.24"
+          }
+        ]
+      },
+      "January": {
+        "5": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-98"
+          }
+        ],
+        "8": [
+          {
+            "info": "O2",
+            "amount": "-66"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "18": [
+          {
+            "info": "wholes foods",
+            "amount": "-01.39"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "special deal",
+            "amount": "01.29"
+          }
+        ],
+        "25": [
+          {
+            "info": "STARBUCKS",
+            "amount": "-4.81"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "28": [
+          {
+            "info": "CINNEMON",
+            "amount": "-2.38"
+          }
+        ]
+      }
+    },
+    "2017": {
+      "December": {
+        "1": [
+          {
+            "info": "uni food cort",
+            "amount": "-2.01"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.54"
+          }
+        ],
+        "6": [
+          {
+            "info": "uni food cort",
+            "amount": "-2.51"
+          }
+        ],
+        "11": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "18": [
+          {
+            "info": "C&A",
+            "amount": "-94.47"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "19": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "22": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "28": [
+          {
+            "info": "Ralphs",
+            "amount": "-96.11"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "29": [
+          {
+            "info": "bank interests",
+            "amount": "8.85"
+          },
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ]
+      },
+      "November": {
+        "2": [
+          {
+            "info": "Vodaphone",
+            "amount": "-5.76"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "10": [
+          {
+            "info": "uni food cort",
+            "amount": "-5.31"
+          }
+        ],
+        "13": [
+          {
+            "info": "some dude",
+            "amount": "613"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "17": [
+          {
+            "info": "Ralphs",
+            "amount": "-7.73"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "23": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-087"
+          },
+          {
+            "info": "RAYEN AIR",
+            "amount": "-061.47"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-0.36"
+          }
+        ],
+        "27": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "29": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "TRAIN",
+            "amount": "-1.18"
+          }
+        ]
+      },
+      "October": {
+        "2": [
+          {
+            "info": "Vodaphone",
+            "amount": "-04.44"
+          }
+        ],
+        "9": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ],
+        "11": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "12": [
+          {
+            "info": "wholes foods",
+            "amount": "-9.45"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          },
+          {
+            "info": "RAYEN AIR",
+            "amount": "-020.45"
+          }
+        ],
+        "25": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "30": [
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-62"
+          },
+          {
+            "info": "STATUE OF LIBERTY",
+            "amount": "-65.18"
+          }
+        ],
+        "31": [
+          {
+            "info": "business refund",
+            "amount": "63"
+          }
+        ]
+      },
+      "September": {
+        "1": [
+          {
+            "info": "Vodaphone",
+            "amount": "-01.21"
+          }
+        ],
+        "4": [
+          {
+            "info": "BUS",
+            "amount": "-31"
+          },
+          {
+            "info": "O2",
+            "amount": "-087.38"
+          }
+        ],
+        "5": [
+          {
+            "info": "friend 1",
+            "amount": "17"
+          }
+        ],
+        "6": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          },
+          {
+            "info": "friend 2",
+            "amount": "0079.44"
+          }
+        ],
+        "11": [
+          {
+            "info": "USAIR",
+            "amount": "-040.32"
+          }
+        ],
+        "13": [
+          {
+            "info": "O2",
+            "amount": "-8.08"
+          }
+        ],
+        "14": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "friend 2",
+            "amount": "31"
+          }
+        ],
+        "15": [
+          {
+            "info": "EASY GAS",
+            "amount": "-95.01"
+          }
+        ],
+        "25": [
+          {
+            "info": "EUROCAR",
+            "amount": "-99"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-94.40"
+          }
+        ],
+        "26": [
+          {
+            "info": "friend 2",
+            "amount": "79.05"
+          }
+        ],
+        "28": [
+          {
+            "info": "EUROCAR",
+            "amount": "-088"
+          }
+        ],
+        "29": [
+          {
+            "info": "bank interests",
+            "amount": "8.00"
+          },
+          {
+            "info": "NEW YORKER",
+            "amount": "-96.78"
+          },
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ]
+      },
+      "August": {
+        "1": [
+          {
+            "info": "O2",
+            "amount": "-8.08"
+          }
+        ],
+        "2": [
+          {
+            "info": "WIZZ AIR",
+            "amount": "-982.43"
+          }
+        ],
+        "3": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "078"
+          }
+        ],
+        "4": [
+          {
+            "info": "O2",
+            "amount": "-53.58"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "11": [
+          {
+            "info": "USAIR",
+            "amount": "-070.43"
+          }
+        ],
+        "16": [
+          {
+            "info": "CINNEMON",
+            "amount": "-98"
+          }
+        ],
+        "25": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "28": [
+          {
+            "info": "WIZZ AIR",
+            "amount": "-65.44"
+          },
+          {
+            "info": "USAIR",
+            "amount": "-74.43"
+          }
+        ],
+        "30": [
+          {
+            "info": "MOUNTAINS",
+            "amount": "-54"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-5.81"
+          }
+        ],
+        "31": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ]
+      },
+      "July": {
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-23"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "13": [
+          {
+            "info": "wholes foods",
+            "amount": "-74"
+          }
+        ],
+        "24": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-04.98"
+          }
+        ],
+        "26": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "28": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-918"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-088"
+          }
+        ],
+        "31": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ]
+      },
+      "June": {
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-10.19"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ralphs",
+            "amount": "-07.01"
+          }
+        ],
+        "12": [
+          {
+            "info": "USAIR",
+            "amount": "-043.19"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "16": [
+          {
+            "info": "FAT MARGARET TALLINN",
+            "amount": "-54.97"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "22": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.75"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          }
+        ],
+        "28": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "30": [
+          {
+            "info": "bank interests",
+            "amount": "8.87"
+          }
+        ]
+      },
+      "May": {
+        "5": [
+          {
+            "info": "O2",
+            "amount": "-29.99"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          },
+          {
+            "info": "HILTON",
+            "amount": "-083.08"
+          }
+        ],
+        "16": [
+          {
+            "info": "wholes foods",
+            "amount": "-7.92"
+          }
+        ],
+        "22": [
+          {
+            "info": "USAIR",
+            "amount": "-935.26"
+          },
+          {
+            "info": "friend 2",
+            "amount": "018"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-04.52"
+          }
+        ],
+        "31": [
+          {
+            "info": "wholes foods",
+            "amount": "-4.08"
+          },
+          {
+            "info": "some unkown restaurant 3",
+            "amount": "-1.18"
+          },
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ]
+      },
+      "April": {
+        "3": [
+          {
+            "info": "O2",
+            "amount": "-16.66"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-0.44"
+          }
+        ],
+        "6": [
+          {
+            "info": "Ralphs",
+            "amount": "-1.15"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68.00"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-07.79"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "11": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68.53"
+          },
+          {
+            "info": "USAIR",
+            "amount": "-982.36"
+          }
+        ],
+        "14": [
+          {
+            "info": "H&M",
+            "amount": "-64.47"
+          }
+        ],
+        "21": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "FARY WHEEL VIENNA",
+            "amount": "-56"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "26": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ]
+      },
+      "March": {
+        "2": [
+          {
+            "info": "no_one_knows",
+            "amount": "069"
+          }
+        ],
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-21.86"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-78"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-56.67"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-59.65"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          }
+        ],
+        "10": [
+          {
+            "info": "some unkown restaurant 3",
+            "amount": "-5.07"
+          }
+        ],
+        "16": [
+          {
+            "info": "friend 2",
+            "amount": "6"
+          },
+          {
+            "info": "DRIVE AWAY",
+            "amount": "-91.18"
+          }
+        ],
+        "17": [
+          {
+            "info": "Ralphs",
+            "amount": "-1.19"
+          }
+        ],
+        "20": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.35"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-5.66"
+          }
+        ],
+        "21": [
+          {
+            "info": "wholes foods",
+            "amount": "-5.20"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.21"
+          }
+        ],
+        "22": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          }
+        ],
+        "28": [
+          {
+            "info": "Ralphs",
+            "amount": "-00.44"
+          }
+        ],
+        "29": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "31": [
+          {
+            "info": "bank interests",
+            "amount": "8.01"
+          }
+        ]
+      },
+      "February": {
+        "1": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-64.58"
+          }
+        ],
+        "2": [
+          {
+            "info": "wholes foods",
+            "amount": "-00.71"
+          }
+        ],
+        "6": [
+          {
+            "info": "O2",
+            "amount": "-53.89"
+          }
+        ],
+        "9": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.62"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "13": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-2.17"
+          }
+        ],
+        "14": [
+          {
+            "info": "wholes foods",
+            "amount": "-0.27"
+          }
+        ],
+        "20": [
+          {
+            "info": "Ralphs",
+            "amount": "-1.28"
+          }
+        ],
+        "21": [
+          {
+            "info": "uni food cort",
+            "amount": "-1.31"
+          }
+        ],
+        "27": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          }
+        ]
+      },
+      "January": {
+        "9": [
+          {
+            "info": "Ms. Mom",
+            "amount": "998.58"
+          },
+          {
+            "info": "O2",
+            "amount": "-20.46"
+          }
+        ],
+        "11": [
+          {
+            "info": "wholes foods",
+            "amount": "-6.04"
+          }
+        ],
+        "13": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-04.98"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-68"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-50.78"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "30": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-68"
+          },
+          {
+            "info": "friend 2",
+            "amount": "08"
+          }
+        ],
+        "31": [
+          {
+            "info": "Stargazing",
+            "amount": "-7.18"
+          }
+        ]
+      }
+    },
+    "2018": {
+      "December": {
+        "3": [
+          {
+            "info": "Wallmart",
+            "amount": "-04.57"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-08.97"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "088"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-8.31"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-05.32"
+          },
+          {
+            "info": "Wallmart",
+            "amount": "-96.41"
+          }
+        ],
+        "4": [
+          {
+            "info": "drill shop",
+            "amount": "-085.23"
+          },
+          {
+            "info": "CITY ENERGIE",
+            "amount": "-66.28"
+          },
+          {
+            "info": "Immob co.",
+            "amount": "-743.76"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-18"
+          }
+        ],
+        "6": [
+          {
+            "info": "Ralphs",
+            "amount": "-1.60"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-7.17"
+          }
+        ],
+        "10": [
+          {
+            "info": "Tesco",
+            "amount": "-17.22"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-4.03"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-4.92"
+          },
+          {
+            "info": "unkown coffe place",
+            "amount": "-06"
+          }
+        ],
+        "11": [
+          {
+            "info": "wholes foods",
+            "amount": "-08.47"
+          }
+        ],
+        "13": [
+          {
+            "info": "wholes foods",
+            "amount": "-4.97"
+          }
+        ],
+        "17": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-58"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-3.99"
+          },
+          {
+            "info": "Wallmart",
+            "amount": "-04.07"
+          },
+          {
+            "info": "AMMON",
+            "amount": "-04.38"
+          },
+          {
+            "info": "ALIEXPRESS",
+            "amount": "-70.53"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-088"
+          }
+        ],
+        "20": [
+          {
+            "info": "wholes foods",
+            "amount": "-7.17"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-3.65"
+          },
+          {
+            "info": "IRISH PUB",
+            "amount": "-07.48"
+          }
+        ],
+        "21": [
+          {
+            "info": "Ralphs",
+            "amount": "-62.26"
+          }
+        ],
+        "27": [
+          {
+            "info": "THERMAL WATER",
+            "amount": "-15.78"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-03.48"
+          }
+        ],
+        "28": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-09.57"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-24.74"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-5.44"
+          },
+          {
+            "info": "everyone_knows",
+            "amount": "9745.60"
+          }
+        ],
+        "31": [
+          {
+            "info": "bank interests",
+            "amount": "8.72"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.84"
+          },
+          {
+            "info": "Wallmart",
+            "amount": "-64.41"
+          },
+          {
+            "info": "IKEA",
+            "amount": "-6.18"
+          },
+          {
+            "info": "IKEA",
+            "amount": "-002.13"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-3.39"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-7.56"
+          },
+          {
+            "info": "ACTION",
+            "amount": "-93.51"
+          }
+        ]
+      },
+      "November": {
+        "2": [
+          {
+            "info": "wholes foods",
+            "amount": "-08.39"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-2.80"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-69.82"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-2.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-8.94"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-2.29"
+          }
+        ],
+        "5": [
+          {
+            "info": "Ralphs",
+            "amount": "-98.22"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-03.00"
+          }
+        ],
+        "6": [
+          {
+            "info": "Immob co.",
+            "amount": "-743.76"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "12": [
+          {
+            "info": "ARBOR",
+            "amount": "-03.54"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-2"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-52.18"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-58"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-61.53"
+          }
+        ],
+        "13": [
+          {
+            "info": "uni food cort",
+            "amount": "-1.08"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-7.77"
+          }
+        ],
+        "14": [
+          {
+            "info": "wholes foods",
+            "amount": "-9.08"
+          }
+        ],
+        "15": [
+          {
+            "info": "wholes foods",
+            "amount": "-0.78"
+          },
+          {
+            "info": "Stargazing",
+            "amount": "-09.61"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-00.02"
+          }
+        ],
+        "16": [
+          {
+            "info": "ACTION",
+            "amount": "-96.98"
+          },
+          {
+            "info": "Asia Market",
+            "amount": "-09.18"
+          },
+          {
+            "info": "drill shop",
+            "amount": "-085.23"
+          }
+        ],
+        "19": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-04.48"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-0.54"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-98.33"
+          }
+        ],
+        "20": [
+          {
+            "info": "SPORT 1",
+            "amount": "-09"
+          },
+          {
+            "info": "ACTION",
+            "amount": "-02.14"
+          }
+        ],
+        "21": [
+          {
+            "info": "Ralphs",
+            "amount": "-04.54"
+          },
+          {
+            "info": "IKEA",
+            "amount": "-00.53"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-3.31"
+          }
+        ],
+        "26": [
+          {
+            "info": "wholes foods",
+            "amount": "-9.25"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-97.30"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-94.03"
+          }
+        ],
+        "30": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-188"
+          },
+          {
+            "info": "everyone_knows",
+            "amount": "6070.95"
+          }
+        ]
+      },
+      "October": {
+        "1": [
+          {
+            "info": "Ralphs",
+            "amount": "-00.61"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Asia Market",
+            "amount": "-06.22"
+          }
+        ],
+        "3": [
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          },
+          {
+            "info": "Immob co.",
+            "amount": "-743.76"
+          }
+        ],
+        "4": [
+          {
+            "info": "uni food cort",
+            "amount": "-1.78"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-1.08"
+          }
+        ],
+        "5": [
+          {
+            "info": "Ralphs",
+            "amount": "-08.23"
+          },
+          {
+            "info": "Wallmart",
+            "amount": "-05.13"
+          }
+        ],
+        "8": [
+          {
+            "info": "Ralphs",
+            "amount": "-58.82"
+          },
+          {
+            "info": "drill shop",
+            "amount": "-085.23"
+          }
+        ],
+        "10": [
+          {
+            "info": "NEW YORKER",
+            "amount": "-64.48"
+          }
+        ],
+        "11": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-088"
+          }
+        ],
+        "15": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-95.08"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-24.78"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-8.24"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.54"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "16": [
+          {
+            "info": "wholes foods",
+            "amount": "-5.54"
+          }
+        ],
+        "17": [
+          {
+            "info": "friend 1",
+            "amount": "9.29"
+          }
+        ],
+        "19": [
+          {
+            "info": "Ralphs",
+            "amount": "-9.17"
+          },
+          {
+            "info": "CAR INSURANCE",
+            "amount": "-069.22"
+          }
+        ],
+        "22": [
+          {
+            "info": "Creazy Beaf",
+            "amount": "-07.18"
+          }
+        ],
+        "23": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-66.52"
+          }
+        ],
+        "29": [
+          {
+            "info": "Ralphs",
+            "amount": "-08.09"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-05.48"
+          },
+          {
+            "info": "CASH MASCHINE 1",
+            "amount": "-08.17"
+          }
+        ],
+        "30": [
+          {
+            "info": "Ralphs",
+            "amount": "-4.05"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-52.49"
+          }
+        ],
+        "31": [
+          {
+            "info": "everyone_knows",
+            "amount": "0246.79"
+          },
+          {
+            "info": "choose_a_category",
+            "amount": "42"
+          }
+        ]
+      },
+      "September": {
+        "3": [
+          {
+            "info": "IKEA",
+            "amount": "-37.19"
+          },
+          {
+            "info": "ACTION",
+            "amount": "-62.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-07.34"
+          },
+          {
+            "info": "BUS",
+            "amount": "-31"
+          }
+        ],
+        "4": [
+          {
+            "info": "O2",
+            "amount": "-8.08"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-5.14"
+          }
+        ],
+        "5": [
+          {
+            "info": "Immob co.",
+            "amount": "-743.76"
+          }
+        ],
+        "6": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-04.48"
+          },
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-58.47"
+          },
+          {
+            "info": "CITY ENERGIE",
+            "amount": "-66.28"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "EASY GAS",
+            "amount": "-1"
+          }
+        ],
+        "10": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-018"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-6.77"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-69.16"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-79"
+          },
+          {
+            "info": "drill shop",
+            "amount": "-73.96"
+          }
+        ],
+        "11": [
+          {
+            "info": "wholes foods",
+            "amount": "-4.32"
+          },
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-095"
+          }
+        ],
+        "12": [
+          {
+            "info": "wholes foods",
+            "amount": "-1.87"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-2"
+          }
+        ],
+        "13": [
+          {
+            "info": "MUSEUM",
+            "amount": "-06.78"
+          },
+          {
+            "info": "Asia Market",
+            "amount": "-08.25"
+          }
+        ],
+        "14": [
+          {
+            "info": "Ralphs",
+            "amount": "-4.07"
+          }
+        ],
+        "17": [
+          {
+            "info": "Ralphs",
+            "amount": "-5.78"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-1.32"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-08.83"
+          }
+        ],
+        "18": [
+          {
+            "info": "wholes foods",
+            "amount": "-00.41"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-06.17"
+          }
+        ],
+        "19": [
+          {
+            "info": "SPORT 2",
+            "amount": "-71"
+          }
+        ],
+        "21": [
+          {
+            "info": "IKEA",
+            "amount": "-1.18"
+          },
+          {
+            "info": "some unkown restaurant",
+            "amount": "-68"
+          }
+        ],
+        "24": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "088"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-5.51"
+          },
+          {
+            "info": "Wallmart",
+            "amount": "-95.97"
+          }
+        ],
+        "26": [
+          {
+            "info": "LUSH",
+            "amount": "-3.18"
+          },
+          {
+            "info": "Tesco",
+            "amount": "-06.18"
+          }
+        ],
+        "27": [
+          {
+            "info": "C&A",
+            "amount": "-13"
+          }
+        ],
+        "28": [
+          {
+            "info": "bank interests",
+            "amount": "8.18"
+          },
+          {
+            "info": "everyone_knows",
+            "amount": "0246.79"
+          }
+        ]
+      },
+      "August": {
+        "1": [
+          {
+            "info": "uni food cort",
+            "amount": "-2"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "USAIR",
+            "amount": "-076.43"
+          }
+        ],
+        "3": [
+          {
+            "info": "BUS",
+            "amount": "-94.18"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-00.40"
+          }
+        ],
+        "6": [
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          },
+          {
+            "info": "Mr. Dad",
+            "amount": "0888"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-04.31"
+          }
+        ],
+        "7": [
+          {
+            "info": "Ralphs",
+            "amount": "-5.40"
+          },
+          {
+            "info": "FURNI STORE",
+            "amount": "-558"
+          }
+        ],
+        "10": [
+          {
+            "info": "Ralphs",
+            "amount": "-50.21"
+          }
+        ],
+        "13": [
+          {
+            "info": "TURMOEL",
+            "amount": "-68"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-2.31"
+          }
+        ],
+        "14": [
+          {
+            "info": "Ralphs",
+            "amount": "-01.36"
+          }
+        ],
+        "16": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-61.58"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "28",
+            "category": "in.family.8k",
+            "todo": "add expenses"
+          }
+        ],
+        "17": [
+          {
+            "info": "EASY GAS",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "EASY GAS",
+            "amount": "-08.70"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-06.61"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-65.74"
+          }
+        ],
+        "23": [
+          {
+            "info": "Ralphs",
+            "amount": "-90.90"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          }
+        ],
+        "27": [
+          {
+            "info": "wholes foods",
+            "amount": "-8.71"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-02.20"
+          },
+          {
+            "info": "vegan ice cream",
+            "amount": "-9"
+          },
+          {
+            "info": "TURMOEL",
+            "amount": "-9.98"
+          }
+        ],
+        "28": [
+          {
+            "info": "Vegan Burgers",
+            "amount": "-07.18"
+          }
+        ],
+        "29": [
+          {
+            "info": "TRAIN",
+            "amount": "-0.78"
+          }
+        ],
+        "31": [
+          {
+            "info": "Creazy Beaf",
+            "amount": "-68"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-8.21"
+          },
+          {
+            "info": "some unkown restaurant",
+            "amount": "-02.18"
+          },
+          {
+            "info": "everyone_knows",
+            "amount": "0246.79"
+          }
+        ]
+      },
+      "July": {
+        "2": [
+          {
+            "info": "C&A",
+            "amount": "-31.41"
+          },
+          {
+            "info": "BUS",
+            "amount": "-94.18"
+          }
+        ],
+        "3": [
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-08.05"
+          }
+        ],
+        "4": [
+          {
+            "info": "uni food cort",
+            "amount": "-2"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "996.58",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 2",
+            "amount": "-98"
+          }
+        ],
+        "9": [
+          {
+            "info": "Immob co.",
+            "amount": "-6057.49"
+          }
+        ],
+        "13": [
+          {
+            "info": "TRAIN",
+            "amount": "-0.78"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-2.28"
+          }
+        ],
+        "16": [
+          {
+            "info": "some unkown restaurant",
+            "amount": "-7.28"
+          },
+          {
+            "info": "some unkown restaurant 2",
+            "amount": "-08"
+          },
+          {
+            "info": "SUSHICAFE",
+            "amount": "-4.08"
+          },
+          {
+            "info": "TRAIN",
+            "amount": "-0.78"
+          },
+          {
+            "info": "Hard Rock Caffe",
+            "amount": "-2"
+          }
+        ],
+        "19": [
+          {
+            "info": "Stargazing",
+            "amount": "-7.78"
+          }
+        ],
+        "24": [
+          {
+            "info": "Ralphs",
+            "amount": "-3.00"
+          }
+        ],
+        "25": [
+          {
+            "info": "uni food cort",
+            "amount": "-2.08"
+          },
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-04.38"
+          }
+        ],
+        "31": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-4.44"
+          },
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-652.40"
+          },
+          {
+            "info": "everyone_knows",
+            "amount": "0246.79"
+          }
+        ]
+      },
+      "June": {
+        "1": [
+          {
+            "info": "Vodaphone",
+            "amount": "-08.71"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-2.48"
+          }
+        ],
+        "4": [
+          {
+            "info": "STAR BIKE",
+            "amount": "-14.41"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-58"
+          }
+        ],
+        "5": [
+          {
+            "info": "Ms. Mom",
+            "amount": "996.58",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "8": [
+          {
+            "info": "SPORT 1",
+            "amount": "-55"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-9.38"
+          }
+        ],
+        "18": [
+          {
+            "info": "Ralphs",
+            "amount": "-9.44"
+          },
+          {
+            "info": "nice look",
+            "amount": "-18"
+          }
+        ],
+        "19": [
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-6.21"
+          }
+        ],
+        "20": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          },
+          {
+            "info": "USAIR",
+            "amount": "-033.47"
+          }
+        ],
+        "25": [
+          {
+            "info": "nice look",
+            "amount": "-98"
+          }
+        ],
+        "26": [
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-4.68"
+          }
+        ],
+        "27": [
+          {
+            "info": "unkown coffe place",
+            "amount": "-6.98"
+          }
+        ],
+        "29": [
+          {
+            "info": "bank interests",
+            "amount": "8.83"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-5.31"
+          }
+        ]
+      },
+      "May": {
+        "2": [
+          {
+            "info": "bank interests",
+            "amount": "8.60"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-08.05"
+          }
+        ],
+        "3": [
+          {
+            "info": "Ralphs",
+            "amount": "-3.56"
+          },
+          {
+            "info": "ACTION",
+            "amount": "-04.55"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-08"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-8.69"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "046.18",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "14": [
+          {
+            "info": "Subway",
+            "amount": "-7.91"
+          },
+          {
+            "info": "some unkown restaurant",
+            "amount": "-08"
+          },
+          {
+            "info": "TRAIN",
+            "amount": "-0.38"
+          }
+        ],
+        "16": [
+          {
+            "info": "Ralphs",
+            "amount": "-5.83"
+          }
+        ],
+        "17": [
+          {
+            "info": "Ralphs",
+            "amount": "-5.93"
+          }
+        ],
+        "18": [
+          {
+            "info": "Ralphs",
+            "amount": "-0.44"
+          }
+        ],
+        "22": [
+          {
+            "info": "CCC",
+            "amount": "-64.42"
+          },
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          }
+        ],
+        "24": [
+          {
+            "info": "Ralphs",
+            "amount": "-5.87"
+          }
+        ],
+        "28": [
+          {
+            "info": "uni food cort",
+            "amount": "-9.38"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-1.31"
+          }
+        ],
+        "30": [
+          {
+            "info": "uni food cort",
+            "amount": "-3.79"
+          }
+        ]
+      },
+      "April": {
+        "3": [
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          }
+        ],
+        "5": [
+          {
+            "info": "Ms. Mom",
+            "amount": "046.18",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "6": [
+          {
+            "info": "wholes foods",
+            "amount": "-8.83"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-68"
+          }
+        ],
+        "9": [
+          {
+            "info": "RAYEN AIR",
+            "amount": "-018.47"
+          },
+          {
+            "info": "STARBUCKS",
+            "amount": "-6.21"
+          }
+        ],
+        "11": [
+          {
+            "info": "Ralphs",
+            "amount": "-06.36"
+          }
+        ],
+        "17": [
+          {
+            "info": "Vegan Burgers",
+            "amount": "-5.98"
+          }
+        ],
+        "20": [
+          {
+            "info": "nice look",
+            "amount": "-98"
+          }
+        ],
+        "25": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "27": [
+          {
+            "info": "Ralphs",
+            "amount": "-0.44"
+          },
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-18"
+          },
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-98.68"
+          }
+        ]
+      },
+      "March": {
+        "1": [
+          {
+            "info": "Ralphs",
+            "amount": "-6.33"
+          }
+        ],
+        "2": [
+          {
+            "info": "wholes foods",
+            "amount": "-7.72"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-08.71"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          }
+        ],
+        "5": [
+          {
+            "info": "IKEA",
+            "amount": "-194"
+          }
+        ],
+        "6": [
+          {
+            "info": "wholes foods",
+            "amount": "-5.13"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "996.18",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          },
+          {
+            "info": "Savings from Mom",
+            "amount": "9037.46"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-9.38"
+          }
+        ],
+        "8": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-0888",
+            "category": "out.other.electronics"
+          }
+        ],
+        "9": [
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-06.11"
+          }
+        ],
+        "13": [
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.17"
+          }
+        ],
+        "15": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "58"
+          }
+        ],
+        "16": [
+          {
+            "info": "Ralphs",
+            "amount": "-9.77"
+          }
+        ],
+        "19": [
+          {
+            "info": "wholes foods",
+            "amount": "-0.44"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "some unkown restaurant 2",
+            "amount": "-01"
+          }
+        ],
+        "21": [
+          {
+            "info": "Ralphs",
+            "amount": "-3.57"
+          }
+        ],
+        "23": [
+          {
+            "info": "wholes foods",
+            "amount": "-99.87"
+          }
+        ],
+        "26": [
+          {
+            "info": "FURNI STORE",
+            "amount": "-72.52"
+          }
+        ],
+        "27": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "28": [
+          {
+            "info": "uni food cort",
+            "amount": "-9.38"
+          }
+        ],
+        "30": [
+          {
+            "info": "bank interests",
+            "amount": "8.83"
+          },
+          {
+            "info": "CASH MASCHINE 5",
+            "amount": "-18"
+          },
+          {
+            "info": "flower shop",
+            "amount": "-3.98"
+          }
+        ]
+      },
+      "February": {
+        "1": [
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-04.47"
+          }
+        ],
+        "5": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "uni food cort",
+            "amount": "-9.08"
+          }
+        ],
+        "6": [
+          {
+            "info": "DEMMERS TEE",
+            "amount": "-7.98"
+          }
+        ],
+        "7": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-98"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "996.58",
+            "category": "in.familienbeihilfe"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "8": [
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-098"
+          },
+          {
+            "info": "friend 2",
+            "amount": "3.18"
+          }
+        ],
+        "12": [
+          {
+            "info": "TURMOEL",
+            "amount": "-08"
+          },
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "098"
+          },
+          {
+            "info": "wholes foods",
+            "amount": "-9.86"
+          }
+        ],
+        "14": [
+          {
+            "info": "TRAIN",
+            "amount": "-5.08"
+          }
+        ],
+        "15": [
+          {
+            "info": "H&M",
+            "amount": "-64.47"
+          },
+          {
+            "info": "MUSEUM",
+            "amount": "-98"
+          },
+          {
+            "info": "COSTA GASTRO CAFE",
+            "amount": "-4.68"
+          }
+        ],
+        "16": [
+          {
+            "info": "SPORT 2",
+            "amount": "-07.30"
+          },
+          {
+            "info": "some unkown restaurant 2",
+            "amount": "-94.18"
+          }
+        ],
+        "19": [
+          {
+            "info": "COSTA CAFE",
+            "amount": "-9.08"
+          },
+          {
+            "info": "MUSEUM",
+            "amount": "-98"
+          }
+        ],
+        "20": [
+          {
+            "info": "TRAIN",
+            "amount": "-5.08"
+          }
+        ],
+        "21": [
+          {
+            "info": "SPORT 2",
+            "amount": "-52"
+          }
+        ],
+        "23": [
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          }
+        ],
+        "28": [
+          {
+            "info": "BUS",
+            "amount": "-31"
+          },
+          {
+            "info": "TECHNICAL UNIVERSITY",
+            "amount": "-04.98"
+          }
+        ]
+      },
+      "January": {
+        "2": [
+          {
+            "info": "Vodaphone",
+            "amount": "-08.05"
+          },
+          {
+            "info": "Vodaphone",
+            "amount": "-4.47"
+          },
+          {
+            "info": "COSTA GASTRO CAFE",
+            "amount": "-5.78"
+          }
+        ],
+        "3": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-50.37"
+          },
+          {
+            "info": "COSTA CAFE",
+            "amount": "-1.42"
+          },
+          {
+            "info": "AIRPORT TRANSFERE",
+            "amount": "-0.49"
+          }
+        ],
+        "8": [
+          {
+            "info": "REGIO TRAIN",
+            "amount": "-39"
+          },
+          {
+            "info": "Beauty babe / handsome dude",
+            "amount": "-31"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "098.58",
+            "category": "in.familienbeihilfe",
+            "todo": "calculate amazon expenses"
+          },
+          {
+            "info": "Ms. Mom",
+            "amount": "988",
+            "category": "in.family.8k"
+          }
+        ],
+        "12": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-98"
+          }
+        ],
+        "22": [
+          {
+            "info": "Ralphs",
+            "amount": "-6.13"
+          }
+        ],
+        "24": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          }
+        ],
+        "25": [
+          {
+            "info": "CASH MASCHINE 4",
+            "amount": "-18"
+          },
+          {
+            "info": "Ralphs",
+            "amount": "-3.84"
+          }
+        ],
+        "26": [
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-18"
+          }
+        ],
+        "29": [
+          {
+            "info": "EIFEL TOWER",
+            "amount": "-18"
+          },
+          {
+            "info": "no_one_knows",
+            "amount": "598"
+          },
+          {
+            "info": "CASH MASCHINE 3",
+            "amount": "-58"
+          },
+          {
+            "info": "CAR INSURNCE",
+            "amount": "-069.22"
+          }
+        ],
+        "30": [
+          {
+            "info": "wholes foods",
+            "amount": "-2.02"
+          }
+        ]
+      }
+    }
+  }
+}

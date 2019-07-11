@@ -5,7 +5,7 @@
       1) make an animation list (what would be nice if it'd be animated)
       2) rework utils (maybe in plugin),
       3) make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
-      Don't offer yes, no answers
+      Don't offer yes, no answers (i.e. "Delete" instead of "Yes")
       4) Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
       5) Tagline: Cause spreadsheats are not enought
     -->
@@ -41,12 +41,12 @@ export default {
   height: 100%;
 
   .github-footer {
-    position: relative;
-    bottom: 0px;
+    position: sticky;
+    bottom: 0;
     z-index: 10;
     width: 100vw;
     box-shadow: 1px -1px 3px 0px rgba(0, 0, 0, 0.8);
-    margin-top: $space4;
+    margin-top: $space3;
 
     p {
       margin-top: $space1;

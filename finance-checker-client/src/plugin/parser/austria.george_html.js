@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { getYear, getMonthAsString } from "@/plugin/utils";
+import { getYear, getMonthAsString, prepareDataOnDate } from "../utils";
 
 export function parse(content) {
   let data = {};
@@ -15,14 +15,12 @@ export function parse(content) {
     if (yearMonth) {
       const year = getYear(yearMonth);
       const month = getMonthAsString(yearMonth);
-      if (!data[year]) data[year] = {};
-      if (!data[year][month]) data[year][month] = {};
       monthView.find("tbody .transaction-line").each((index, dayEntry) => {
         dayEntry = $(dayEntry);
         let parsedDayEntry = parseDayEntry(dayEntry);
         if (parsedDayEntry) {
           let day = dayEntry.find(".datecol .day").text();
-          if (!data[year][month][day]) data[year][month][day] = [];
+          prepareDataOnDate(year, month, day, data);
           data[year][month][day].push({
             year: year,
             month: month,
