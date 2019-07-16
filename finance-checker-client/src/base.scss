@@ -48,10 +48,12 @@ body {
   .el-tag {
     margin: 0 8px;
   }
+
   .full {
     height: 100%;
     width: 100%;
   }
+
   .clearfix:before,
   .clearfix:after {
     display: table;
@@ -477,6 +479,7 @@ body {
 
   main {
     overflow: auto;
+    text-align: left;
   }
 
   aside {

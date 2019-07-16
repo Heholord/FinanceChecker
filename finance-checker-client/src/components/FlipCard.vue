@@ -1,39 +1,39 @@
 <template>
   <!-- from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_flip_card -->
-  <div class="flip-card">
-    <div
-      class="flip-card-inner"
-      @mouseenter="hoverFlipCard()"
-      @mouseleave="hoverFlipCard()"
-      :class="{flip:flip, preview:flipPreview}"
-    >
-      <div class="flip-card-front">
+  <div
+    class="flip-card visual-content"
+    @mouseenter="hoverFlipCard()"
+    @mouseleave="hoverFlipCard()"
+    :class="{flip:flip, preview:flipPreview}"
+  >
+    <div class="flip-card-front">
+      <div class="front-container" :class="{paddingtop: buttonFlip}">
         <div
           class="flip-button"
           @mouseenter="toggleFlipPreview()"
           @mouseleave="toggleFlipPreview()"
         >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
-            <span class="mdi mdi-36px mdi-swap-horizontal"/>
+            <span class="mdi mdi-36px mdi-swap-horizontal" />
           </el-button>
         </div>
-        <div class="front-container visual-content" :class="{paddingtop: buttonFlip}">
-          <slot name="front"></slot>
-        </div>
+
+        <slot name="front"></slot>
       </div>
-      <div class="flip-card-back">
+    </div>
+    <div class="flip-card-back">
+      <div class="back-container" :class="{paddingtop: buttonFlip}">
         <div
           class="flip-button"
           @mouseenter="toggleFlipPreview()"
           @mouseleave="toggleFlipPreview()"
         >
           <el-button circle v-if="buttonFlip" @click="flipCard()">
-            <span class="mdi mdi-36px mdi-swap-horizontal"/>
+            <span class="mdi mdi-36px mdi-swap-horizontal" />
           </el-button>
         </div>
-        <div class="back-container visual-content" :class="{paddingtop: buttonFlip}">
-          <slot name="back"></slot>
-        </div>
+
+        <slot name="back"></slot>
       </div>
     </div>
   </div>
@@ -76,64 +76,64 @@ export default {
 @import "@/variables.scss";
 
 .flip-card {
-  background-color: transparent;
   perspective: 10000px;
-  box-shadow: $flying-shadow2;
+  margin-right: $space3;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
 
-  .flip-card-inner {
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+  $flip-preview: 12deg;
 
-    $flip-preview: 12deg;
+  &.flip {
+    transform: rotateY(180deg);
 
-    &.flip {
-      transform: rotateY(180deg);
-
-      .flip-card-front {
-        display: none;
-      }
-      .flip-card-back {
-        display: block;
-      }
-
-      &.preview {
-        transform: rotateY(180deg - $flip-preview);
-      }
+    .flip-card-front {
+      display: none;
+    }
+    .flip-card-back {
+      display: block;
     }
 
     &.preview {
-      transform: rotateY($flip-preview);
-    }
-
-    .flip-card-front,
-    .flip-card-back {
-      backface-visibility: hidden;
-      position: relative;
-
-      .flip-button {
-        position: absolute;
-        top: $space1;
-        right: $size3;
-        border: none;
-        background: none;
-
-        .el-button {
-          background: none;
-          box-shadow: none;
-          border: none;
-        }
-      }
-    }
-
-    .flip-card-back {
-      transform: rotateY(180deg);
-      display: none;
+      transform: rotateY(180deg - $flip-preview);
     }
   }
 
+  &.preview {
+    transform: rotateY($flip-preview);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    backface-visibility: hidden;
+
+    > .front-container,
+    > .back-container {
+      position: relative;
+    }
+
+    .flip-button {
+      position: absolute;
+      right: 0;
+      top: -$space3;
+      border: none;
+      background: none;
+
+      .el-button {
+        background: none;
+        box-shadow: none;
+        border: none;
+      }
+    }
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+    display: none;
+  }
+
   .paddingtop {
-    padding-top: $space4;
+    padding-top: $space2;
   }
 }
 </style>
