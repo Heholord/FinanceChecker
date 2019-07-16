@@ -43,28 +43,30 @@
         :picker-options="{disabledDate: disabledDates}"
       ></el-date-picker>
       <p>Select a category</p>
-      <CategoryTree :categories="['in', 'out','save']" @onSelect="setChartData"/>
+      <CategoryTree :categories="['in', 'out','save']" @onSelect="setChartData" />
       <data-downloader></data-downloader>
     </aside>
 
     <main>
-      <div class="chart visual-content">
-        <doughnut v-if="loaded" :chartData="chartData.general"></doughnut>
-      </div>
-      <el-table
-        show-summary
-        @row-contextmenu="showEntries"
-        :summary-method="getSummaries"
-        :data="tableData"
-        class="table visual-content"
-        oncontextmenu="return false;"
-      >
-        <el-table-column prop="category" label="Category" width="160"></el-table-column>
-        <el-table-column prop="sum" header-align="left" label="Sum" width="100" align="right"></el-table-column>
-        <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
-        <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
-        <el-table-column prop="std" label="Standard Deviation" width="160" align="right"></el-table-column>
-      </el-table>
+      <flip-card buttonFlip class="flip-content">
+        <div slot="front">
+          <doughnut v-if="loaded" :chartData="chartData.general"></doughnut>
+        </div>
+        <el-table
+          slot="back"
+          show-summary
+          @row-contextmenu="showEntries"
+          :summary-method="getSummaries"
+          :data="tableData"
+          oncontextmenu="return false;"
+        >
+          <el-table-column prop="category" label="Category" width="160"></el-table-column>
+          <el-table-column prop="sum" header-align="left" label="Sum" width="100" align="right"></el-table-column>
+          <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
+          <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
+          <el-table-column prop="std" label="Standard Deviation" width="160" align="right"></el-table-column>
+        </el-table>
+      </flip-card>
       <switchable-line-chart
         class="chart visual-content"
         :chartData="chartData.historical"
@@ -80,12 +82,19 @@
 import Doughnut from "@/components/charts/Doughnut.vue";
 import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
+import FlipCard from "@/components/FlipCard";
 import DataDownloader from "@/components/DataDownloader";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Category",
-  components: { CategoryTree, Doughnut, SwitchableLineChart, DataDownloader },
+  components: {
+    CategoryTree,
+    Doughnut,
+    SwitchableLineChart,
+    DataDownloader,
+    FlipCard
+  },
   data() {
     return {
       entries: [],

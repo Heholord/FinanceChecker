@@ -28,15 +28,15 @@
           :picker-options="{disabledDate: disabledDates}"
         ></el-date-picker>
         <p>Select a category</p>
-        <CategoryTree :categories="['in', 'out','save']" @onSelect="setData"/>
+        <CategoryTree :categories="['in', 'out','save']" @onSelect="setData" />
         <data-downloader></data-downloader>
       </el-aside>
 
       <el-container>
         <el-main>
-          <section class="visual-content">
-            <bar-chart :chartData="weekChartData"/>
-            <div class="flex-container">
+          <flip-card buttonFlip class="flip-content">
+            <bar-chart slot="front" :chartData="weekChartData" />
+            <div slot="back" class="flex-container">
               <div class="flex-item" v-for="(day,index) in week.total.avg" :key="index">
                 <h2>{{dayName(index)}}</h2>
                 <em>Sum / Count</em>
@@ -47,10 +47,10 @@
                 <p>{{day}}</p>
               </div>
             </div>
-          </section>
-          <section class="visual-content">
-            <bar-chart :chartData="monthChartData"/>
-            <div class="flex-container">
+          </flip-card>
+          <flip-card buttonFlip class="flip-content">
+            <bar-chart slot="front" :chartData="monthChartData" />
+            <div slot="back" class="flex-container">
               <div class="flex-item" v-for="(mon,index) in month.total.avg" :key="index">
                 <h2>{{monthName(index)}}</h2>
                 <em>Sum / Count</em>
@@ -59,7 +59,7 @@
                 <p>{{mon}}</p>
               </div>
             </div>
-          </section>
+          </flip-card>
         </el-main>
       </el-container>
     </el-container>
@@ -70,6 +70,7 @@
 import CategoryTree from "@/components/CategoryTree.vue";
 import BarChart from "@/components/charts/BarChart.vue";
 import DataDownloader from "@/components/DataDownloader";
+import FlipCard from "@/components/FlipCard";
 import { mapGetters } from "vuex";
 import {
   moment,
@@ -92,7 +93,7 @@ const days = [
 
 export default {
   name: "SpecialStats",
-  components: { CategoryTree, DataDownloader, BarChart },
+  components: { CategoryTree, DataDownloader, BarChart, FlipCard },
   data() {
     return {
       week: {
