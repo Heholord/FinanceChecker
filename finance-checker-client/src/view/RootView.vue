@@ -35,7 +35,7 @@ export default {
           route: "/manage"
         },
         {
-          text: "Launche the demo",
+          text: "Launch the demo",
           subtext: "and get to know the environment",
           image: "test.svg",
           dummy: true,

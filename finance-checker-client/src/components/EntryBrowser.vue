@@ -42,46 +42,56 @@
     </el-dialog>
     <el-collapse class="collapse" accordion @change="setOpen">
       <el-collapse-item
-        v-for="entryKey in Object.keys(getEntries)"
-        :key="entryKey"
+        v-for="yearKey in Object.keys(getEntries)"
+        :key="yearKey"
         class="collapse-item"
-        :title="entryKey"
-        :name="entryKey"
+        :title="yearKey"
+        :name="yearKey"
       >
-        <el-table
-          v-if="openMonth === entryKey"
-          class="table"
-          :span-method="objectSpanMethod"
-          :data="join(getEntries[entryKey])"
-        >
-          <el-table-column prop="day" label="Day" width="50" header-align="center"></el-table-column>
-          <el-table-column prop="info" label="Info" width="330" header-align="center"></el-table-column>
-          <el-table-column
-            prop="category"
-            label="Special Category"
-            width="150"
-            header-align="center"
-          ></el-table-column>
-          <el-table-column
-            prop="amount"
-            label="Value"
-            width="140"
-            align="right"
-            header-align="center"
-          ></el-table-column>
-          <el-table-column
-            v-if="isEditable"
-            label="Operations"
-            align="right"
-            width="150"
-            header-align="center"
+        <el-collapse class="collapse" accordion @change="addOpen">
+          <el-collapse-item
+            v-for="monthKey in Object.keys(getEntries[yearKey])"
+            :key="monthKey"
+            class="collapse-item"
+            :title="monthKey"
+            :name="monthKey"
           >
-            <template slot-scope="scope">
-              <el-button size="mini" @click="editEntry=scope.row">Edit</el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+            <el-table
+              v-if="openMonth === yearKey+monthKey"
+              class="table"
+              :span-method="objectSpanMethod"
+              :data="join(getEntries[yearKey][monthKey])"
+            >
+              <el-table-column prop="day" label="Day" width="50" header-align="center"></el-table-column>
+              <el-table-column prop="info" label="Info" width="330" header-align="center"></el-table-column>
+              <el-table-column
+                prop="category"
+                label="Special Category"
+                width="150"
+                header-align="center"
+              ></el-table-column>
+              <el-table-column
+                prop="amount"
+                label="Value"
+                width="140"
+                align="right"
+                header-align="center"
+              ></el-table-column>
+              <el-table-column
+                v-if="isEditable"
+                label="Operations"
+                align="right"
+                width="150"
+                header-align="center"
+              >
+                <template slot-scope="scope">
+                  <el-button size="mini" @click="editEntry=scope.row">Edit</el-button>
+                  <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-collapse-item>
+        </el-collapse>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -89,7 +99,7 @@
 
 
 <script>
-import { join, clone, isEqualEntry } from "@/plugin/utils";
+import { join, clone, isEqualEntry, moment } from "@/plugin/utils";
 import { mapGetters } from "vuex";
 import CategoryTree from "@/components/CategoryTree";
 
@@ -137,8 +147,8 @@ export default {
         } else {
           this.selectedEntity.old = newValue;
           let updateEntity = clone(newValue);
-          updateEntity.date = this.$moment(
-            newValue.month + newValue.day,
+          updateEntity.date = moment(
+            newValue.month + newValue.year + newValue.day,
             "MMMMYYYYD"
           ).format("YYYY-MM-DD");
 
@@ -166,13 +176,19 @@ export default {
       this.selectedDate = newVal;
       this.selectedEntity.new.date = this.selectedDate;
     },
-    setOpen(month) {
-      this.openMonth = month;
+    setOpen(year) {
+      this.openMonth = year;
+    },
+    addOpen(month) {
+      this.openMonth.length === 4
+        ? (this.openMonth += month)
+        : (this.openMonth = this.openMonth.substring(0, 4) + month);
     },
     updateEntity() {
       let newEntry = clone(this.selectedEntity.new);
-      let date = this.$moment(this.selectedEntity.new.date, "YYYY-MM-DD");
-      newEntry.month = date.format("MMMMYYYY");
+      let date = moment(this.selectedEntity.new.date, "YYYY-MM-DD");
+      newEntry.year = date.format("YYYY");
+      newEntry.month = date.format("MMMM");
       newEntry.day = date.format("D");
       delete newEntry.date;
       delete newEntry.title;
@@ -206,8 +222,8 @@ export default {
     },
     isFirst(row) {
       const entries = this.getEntries;
-      if (isEqualEntry(entries[row.month][row.day][0], row)) {
-        return entries[row.month][row.day];
+      if (isEqualEntry(entries[row.year][row.month][row.day][0], row)) {
+        return entries[row.year][row.month][row.day];
       }
       return false;
     },
@@ -276,11 +292,15 @@ export default {
 }
 .entrybrowser {
   .collapse {
-    min-width: 500px;
+    min-width: $size7;
     .collapse-item {
-      .table {
-        margin-top: 20px;
-        margin-left: 30px;
+      .collapse {
+        margin-top: $space3;
+        margin-left: $space4;
+        .table {
+          margin-top: $space3;
+          margin-left: $space4;
+        }
       }
     }
   }
