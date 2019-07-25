@@ -14,6 +14,8 @@
         <choices :choices="choices" big @select="execute"></choices>
       </div>
     </div>
+
+    <v-tour name="myTour" :steps="tourSteps"></v-tour>
   </div>
 </template>
 
@@ -55,6 +57,27 @@ export default {
           image: "data.svg",
           route: "/visualize"
         }
+      ],
+      tourSteps: [
+        {
+          target: ".choice-container > .box",
+          content:
+            "<p class='article'>Have you been here before? Then upload your data and continue your analyzes. It is also the place <strong> to get started.<strong></p>"
+        },
+        {
+          target: ".box + .box",
+          content:
+            "<p class='article'>If you are new and you wanna see what this site can do for you, then you wanna check out the demo first. " +
+            "It's just dummy data so better don't take the records too seriously.</p>"
+        },
+        {
+          target: ".tabs",
+          content:
+            "<p class='article'>One last thing ... I will always be up here, on every page. So just hit me up and I'll explain you what comes next. But now go on ... you are ready.</p>",
+          params: {
+            placement: "bottom"
+          }
+        }
       ]
     };
   },
@@ -73,6 +96,9 @@ export default {
         if (doneAction) doneAction();
       });
     }
+  },
+  mounted: function() {
+    this.$tours["myTour"].start();
   }
 };
 </script>
