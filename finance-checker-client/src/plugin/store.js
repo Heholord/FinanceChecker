@@ -28,10 +28,12 @@ const store = new Vuex.Store({
     categories: {},
     data: {},
     dataStartDate: "1900-01-01",
-    dataEndDate: "9999-12-31"
+    dataEndDate: "9999-12-31",
+    firstTimeTour: true
   },
   strict: debug,
   getters: {
+    isfirstTimeTour: state => state.firstTimeTour,
     categories: state => state.categories,
     data: state => state.data,
     hasData: state => !isEmpty(state.data),
@@ -114,6 +116,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setToured(state) {
+      state.firstTimeTour = false;
+    },
     setCategories(state, categories) {
       state.categories = categories;
     },

@@ -4,6 +4,12 @@ import { isEmpty } from "./utils";
 
 const CategoryPlugin = {
   install(Vue, { router }) {
+    Vue.mixin({
+      created: function() {
+        // some logic ...
+      }
+    });
+
     Vue.prototype.$parseHtml = (content, bank) => {
       let bankParser = require("@/plugin/parser/" + bank + "_html.js");
       return bankParser.parse(content);
