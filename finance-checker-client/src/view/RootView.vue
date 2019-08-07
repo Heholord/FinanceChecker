@@ -3,7 +3,12 @@
     <heading heading="Finance Checker" />
     <div class="width-center h100 w100">
       <div class="hint">
-        <el-button circle class="mdi mdi-36px mdi-routes" @click="showTour()"></el-button>
+        <el-button
+          circle
+          class="mdi mdi-36px mdi-routes"
+          :class="{active:tourIsActive}"
+          @click="showTour()"
+        ></el-button>
       </div>
       <div v-if="!$store.getters.hasData" class="tabs">
         <choices
@@ -18,7 +23,7 @@
       </div>
     </div>
 
-    <v-tour name="myTour" :steps="tourSteps"></v-tour>
+    <v-tour name="myTour" :steps="tourSteps" :callbacks="tourCallbacks"></v-tour>
   </div>
 </template>
 
@@ -60,7 +65,12 @@ export default {
           image: "data.svg",
           route: "/visualize"
         }
-      ]
+      ],
+      tourIsActive: false,
+      tourCallbacks: {
+        onStart: () => (this.tourIsActive = true),
+        onStop: () => (this.tourIsActive = false)
+      }
     };
   },
   computed: {
@@ -152,11 +162,12 @@ export default {
     position: relative;
     border: none;
     border-radius: 50%;
-    padding: 5px;
-    margin: 3px;
+    padding: $space2;
+    margin: $space1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
-    &:hover {
+    &:hover,
+    &.active {
       color: $neutral5;
       background-color: $neutral1;
       // background-color: transparent;
@@ -174,10 +185,10 @@ export default {
       width: 100%;
       height: 100%;
       border: $neutral5 solid 2px;
-      transform: scale(0.8);
+      transform: scale(0.75);
       position: absolute;
-      top: -2px;
-      left: -2px;
+      top: 0;
+      left: 0;
       border-radius: 50%;
       transition: all 0.3s ease;
     }
