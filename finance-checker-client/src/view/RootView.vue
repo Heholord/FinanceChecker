@@ -3,9 +3,7 @@
     <heading heading="Finance Checker" />
     <div class="width-center h100 w100">
       <div class="hint">
-        <el-button circle @click="showTour()">
-          <span class="mdi mdi-36px mdi-routes" />
-        </el-button>
+        <el-button circle class="mdi mdi-36px mdi-routes" @click="showTour()"></el-button>
       </div>
       <div v-if="!$store.getters.hasData" class="tabs">
         <choices
@@ -146,5 +144,43 @@ export default {
   position: absolute;
   top: $space6;
   right: $space3;
+
+  button {
+    font-size: 1.5rem;
+    color: $neutral1;
+    background-color: $neutral5;
+    position: relative;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.3s ease;
+    &:hover {
+      color: $neutral5;
+      background-color: $neutral1;
+      // background-color: transparent;
+      transform: rotate(10deg);
+      cursor: pointer;
+      box-shadow: none;
+      &:after {
+        transform: scale(1);
+        box-shadow: 10px 0 20px rgba(0, 0, 0, 0.19),
+          6px 0 6px rgba(0, 0, 0, 0.23);
+      }
+    }
+    &:after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border: $neutral5 solid 2px;
+      transform: scale(0.8);
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+  }
 }
 </style>

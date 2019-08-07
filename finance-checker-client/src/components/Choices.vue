@@ -8,14 +8,14 @@
         :class="{big:big, info:choice.info}"
         class="box br-softer"
       >
-        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2">
+        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2" />
         <div class="textarea">
           <span class="title">{{choice.text}}</span>
           <div class="bottom clearfix">
             <span class="sub">{{choice.subtext}}</span>
           </div>
         </div>
-        <button @click="$emit('select', choice)" v-if="!choice.info"/>
+        <button @click="$emit('select', choice)" v-if="!choice.info" />
       </el-card>
     </div>
   </div>
@@ -54,8 +54,6 @@ export default {
 
 
 <style lang="scss">
-@import "@/variables.scss";
-
 .choices {
   h1.title {
     margin-bottom: $space2;
