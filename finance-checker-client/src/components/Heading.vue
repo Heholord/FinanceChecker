@@ -1,10 +1,10 @@
 <template>
   <div class="heading size-height4 primary7 width-center">
-    <div class="bar primary2"/>
-    <img class="logo" v-lazy="require('@/assets/fc_s.svg')" @click="$routeTo('/')">
+    <div class="bar primary2" />
+    <img class="logo" v-lazy="require('@/assets/fc_w_text_i.png')" @click="$routeTo('/')" />
     <div class="center-content content">
       <h1 class="headline thick">{{heading}}</h1>
-      <img v-if="img" class="headline-img" v-lazy="getImage">
+      <img v-if="img" class="headline-img" v-lazy="getImage" />
     </div>
   </div>
 </template>
@@ -44,9 +44,8 @@ export default {
   }
 
   img.logo {
-    width: $size3;
+    width: $size5;
     height: $size3;
-    box-shadow: $flying-shadow1;
     cursor: pointer;
   }
 

@@ -68,8 +68,13 @@ export default {
       ],
       tourIsActive: false,
       tourCallbacks: {
-        onStart: () => (this.tourIsActive = true),
-        onStop: () => (this.tourIsActive = false)
+        onStart: () => {
+          this.tourIsActive = true;
+        },
+        onStop: () => {
+          this.tourIsActive = false;
+          this.$store.commit("setToured");
+        }
       }
     };
   },
@@ -89,7 +94,7 @@ export default {
         "Here you can find your uploaded data in nice graphs. Check it out, you might get surprised.";
       if (!this.$store.getters.hasData) {
         secondText =
-          "If you are new and you wanna see what this site can do for you, then you wanna check out the demo first. " +
+          "If you are new and you wanna see what this site can do for you, then you wanna check out the <strong>demo</strong> first. <br>" +
           "It's just dummy data so don't worry about a squandering lifestyle.";
       }
       steps.push({
@@ -104,7 +109,7 @@ export default {
         steps.push({
           target: ".hint",
           content:
-            "<p class='article'>One last thing ... I will always be up here, on every page. So just hit me up and I'll explain you what comes next. But now go on ... you are ready.</p>",
+            "<p class='article'><strong>One last thing ...</strong> <br> I will always be up here, on every page. So just hit me up and I'll explain you what comes next. <br> Go on now ... you are ready.</p>",
           params: {
             placement: "left"
           }
@@ -131,7 +136,6 @@ export default {
     },
     showTour() {
       this.$tours["myTour"].start();
-      this.$store.commit("setToured");
     }
   },
   mounted: function() {
@@ -154,7 +158,7 @@ export default {
   position: absolute;
   top: $space6;
   right: $space3;
-
+  // from https://codepen.io/colewaldrip/pen/bdZVGd
   button {
     font-size: 1.5rem;
     color: $neutral1;

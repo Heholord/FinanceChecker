@@ -675,6 +675,11 @@ body {
   }
 }
 
-.v-tour > .v-step {
-  z-index: 13;
+.v-tour {
+  & > .v-step {
+    z-index: 13;
+    > .v-step__content {
+      text-align: left;
+    }
+  }
 }
