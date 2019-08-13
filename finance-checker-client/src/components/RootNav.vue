@@ -1,19 +1,20 @@
 <template>
   <div class="width-center">
     <div class="navbox center-content">
+      <img v-if="img" class="headline-img" v-lazy="getImage" />
       <ul class="root-navigation title">
         <li
           class="br-soft"
           :class="{active: isActive('/visualize')}"
           @click="$routeTo('/visualize')"
         >
-          <img v-if="isActive('/visualize')" v-lazy="require('@/assets/data-i-s.svg')">
-          <img v-else v-lazy="require('@/assets/data-s.svg')">
+          <img v-if="isActive('/visualize')" v-lazy="require('@/assets/data-i-s.svg')" />
+          <img v-else v-lazy="require('@/assets/data-s.svg')" />
           <span>Visualization</span>
         </li>
         <li class="br-soft" :class="{active: isActive('/manage')}" @click="$routeTo('/manage')">
-          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')">
-          <img v-else v-lazy="require('@/assets/manage-s.svg')">
+          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')" />
+          <img v-else v-lazy="require('@/assets/manage-s.svg')" />
           <span>Management</span>
         </li>
       </ul>
@@ -23,9 +24,17 @@
 
 <script>
 export default {
+  props: {
+    img: String
+  },
   methods: {
     isActive(path) {
       return this.$route.path.startsWith(path);
+    }
+  },
+  computed: {
+    getImage() {
+      return require("@/assets/" + this.img);
     }
   }
 };
@@ -66,6 +75,17 @@ $toptrans: top $time, margin $time, height $time, width $time,
   .center-content.navbox {
     transition: $toptrans;
     margin: 0;
+
+    .headline-img {
+      position: absolute;
+      top: $space5;
+      left: $space2;
+      padding: $space1;
+      background: $primary9;
+      box-shadow: $flying-shadow2;
+      border-radius: 50%;
+      @include square($size5);
+    }
 
     ul.root-navigation {
       margin: 0 $space2;

@@ -23,8 +23,8 @@
       6) jump to finish page option when store data and category exits
       7) loading from upload to entity browser does not work correctly (maybe split methods?). check if fixed
     -->
-    <heading heading="Manage your data" img="manage-i.svg"></heading>
-    <root-nav />
+    <heading heading="Manage your data"></heading>
+    <root-nav img="manage-i.svg" />
     <div class="width-center">
       <div class="center-content">
         <div class="tabs">

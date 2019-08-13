@@ -5,8 +5,8 @@
         2) special stats
         3) janika in/out bug   # check if fixed
     -->
-    <heading heading="Data Visualizer" img="data-i.svg"/>
-    <root-nav/>
+    <heading heading="Data Visualizer" />
+    <root-nav img="data-i.svg" />
     <div class="width-center">
       <div class="center-content">
         <div v-if="!$store.getters.hasData" class="tabs">
@@ -21,9 +21,9 @@
             @selected="key => this.selected = key"
           />
           <div class="content">
-            <Overview v-if="selected === 'overview'"/>
-            <Category v-if="selected === 'category'"/>
-            <SpecialStats v-if="selected === 'special'"/>
+            <Overview v-if="selected === 'overview'" />
+            <Category v-if="selected === 'category'" />
+            <SpecialStats v-if="selected === 'special'" />
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
 <template>
-  <div class="heading size-height4 primary7 width-center">
+  <div class="heading primary7 width-center">
     <div class="bar primary2" />
     <img class="logo" v-lazy="require('@/assets/fc_w_text_i.png')" @click="$routeTo('/')" />
     <div class="center-content content">
       <h1 class="headline thick">{{heading}}</h1>
-      <img v-if="img" class="headline-img" v-lazy="getImage" />
     </div>
   </div>
 </template>
@@ -14,7 +13,6 @@ export default {
   name: "Heading",
   components: {},
   props: {
-    img: String,
     heading: String
   },
   computed: {
@@ -32,8 +30,9 @@ export default {
   text-align: left;
   z-index: 12;
   position: relative;
-  padding: $space2;
+  padding: $space1;
   margin-bottom: $space4;
+  height: $size4 + $size1;
 
   .bar {
     position: absolute;
@@ -44,8 +43,9 @@ export default {
   }
 
   img.logo {
-    width: $size5;
-    height: $size3;
+    width: $size6;
+    height: $size4;
+    margin: 0 $space4;
     cursor: pointer;
   }
 
@@ -56,19 +56,9 @@ export default {
     min-width: $size10;
     padding: $space2;
     h1.headline {
-      text-align: left;
       vertical-align: baseline;
       margin: 0;
-    }
-    .headline-img {
-      position: absolute;
-      top: -$space2;
-      right: 0;
-      padding: $space1;
-      background: $primary9;
-      box-shadow: $flying-shadow2;
-      border-radius: 50%;
-      @include square($size5);
+      margin-right: $size6;
     }
   }
 }
