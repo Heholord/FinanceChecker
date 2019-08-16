@@ -22,7 +22,7 @@ import { mapGetters } from "vuex";
 import { convert } from "@/plugin/utils.js";
 
 export default {
-  name: "QuickUpload",
+  name: "ExistingDataUpload",
   components: { FileUploader, Choices },
   data() {
     return {

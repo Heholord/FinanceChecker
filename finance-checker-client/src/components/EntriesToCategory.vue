@@ -28,7 +28,7 @@
       <el-alert v-else-if="isCategorySelected" type="warning" :closable="false" show-icon>
         The selected category
         <el-tag type="info">{{selectedCategoryPrint}}</el-tag>has subcategories, thus no entries can be added to this category.
-        <br>Please specify the category or add a new subcategory.
+        <br />Please specify the category or add a new subcategory.
       </el-alert>
       <el-alert v-else title="No category selected" type="info" :closable="false" show-icon></el-alert>
       <category-tree
@@ -38,7 +38,13 @@
         @onSelect="selectCategory"
       ></category-tree>
       <div class="buttons-bar">
-        <el-popover class="btn new" placement="top" width="500" v-model="newCategoryPopover">
+        <el-popover
+          v-if="isCategorySelected"
+          class="btn new"
+          placement="top"
+          width="500"
+          v-model="newCategoryPopover"
+        >
           <div class="popover content">
             <p>Do you want to create a new category in</p>
             <el-tag type="info">{{selectedCategoryPrint}}</el-tag>
@@ -57,7 +63,7 @@
               <el-button type="primary" size="mini" @click="setNewCategoryName">confirm</el-button>
             </div>
           </div>
-          <el-button v-if="isCategorySelected" icon="el-icon-plus" slot="reference">New Category</el-button>
+          <el-button icon="el-icon-plus" slot="reference">New Category</el-button>
         </el-popover>
         <el-button class="btn skip" type="info" icon="el-icon-caret-right" @click="nextEntry">Skip</el-button>
         <el-button
@@ -68,27 +74,6 @@
           :disabled="!canInsertIntoCategory"
         >place here</el-button>
       </div>
-      <el-popover placement="top" width="160" v-model="newCategoryPopover">
-        <div class="popover content">
-          <p>Do you want to create a new category in</p>
-          <el-tag type="info">{{selectedCategoryPrint}}</el-tag>
-          <el-alert v-if="isLeaf(selectedCategory)" type="warning" :closable="false" show-icon>
-            <p>
-              The selected category
-              <el-tag type="info">{{selectedCategoryPrint}}</el-tag>contains entries. If you still decide to add a new subcategory to this category, the existing entries will be placed into an
-              <el-tag type="info">{{selectedCategoryPrint}} > other</el-tag>subcategory.
-            </p>
-          </el-alert>
-          <label>The category should be named:</label>
-          <el-input placeholder="category name" v-model="newCategory"></el-input>
-
-          <div class="popover buttons">
-            <el-button size="mini" type="text" @click="newCategoryPopover = false">cancel</el-button>
-            <el-button type="primary" size="mini" @click="setNewCategoryName">confirm</el-button>
-          </div>
-        </div>
-        <el-button slot="reference">Delete</el-button>
-      </el-popover>
     </div>
   </div>
 </template>

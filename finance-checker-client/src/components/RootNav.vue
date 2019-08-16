@@ -1,7 +1,7 @@
 <template>
   <div class="width-center">
     <div class="navbox center-content">
-      <img v-if="img" class="headline-img" v-lazy="getImage" />
+      <!--img v-if="img" class="headline-img" v-lazy="getImage" /-->
       <ul class="root-navigation title">
         <li
           class="br-soft"
@@ -49,7 +49,7 @@ $toptrans: top $time, margin $time, height $time, width $time,
 
 .width-center {
   position: absolute;
-  top: -30px;
+  top: -10px;
   z-index: 9;
   widows: 100vw;
   transition: $toptrans;
@@ -58,7 +58,7 @@ $toptrans: top $time, margin $time, height $time, width $time,
   box-shadow: $flying-shadow1; //0 1px 2px $neutral1, inset 0 1px 2px hsla(0, 0%, 0%, 0.25);
 
   &:hover {
-    top: 45px;
+    top: 65px;
     > .center-content.navbox {
       > ul.root-navigation {
         > li {

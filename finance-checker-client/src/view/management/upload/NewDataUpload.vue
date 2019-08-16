@@ -19,16 +19,15 @@
         ></el-cascader>
       </div>
       <div class="step" v-else-if="activeStep === 1">
-        <div class="split">
-          <file-uploader class="split-elem" fileType="html" :fileSize="20" @onFile="setHTMLFile"/>
-          <file-uploader
+        <file-uploader class="split-elem" fileType="html" :fileSize="20" @onFile="setHTMLFile" />
+        <!-- TODO Extract into another Component with mergestrategies
+           file-uploader
             class="split-elem"
             fileType="json"
             :fileSize="20"
             text="Drop optional json file here, if you have pre-existing data to merge"
             @onFile="setMergeEntries"
-          />
-        </div>
+        /-->
       </div>
       <div class="step" v-else-if="activeStep === 2">
         <entries-to-category
@@ -66,7 +65,7 @@ import { mapGetters } from "vuex";
 import { join } from "@/plugin/utils";
 
 export default {
-  name: "Upload",
+  name: "NewDataUpload",
   components: { FileUploader, EntriesToCategory },
   data() {
     return {

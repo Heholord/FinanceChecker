@@ -51,14 +51,13 @@ export default {
 
   .content {
     position: relative;
-    text-align: center;
+    text-align: left;
     max-width: $size11;
     min-width: $size10;
     padding: $space2;
     h1.headline {
       vertical-align: baseline;
-      margin: 0;
-      margin-right: $size6;
+      margin: 0 0 0 $space3;
     }
   }
 }

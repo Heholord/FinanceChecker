@@ -3,8 +3,7 @@
     <!-- TODO  
        1) html and/or json (make hirachy clear) 
        2) desicion component for:
-          -> upload (q: do you have some data to upload? a: upload data, take a tour)
-            -> upload existing data
+          -> upload existing data
               -> then add new data
             -> upload bank data (html, csv)
               -> select bank:
@@ -37,18 +36,11 @@
             default="upload"
             @selected="key => this.selected = key"
           />
-          <selection
-            v-else
-            :selections="[{key:'upload', icon:'el-icon-upload', text:'Upload'}]"
-            default="upload"
-            @selected="key => this.selected = key"
-          />
           <div class="content">
             <Download v-if="selected === 'download'" />
             <EntryBrowser v-if="selected === 'edit'" />
             <div v-if="selected === 'upload'">
-              <choices v-if="$route.path === '/manage'" :choices="uploadChoices" @select="route"></choices>
-              <router-view></router-view>
+              <Upload />
             </div>
           </div>
         </div>
@@ -59,8 +51,8 @@
 
 <script>
 import RootNav from "@/components/RootNav";
-import Choices from "@/components/Choices";
 import Download from "./Download";
+import Upload from "./upload/Upload";
 import Heading from "@/components/Heading";
 import Selection from "@/components/Selection";
 import EntryBrowser from "@/components/EntryBrowser";
@@ -70,34 +62,17 @@ export default {
   components: {
     RootNav,
     Download,
-    Choices,
+    Upload,
     Heading,
     Selection,
     EntryBrowser
   },
   data() {
     return {
-      uploadChoices: [
-        {
-          text: "Upload your existing data",
-          subtext: "That's quick and easy",
-          image: "quickupload.svg",
-          route: "/manage/upload/quick"
-        },
-        {
-          text: "Setup",
-          subtext: "Everything that is great beginns with a setup",
-          image: "setup.svg",
-          route: "/manage/upload/setup"
-        }
-      ],
       selected: "upload"
     };
   },
   methods: {
-    route(choice) {
-      this.$routeTo(choice.route);
-    },
     openUpload() {
       this.$refs.manTabs.value = "upload";
     }
