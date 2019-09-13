@@ -1,16 +1,13 @@
 import $ from "jquery";
 import { getYear, getMonthAsString, prepareDataOnDate } from "../utils";
+import { getText } from "./parse_utils";
 
 export function parse(content) {
   let data = {};
   let html = $(content);
   html.find(".transactionlist").each((index, monthView) => {
     monthView = $(monthView);
-    const yearMonth = monthView
-      .find("thead h2")
-      .text()
-      .trim()
-      .replace(/\s/gm, "");
+    const yearMonth = getText(monthView.find("thead h2"));
 
     if (yearMonth) {
       const year = getYear(yearMonth);
@@ -45,11 +42,4 @@ function parseDayEntry(dayEntry) {
 
   if (isNaN(data.amount) || +data.amount == 0) return false; // *** Abschlussbuchung per 30.09.2018 **** interessiert uns nicht
   return data;
-}
-
-function getText(elem) {
-  return elem
-    .text()
-    .replace(/(\r\n\t|\n|\r\t|\.)/gm, "")
-    .trim();
 }

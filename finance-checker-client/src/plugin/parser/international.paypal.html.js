@@ -1,5 +1,6 @@
 import $ from "jquery";
 import { convertMonthToString, prepareDataOnDate } from "@/plugin/utils";
+import { getText } from "./parse_utils";
 
 export function parse(content) {
   let data = {};
@@ -36,27 +37,12 @@ function parseDayEntry(dayEntry) {
   data.info = getText(dayEntry.find(".transactionDescription")).toUpperCase();
   if (dayEntry.find(".netAmount").length > 0) {
     data.amount = +(
-      "-" +
-      getText(dayEntry.find(".netAmount"))
-        .replace(",", ".")
-        .replace("USD", "")
-        .replace("EUR", "")
+      "-" + getText(dayEntry.find(".netAmount")).replace(",", ".")
     );
   } else if (dayEntry.find(".isPositive").length > 0) {
-    data.amount = getText($(dayEntry.find(".isPositive")[1]))
-      .replace(",", ".")
-      .replace("USD", "")
-      .replace("EUR", "");
+    data.amount = getText($(dayEntry.find(".isPositive")[1])).replace(",", ".");
   }
 
   if (isNaN(data.amount) || +data.amount == 0) return false; // *** Abschlussbuchung per 30.09.2018 **** interessiert uns nicht
   return data;
-}
-
-function getText(elem) {
-  return elem
-    .text()
-    .replace(/(\r\n\t|\n|\r\t|\.)/gm, "")
-    .replace("USD", "")
-    .trim();
 }

@@ -10,3 +10,4 @@ categorizer*.json
 *.bak*.json
 *_bak/
 !data.demo.json
+/resources/mydata
