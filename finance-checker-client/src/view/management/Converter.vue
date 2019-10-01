@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import FileUploader from "@/components/FileUploader";
-import FileDownloader from "@/components/FileDownloader";
+import FileUploader from "@/components/management/FileUploader";
+import FileDownloader from "@/components/management/FileDownloader";
 import { getYear, getMonthAsString, download } from "../../plugin/utils";
 
 export default {

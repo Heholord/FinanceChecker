@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import FileUploader from "@/components/FileUploader";
+import FileUploader from "@/components/management/FileUploader";
 import Choices from "@/components/Choices";
 import { mapGetters } from "vuex";
 import { convert } from "@/plugin/utils.js";

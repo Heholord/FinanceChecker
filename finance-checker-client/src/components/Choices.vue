@@ -56,8 +56,8 @@ export default {
 <style lang="scss">
 .choices {
   h1.title {
-    margin-bottom: $space2;
     @include label;
+    margin-bottom: $space3;
   }
   .choice-container {
     display: flex;

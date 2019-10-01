@@ -55,7 +55,7 @@ import Download from "./Download";
 import Upload from "./upload/Upload";
 import Heading from "@/components/Heading";
 import Selection from "@/components/Selection";
-import EntryBrowser from "@/components/EntryBrowser";
+import EntryBrowser from "@/components/management/EntryBrowser";
 
 export default {
   name: "DataManagement",

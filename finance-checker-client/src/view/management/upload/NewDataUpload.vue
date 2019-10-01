@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import FileUploader from "@/components/FileUploader";
-import EntriesToCategory from "@/components/EntriesToCategory";
+import FileUploader from "@/components/management/FileUploader";
+import EntriesToCategory from "@/components/management/EntriesToCategory";
 import { mapGetters } from "vuex";
 import { join } from "@/plugin/utils";
 

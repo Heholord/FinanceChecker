@@ -83,7 +83,7 @@ import Doughnut from "@/components/charts/Doughnut.vue";
 import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
 import CategoryTree from "@/components/CategoryTree.vue";
 import FlipCard from "@/components/FlipCard";
-import DataDownloader from "@/components/DataDownloader";
+import DataDownloader from "@/components/management/DataDownloader";
 import { mapGetters } from "vuex";
 
 export default {

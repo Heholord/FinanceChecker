@@ -69,7 +69,7 @@
 <script>
 import CategoryTree from "@/components/CategoryTree.vue";
 import BarChart from "@/components/charts/BarChart.vue";
-import DataDownloader from "@/components/DataDownloader";
+import DataDownloader from "@/components/management/DataDownloader";
 import FlipCard from "@/components/FlipCard";
 import { mapGetters } from "vuex";
 import {

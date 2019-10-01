@@ -60,7 +60,7 @@
 <script>
 import SwitchableLineChart from "@/components/charts/SwitchableLineChart";
 import FlipCard from "@/components/FlipCard";
-import DataDownloader from "@/components/DataDownloader";
+import DataDownloader from "@/components/management/DataDownloader";
 import { mapGetters } from "vuex";
 
 export default {

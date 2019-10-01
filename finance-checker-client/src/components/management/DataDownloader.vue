@@ -6,7 +6,7 @@
 
 
 <script>
-import FileDownloader from "@/components/FileDownloader";
+import FileDownloader from "@/components/management/FileDownloader";
 import { mapGetters } from "vuex";
 import { download } from "@/plugin/utils";
 
