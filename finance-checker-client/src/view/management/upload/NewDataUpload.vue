@@ -11,12 +11,7 @@
 
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
-        <el-cascader
-          expand-trigger="hover"
-          :options="options"
-          v-model="selectedBank"
-          @change="allowNextStep"
-        ></el-cascader>
+        <bank-chooser @selected="allowNextStep" />
       </div>
       <div class="step" v-else-if="activeStep === 1">
         <file-uploader class="split-elem" fileType="html" :fileSize="20" @onFile="setHTMLFile" />
@@ -61,47 +56,18 @@
 <script>
 import FileUploader from "@/components/management/FileUploader";
 import EntriesToCategory from "@/components/management/EntriesToCategory";
+import BankChooser from "@/components/management/BankChooser";
 import { mapGetters } from "vuex";
 import { join } from "@/plugin/utils";
 
 export default {
   name: "NewDataUpload",
-  components: { FileUploader, EntriesToCategory },
+  components: { FileUploader, EntriesToCategory, BankChooser },
   data() {
     return {
       activeStep: 0,
       totalSteps: 3,
       disableNextStep: true,
-      options: [
-        {
-          value: "austria",
-          label: "Austria",
-          children: [
-            {
-              value: "george",
-              label: "George"
-            },
-            {
-              value: "raiffeisen",
-              label: "Raiffeisen"
-            }
-          ]
-        },
-        {
-          value: "international",
-          label: "International",
-          children: [
-            {
-              value: "paypal",
-              label: "Paypal"
-            },
-            {
-              value: "westernunion",
-              label: "Western Union"
-            }
-          ]
-        }
-      ],
       loading: false,
       selectedBank: [],
       categoryData: [],

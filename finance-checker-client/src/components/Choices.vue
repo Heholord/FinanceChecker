@@ -4,8 +4,8 @@
     <div class="choice-container">
       <el-card
         v-for="choice in choices"
-        :key="choice.title"
-        :class="{big:big, info:choice.info}"
+        :key="choice.text"
+        :class="{big:big, small:small, info:choice.info}"
         class="box br-softer"
       >
         <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2" />
@@ -35,6 +35,10 @@ export default {
       default: ""
     },
     big: {
+      type: Boolean,
+      default: false
+    },
+    small: {
       type: Boolean,
       default: false
     }
@@ -83,6 +87,15 @@ export default {
         .image {
           width: $size8;
           height: $size7;
+        }
+      }
+
+      &.small {
+        width: $size5;
+        height: $size3;
+        .image {
+          width: 0;
+          height: 0;
         }
       }
 
