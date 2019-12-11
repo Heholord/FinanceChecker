@@ -5,16 +5,26 @@
       <ul class="root-navigation title">
         <li
           class="br-soft"
-          :class="{active: isActive('/visualize')}"
+          :class="{ active: isActive('/visualize') }"
           @click="$routeTo('/visualize')"
         >
-          <img v-if="isActive('/visualize')" v-lazy="require('@/assets/data-i-s.svg')" />
-          <img v-else v-lazy="require('@/assets/data-s.svg')" />
+          <img
+            v-if="isActive('/visualize')"
+            v-lazy="require('@/assets/avatars/data-i-s.svg')"
+          />
+          <img v-else v-lazy="require('@/assets/avatars/data-s.svg')" />
           <span>Visualization</span>
         </li>
-        <li class="br-soft" :class="{active: isActive('/manage')}" @click="$routeTo('/manage')">
-          <img v-if="isActive('/manage')" v-lazy="require('@/assets/manage-i-s.svg')" />
-          <img v-else v-lazy="require('@/assets/manage-s.svg')" />
+        <li
+          class="br-soft"
+          :class="{ active: isActive('/manage') }"
+          @click="$routeTo('/manage')"
+        >
+          <img
+            v-if="isActive('/manage')"
+            v-lazy="require('@/assets/avatars/manage-i-s.svg')"
+          />
+          <img v-else v-lazy="require('@/assets/avatars/manage-s.svg')" />
           <span>Management</span>
         </li>
       </ul>
@@ -40,7 +50,6 @@ export default {
 };
 </script>
 
-    
 <style lang="scss" scoped>
 $time: 0.1s ease-out;
 
@@ -49,7 +58,7 @@ $toptrans: top $time, margin $time, height $time, width $time,
 
 .width-center {
   position: absolute;
-  top: -10px;
+  top: -0px;
   z-index: 9;
   widows: 100vw;
   transition: $toptrans;
@@ -58,14 +67,17 @@ $toptrans: top $time, margin $time, height $time, width $time,
   box-shadow: $flying-shadow1; //0 1px 2px $neutral1, inset 0 1px 2px hsla(0, 0%, 0%, 0.25);
 
   &:hover {
-    top: 65px;
+    top: 90px;
     > .center-content.navbox {
       > ul.root-navigation {
         > li {
-          top: 10px;
-          margin: $space3;
+          top: $space1;
+          margin: $space2 $space3;
           > span {
             opacity: 1;
+          }
+          &.active {
+            top: 0;
           }
         }
       }
@@ -88,8 +100,8 @@ $toptrans: top $time, margin $time, height $time, width $time,
     }
 
     ul.root-navigation {
-      margin: 0 $space2;
-      height: $size5;
+      margin: 0;
+      height: $size4 + $size3;
       z-index: 7;
       display: flex;
       padding: 0;
@@ -106,10 +118,9 @@ $toptrans: top $time, margin $time, height $time, width $time,
         background-color: $neutral3;
         box-shadow: $flying-shadow1;
         position: relative;
-        // top: 110px;
         bottom: -40px;
         z-index: 8;
-        margin: $space2;
+        margin: 0 $space2;
         transition: $toptrans;
         > span {
           transition: $toptrans;
@@ -124,8 +135,13 @@ $toptrans: top $time, margin $time, height $time, width $time,
         }
 
         &.active {
+          @include square($size1 + $size4);
           background-color: $primary6;
-          // border: solid 3px $support-positive2;
+          border: solid $space1 $primary3;
+          bottom: -30px;
+          > span {
+            bottom: -25px;
+          }
         }
       }
     }

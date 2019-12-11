@@ -1,9 +1,13 @@
 <template>
   <div class="heading primary7 width-center">
     <div class="bar primary2" />
-    <img class="logo" v-lazy="require('@/assets/fc_w_text_i.png')" @click="$routeTo('/')" />
+    <img
+      class="logo"
+      v-lazy="require('@/assets/logo/fc_w_text_i.png')"
+      @click="$routeTo('/')"
+    />
     <div class="center-content content">
-      <h1 class="headline thick">{{heading}}</h1>
+      <h1 class="headline thick">{{ heading }}</h1>
     </div>
   </div>
 </template>

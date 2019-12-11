@@ -1,18 +1,22 @@
 <template>
   <div class="choices">
-    <h1 v-if="title" class="title fs6">{{title}}</h1>
+    <h1 v-if="title" class="title fs6">{{ title }}</h1>
     <div class="choice-container">
       <el-card
         v-for="choice in choices"
         :key="choice.text"
-        :class="{big:big, small:small, info:choice.info}"
+        :class="{ big: big, small: small, info: choice.info }"
         class="box br-softer"
       >
-        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2" />
+        <img
+          v-if="getImage(choice)"
+          v-lazy="getImage(choice)"
+          class="image padding2"
+        />
         <div class="textarea">
-          <span class="title">{{choice.text}}</span>
+          <span class="title">{{ choice.text }}</span>
           <div class="bottom clearfix">
-            <span class="sub">{{choice.subtext}}</span>
+            <span class="sub">{{ choice.subtext }}</span>
           </div>
         </div>
         <button @click="$emit('select', choice)" v-if="!choice.info" />
@@ -20,7 +24,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -46,16 +49,15 @@ export default {
   methods: {
     getImage(choice) {
       if (choice.image) {
-        return require("@/assets/" + choice.image);
+        return require("@/assets/avatars/" + choice.image);
       } else if (choice.info) {
-        return require("@/assets/waiting_i.svg");
+        return require("@/assets/avatars/waiting_i.svg");
       }
       return undefined;
     }
   }
 };
 </script>
-
 
 <style lang="scss">
 .choices {

@@ -6,7 +6,7 @@
         <el-button
           circle
           class="mdi mdi-36px mdi-routes"
-          :class="{active:tourIsActive}"
+          :class="{ active: tourIsActive }"
           @click="showTour()"
         ></el-button>
       </div>
@@ -23,7 +23,11 @@
       </div>
     </div>
 
-    <v-tour name="myTour" :steps="tourSteps" :callbacks="tourCallbacks"></v-tour>
+    <v-tour
+      name="myTour"
+      :steps="tourSteps"
+      :callbacks="tourCallbacks"
+    ></v-tour>
   </div>
 </template>
 

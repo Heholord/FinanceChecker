@@ -10,15 +10,25 @@
     <div class="width-center">
       <div class="center-content">
         <div v-if="!$store.getters.hasData" class="tabs">
-          <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
+          <choices
+            :choices="choices"
+            title="You haven't uploaded any data yet"
+            @select="execute"
+          ></choices>
         </div>
         <div v-else class="tabs">
           <selection
-            :selections="[{key:'overview', icon:'el-icon-view', text:'Overview'},
-              {key:'category', icon:'el-icon-menu', text:'Category Browser'},
-              {key:'special', icon:'el-icon-star-on', text:'Special Stats'}]"
+            :selections="[
+              { key: 'overview', icon: 'el-icon-view', text: 'Overview' },
+              {
+                key: 'category',
+                icon: 'el-icon-menu',
+                text: 'Category Browser'
+              },
+              { key: 'special', icon: 'el-icon-star-on', text: 'Special Stats' }
+            ]"
             default="overview"
-            @selected="key => this.selected = key"
+            @selected="key => (this.selected = key)"
           />
           <div class="content">
             <Overview v-if="selected === 'overview'" />

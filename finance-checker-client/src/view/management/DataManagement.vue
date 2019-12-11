@@ -30,18 +30,17 @@
           <selection
             v-if="$store.getters.hasData"
             :selections="[
-          {key:'download', icon:'el-icon-download', text:'Download'},
-          {key:'edit', icon:'el-icon-edit', text:'Editor'},
-          {key:'upload', icon:'el-icon-upload', text:'Upload'}]"
+              { key: 'download', icon: 'el-icon-download', text: 'Download' },
+              { key: 'edit', icon: 'el-icon-edit', text: 'Editor' },
+              { key: 'upload', icon: 'el-icon-upload', text: 'Upload' }
+            ]"
             default="upload"
-            @selected="key => this.selected = key"
+            @selected="key => (this.selected = key)"
           />
           <div class="content">
             <Download v-if="selected === 'download'" />
             <EntryBrowser v-if="selected === 'edit'" />
-            <div v-if="selected === 'upload'">
-              <Upload />
-            </div>
+            <Upload v-if="selected === 'upload'" />
           </div>
         </div>
       </div>
@@ -80,6 +79,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
-
+<style lang="scss"></style>

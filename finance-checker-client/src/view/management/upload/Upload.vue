@@ -46,7 +46,8 @@ export default {
         {
           text: "Add raw data",
           subtext: "Enrichen your understanding of money",
-          image: "add.svg"
+          image: "add.svg",
+          route: "/manage/upload/setup"
         },
         {
           text: "Got lost?",
