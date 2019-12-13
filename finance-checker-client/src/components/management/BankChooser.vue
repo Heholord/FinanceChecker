@@ -21,7 +21,7 @@
 
 
 <script>
-import banks from "@/assets/banks";
+import banks from "@/assets/banks/banks";
 import Choices from "@/components/Choices";
 
 export default {

@@ -32,13 +32,13 @@ export default {
         {
           text: "Upload your existing data",
           subtext: "That's quick and easy",
-          image: "quickupload.svg",
+          image: "avatars/quickupload.svg",
           route: "/manage/upload/quick"
         },
         {
           text: "Setup new analysis",
           subtext: "Everything that is great beginns with preparation",
-          image: "setup.svg",
+          image: "avatars/setup.svg",
           route: "/manage/upload/setup"
         }
       ],
@@ -46,19 +46,19 @@ export default {
         {
           text: "Add raw data",
           subtext: "Enrichen your understanding of money",
-          image: "add.svg",
+          image: "avatars/add.svg",
           route: "/manage/upload/setup"
         },
         {
           text: "Got lost?",
           subtext: "I can you bring you to the visualisation page",
-          image: "data.svg",
+          image: "avatars/data.svg",
           route: "/visualize"
         },
         {
           text: "Clean analysis",
           subtext: "and delete existing data",
-          image: "delete.svg",
+          image: "avatars/delete.svg",
           delete: true
         },
         {

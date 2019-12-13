@@ -23,11 +23,7 @@
       </div>
     </div>
 
-    <v-tour
-      name="myTour"
-      :steps="tourSteps"
-      :callbacks="tourCallbacks"
-    ></v-tour>
+    <v-tour name="myTour" :steps="tourSteps" :callbacks="tourCallbacks"></v-tour>
   </div>
 </template>
 
@@ -45,13 +41,13 @@ export default {
         {
           text: "Upload transaction data",
           subtext: "and start the journey",
-          image: "manage.svg",
+          image: "avatars/manage.svg",
           route: "/manage"
         },
         {
           text: "Launch the demo",
           subtext: "and get to know the environment",
-          image: "test.svg",
+          image: "avatars/test.svg",
           dummy: true,
           route: "/visualize"
         }
@@ -60,13 +56,13 @@ export default {
         {
           text: "Upload data from the bank",
           subtext: "and proceede the journey",
-          image: "manage.svg",
+          image: "avatars/manage.svg",
           route: "/manage"
         },
         {
           text: "View what you have",
           subtext: "and enjoy your growth",
-          image: "data.svg",
+          image: "avatars/data.svg",
           route: "/visualize"
         }
       ],

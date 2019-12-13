@@ -10,11 +10,7 @@
     <div class="width-center">
       <div class="center-content">
         <div v-if="!$store.getters.hasData" class="tabs">
-          <choices
-            :choices="choices"
-            title="You haven't uploaded any data yet"
-            @select="execute"
-          ></choices>
+          <choices :choices="choices" title="You haven't uploaded any data yet" @select="execute"></choices>
         </div>
         <div v-else class="tabs">
           <selection
@@ -68,7 +64,7 @@ export default {
         {
           text: "Click here",
           subtext: "and I will bring you to the upload page",
-          image: "upload.svg",
+          image: "avatars/upload.svg",
           route: "/manage"
         },
         {

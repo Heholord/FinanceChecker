@@ -31,13 +31,13 @@ export default {
         {
           text: "I want to upload some other data",
           subtext: "and my old data can be deleted",
-          image: "delete.svg",
+          image: "avatars/delete.svg",
           delete: true
         },
         {
           text: "I got lost",
           subtext: "Can you bring me to the page with the charts and stuff",
-          image: "data.svg",
+          image: "avatars/data.svg",
           route: "/visualize"
         },
         {

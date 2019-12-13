@@ -8,11 +8,7 @@
         :class="{ big: big, small: small, info: choice.info }"
         class="box br-softer"
       >
-        <img
-          v-if="getImage(choice)"
-          v-lazy="getImage(choice)"
-          class="image padding2"
-        />
+        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2" />
         <div class="textarea">
           <span class="title">{{ choice.text }}</span>
           <div class="bottom clearfix">
@@ -49,7 +45,7 @@ export default {
   methods: {
     getImage(choice) {
       if (choice.image) {
-        return require("@/assets/avatars/" + choice.image);
+        return require("@/assets/" + choice.image);
       } else if (choice.info) {
         return require("@/assets/avatars/waiting_i.svg");
       }

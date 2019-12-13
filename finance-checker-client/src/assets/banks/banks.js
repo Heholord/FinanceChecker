@@ -4,7 +4,7 @@ export default {
     children: {
       george: {
         label: "George",
-        image: "george.svg",
+        image: "banks/george.svg",
         children: {
           html: {
             label: "HTML"

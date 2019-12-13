@@ -8,23 +8,11 @@
           :class="{ active: isActive('/visualize') }"
           @click="$routeTo('/visualize')"
         >
-          <img
-            v-if="isActive('/visualize')"
-            v-lazy="require('@/assets/avatars/data-i-s.svg')"
-          />
-          <img v-else v-lazy="require('@/assets/avatars/data-s.svg')" />
+          <img v-lazy="require('@/assets/avatars/data-s.svg')" />
           <span>Visualization</span>
         </li>
-        <li
-          class="br-soft"
-          :class="{ active: isActive('/manage') }"
-          @click="$routeTo('/manage')"
-        >
-          <img
-            v-if="isActive('/manage')"
-            v-lazy="require('@/assets/avatars/manage-i-s.svg')"
-          />
-          <img v-else v-lazy="require('@/assets/avatars/manage-s.svg')" />
+        <li class="br-soft" :class="{ active: isActive('/manage') }" @click="$routeTo('/manage')">
+          <img v-lazy="require('@/assets/avatars/manage-s.svg')" />
           <span>Management</span>
         </li>
       </ul>
@@ -55,6 +43,8 @@ $time: 0.1s ease-out;
 
 $toptrans: top $time, margin $time, height $time, width $time,
   opacity 0.2s ease-out;
+
+$square_size: $size1 + $size4;
 
 .width-center {
   position: absolute;
@@ -133,14 +123,24 @@ $toptrans: top $time, margin $time, height $time, width $time,
           padding: $space1;
           @include square($size4);
         }
-
         &.active {
-          @include square($size1 + $size4);
-          background-color: $primary6;
-          border: solid $space1 $primary3;
+          @include square($square_size);
+          background-color: $neutral3;
+          border: solid $space1 $primary5;
           bottom: -30px;
-          > span {
+          box-shadow: $flying-shadow2;
+          & > span {
             bottom: -25px;
+          }
+          // for shadow on active box
+          &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: $square_size - 2 * $space1;
+            height: $square_size - 2 * $space1;
+            box-shadow: $flying-shadow1;
           }
         }
       }
