@@ -2,6 +2,7 @@
   <div id="app">
     <router-view></router-view>
     <!-- TODO  
+      0) use lodash https://lodash.com/docs/4.17.15
       1) make an animation list (what would be nice if it'd be animated)
       2) rework utils (maybe in plugin),
       3) make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
@@ -11,7 +12,7 @@
     -->
     <div class="github-footer size-h4 primary9 width-center">
       <div class="center-content">
-        <img src="@/assets/GitHub-Mark-Light-64px.png" class="image">
+        <img src="@/assets/GitHub-Mark-Light-64px.png" class="image" />
         <p>
           <a
             class="article"
