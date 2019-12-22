@@ -11,10 +11,15 @@
 
     <div class="stepContainer" v-loading="loading">
       <div class="step" v-if="activeStep === 0">
-        <bank-chooser @selected="allowNextStep" />
+        <bank-chooser @selected="setBank" />
       </div>
       <div class="step" v-else-if="activeStep === 1">
-        <file-uploader class="split-elem" fileType="html" :fileSize="20" @onFile="setHTMLFile" />
+        <file-uploader
+          class="split-elem"
+          :fileType="selectedBank[selectedBank.length -1]"
+          :fileSize="20"
+          @onFile="setContent"
+        />
         <!-- TODO Extract into another Component with mergestrategies
            file-uploader
             class="split-elem"
@@ -81,17 +86,18 @@ export default {
   methods: {
     nextStep() {
       this.disableNextStep = true;
-      // this.loading = true; // will be turned off by next step
       // merge previous data with new data
       if (this.activeStep === 1) {
-        // this.loading = true; // will be turned off by next step
         this.merge();
       }
-      // console.log("nextStep " + this.loading);
       this.activeStep++;
       if (this.activeStep >= this.totalSteps) {
         this.$router.push("/visualize");
       }
+    },
+    setBank(banks) {
+      this.selectedBank = banks;
+      this.allowNextStep();
     },
     previousStep() {
       this.activeStep--;
@@ -100,7 +106,7 @@ export default {
     allowNextStep() {
       this.disableNextStep = false;
     },
-    setHTMLFile(file) {
+    setContent(file) {
       this.setFile(file, content => {
         this.content = content;
         this.allowNextStep();
@@ -128,16 +134,14 @@ export default {
     merge() {
       let mergeEntries = this.mergeEntries;
       if (this.$isEmpty(mergeEntries)) {
-        mergeEntries = { categories: { out: [], in: [] }, data: {} };
+        mergeEntries = { categories: this.categories, data: this.entries };
       }
       let entries = this.$parseHtml(this.content, this.selectedBank.join("."));
       entries = {
         categories: mergeEntries.categories,
         data: { ...entries, ...this.mergeEntries.data }
       };
-      this.$store.dispatch("setData", entries).then(() => {
-        // this.loading = false;
-      });
+      this.$store.dispatch("setData", entries);
     }
   },
   mounted() {
@@ -193,7 +197,7 @@ export default {
       margin: auto;
       height: $step-height;
       width: 85%;
-      overflow-y: auto;
+      //      overflow-y: auto;
       display: flex;
       align-items: center;
       justify-content: center;

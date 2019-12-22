@@ -11,7 +11,7 @@ const CategoryPlugin = {
     });
 
     Vue.prototype.$parseHtml = (content, bank) => {
-      let bankParser = require("@/plugin/parser/" + bank + ".html.js");
+      let bankParser = require("@/plugin/parser/" + bank + ".js");
       return bankParser.parse(content);
     };
 

@@ -9,6 +9,7 @@
               -> select bank:
                 -> select country, then list banks in choice component with unified logo style
               -> add new data
+                -> allow specificitaion of what should be imported (from when to when and not the full file)
               -> choose merge strategy in choice component (newest, merge non empty days, merge months, merge years, merge everything)]
                 -> name side effects of each merge strategy (maybe in bulletpoints)
                 -> explain what it does (i.e: creates new days, extends days, extends months)
@@ -16,7 +17,7 @@
             -> then entry browser, category browser, ect
           -> take a tour
         
-      3)
+      3) 
       4) options(delete, add, modify, special category) in entity view 
       5) make a finish page (with nice animations)
       6) jump to finish page option when store data and category exits
