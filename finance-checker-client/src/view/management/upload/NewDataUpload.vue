@@ -76,8 +76,7 @@ export default {
       loading: false,
       selectedBank: [],
       categoryData: [],
-      content: {},
-      mergeEntries: {}
+      content: {}
     };
   },
   computed: {
@@ -112,12 +111,6 @@ export default {
         this.allowNextStep();
       });
     },
-    setMergeEntries(file) {
-      this.setFile(file, content => {
-        this.mergeEntries = JSON.parse(content);
-        this.allowNextStep();
-      });
-    },
     setFile(file, contentCall) {
       this.loading = true;
       const reader = new FileReader();
@@ -132,14 +125,13 @@ export default {
       return join(obj);
     },
     merge() {
-      let mergeEntries = this.mergeEntries;
-      if (this.$isEmpty(mergeEntries)) {
-        mergeEntries = { categories: this.categories, data: this.entries };
-      }
-      let entries = this.$parseHtml(this.content, this.selectedBank.join("."));
+      let entries = this.$parseContent(
+        this.content,
+        this.selectedBank.join(".")
+      );
       entries = {
-        categories: mergeEntries.categories,
-        data: { ...entries, ...this.mergeEntries.data }
+        categories: this.categories,
+        data: { ...entries, ...this.entries }
       };
       this.$store.dispatch("setData", entries);
     }

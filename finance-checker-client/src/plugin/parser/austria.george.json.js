@@ -8,7 +8,7 @@ export function parse(content) {
     let year, month, day;
     let date = moment(elem.booking);
     year = date.year();
-    month = date.month() + 1;
+    month = date.format("MMMM");
     day = date.date();
     let parsedDayEntry = parseDayEntry(elem);
     if (parsedDayEntry) {
