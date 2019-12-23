@@ -1,35 +1,40 @@
 <template>
   <div class="uploader">
     <el-steps direction="vertical" class="step-indicator" :active="activeStep" simple>
-      <el-step v-if="activeStep === 0" title="Choose a bank" icon="el-icon-tickets"></el-step>
+      <el-step v-if="activeStep === steps.selectBank" title="Choose a bank" icon="el-icon-tickets"></el-step>
       <el-step v-else icon="el-icon-tickets"></el-step>
-      <el-step v-if="activeStep === 1" title="Upload data" icon="el-icon-upload"></el-step>
+      <el-step v-if="activeStep === steps.upload" title="Upload data" icon="el-icon-upload"></el-step>
       <el-step v-else icon="el-icon-upload"></el-step>
-      <el-step v-if="activeStep === 2" title="Categorize data" icon="el-icon-menu"></el-step>
+      <el-step v-if="activeStep === steps.edit" title="Edit data" icon="el-icon-edit"></el-step>
+      <el-step v-else icon="el-icon-edit"></el-step>
+      <el-step
+        v-if="activeStep === steps.merge && hasData"
+        title="Merge data"
+        icon="el-icon-connection"
+      ></el-step>
+      <el-step v-else-if="hasData" icon="el-icon-connection"></el-step>
+      <el-step v-if="activeStep === steps.categorize" title="Categorize data" icon="el-icon-menu"></el-step>
       <el-step v-else icon="el-icon-menu"></el-step>
     </el-steps>
 
     <div class="stepContainer" v-loading="loading">
-      <div class="step" v-if="activeStep === 0">
+      <div class="step" v-if="activeStep === steps.selectBank">
         <bank-chooser @selected="setBank" />
       </div>
-      <div class="step" v-else-if="activeStep === 1">
+      <div class="step center" v-else-if="activeStep === steps.upload">
         <file-uploader
-          class="split-elem"
           :fileType="selectedBank[selectedBank.length -1]"
           :fileSize="20"
           @onFile="setContent"
         />
-        <!-- TODO Extract into another Component with mergestrategies
-           file-uploader
-            class="split-elem"
-            fileType="json"
-            :fileSize="20"
-            text="Drop optional json file here, if you have pre-existing data to merge"
-            @onFile="setMergeEntries"
-        /-->
       </div>
-      <div class="step" v-else-if="activeStep === 2">
+      <div class="step" v-else-if="activeStep === steps.edit">
+        <entry-browser :entries="newEntries" />
+      </div>
+      <div class="step" v-else-if="activeStep === steps.merge">
+        <entry-browser />
+      </div>
+      <div class="step" v-else-if="activeStep === steps.categorize">
         <entries-to-category
           :entries="join(entries)"
           :categories="categories"
@@ -40,7 +45,7 @@
     <div class="navigation-control" ref="navctrl">
       <el-button
         class="stepButton left"
-        v-show="activeStep > 0"
+        v-show="activeStep > steps.selectBank"
         type="primary"
         icon="el-icon-arrow-left"
         @click="previousStep"
@@ -60,6 +65,7 @@
 
 <script>
 import FileUploader from "@/components/management/FileUploader";
+import EntryBrowser from "@/components/management/EntryBrowser";
 import EntriesToCategory from "@/components/management/EntriesToCategory";
 import BankChooser from "@/components/management/BankChooser";
 import { mapGetters } from "vuex";
@@ -67,31 +73,48 @@ import { join } from "@/plugin/utils";
 
 export default {
   name: "NewDataUpload",
-  components: { FileUploader, EntriesToCategory, BankChooser },
+  components: { FileUploader, EntriesToCategory, BankChooser, EntryBrowser },
   data() {
     return {
+      steps: {
+        selectBank: 0,
+        upload: 1,
+        edit: 2,
+        merge: 3,
+        categorize: 4
+      },
       activeStep: 0,
-      totalSteps: 3,
       disableNextStep: true,
       loading: false,
       selectedBank: [],
-      categoryData: [],
-      content: {}
+      newEntries: {}
     };
   },
   computed: {
-    ...mapGetters({ entries: "data", categories: "categories" })
+    ...mapGetters({
+      entries: "data",
+      categories: "categories",
+      hasData: "hasData"
+    })
   },
   methods: {
     nextStep() {
-      this.disableNextStep = true;
-      // merge previous data with new data
-      if (this.activeStep === 1) {
-        this.merge();
-      }
       this.activeStep++;
-      if (this.activeStep >= this.totalSteps) {
+
+      if (this.activeStep === this.steps.merge && !this.hasData) {
+        // export to data merger
+        this.merge();
+        this.nextStep();
+      }
+      if (this.activeStep >= this.steps.length) {
         this.$router.push("/visualize");
+      }
+
+      if (
+        this.activeStep in
+        [this.steps.selectBank, this.steps.upload, this.steps.merge]
+      ) {
+        //this.disableNextStep = true;
       }
     },
     setBank(banks) {
@@ -107,7 +130,10 @@ export default {
     },
     setContent(file) {
       this.setFile(file, content => {
-        this.content = content;
+        this.newEntries = this.$parseContent(
+          content,
+          this.selectedBank.join(".")
+        );
         this.allowNextStep();
       });
     },
@@ -125,20 +151,11 @@ export default {
       return join(obj);
     },
     merge() {
-      let entries = this.$parseContent(
-        this.content,
-        this.selectedBank.join(".")
-      );
-      entries = {
+      let entries = {
         categories: this.categories,
-        data: { ...entries, ...this.entries }
+        data: { ...this.newEntries, ...this.entries }
       };
       this.$store.dispatch("setData", entries);
-    }
-  },
-  mounted() {
-    if (!this.$isEmpty(this.entries)) {
-      this.activeStep = this.totalSteps - 1;
     }
   }
 };
@@ -189,19 +206,13 @@ export default {
       margin: auto;
       height: $step-height;
       width: 85%;
-      //      overflow-y: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .split {
-        height: 100%;
+      overflow-y: auto;
+      &.center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
-  }
-  .split-elem {
-    justify-self: center;
-    align-self: center;
-    margin: auto;
   }
 }
 </style>
