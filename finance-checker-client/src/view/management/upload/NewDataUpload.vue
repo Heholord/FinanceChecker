@@ -1,40 +1,27 @@
 <template>
   <div class="uploader">
     <el-steps direction="vertical" class="step-indicator" :active="activeStep" simple>
-      <el-step v-if="activeStep === steps.selectBank" title="Choose a bank" icon="el-icon-tickets"></el-step>
-      <el-step v-else icon="el-icon-tickets"></el-step>
-      <el-step v-if="activeStep === steps.upload" title="Upload data" icon="el-icon-upload"></el-step>
-      <el-step v-else icon="el-icon-upload"></el-step>
-      <el-step v-if="activeStep === steps.edit" title="Edit data" icon="el-icon-edit"></el-step>
-      <el-step v-else icon="el-icon-edit"></el-step>
-      <el-step
-        v-if="activeStep === steps.merge && hasData"
-        title="Merge data"
-        icon="el-icon-connection"
-      ></el-step>
-      <el-step v-else-if="hasData" icon="el-icon-connection"></el-step>
-      <el-step v-if="activeStep === steps.categorize" title="Categorize data" icon="el-icon-menu"></el-step>
-      <el-step v-else icon="el-icon-menu"></el-step>
+      <el-step v-for="step in steps" :key="step.name" :title="stepTitle(step)" :icon="step.icon"></el-step>
     </el-steps>
 
     <div class="stepContainer" v-loading="loading">
-      <div class="step" v-if="activeStep === steps.selectBank">
+      <div class="step" v-if="activeStep === findStepIndex('selectBank')">
         <bank-chooser @selected="setBank" />
       </div>
-      <div class="step center" v-else-if="activeStep === steps.upload">
+      <div class="step center" v-else-if="activeStep === findStepIndex('upload')">
         <file-uploader
           :fileType="selectedBank[selectedBank.length -1]"
           :fileSize="20"
           @onFile="setContent"
         />
       </div>
-      <div class="step" v-else-if="activeStep === steps.edit">
+      <div class="step" v-else-if="activeStep === findStepIndex('edit')">
         <entry-browser :entries="newEntries" />
       </div>
-      <div class="step" v-else-if="activeStep === steps.merge">
+      <div class="step" v-else-if="activeStep === findStepIndex('merge')">
         <entry-browser />
       </div>
-      <div class="step" v-else-if="activeStep === steps.categorize">
+      <div class="step" v-else-if="activeStep === findStepIndex('categorize')">
         <entries-to-category
           :entries="join(entries)"
           :categories="categories"
@@ -45,7 +32,7 @@
     <div class="navigation-control" ref="navctrl">
       <el-button
         class="stepButton left"
-        v-show="activeStep > steps.selectBank"
+        v-show="activeStep > findStepIndex('selectBank')"
         type="primary"
         icon="el-icon-arrow-left"
         @click="previousStep"
@@ -76,12 +63,15 @@ export default {
   components: { FileUploader, EntriesToCategory, BankChooser, EntryBrowser },
   data() {
     return {
-      steps: {
-        selectBank: 0,
-        upload: 1,
-        edit: 2,
-        merge: 3,
-        categorize: 4
+      steps: [
+        { name: "selectBank", title: "Choose a bank", icon: "el-icon-tickets" },
+        { name: "upload", title: "Upload data", icon: "el-icon-upload" },
+        { name: "edit", title: "Edit data", icon: "el-icon-edit" },
+        { name: "merge", title: "Merge data", icon: "el-icon-connection" },
+        { name: "categorize", title: "Categorize data", icon: "el-icon-menu" }
+      ],
+      findStepIndex: elemName => {
+        return this.steps.findIndex(elem => elem.name == elemName);
       },
       activeStep: 0,
       disableNextStep: true,
@@ -116,6 +106,9 @@ export default {
       ) {
         //this.disableNextStep = true;
       }
+    },
+    stepTitle(step) {
+      return this.activeStep == this.findStepIndex(step.name) ? step.title : "";
     },
     setBank(banks) {
       this.selectedBank = banks;
@@ -156,6 +149,11 @@ export default {
         data: { ...this.newEntries, ...this.entries }
       };
       this.$store.dispatch("setData", entries);
+    }
+  },
+  mounted() {
+    if (!this.hasData) {
+      this.steps.splice(this.findStepIndex("merge"), 1);
     }
   }
 };

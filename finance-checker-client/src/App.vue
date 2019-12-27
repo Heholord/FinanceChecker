@@ -5,6 +5,7 @@
       0) use lodash https://lodash.com/docs/4.17.15
       1) make an animation list (what would be nice if it'd be animated)
       2) rework utils (maybe in plugin),
+      !!!) error handling (i.e upload of false documents)
       3) make all dialogs nicer (talk to user) [maybe make an talk interface like speaking bubbles or so]
       Don't offer yes, no answers (i.e. "Delete" instead of "Yes")
       4) Uniform forms numbered steps 1, 2, 3 with drops (border-radius: 50% 50% 50% 0%)
