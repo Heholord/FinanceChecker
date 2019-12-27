@@ -16,7 +16,10 @@ import {
   addRedundantData,
   clone,
   firstPartOfCategory,
-  isValidCat
+  isValidCat,
+  updateElem,
+  deleteElem,
+  insertElem
 } from "./utils";
 
 Vue.use(Vuex);
@@ -53,7 +56,7 @@ const store = new Vuex.Store({
     /**
      * TODO: this should only be a filter
      * the assignment to categories should be a nother function
-     * @param {string} categoryPath the path of the category where the subcategories should be optained. If there is no subcategory then a subcategory "all" will be returned.
+     * @param {string} categoryPath the path of the category whos subcategories should be obtained. If there is no subcategory then a fictive subcategory "all" will be returned.
      * @param {string} date the date can be "undefined", a year (i.e 2010) or a month (MMMMYYYY, i.e. February2000)
      * @returns {object} creates an object with following structure:
      * - sorting {array}: list with the sorted keys of the historical data (i.e [2000, 2001, ..., 2020], [Jannuar, Feb...., December], [01, 02, ..., 31])
@@ -143,18 +146,10 @@ const store = new Vuex.Store({
       if (oldEntry) {
         if (newEntry) {
           // update
-          updateElem(
-            state.data[oldEntry.year][oldEntry.month][oldEntry.day],
-            state.data,
-            oldEntry,
-            newEntry
-          );
+          updateElem(state.data, oldEntry, newEntry);
         } else {
           // delete
-          deleteElem(
-            state.data[oldEntry.year][oldEntry.month][oldEntry.day],
-            oldEntry
-          );
+          deleteElem(state.data, oldEntry);
         }
       } else if (newEntry) {
         //insert
@@ -270,35 +265,6 @@ function cleanStringHead(str) {
     return str.replace(".", "").trim();
   }
   return str;
-}
-
-function updateElem(list, data, oldValue, newValue) {
-  if (
-    oldValue.year === newValue.year &&
-    oldValue.month === newValue.month &&
-    oldValue.day === newValue.day
-  ) {
-    list.splice(list.indexOf(oldValue), 1, newValue);
-  } else {
-    deleteElem(list, oldValue);
-    insertElem(data, newValue);
-  }
-}
-
-function deleteElem(list, oldValue) {
-  list.splice(list.indexOf(oldValue), 1);
-}
-
-function insertElem(data, newValue) {
-  if (!data[newValue.year]) data[newValue.year] = {};
-
-  if (!data[newValue.year][newValue.month])
-    data[newValue.year][newValue.month] = {};
-
-  if (!data[newValue.year][newValue.month][newValue.day])
-    data[newValue.year][newValue.month][newValue.day] = [];
-
-  data[newValue.year][newValue.month][newValue.day].push(newValue);
 }
 
 export default store;

@@ -475,6 +475,7 @@ body {
     box-shadow: $flying-shadow2;
     border-radius: $br-soft;
     margin-bottom: $space3;
+    background-color: white;
   }
 
   main {
@@ -523,7 +524,7 @@ body {
     }
   }
 
-  .el-upload-dragger {
+  /* .el-upload-dragger {
     background: none;
     border-color: $neutral5;
     color: $neutral5;
@@ -564,6 +565,12 @@ body {
   .el-tree {
     background: none;
     color: $neutral8;
+
+    .el-tree--highlight-current
+      .el-tree-node.is-current
+      > .el-tree-node__content {
+      background-color: $support-positive1;
+    }
   }
 
   .el-button.stepButton {
@@ -660,7 +667,7 @@ body {
     .el-step__head.is-wait {
       color: $neutral3;
     }
-  }
+  }*/
 
   .table {
     justify-self: center;

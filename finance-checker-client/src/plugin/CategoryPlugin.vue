@@ -15,6 +15,10 @@ const CategoryPlugin = {
       return bankParser.parse(content);
     };
 
+    Vue.prototype.$readableCategoryPath = path => {
+      return path.split(".").join(" > ");
+    };
+
     /**
      * TODO: Split historical and general so it can be used in all charts
      * @param {object} data output of the @see filter function in store.

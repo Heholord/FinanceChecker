@@ -217,8 +217,7 @@ export function renderCategory(path, cat) {
   let returnValue = [];
 
   actOnCategory(cat, (key, subCategory) => {
-    const prefix = isEmpty(path) ? path : path + ".";
-    const newPath = prefix + key;
+    const newPath = isEmpty(path) ? key : path + "." + key;
     returnValue.push({
       id: newPath,
       label: key,
@@ -483,4 +482,30 @@ export function convert(oldData) {
     currentVersionNr = oldData.version ? +oldData.version.charAt(1) : 1;
   }
   return oldData;
+}
+
+export function updateElem(data, oldValue, newValue) {
+  let dateList = data[oldValue.year][oldValue.month][oldValue.day];
+  if (
+    // if on same day
+    oldValue.year === newValue.year &&
+    oldValue.month === newValue.month &&
+    oldValue.day === newValue.day
+  ) {
+    dateList.splice(dateList.indexOf(oldValue), 1, newValue);
+  } else {
+    // if on different day
+    deleteElem(dateList, oldValue);
+    insertElem(data, newValue);
+  }
+}
+
+export function deleteElem(data, oldValue) {
+  let dateList = data[oldValue.year][oldValue.month][oldValue.day];
+  dateList.splice(dateList.indexOf(oldValue), 1);
+}
+
+export function insertElem(data, newValue) {
+  prepareDataOnDate(newValue.year, newValue.month, newValue.day, data);
+  data[newValue.year][newValue.month][newValue.day].push(newValue);
 }

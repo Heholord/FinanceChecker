@@ -1,31 +1,32 @@
 <template>
   <div class="categories">
     <el-input v-if="filterMode" placeholder="Filter keyword" v-model="filterText"></el-input>
-    <el-button v-if="categories.length > 1" @click="click('')">
+    <el-button @click="click('')">
       <i class="el-icon-menu"></i> Reset selection
     </el-button>
     <el-menu class="treeMenu" @close="click" @open="click" :default-openeds="categories">
       <el-submenu v-for="category in categories" :key="category" :index="category">
         <template v-if="category === 'in'" slot="title">
-          <span class="mdi mdi-account-arrow-left"/>Incomming
+          <span class="mdi mdi-account-arrow-left" />Incomming
         </template>
         <template v-else-if="category === 'out'" slot="title">
-          <span class="mdi mdi-account-arrow-right"/>Outgoing
+          <span class="mdi mdi-account-arrow-right" />Outgoing
         </template>
         <template v-else-if="category === 'save'" slot="title">
-          <span class="mdi mdi-bank-transfer"/>Save
+          <span class="mdi mdi-bank-transfer" />Save
         </template>
         <template v-else slot="title">{{category}}</template>
         <el-tree
           v-if="!$isEmpty(activeCategories)"
-          :default-expanded-keys="activeCategories"
+          :default-expanded-keys="mutableActiveCategories"
           :current-node-key="getCurrent"
           :data="getCategoryTree(category)"
           :props="defaultProps"
           :filter-node-method="filterNode"
-          :ref="'trees'"
+          :ref="category + '_tree'"
           @node-click="click"
           node-key="id"
+          highlight-current
         ></el-tree>
         <el-tree
           v-else
@@ -33,8 +34,9 @@
           :data="getCategoryTree(category)"
           :props="defaultProps"
           :filter-node-method="filterNode"
-          :ref="'trees'"
+          :ref="category + '_tree'"
           @node-click="click"
+          highlight-current
         ></el-tree>
       </el-submenu>
     </el-menu>
@@ -71,14 +73,15 @@ export default {
         children: "children",
         label: "label"
       },
+      mutableActiveCategories: this.activeCategories,
       filterText: ""
     };
   },
   computed: {
     ...mapGetters({ storeCategories: "categories" }),
     getCurrent() {
-      if (this.activeCategories.length === 1) {
-        return this.activeCategories[0];
+      if (this.mutableActiveCategories.length === 1) {
+        return this.mutableActiveCategories[0];
       }
       return undefined;
     }
@@ -86,29 +89,29 @@ export default {
   methods: {
     filterNode(value, data) {
       if (!value) return true;
-      const retVal = data.label.indexOf(value) !== -1;
-      return retVal;
+      const returnVal = data.label.indexOf(value) !== -1;
+      return returnVal;
     },
     click(categoryPath) {
-      if (this.$isEmpty(categoryPath)) this.filterText = "";
-      let emitValue = categoryPath;
-      if (categoryPath.id) emitValue = categoryPath.id;
-      this.$emit("onSelect", emitValue);
+      if (this.$isEmpty(categoryPath)) {
+        this.filterText = "";
+        this.mutableActiveCategories = [];
+        this.$emit("onSelect", "");
+      } else {
+        const emitValue = categoryPath.id ? categoryPath.id : categoryPath; // in case of rootcategory there is no id.
+        this.$emit("onSelect", emitValue);
+      }
     },
     getCategoryTree(startingpoint) {
-      let cat = renderCategory(
-        startingpoint,
-        this.storeCategories[startingpoint]
-      );
-      return cat;
+      return renderCategory(startingpoint, this.storeCategories[startingpoint]);
     }
   },
   watch: {
-    filterText(value) {
-      for (let tree in this.$refs.trees) {
-        const subtree = this.$refs.trees[tree];
-        subtree.filter(value);
-      }
+    filterText(val) {
+      this.categories.forEach(category => {
+        let tree = this.$refs[category + "_tree"];
+        tree.filter(val);
+      });
     }
   }
 };

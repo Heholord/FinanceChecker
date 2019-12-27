@@ -16,7 +16,7 @@
         />
       </div>
       <div class="step" v-else-if="activeStep === findStepIndex('edit')">
-        <entry-browser :entries="newEntries" />
+        <entry-browser :entries="newEntries" edit />
       </div>
       <div class="step" v-else-if="activeStep === findStepIndex('merge')">
         <entry-browser />

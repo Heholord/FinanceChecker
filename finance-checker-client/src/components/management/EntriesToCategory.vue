@@ -9,7 +9,7 @@
     >
       <span>
         The entry {{activeEntry.info}} has similarities with a categorized entry {{shouldUse.elem}} ({{shouldUse.similarity}}% similarity). Sould the new entry be placed in path
-        <el-tag type="info">{{shouldUse.categoryPath.split(".").join(" > ")}}</el-tag>as well?
+        <el-tag type="info">{{$readableCategoryPath(shouldUse.categoryPath)}}</el-tag>as well?
       </span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="use(false)">No</el-button>
@@ -230,7 +230,7 @@ export default {
       return !this.$isEmpty(this.selectedCategory);
     },
     selectedCategoryPrint() {
-      return this.selectedCategory.replace(/\./gm, " > ");
+      return this.$readableCategoryPath(this.selectedCategory);
     },
     canInsertIntoCategory() {
       return (

@@ -1,44 +1,7 @@
 <template>
   <div class="entrybrowser">
-    <el-dialog v-if="editEntry" :visible.sync="editEntry" width="50%" center>
-      <div class="edit-elem">
-        <fieldset>
-          <legend>
-            <span class="number">1</span>
-            General infos
-          </legend>
-          <el-input v-model.lazy="selectedEntity.new.info" placeholder="How is the entry called?"></el-input>
-          <label for="date">When did that happen?</label>
-          <el-date-picker
-            id="date"
-            v-model="selectedDate"
-            placeholder="Choose a date"
-            format="yyyy-MMM-dd"
-            value-format="yyyy-MM-dd"
-            @change="updateDate"
-          ></el-date-picker>
-          <label>About how much are we talking here?</label>
-          <el-input
-            v-model.lazy="selectedEntity.new.amount"
-            placeholder="Quanta costa?"
-            class="money"
-          ></el-input>
-        </fieldset>
-        <fieldset>
-          <legend>
-            <span class="number">2</span>
-            Optional
-          </legend>
-          <label>Select a special category</label>
-          <category-tree
-            :categories="[rootCat]"
-            :activeCategories="[selectedCategory]"
-            :filterMode="false"
-            @onSelect="selectCategory"
-          ></category-tree>
-        </fieldset>
-        <el-button type="primary" @click="updateEntity()">Update</el-button>
-      </div>
+    <el-dialog v-if="hasEdit" :visible.sync="hasEdit" width="50%" center>
+      <edit-entry :entry="entryMarkedForEdit" @update="updateEntity"></edit-entry>
     </el-dialog>
     <el-collapse class="collapse" accordion @change="setOpen">
       <el-collapse-item
@@ -69,7 +32,14 @@
                 label="Special Category"
                 width="150"
                 header-align="center"
-              ></el-table-column>
+              >
+                <template slot-scope="scope">
+                  <el-tag
+                    v-if="scope.row.category"
+                    type="info"
+                  >{{$readableCategoryPath(scope.row.category)}}</el-tag>
+                </template>
+              </el-table-column>
               <el-table-column
                 prop="amount"
                 label="Value"
@@ -78,14 +48,14 @@
                 header-align="center"
               ></el-table-column>
               <el-table-column
-                v-if="isEditable"
+                v-if="edit"
                 label="Operations"
                 align="right"
                 width="150"
                 header-align="center"
               >
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="editEntry=scope.row">Edit</el-button>
+                  <el-button size="mini" @click="entryMarkedForEdit = scope.row">Edit</el-button>
                   <el-button size="mini" type="danger" @click="handleDelete(scope.row)">Delete</el-button>
                 </template>
               </el-table-column>
@@ -99,12 +69,18 @@
 
 
 <script>
-import { join, clone, isEqualEntry, moment } from "@/plugin/utils";
+import {
+  join,
+  clone,
+  isEqualEntry,
+  updateElem,
+  deleteElem
+} from "@/plugin/utils";
 import { mapGetters } from "vuex";
-import CategoryTree from "@/components/CategoryTree";
+import EditEntry from "./EditEntry";
 
 export default {
-  components: { CategoryTree },
+  components: { EditEntry },
   name: "EntryBrowser",
   props: {
     entries: {
@@ -112,70 +88,38 @@ export default {
         return {};
       },
       type: Object
+    },
+    edit: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      selectedEntity: {
-        old: undefined,
-        new: undefined
-      },
+      entryMarkedForEdit: false,
       openMonth: "",
-      selectedDate: "",
-      selectedCategory: ""
+      fromStore: false
     };
   },
   computed: {
+    hasEdit: {
+      get: function() {
+        return this.entryMarkedForEdit ? true : false;
+      },
+      set: function(newValue) {
+        this.entryMarkedForEdit = newValue;
+      }
+    },
     getEntries() {
-      if (!this.$isEmpty(this.entries)) {
+      if (!this.fromStore) {
         return this.entries;
       } else {
         return this.storeEntries;
       }
     },
-    editEntry: {
-      get: function() {
-        return this.selectedEntity.new !== undefined;
-      },
-      set: function(newValue) {
-        if (newValue === false) {
-          this.selectedEntity.old = undefined;
-          this.selectedEntity.new = undefined;
-          this.selectedCategory = "";
-          this.selectedDate = "";
-          this.rootCat = "";
-        } else {
-          this.selectedEntity.old = newValue;
-          let updateEntity = clone(newValue);
-          updateEntity.date = moment(
-            newValue.month + newValue.year + newValue.day,
-            "MMMMYYYYD"
-          ).format("YYYY-MM-DD");
-
-          updateEntity.title = updateEntity.date + " " + updateEntity.info;
-          this.selectedDate = updateEntity.date;
-          if (updateEntity.category)
-            this.selectedCategory = updateEntity.category;
-
-          this.rootCat = updateEntity.amount > 0 ? "in" : "out";
-          this.selectedEntity.new = updateEntity;
-        }
-      }
-    },
-    ...mapGetters({ storeEntries: "data", categories: "categories" }),
-    isEditable() {
-      return this.$isEmpty(this.entries);
-    }
+    ...mapGetters({ storeEntries: "data" })
   },
   methods: {
-    selectCategory(categoryPath) {
-      this.selectedCategory = categoryPath;
-      this.selectedEntity.new.category = categoryPath;
-    },
-    updateDate(newVal) {
-      this.selectedDate = newVal;
-      this.selectedEntity.new.date = this.selectedDate;
-    },
     setOpen(year) {
       this.openMonth = year;
     },
@@ -184,25 +128,14 @@ export default {
         ? (this.openMonth += month)
         : (this.openMonth = this.openMonth.substring(0, 4) + month);
     },
-    updateEntity() {
-      let newEntry = clone(this.selectedEntity.new);
-      let date = moment(this.selectedEntity.new.date, "YYYY-MM-DD");
-      newEntry.year = date.format("YYYY");
-      newEntry.month = date.format("MMMM");
-      newEntry.day = date.format("D");
-      delete newEntry.date;
-      delete newEntry.title;
-      if (this.$isEmpty(newEntry.category)) delete newEntry.category;
-      this.$store.commit("updateEntriy", {
-        oldEntry: this.selectedEntity.old,
-        newEntry: newEntry
-      });
-      this.editEntry = false;
-    },
     handleDelete(row) {
-      this.$store.commit("updateEntriy", {
-        oldEntry: row
-      });
+      if (this.fromStore) {
+        this.$store.commit("updateEntriy", {
+          oldEntry: row
+        });
+      } else {
+        deleteElem(this.entries, row);
+      }
     },
     objectSpanMethod({ row, columnIndex }) {
       if (columnIndex === 0) {
@@ -229,67 +162,28 @@ export default {
     },
     join(obj) {
       return join(obj);
+    },
+    updateEntity(updatedEntity) {
+      if (this.fromStore) {
+        this.$store.commit("updateEntriy", {
+          oldEntry: this.entryMarkedForEdit,
+          newEntry: clone(updatedEntity)
+          // clone because when object is changed again we don't want to autoupdate on change
+          //(because withoud clone it would be linked to the store now), but on clicking on update again
+        });
+      } else {
+        updateElem(this.entries, this.entryMarkedForEdit, updatedEntity);
+      }
+      this.entryMarkedForEdit = false;
     }
+  },
+  mounted() {
+    if (this.$isEmpty(this.entries)) this.fromStore = true;
   }
 };
 </script>
 
 <style lang="scss">
-.edit-elem {
-  padding: 20px 20px;
-  background: #f4f7f8;
-  margin: 0;
-  border-radius: 8px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  display: grid;
-  grid-template-rows: auto auto auto;
-
-  fieldset {
-    border: none;
-    margin: 10px;
-    legend {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-      .number {
-        background: #409eff;
-        color: white;
-        height: 30px;
-        width: 30px;
-        display: inline-block;
-        font-size: 0.8em;
-        margin-right: 4px;
-        line-height: 30px;
-        text-align: center;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-        border-radius: 50% 50% 50% 0;
-      }
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .el-input {
-      margin: 0 0 0 00px;
-      background: rgba(255, 255, 255, 0.2);
-      margin-bottom: 30px;
-      max-width: 500px;
-
-      & > input {
-        margin: 0;
-      }
-
-      &.money {
-        max-width: 150px;
-      }
-    }
-  }
-  .primary {
-    width: 90%;
-    justify-self: center;
-  }
-}
 .entrybrowser {
   .collapse {
     min-width: $size7;

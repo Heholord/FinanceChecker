@@ -40,7 +40,7 @@
           />
           <div class="content">
             <Download v-if="selected === 'download'" />
-            <EntryBrowser v-if="selected === 'edit'" />
+            <EntryBrowser v-if="selected === 'edit'" edit />
             <Upload v-if="selected === 'upload'" />
           </div>
         </div>
