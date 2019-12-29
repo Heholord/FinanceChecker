@@ -4,10 +4,10 @@
        1) html and/or json (make hirachy clear) 
        2) desicion component for:
           -> upload existing data
-              -> then add new data
+              -> ✔️ then add new data
             -> upload bank data (html, csv)
-              -> select bank:
-                -> select country, then list banks in choice component with unified logo style
+              -> ✔️ select bank:
+                -> ✔️ select country, then list banks in choice component with unified logo style
               -> add new data
                 -> allow specificitaion of what should be imported (from when to when and not the full file)
               -> choose merge strategy in choice component (newest, merge non empty days, merge months, merge years, merge everything)]
@@ -71,11 +71,6 @@ export default {
     return {
       selected: "upload"
     };
-  },
-  methods: {
-    openUpload() {
-      this.$refs.manTabs.value = "upload";
-    }
   }
 };
 </script>

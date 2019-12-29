@@ -524,6 +524,10 @@ body {
     }
   }
 
+  .el-step.is-simple:not(:last-of-type) .el-step__title {
+    max-width: 55%;
+  }
+
   /* .el-upload-dragger {
     background: none;
     border-color: $neutral5;

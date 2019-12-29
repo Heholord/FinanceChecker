@@ -250,7 +250,6 @@ $min-width: 250px;
 .assigner {
   box-sizing: border-box;
   min-width: $min-width;
-  overflow-y: scroll;
 
   .progress {
     position: fixed;

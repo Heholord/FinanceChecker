@@ -22,7 +22,6 @@
         <choices :choices="choices" big @select="execute"></choices>
       </div>
     </div>
-
     <v-tour name="myTour" :steps="tourSteps" :callbacks="tourCallbacks"></v-tour>
   </div>
 </template>

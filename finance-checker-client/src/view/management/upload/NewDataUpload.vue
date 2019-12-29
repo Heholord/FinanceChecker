@@ -5,24 +5,18 @@
     </el-steps>
 
     <div class="stepContainer" v-loading="loading">
-      <div class="step" v-if="activeStep === findStepIndex('selectBank')">
-        <bank-chooser @selected="setBank" />
-      </div>
-      <div class="step center" v-else-if="activeStep === findStepIndex('upload')">
+      <div class="step visual-content">
+        <bank-chooser @selected="setBank" v-if="isStep('selectBank')" />
         <file-uploader
+          v-else-if="isStep('upload')"
           :fileType="selectedBank[selectedBank.length -1]"
           :fileSize="20"
           @onFile="setContent"
         />
-      </div>
-      <div class="step" v-else-if="activeStep === findStepIndex('edit')">
-        <entry-browser :entries="newEntries" edit />
-      </div>
-      <div class="step" v-else-if="activeStep === findStepIndex('merge')">
-        <entry-browser />
-      </div>
-      <div class="step" v-else-if="activeStep === findStepIndex('categorize')">
+        <entry-browser v-else-if="isStep('edit')" :entries="newEntries" edit />
+        <entry-browser v-else-if="isStep('merge')" />
         <entries-to-category
+          v-else-if="isStep('categorize')"
           :entries="join(entries)"
           :categories="categories"
           @next="allowNextStep"
@@ -107,6 +101,9 @@ export default {
         //this.disableNextStep = true;
       }
     },
+    isStep(stepTitle) {
+      return this.activeStep === this.findStepIndex(stepTitle);
+    },
     stepTitle(step) {
       return this.activeStep == this.findStepIndex(step.name) ? step.title : "";
     },
@@ -165,6 +162,10 @@ export default {
 .uploader {
   box-sizing: border-box;
   width: 100%;
+
+  .visual-content {
+    max-width: $size11;
+  }
 
   .navigation-control {
     display: grid;
