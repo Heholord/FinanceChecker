@@ -49,14 +49,14 @@ export function flatten(category) {
 }
 
 export function forEachYear(data, callback) {
-  Object.keys(data).forEach(year => {
+  Object.keys(data).forEach((year) => {
     callback(year, data[year]);
   });
 }
 
 export function forEachMonth(data, callback) {
   forEachYear(data, (year, yearData) => {
-    Object.keys(yearData).forEach(month => {
+    Object.keys(yearData).forEach((month) => {
       callback(year, month, yearData[month]);
     });
   });
@@ -64,7 +64,7 @@ export function forEachMonth(data, callback) {
 
 export function forEachDay(data, callback) {
   forEachMonth(data, (year, month, monthData) => {
-    Object.keys(monthData).forEach(day => {
+    Object.keys(monthData).forEach((day) => {
       callback(year, month, day, monthData[day]);
     });
   });
@@ -72,7 +72,7 @@ export function forEachDay(data, callback) {
 
 export function forEachElem(data, callback) {
   forEachDay(data, (year, month, day, dayData) => {
-    dayData.forEach(elem => {
+    dayData.forEach((elem) => {
       callback(year, month, day, elem);
     });
   });
@@ -141,9 +141,9 @@ export function fillUpHistoricalData(
 ) {
   const dateList = getDateList(date, dataStartDate, dataEndDate);
 
-  Object.keys(returnValue).forEach(elemKey => {
+  Object.keys(returnValue).forEach((elemKey) => {
     let elem = returnValue[elemKey];
-    dateList.forEach(dateElem => {
+    dateList.forEach((dateElem) => {
       if (!Object.keys(elem.values).includes(dateElem)) {
         elem.values[dateElem] = 0;
       }
@@ -160,7 +160,7 @@ export function addToCategory(returnValue, category, dateSelection, elem) {
     returnValue[category] = {
       sum: 0,
       values: {}, //historical values
-      entries: []
+      entries: [],
     };
   returnValue[category].sum += sum;
   const histValue = getHistoricalValue(dateSelection, elem);
@@ -188,7 +188,7 @@ export function actOnCategory(
   if (Array.isArray(category)) {
     if (leafFunction) leafFunction();
   } else if (typeof category === "object") {
-    Object.keys(category).forEach(catKey => {
+    Object.keys(category).forEach((catKey) => {
       if (subCategoryFunction) subCategoryFunction(catKey, category[catKey]);
     });
     if (categoryFunction) categoryFunction();
@@ -221,7 +221,7 @@ export function renderCategory(path, cat) {
     returnValue.push({
       id: newPath,
       label: key,
-      children: renderCategory(newPath, subCategory)
+      children: renderCategory(newPath, subCategory),
     });
   });
   return returnValue;
@@ -248,7 +248,7 @@ export function getDataByDate(date, fullData) {
   if (date) {
     if (!isNaN(+date)) {
       data = {};
-      forEachYear(fullData, year => {
+      forEachYear(fullData, (year) => {
         if (year === date) {
           data[year] = fullData[year];
         }
@@ -300,7 +300,7 @@ export function join(obj) {
     return obj;
   } else if (typeof obj === "object") {
     let array = [];
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       array.push(...join(obj[key]));
     });
     return array;
@@ -338,7 +338,7 @@ export function addRedundantData(data) {
       year: year,
       month: replacedMonth,
       day: day,
-      ...elem
+      ...elem,
     });
   });
   return returnValue;
@@ -348,7 +348,7 @@ export function removeRedundantData(data) {
   let returnValue = {
     version: dataVersion,
     categories: data.categories,
-    data: {}
+    data: {},
   };
   forEachElem(data.data, (year, month, day, elem) => {
     let copyElem = clone(elem);
@@ -367,7 +367,7 @@ export function removeRedundantData(data) {
 export function download(categories, data) {
   let downloadData = {
     categories: categories,
-    data: data
+    data: data,
   };
   return (
     "data:text/json;charset=utf-8," +
@@ -379,7 +379,11 @@ export function clone(obj) {
   if (null == obj || "object" != typeof obj) return obj;
   var copy = obj.constructor();
   for (var attr in obj) {
-    if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    // try fix https://ourcodeworld.com/articles/read/1425/how-to-fix-eslint-error-do-not-access-objectprototype-method-hasownproperty-from-target-object-no-prototype-builtins
+    if (Object.prototype.hasOwnProperty.call(obj, attr)) {
+      copy[attr] = obj[attr];
+    }
+    // if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
   }
   return copy;
 }
@@ -398,12 +402,12 @@ const replacements = [
   { repl: "September", find: ["september"] },
   { repl: "October", find: ["Oktober"] },
   { repl: "November", find: ["november"] },
-  { repl: "December", find: ["Dezember"] }
+  { repl: "December", find: ["Dezember"] },
 ];
 export function replaceMonthName(month) {
   let returnValue = month;
-  replacements.forEach(repPair => {
-    repPair.find.forEach(find => {
+  replacements.forEach((repPair) => {
+    repPair.find.forEach((find) => {
       if (month === find) {
         returnValue = repPair.repl;
         return;
@@ -460,18 +464,18 @@ const converterFunctions = [
     // v1 -> v2
     let returnValue = {};
 
-    Object.keys(oldData.data).forEach(yearMonth => {
+    Object.keys(oldData.data).forEach((yearMonth) => {
       const year = getYear(yearMonth);
       const month = getMonthAsString(yearMonth);
       if (!returnValue[year]) returnValue[year] = {};
       if (!returnValue[year][month]) returnValue[year][month] = {};
 
-      Object.keys(oldData.data[yearMonth]).forEach(day => {
+      Object.keys(oldData.data[yearMonth]).forEach((day) => {
         returnValue[year][month][day] = oldData.data[yearMonth][day];
       });
     });
     return { version: "v2", categories: oldData.categories, data: returnValue };
-  }
+  },
 ];
 
 export function convert(oldData) {
