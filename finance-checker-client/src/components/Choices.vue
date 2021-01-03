@@ -8,7 +8,11 @@
         :class="{ big: big, small: small, info: choice.info }"
         class="box br-softer"
       >
-        <img v-if="getImage(choice)" v-lazy="getImage(choice)" class="image padding2" />
+        <img
+          v-if="getImage(choice)"
+          v-lazy="getImage(choice)"
+          class="image padding2"
+        />
         <div class="textarea">
           <span class="title">{{ choice.text }}</span>
           <div class="bottom clearfix">
@@ -27,32 +31,32 @@ export default {
   props: {
     choices: {
       type: Array,
-      required: true
+      required: true,
     },
     title: {
       type: String,
-      default: ""
+      default: "",
     },
     big: {
       type: Boolean,
-      default: false
+      default: false,
     },
     small: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   methods: {
     getImage(choice) {
       if (choice.image) {
-        return require("@/assets/" + choice.image);
+        return require("@/assets/" + choice.image)
       } else if (choice.info) {
-        return require("@/assets/avatars/waiting_i.svg");
+        return require("@/assets/avatars/waiting_i.svg")
       }
-      return undefined;
-    }
-  }
-};
+      return undefined
+    },
+  },
+}
 </script>
 
 <style lang="scss">
@@ -92,8 +96,8 @@ export default {
         width: $size5;
         height: $size3;
         .image {
-          width: 0;
-          height: 0;
+          width: $size3;
+          height: $size3;
         }
       }
 

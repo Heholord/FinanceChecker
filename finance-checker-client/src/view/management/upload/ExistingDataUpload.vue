@@ -10,16 +10,20 @@
       />
     </div>
     <div v-else>
-      <choices :choices="choices" @select="execute" title="Didn't you give me some data already?"></choices>
+      <choices
+        :choices="choices"
+        @select="execute"
+        title="Didn't you give me some data already?"
+      ></choices>
     </div>
   </div>
 </template>
 
 <script>
-import FileUploader from "@/components/management/FileUploader";
-import Choices from "@/components/Choices";
-import { mapGetters } from "vuex";
-import { convert } from "@/plugin/utils.js";
+import FileUploader from "@/components/management/FileUploader"
+import Choices from "@/components/Choices"
+import { mapGetters } from "vuex"
+import { convert } from "@/plugin/utils.js"
 
 export default {
   name: "ExistingDataUpload",
@@ -32,56 +36,56 @@ export default {
           text: "I want to upload some other data",
           subtext: "and my old data can be deleted",
           image: "avatars/delete.svg",
-          delete: true
+          delete: true,
         },
         {
           text: "I got lost",
           subtext: "Can you bring me to the page with the charts and stuff",
           image: "avatars/data.svg",
-          route: "/visualize"
+          route: "/visualize",
         },
         {
           text: "Yeah, you'r right",
           subtext: "I just wanted to make sure I did",
-          info: true
-        }
-      ]
-    };
+          info: true,
+        },
+      ],
+    }
   },
   computed: {
-    ...mapGetters({ entries: "data", categories: "categories" })
+    ...mapGetters({ entries: "data", categories: "categories" }),
   },
   methods: {
     setMergeEntries(file) {
-      this.setFile(file, content => {
-        let mergeEntries = JSON.parse(content);
+      this.setFile(file, (content) => {
+        let mergeEntries = JSON.parse(content)
         this.updateStore(mergeEntries, () => {
-          this.$router.push("/visualize");
-        });
-      });
+          this.$router.push("/visualize")
+        })
+      })
     },
     updateStore(data, doneAction) {
-      data = convert(data);
+      data = convert(data)
       this.$store.dispatch("setData", data).then(() => {
-        if (doneAction) doneAction();
-      });
+        if (doneAction) doneAction()
+      })
     },
     setFile(file, contentCall) {
-      this.loading = true;
-      const reader = new FileReader();
-      reader.onload = event => {
-        const content = event.target.result;
-        contentCall(content);
-        this.loading = false;
-      };
-      reader.readAsText(file);
+      this.loading = true
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const content = event.target.result
+        contentCall(content)
+        this.loading = false
+      }
+      reader.readAsText(file)
     },
     execute(choice) {
-      if (choice.delete) this.updateStore({ data: {}, categories: {} });
-      if (choice.route) this.$routeTo(choice.route);
-    }
-  }
-};
+      if (choice.delete) this.updateStore({ data: {}, categories: {} })
+      if (choice.route) this.$routeTo(choice.route)
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

@@ -8,9 +8,23 @@
           :data="entries"
           class="table no-margin"
         >
-          <el-table-column prop="date" label="Date" width="100"></el-table-column>
-          <el-table-column prop="info" label="Info" width="400" align="center"></el-table-column>
-          <el-table-column prop="amount" label="Amount" width="100" align="right"></el-table-column>
+          <el-table-column
+            prop="date"
+            label="Date"
+            width="100"
+          ></el-table-column>
+          <el-table-column
+            prop="info"
+            label="Info"
+            width="400"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="amount"
+            label="Amount"
+            width="100"
+            align="right"
+          ></el-table-column>
         </el-table>
       </div>
     </modal>
@@ -21,7 +35,7 @@
         <el-radio-button label="month"></el-radio-button>
       </el-radio-group>
       <el-date-picker
-        v-if="dateType==='year'"
+        v-if="dateType === 'year'"
         v-model="displayDate"
         type="year"
         placeholder="Pick a year"
@@ -29,10 +43,10 @@
         value-format="yyyy"
         ref="yearPicker"
         @change="reloadChart"
-        :picker-options="{disabledDate: disabledDates}"
+        :picker-options="{ disabledDate: disabledDates }"
       ></el-date-picker>
       <el-date-picker
-        v-if="dateType==='month'"
+        v-if="dateType === 'month'"
         v-model="displayDate"
         type="month"
         placeholder="Pick a month"
@@ -40,10 +54,13 @@
         value-format="MMMMyyyy"
         ref="monthPicker"
         @change="reloadChart"
-        :picker-options="{disabledDate: disabledDates}"
+        :picker-options="{ disabledDate: disabledDates }"
       ></el-date-picker>
       <p>Select a category</p>
-      <CategoryTree :categories="['in', 'out','save']" @onSelect="setChartData" />
+      <CategoryTree
+        :categories="['in', 'out', 'save']"
+        @onSelect="setChartData"
+      />
       <data-downloader></data-downloader>
     </aside>
 
@@ -60,11 +77,36 @@
           :data="tableData"
           oncontextmenu="return false;"
         >
-          <el-table-column prop="category" label="Category" width="160"></el-table-column>
-          <el-table-column prop="sum" header-align="left" label="Sum" width="100" align="right"></el-table-column>
-          <el-table-column prop="count" label="# of Entries" width="100" align="right"></el-table-column>
-          <el-table-column prop="avg" label="Average " width="100" align="right"></el-table-column>
-          <el-table-column prop="std" label="Standard Deviation" width="160" align="right"></el-table-column>
+          <el-table-column
+            prop="category"
+            label="Category"
+            width="160"
+          ></el-table-column>
+          <el-table-column
+            prop="sum"
+            header-align="left"
+            label="Sum"
+            width="100"
+            align="right"
+          ></el-table-column>
+          <el-table-column
+            prop="count"
+            label="# of Entries"
+            width="100"
+            align="right"
+          ></el-table-column>
+          <el-table-column
+            prop="avg"
+            label="Average "
+            width="100"
+            align="right"
+          ></el-table-column>
+          <el-table-column
+            prop="std"
+            label="Standard Deviation"
+            width="160"
+            align="right"
+          ></el-table-column>
         </el-table>
       </flip-card>
       <switchable-line-chart
@@ -79,12 +121,12 @@
 </template>
 
 <script>
-import Doughnut from "@/components/charts/Doughnut.vue";
-import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue";
-import CategoryTree from "@/components/CategoryTree.vue";
-import FlipCard from "@/components/FlipCard";
-import DataDownloader from "@/components/management/DataDownloader";
-import { mapGetters } from "vuex";
+import Doughnut from "@/components/charts/Doughnut.vue"
+import SwitchableLineChart from "@/components/charts/SwitchableLineChart.vue"
+import CategoryTree from "@/components/CategoryTree.vue"
+import FlipCard from "@/components/FlipCard"
+import DataDownloader from "@/components/management/DataDownloader"
+import { mapGetters } from "vuex"
 
 export default {
   name: "Category",
@@ -93,7 +135,7 @@ export default {
     Doughnut,
     SwitchableLineChart,
     DataDownloader,
-    FlipCard
+    FlipCard,
   },
   data() {
     return {
@@ -103,158 +145,158 @@ export default {
       chartData: {
         general: {
           datasets: [],
-          labels: []
+          labels: [],
         },
         historical: {
           datasets: [],
-          labels: []
-        }
+          labels: [],
+        },
       },
       displayDate: undefined,
       dateType: "year",
       tableData: [],
-      transparent: false
-    };
+      transparent: false,
+    }
   },
   computed: {
-    ...mapGetters(["disabledDates", "categories"])
+    ...mapGetters(["disabledDates", "categories"]),
   },
   beforeMount: function() {
-    this.setChartData("");
+    this.setChartData("")
   },
   methods: {
     setTransparent(stacked) {
-      this.transparent = !stacked;
-      this.setChartData(this.lastCategoryPath);
+      this.transparent = !stacked
+      this.setChartData(this.lastCategoryPath)
     },
     focusPicker() {
-      //this.displayDate = "undefined";
+      this.displayDate = undefined
       if (this.dateType === "year") {
-        this.$refs.yearPicker.focus();
+        this.$refs.yearPicker.focus()
       } else {
-        this.$refs.monthPicker.focus();
+        this.$refs.monthPicker.focus()
       }
     },
     showEntries(row) {
       let filteredData = this.$store.getters.filter(
         this.lastCategoryPath,
-        this.displayDate
-      );
-      let category = filteredData.data[row.category];
-      this.entries = category.entries;
-      this.$modal.show("entry");
+        this.displayDate,
+      )
+      let category = filteredData.data[row.category]
+      this.entries = category.entries
+      this.$modal.show("entry")
     },
     async reloadChart() {
-      await this.setChartData(this.lastCategoryPath);
+      await this.setChartData(this.lastCategoryPath)
     },
     async setChartData(categoryPath) {
-      this.loaded = false;
+      this.loaded = false
 
       let filteredData = this.$store.getters.filter(
         categoryPath,
-        this.displayDate
-      );
+        this.displayDate,
+      )
       if (Object.keys(filteredData.data).length > 0) {
-        this.chartData = this.$createChartData(filteredData, this.transparent);
-        this.tableData = this.$createTableData(filteredData);
+        this.chartData = this.$createChartData(filteredData, this.transparent)
+        this.tableData = this.$createTableData(filteredData)
       }
 
-      this.loaded = true;
-      this.lastCategoryPath = categoryPath;
+      this.loaded = true
+      this.lastCategoryPath = categoryPath
     },
     getSummaries(param) {
-      const { columns, data } = param;
-      const sums = [];
+      const { columns, data } = param
+      const sums = []
       if (["", "save"].includes(this.lastCategoryPath)) {
         columns.forEach((column, index) => {
           if (index === 0) {
-            sums[index] = "Under the line";
-            return;
+            sums[index] = "Under the line"
+            return
           }
           if (index === 1) {
             const inValue = +data
-              .filter(item => item.category === "in")[0]
-              .sum.replace(" €", "");
+              .filter((item) => item.category === "in")[0]
+              .sum.replace(" €", "")
 
             const outValue = +data
-              .filter(item => item.category === "out")[0]
-              .sum.replace(" €", "");
+              .filter((item) => item.category === "out")[0]
+              .sum.replace(" €", "")
 
-            sums[index] = Math.round((inValue - outValue) * 100) / 100 + " €";
+            sums[index] = Math.round((inValue - outValue) * 100) / 100 + " €"
           }
-        });
+        })
       } else {
         columns.forEach((column, index) => {
           if (index === 0) {
-            sums[index] = "Summary";
-            return;
+            sums[index] = "Summary"
+            return
           }
-          const values = data.map(item => {
+          const values = data.map((item) => {
             if (typeof item[column.property] === "string")
-              return +item[column.property].replace(" €", "");
-            else return item[column.property];
-          });
-          if (!values.every(value => isNaN(value))) {
+              return +item[column.property].replace(" €", "")
+            else return item[column.property]
+          })
+          if (!values.every((value) => isNaN(value))) {
             if ([1, 2].includes(index)) {
               sums[index] = values.reduce((prev, curr) => {
-                const value = Number(curr);
+                const value = Number(curr)
                 if (!isNaN(value)) {
-                  return prev + curr;
+                  return prev + curr
                 } else {
-                  return prev;
+                  return prev
                 }
-              });
+              })
             } else if (index === 3) {
-              sums[index] = sums[index - 2].replace(" €", "") / sums[index - 1];
+              sums[index] = sums[index - 2].replace(" €", "") / sums[index - 1]
             } else if (index === 4) {
-              sums[index] = this.$std(values);
+              sums[index] = this.$std(values)
             }
             sums[index] =
-              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €")
           } else {
-            sums[index] = "N/A";
+            sums[index] = "N/A"
           }
-        });
+        })
       }
 
-      return sums;
+      return sums
     },
     getEntriesSummaries(param) {
-      const { columns, data } = param;
-      const sums = [];
+      const { columns, data } = param
+      const sums = []
 
       columns.forEach((column, index) => {
         if (index === 0) {
-          sums[index] = "Sum";
-          return;
+          sums[index] = "Sum"
+          return
         }
-        const values = data.map(item => {
+        const values = data.map((item) => {
           if (typeof item[column.property] === "string")
-            return +item[column.property].replace(" €", "");
-          else return item[column.property];
-        });
+            return +item[column.property].replace(" €", "")
+          else return item[column.property]
+        })
         if ([2].includes(index)) {
-          if (!values.every(value => isNaN(value))) {
+          if (!values.every((value) => isNaN(value))) {
             sums[index] = values.reduce((prev, curr) => {
-              const value = Number(curr);
+              const value = Number(curr)
               if (!isNaN(value)) {
-                return prev + curr;
+                return prev + curr
               } else {
-                return prev;
+                return prev
               }
-            });
+            })
             sums[index] =
-              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €");
+              Math.round(sums[index] * 100) / 100 + (index === 2 ? "" : " €")
           } else {
-            sums[index] = "N/A";
+            sums[index] = "N/A"
           }
         }
-      });
+      })
 
-      return sums;
-    }
-  }
-};
+      return sums
+    },
+  },
+}
 </script>
 
 <style lang="scss">

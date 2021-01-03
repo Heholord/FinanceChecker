@@ -16,13 +16,13 @@
       :choices="toChoices(objectAsList(banks[region].children[bank].children))"
       @select="setInputType"
     />
+    <el-tag type="info" v-if="!$isEmpty(toString())">{{ toString() }}</el-tag>
   </div>
 </template>
 
-
 <script>
-import banks from "@/assets/banks/banks";
-import Choices from "@/components/Choices";
+import banks from "@/assets/banks/banks"
+import Choices from "@/components/Choices"
 
 export default {
   name: "BankChooser",
@@ -31,46 +31,52 @@ export default {
     return {
       region: "",
       bank: "",
-      inputType: ""
-    };
+      inputType: "",
+    }
   },
   computed: {
     banks() {
-      return banks;
-    }
+      return banks
+    },
   },
   methods: {
     objectAsList(object) {
-      return Object.keys(object).map(elem => {
-        return { id: elem, ...object[elem] };
-      });
+      return Object.keys(object).map((elem) => {
+        return { id: elem, ...object[elem] }
+      })
     },
     toChoices(list) {
-      let choice = list.map(entry => {
+      let choice = list.map((entry) => {
         return {
           text: entry.label,
           id: entry.id,
-          image: entry.image ? entry.image : false
-        };
-      });
-      return choice;
+          image: entry.image ? entry.image : false,
+        }
+      })
+      return choice
+    },
+    toString() {
+      let string = ""
+      if (this.region) string += this.region
+      if (this.bank) string += "." + this.bank
+      if (this.inputType) string += "." + this.inputType
+      return string
     },
     setRegion(value) {
-      this.region = value.id;
-      this.bank = false;
-      this.inputType = false;
+      this.region = value.id
+      this.bank = false
+      this.inputType = false
     },
     setBank(value) {
-      this.bank = value.id;
-      this.inputType = false;
+      this.bank = value.id
+      this.inputType = false
     },
     setInputType(value) {
-      this.inputType = value.id;
-      this.$emit("selected", [this.region, this.bank, this.inputType]);
-    }
-  }
-};
+      this.inputType = value.id
+      this.$emit("selected", [this.region, this.bank, this.inputType])
+    },
+  },
+}
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

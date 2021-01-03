@@ -6,38 +6,39 @@ export default {
         label: "George",
         image: "banks/george.svg",
         children: {
-          html: {
-            label: "HTML"
-            // image: "html.svg"
-          },
           json: {
-            label: "JSON"
-            // image: "json.svg"
-          }
-        }
+            label: "JSON",
+            image: "banks/json.svg",
+          },
+          html: {
+            label: "HTML",
+            image: "banks/html.svg",
+          },
+        },
       },
       raiffeisen: {
         label: "Raiffeisen",
-        children: {}
-      }
-    }
+        children: {},
+      },
+    },
   },
   international: {
     label: "International",
     children: {
       paypal: {
         label: "Paypal",
+        image: "banks/paypal.svg",
         children: {
           html: {
-            label: "HTML"
+            label: "HTML",
             // image: "html.svg"
-          }
-        }
+          },
+        },
       },
       westernunion: {
         label: "Western Union",
-        children: {}
-      }
-    }
-  }
-};
+        children: {},
+      },
+    },
+  },
+}

@@ -1,7 +1,17 @@
 <template>
   <div class="uploader">
-    <el-steps direction="vertical" class="step-indicator" :active="activeStep" simple>
-      <el-step v-for="step in steps" :key="step.name" :title="stepTitle(step)" :icon="step.icon"></el-step>
+    <el-steps
+      direction="vertical"
+      class="step-indicator"
+      :active="activeStep"
+      simple
+    >
+      <el-step
+        v-for="step in steps"
+        :key="step.name"
+        :title="stepTitle(step)"
+        :icon="step.icon"
+      ></el-step>
     </el-steps>
 
     <div class="stepContainer" v-loading="loading">
@@ -9,7 +19,7 @@
         <bank-chooser @selected="setBank" v-if="isStep('selectBank')" />
         <file-uploader
           v-else-if="isStep('upload')"
-          :fileType="selectedBank[selectedBank.length -1]"
+          :fileType="selectedBank[selectedBank.length - 1]"
           :fileSize="20"
           @onFile="setContent"
         />
@@ -45,12 +55,12 @@
 </template>
 
 <script>
-import FileUploader from "@/components/management/FileUploader";
-import EntryBrowser from "@/components/management/EntryBrowser";
-import EntriesToCategory from "@/components/management/EntriesToCategory";
-import BankChooser from "@/components/management/BankChooser";
-import { mapGetters } from "vuex";
-import { join } from "@/plugin/utils";
+import FileUploader from "@/components/management/FileUploader"
+import EntryBrowser from "@/components/management/EntryBrowser"
+import EntriesToCategory from "@/components/management/EntriesToCategory"
+import BankChooser from "@/components/management/BankChooser"
+import { mapGetters } from "vuex"
+import { join } from "@/plugin/utils"
 
 export default {
   name: "NewDataUpload",
@@ -62,36 +72,41 @@ export default {
         { name: "upload", title: "Upload data", icon: "el-icon-upload" },
         { name: "edit", title: "Edit data", icon: "el-icon-edit" },
         { name: "merge", title: "Merge data", icon: "el-icon-connection" },
-        { name: "categorize", title: "Categorize data", icon: "el-icon-menu" }
+        { name: "categorize", title: "Categorize data", icon: "el-icon-menu" },
       ],
-      findStepIndex: elemName => {
-        return this.steps.findIndex(elem => elem.name == elemName);
+      findStepIndex: (elemName) => {
+        return this.steps.findIndex((elem) => elem.name == elemName)
       },
       activeStep: 0,
       disableNextStep: true,
       loading: false,
       selectedBank: [],
-      newEntries: {}
-    };
+      newEntries: {},
+    }
+  },
+  mounted() {
+    if (!this.hasData) {
+      this.steps.splice(this.findStepIndex("merge"), 1)
+    }
   },
   computed: {
     ...mapGetters({
       entries: "data",
       categories: "categories",
-      hasData: "hasData"
-    })
+      hasData: "hasData",
+    }),
   },
   methods: {
     nextStep() {
-      this.activeStep++;
+      this.activeStep++
 
       if (this.activeStep === this.steps.merge && !this.hasData) {
         // export to data merger
-        this.merge();
-        this.nextStep();
+        this.merge()
+        this.nextStep()
       }
       if (this.activeStep >= this.steps.length) {
-        this.$router.push("/visualize");
+        this.$router.push("/visualize")
       }
 
       if (
@@ -102,58 +117,53 @@ export default {
       }
     },
     isStep(stepTitle) {
-      return this.activeStep === this.findStepIndex(stepTitle);
+      return this.activeStep === this.findStepIndex(stepTitle)
     },
     stepTitle(step) {
-      return this.activeStep == this.findStepIndex(step.name) ? step.title : "";
+      return this.activeStep == this.findStepIndex(step.name) ? step.title : ""
     },
     setBank(banks) {
-      this.selectedBank = banks;
-      this.allowNextStep();
+      this.selectedBank = banks
+      this.allowNextStep()
     },
     previousStep() {
-      this.activeStep--;
-      this.disableNextStep = false;
+      this.activeStep--
+      this.disableNextStep = false
     },
     allowNextStep() {
-      this.disableNextStep = false;
+      this.disableNextStep = false
     },
     setContent(file) {
-      this.setFile(file, content => {
+      this.setFile(file, (content) => {
         this.newEntries = this.$parseContent(
           content,
-          this.selectedBank.join(".")
-        );
-        this.allowNextStep();
-      });
+          this.selectedBank.join("."),
+        )
+        this.allowNextStep()
+      })
     },
     setFile(file, contentCall) {
-      this.loading = true;
-      const reader = new FileReader();
-      reader.onload = event => {
-        const content = event.target.result;
-        contentCall(content);
-        this.loading = false;
-      };
-      reader.readAsText(file);
+      this.loading = true
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const content = event.target.result
+        contentCall(content)
+        this.loading = false
+      }
+      reader.readAsText(file)
     },
     join(obj) {
-      return join(obj);
+      return join(obj)
     },
     merge() {
       let entries = {
         categories: this.categories,
-        data: { ...this.newEntries, ...this.entries }
-      };
-      this.$store.dispatch("setData", entries);
-    }
+        data: { ...this.newEntries, ...this.entries },
+      }
+      this.$store.dispatch("setData", entries)
+    },
   },
-  mounted() {
-    if (!this.hasData) {
-      this.steps.splice(this.findStepIndex("merge"), 1);
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss">
