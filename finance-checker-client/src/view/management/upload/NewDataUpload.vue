@@ -55,17 +55,18 @@
 </template>
 
 <script>
-import FileUploader from "@/components/management/FileUploader"
-import EntryBrowser from "@/components/management/EntryBrowser"
-import EntriesToCategory from "@/components/management/EntriesToCategory"
-import BankChooser from "@/components/management/BankChooser"
-import { mapGetters } from "vuex"
-import { join } from "@/plugin/utils"
+import FileUploader from "@/components/management/FileUploader";
+import EntryBrowser from "@/components/management/EntryBrowser";
+import EntriesToCategory from "@/components/management/EntriesToCategory";
+import BankChooser from "@/components/management/BankChooser";
+import { mapGetters } from "vuex";
+import { join } from "@/plugin/utils";
 
 export default {
   name: "NewDataUpload",
   components: { FileUploader, EntriesToCategory, BankChooser, EntryBrowser },
   data() {
+    // TODO: create abstract wizard component
     return {
       steps: [
         { name: "selectBank", title: "Choose a bank", icon: "el-icon-tickets" },
@@ -75,18 +76,18 @@ export default {
         { name: "categorize", title: "Categorize data", icon: "el-icon-menu" },
       ],
       findStepIndex: (elemName) => {
-        return this.steps.findIndex((elem) => elem.name == elemName)
+        return this.steps.findIndex((elem) => elem.name == elemName);
       },
       activeStep: 0,
       disableNextStep: true,
       loading: false,
       selectedBank: [],
       newEntries: {},
-    }
+    };
   },
   mounted() {
     if (!this.hasData) {
-      this.steps.splice(this.findStepIndex("merge"), 1)
+      this.steps.splice(this.findStepIndex("merge"), 1);
     }
   },
   computed: {
@@ -98,72 +99,73 @@ export default {
   },
   methods: {
     nextStep() {
-      this.activeStep++
+      this.activeStep++;
 
-      if (this.activeStep === this.steps.merge && !this.hasData) {
+      if (this.activeStep === this.findStepIndex("categorize")) {
         // export to data merger
-        this.merge()
-        this.nextStep()
+        this.merge();
       }
       if (this.activeStep >= this.steps.length) {
-        this.$router.push("/visualize")
+        this.$router.push("/visualize");
       }
 
-      if (
-        this.activeStep in
-        [this.steps.selectBank, this.steps.upload, this.steps.merge]
-      ) {
-        //this.disableNextStep = true;
-      }
+      // if (
+      //   this.activeStep in
+      //   [this.steps.selectBank, this.steps.upload, this.steps.merge]
+      // ) {
+      //   this.disableNextStep = true;
+      // }
     },
     isStep(stepTitle) {
-      return this.activeStep === this.findStepIndex(stepTitle)
+      return this.activeStep === this.findStepIndex(stepTitle);
     },
     stepTitle(step) {
-      return this.activeStep == this.findStepIndex(step.name) ? step.title : ""
+      return this.activeStep === this.findStepIndex(step.name)
+        ? step.title
+        : "";
     },
     setBank(banks) {
-      this.selectedBank = banks
-      this.allowNextStep()
+      this.selectedBank = banks;
+      this.allowNextStep();
     },
     previousStep() {
-      this.activeStep--
-      this.disableNextStep = false
+      this.activeStep--;
+      this.disableNextStep = false;
     },
     allowNextStep() {
-      this.disableNextStep = false
+      this.disableNextStep = false;
     },
     setContent(file) {
       this.setFile(file, (content) => {
         this.newEntries = this.$parseContent(
           content,
-          this.selectedBank.join("."),
-        )
-        this.allowNextStep()
-      })
+          this.selectedBank.join(".")
+        );
+        this.allowNextStep();
+      });
     },
     setFile(file, contentCall) {
-      this.loading = true
-      const reader = new FileReader()
+      this.loading = true;
+      const reader = new FileReader();
       reader.onload = (event) => {
-        const content = event.target.result
-        contentCall(content)
-        this.loading = false
-      }
-      reader.readAsText(file)
+        const content = event.target.result;
+        contentCall(content);
+        this.loading = false;
+      };
+      reader.readAsText(file);
     },
     join(obj) {
-      return join(obj)
+      return join(obj);
     },
     merge() {
       let entries = {
         categories: this.categories,
         data: { ...this.newEntries, ...this.entries },
-      }
-      this.$store.dispatch("setData", entries)
+      };
+      this.$store.dispatch("setData", entries);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
